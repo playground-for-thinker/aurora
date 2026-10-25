@@ -2,11 +2,12 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a scrolling column of chapters beside a sticky map; on phones the map pins to the top and the
-   chapters scroll beneath it. AQI colors follow the CPCB scale (status colors), separate from the accent. */
+/* Layout: a scrolling column of chapters beside a sticky 2:1 map that flies from the world to India, the
+   NCR tile, Delhi and one hotspot. Map text and strokes are sized per frame so they stay the same on screen
+   at every zoom. AQI colors follow the CPCB scale (status colors), separate from the accent. */
 :root {
   --bg: #f3f6f8; --surface: #ffffff; --fg: #16212b; --muted: #5a6875; --line: #d6dee5;
-  --accent: #0b6e8f; --accent-soft: #dbeef5; --map-land: #eef0ea; --map-water: #dde9f1; --haze: #e9e2d6;
+  --accent: #0b6e8f; --accent-soft: #dbeef5; --land: #e9ebe4; --water: #d7e4ee; --india: #d9dfd0; --haze: #e9e2d6;
   --aqi-good: #2e8b57; --aqi-sat: #7fb241; --aqi-mod: #d4a72c; --aqi-poor: #e0782a; --aqi-vpoor: #c84a3b; --aqi-sev: #7f1d2d;
   --font-display: "IBM Plex Sans KR", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
   --font-body: "Noto Sans KR", "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
@@ -15,76 +16,90 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #111920; --surface: #18232c; --fg: #e5ebf0; --muted: #9aa8b4; --line: #2b3843;
-    --accent: #4cb6d8; --accent-soft: #15333f; --map-land: #1f2a33; --map-water: #16232e; --haze: #3a3328;
+    --accent: #4cb6d8; --accent-soft: #15333f; --land: #232e37; --water: #141e27; --india: #2d3a2f; --haze: #3a3328;
     --aqi-good: #4cc26a; --aqi-sat: #93c84a; --aqi-mod: #e2b73f; --aqi-poor: #ee8b3f; --aqi-vpoor: #ee6b5c; --aqi-sev: #c9474a;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #111920; --surface: #18232c; --fg: #e5ebf0; --muted: #9aa8b4; --line: #2b3843;
-  --accent: #4cb6d8; --accent-soft: #15333f; --map-land: #1f2a33; --map-water: #16232e; --haze: #3a3328;
+  --accent: #4cb6d8; --accent-soft: #15333f; --land: #232e37; --water: #141e27; --india: #2d3a2f; --haze: #3a3328;
   --aqi-good: #4cc26a; --aqi-sat: #93c84a; --aqi-mod: #e2b73f; --aqi-poor: #ee8b3f; --aqi-vpoor: #ee6b5c; --aqi-sev: #c9474a;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
-body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.6; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
 h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; line-height: 1.25; margin: 0; }
-h1 { font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 700; letter-spacing: -0.01em; }
-h2 { font-size: 1.25rem; font-weight: 600; }
-p { margin: 0.6rem 0; max-width: 60ch; }
+h1 { font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1.15rem; font-weight: 600; }
+h3 { font-size: 0.98rem; font-weight: 600; margin-top: 1rem; }
+p { margin: 0.55rem 0; max-width: 62ch; }
+ul, ol { padding-left: 1.2rem; margin: 0.4rem 0; max-width: 62ch; }
+li { margin: 0.25rem 0; }
 a { color: var(--accent); text-underline-offset: 2px; }
-code { font-family: var(--font-mono); font-size: 0.86em; background: var(--accent-soft); padding: 0.05em 0.35em; border-radius: 4px; }
-.eyebrow { font-family: var(--font-display); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+code { font-family: var(--font-mono); font-size: 0.85em; background: var(--accent-soft); padding: 0.05em 0.35em; border-radius: 4px; }
+.eyebrow { font-family: var(--font-display); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
 [data-lang="ko"] .en { display: none !important; }
 [data-lang="en"] .ko { display: none !important; }
 
 .bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 6; background: var(--surface); border-bottom: 1px solid var(--line); }
-.bar-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
-  padding-block: 0.55rem; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-.bar-title { font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; }
+.bar-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  padding-block: 0.5rem; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.bar-title { font-family: var(--font-display); font-weight: 600; font-size: 0.92rem; }
 .lang-switch { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; background: var(--bg); }
-.lang-switch button { font: inherit; font-family: var(--font-display); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.04em; border: 0; background: transparent; color: var(--muted); padding: 0.35rem 0.95rem; border-radius: 999px; cursor: pointer; }
+.lang-switch button { font: inherit; font-family: var(--font-display); font-weight: 600; font-size: 0.82rem; letter-spacing: 0.04em; border: 0; background: transparent; color: var(--muted); padding: 0.3rem 0.9rem; border-radius: 999px; cursor: pointer; }
 .lang-switch button[aria-pressed="true"] { background: var(--accent); color: #fff; }
-.lang-switch button:focus-visible, .step button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-.page { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 1.5rem 3rem;
-  display: grid; grid-template-columns: minmax(0, 430px) minmax(0, 1fr); gap: 1.5rem; align-items: start; }
+.page { max-width: 1280px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 1.25rem 3rem;
+  display: grid; grid-template-columns: minmax(0, 440px) minmax(0, 1fr); gap: 1.5rem; align-items: start; }
 .story { min-width: 0; }
-.mapwrap { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 56px); min-width: 0; }
-.mapcard { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
-.mapcard svg { display: block; width: 100%; height: auto; background: var(--map-land); }
-.mapcard svg text { font-family: var(--font-mono); font-size: 3.2px; fill: var(--fg); }
-.controls { display: grid; grid-template-columns: 1fr auto; gap: 0.4rem 0.8rem; align-items: center; padding: 0.7rem 0.9rem; border-top: 1px solid var(--line); }
+.mapwrap { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 54px); min-width: 0; }
+.mapcard { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; position: relative; }
+.mapcard svg { display: block; width: 100%; height: auto; background: var(--water); }
+.mapcard svg text { font-family: var(--font-mono); fill: var(--fg); paint-order: stroke; stroke: var(--surface); stroke-linejoin: round; }
+.controls { display: grid; grid-template-columns: 1fr auto; gap: 0.4rem 0.8rem; align-items: center; padding: 0.6rem 0.9rem; border-top: 1px solid var(--line); }
 .controls input[type=range] { width: 100%; accent-color: var(--accent); }
-.controls .when { font-family: var(--font-mono); font-size: 0.85rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.layers { display: flex; flex-wrap: wrap; gap: 0.3rem 0.9rem; font-size: 0.82rem; color: var(--muted); grid-column: 1 / -1; }
+.controls .when { font-family: var(--font-mono); font-size: 0.82rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.layers { display: flex; flex-wrap: wrap; gap: 0.3rem 0.8rem; font-size: 0.8rem; color: var(--muted); grid-column: 1 / -1; align-items: center; }
 .layers label { display: inline-flex; align-items: center; gap: 0.3rem; }
-.legend { display: flex; flex-wrap: wrap; gap: 0.35rem 0.8rem; padding: 0.5rem 0.9rem 0.7rem; font-size: 0.78rem; color: var(--muted); border-top: 1px solid var(--line); }
-.legend span i { display: inline-block; width: 11px; height: 11px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
-.attr { font-size: 0.72rem; color: var(--muted); padding: 0 0.9rem 0.6rem; }
-.tip { position: absolute; pointer-events: none; background: var(--fg); color: var(--bg); font-family: var(--font-mono); font-size: 12px; padding: 6px 8px; border-radius: 6px; white-space: nowrap; transform: translate(-50%, -115%); opacity: 0; z-index: 3; }
+.layers select { font: inherit; font-size: 0.8rem; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 6px; padding: 0.15rem 0.4rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 0.3rem 0.75rem; padding: 0.45rem 0.9rem 0.6rem; font-size: 0.76rem; color: var(--muted); border-top: 1px solid var(--line); }
+.legend span i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+.attr { font-size: 0.7rem; color: var(--muted); padding: 0 0.9rem 0.55rem; }
+.tip { position: absolute; pointer-events: none; background: var(--fg); color: var(--bg); font-family: var(--font-mono); font-size: 11.5px; padding: 5px 8px; border-radius: 6px; white-space: nowrap; transform: translate(-50%, -115%); opacity: 0; z-index: 3; }
 .tip.on { opacity: 1; }
 
-.chapter { padding: 1.4rem 0 1.6rem; border-bottom: 1px solid var(--line); scroll-margin-top: 80px; }
+.chapter { padding: 1.3rem 0 1.4rem; border-bottom: 1px solid var(--line); scroll-margin-top: 80px; }
 .chapter:first-of-type { padding-top: 0; }
-.chapter.active h2 { color: var(--accent); }
-.chapter .step { margin-top: 0.7rem; }
-.step button { font: inherit; font-family: var(--font-display); font-size: 0.82rem; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 0; border-radius: 999px; padding: 0.3rem 0.8rem; cursor: pointer; }
-.pill { display: inline-block; padding: 0.08rem 0.55rem; border-radius: 999px; font-size: 0.76rem; font-family: var(--font-display); font-weight: 600; color: #fff; background: var(--aqi-sev); }
-.msg { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--aqi-sev); border-radius: 0 8px 8px 0; padding: 0.7rem 0.9rem; margin: 0.8rem 0; font-size: 0.9rem; }
-.msg .eyebrow { margin-bottom: 0.2rem; }
-.badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.8rem 0; }
-.badges a { display: inline-flex; align-items: stretch; text-decoration: none; font-family: var(--font-display); font-size: 0.78rem; font-weight: 600; border-radius: 4px; overflow: hidden; border: 1px solid var(--line); }
-.badges a .l { background: var(--surface); color: var(--fg); padding: 0.3rem 0.6rem; }
-.badges a .r { background: var(--accent); color: #fff; padding: 0.3rem 0.6rem; }
+.chapter.active h2, .chapter.active h1 { color: var(--accent); }
+.step { margin-top: 0.6rem; display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.step button { font: inherit; font-family: var(--font-display); font-size: 0.8rem; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 0; border-radius: 999px; padding: 0.28rem 0.75rem; cursor: pointer; }
+.pill { display: inline-block; padding: 0.05rem 0.5rem; border-radius: 999px; font-size: 0.74rem; font-family: var(--font-display); font-weight: 600; color: #fff; background: var(--aqi-sev); }
+.msg { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--aqi-sev); border-radius: 0 8px 8px 0; padding: 0.6rem 0.85rem; margin: 0.7rem 0; font-size: 0.86rem; max-width: 62ch; }
+.msg .eyebrow { margin-bottom: 0.15rem; }
+.msg pre { margin: 0; white-space: pre-wrap; border: 0; padding: 0; background: none; font-size: 0.82rem; }
+.flow { display: grid; gap: 0.4rem; margin: 0.7rem 0; max-width: 62ch; }
+.flow .node { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 0.5rem 0.7rem; font-size: 0.84rem; line-height: 1.45; }
+.flow .node.model { border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); }
+.flow .node b { font-family: var(--font-display); }
+table { border-collapse: collapse; width: 100%; font-size: 0.82rem; }
+.table-wrap { overflow-x: auto; margin: 0.7rem 0; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); max-width: 62ch; }
+th, td { text-align: left; padding: 0.4rem 0.55rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--font-display); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.03em; color: var(--muted); background: var(--bg); }
+tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; text-align: right; }
+.badges { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0.7rem 0; }
+.badges a { display: inline-flex; align-items: stretch; text-decoration: none; font-family: var(--font-display); font-size: 0.76rem; font-weight: 600; border-radius: 4px; overflow: hidden; border: 1px solid var(--line); }
+.badges a .l { background: var(--surface); color: var(--fg); padding: 0.28rem 0.55rem; }
+.badges a .r { background: var(--accent); color: #fff; padding: 0.28rem 0.55rem; }
 .badges a.colab .r { background: #e8710a; } .badges a.binder .r { background: #579aca; } .badges a.gh .r { background: #24292f; }
-pre { font-family: var(--font-mono); font-size: 0.82rem; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 0.8rem 0.9rem; overflow-x: auto; line-height: 1.5; }
-.note { font-size: 0.86rem; color: var(--muted); }
+pre { font-family: var(--font-mono); font-size: 0.8rem; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 0.7rem 0.85rem; overflow-x: auto; line-height: 1.5; max-width: 62ch; }
+.note { font-size: 0.84rem; color: var(--muted); }
 @media (max-width: 880px) {
   .page { grid-template-columns: 1fr; }
-  .mapwrap { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 52px); z-index: 4; order: -1; }
-  .mapcard svg { max-height: 46vh; }
+  .mapwrap { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 50px); z-index: 4; order: -1; }
   .legend { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
@@ -101,72 +116,201 @@ pre { font-family: var(--font-mono); font-size: 0.82rem; background: var(--surfa
 
 <div class="page">
 <main class="story">
-  <section class="chapter" data-step="0" data-view="tile" data-wind="0" data-focus="">
+
+  <section class="chapter" data-view="world" data-step="0">
     <div class="eyebrow"><span class="ko">Aurora 1.5 + Aurora Air Pollution · 스토리 맵</span><span class="en">Aurora 1.5 + Aurora Air Pollution · story map</span></div>
-    <h1><span class="ko">48시간, 델리 NCR의 공기는 어디서 언제 나빠지는가</span><span class="en">Where and when Delhi-NCR's air turns bad over 48 hours</span></h1>
-    <p class="ko">오른쪽 지도는 Aurora 예측을 델리 NCR 타일(27.5~31.5°N, 76~80°E, 0.25° 격자)에 그린 것입니다. 색은 CPCB 기준 AQI, 점은 대표 지점 10곳, 굵은 외곽선은 델리 수도직할지(NCT)입니다. 슬라이더를 움직이거나 아래 장면을 따라 내려가면 시간이 흐릅니다.</p>
-    <p class="en">The map draws Aurora predictions on the Delhi-NCR tile (27.5–31.5°N, 76–80°E, 0.25° grid). Colors are the CPCB AQI, dots are ten reporting sites, the bold outline is the National Capital Territory of Delhi. Drag the slider or scroll through the scenes to move in time.</p>
-    <p class="note ko">데이터는 <code>delhi_aq.py --mode demo</code>가 만든 합성 예시이며 실제 예보가 아닙니다. 농도는 Air Pollution 모델(12시간 간격)을 시간별로 보간한 값, 바람은 Aurora 1.5의 시간별 값입니다.</p>
-    <p class="note en">Data are the synthetic example produced by <code>delhi_aq.py --mode demo</code>, not a real forecast. Concentrations are the 12-hourly Air Pollution model interpolated to hourly; winds are hourly Aurora 1.5 values.</p>
+    <h1><span class="ko">시민에게 닿는 한 줄의 대기질 경보</span><span class="en">One line of air-quality warning that reaches a citizen</span></h1>
+    <p class="ko">Aurora는 Microsoft Research의 지구 시스템 파운데이션 모델입니다. 이 이야기는 그 모델로 인도 뉴델리의 48시간 대기질을 예측하고, 인도 CPCB 기준 AQI와 GRAP 단계로 바꿔 힌디어·영어·한국어 메시지를 만들기까지를 장면별로 따라갑니다. 지도는 세계에서 시작해 인도, 델리 수도권, 델리, 그리고 가장 심각한 지점으로 내려갑니다.</p>
+    <p class="en">Aurora is Microsoft Research's foundation model for the Earth system. This story follows it from a 48-hour forecast for New Delhi to a CPCB AQI, a GRAP stage and a message in Hindi, English and Korean. The map starts at the world and descends to India, the capital region, Delhi and the worst-hit site.</p>
+    <p class="note ko">아래로 내려가면 지도가 따라 움직입니다. 각 장면의 버튼으로 바로 이동할 수도 있습니다. 데이터는 <code>delhi_aq.py --mode demo</code>가 만든 합성 예시이며 실제 예보가 아닙니다.</p>
+    <p class="note en">The map follows as you scroll; the buttons in each scene jump there directly. Data are the synthetic example from <code>delhi_aq.py --mode demo</code>, not a real forecast.</p>
+    <div class="step"><button type="button" data-go="1"><span class="ko">인도로 →</span><span class="en">To India →</span></button></div>
   </section>
 
-  <section class="chapter" data-step="0" data-view="tile" data-wind="0" data-grid="1" data-focus="">
-    <div class="eyebrow">S1 · S2</div>
-    <h2><span class="ko">11월 5일 17:30 IST, 초기장과 두 모델</span><span class="en">5 Nov 17:30 IST, initial conditions and two models</span></h2>
-    <p class="ko">12 UTC의 CAMS 분석(0.4°)과 ERA5(0.25°)로 두 개의 <code>Batch</code>를 만듭니다. Aurora Air Pollution은 12시간 간격으로 4스텝, Aurora 1.5는 6시간 × 8스텝에 시간별 서브스텝을 더해 48개의 시간별 기상장을 냅니다. 지도의 가는 격자가 1.5의 0.25° 셀입니다. Air Pollution의 0.4° 셀은 이보다 더 큽니다.</p>
-    <p class="en">Two <code>Batch</code> objects are built from the 12 UTC CAMS analysis (0.4°) and ERA5 (0.25°). Aurora Air Pollution runs 4 twelve-hour steps; Aurora 1.5 runs 8 six-hour steps with hourly sub-steps, giving 48 hourly weather fields. The thin grid on the map is 1.5's 0.25° cells. Air Pollution's 0.4° cells are larger still.</p>
-    <div class="step"><button type="button" data-go="1"><span class="ko">지도에서 보기</span><span class="en">Show on map</span></button></div>
+  <section class="chapter" data-view="india" data-step="0">
+    <div class="eyebrow">0 · <span class="ko">배경</span><span class="en">Background</span></div>
+    <h2><span class="ko">왜 뉴델리이고, 왜 11월인가</span><span class="en">Why Delhi, why November</span></h2>
+    <ul class="ko">
+      <li>델리 NCR(수도권)은 매년 10월 말~1월에 세계 최악 수준의 미세먼지 에피소드를 겪습니다. 인접 주(펀자브, 하리아나)의 볏짚 소각, 디왈리 폭죽, 교통·건설·발전 배출이 겹치고, 겨울철 <b>낮은 혼합층(100~300 m)과 약한 바람</b>이 오염을 지표 근처에 가둡니다.</li>
+      <li>인도 정부는 국가 AQI(CPCB 기준)와 단계별 대응계획 <b>GRAP</b>(CAQM 주관)을 운영합니다. AQI 구간별로 건설 중단, 차량 제한, 원격수업, 재택근무가 정해져 있어 <b>예보 → 단계 → 조치</b>의 연결이 제도적으로 존재합니다.</li>
+      <li>핵심 질문은 "얼마나 나빠질지"가 아니라 <b>"언제, 어느 지역에서, 어떤 기상 조건 때문에 나빠지며, 시민은 무엇을 해야 하는가"</b>를 12~48시간 앞서 전달하는 것입니다.</li>
+    </ul>
+    <ul class="en">
+      <li>Delhi-NCR suffers some of the world's worst particulate episodes from late October to January. Stubble burning in Punjab and Haryana, Diwali fireworks and traffic, construction and power emissions coincide with winter's <b>shallow mixing layer (100–300 m) and weak winds</b>, which trap pollution near the ground.</li>
+      <li>India runs a national AQI (CPCB scale) and a staged response plan, <b>GRAP</b> (run by CAQM). AQI bands map to construction bans, vehicle restrictions, online classes and work-from-home, so <b>forecast → stage → action</b> already exists.</li>
+      <li>The question is not "how bad" but <b>"when, where, because of which weather, and what should citizens do"</b>, 12 to 48 hours ahead.</li>
+    </ul>
+    <p class="note ko">지도의 작은 사각형이 이 예제가 다루는 델리 NCR 타일(27.5~31.5°N, 76~80°E)입니다.</p>
+    <p class="note en">The small square on the map is the Delhi-NCR tile this example covers (27.5–31.5°N, 76–80°E).</p>
+    <div class="step"><button type="button" data-go="2"><span class="ko">수도권 타일로 →</span><span class="en">To the NCR tile →</span></button></div>
   </section>
 
-  <section class="chapter" data-step="0" data-view="tile" data-wind="0" data-focus="Anand Vihar,ITO,Gurugram Vikas Sadan">
-    <div class="eyebrow">S3 · S4</div>
+  <section class="chapter" data-view="tile" data-step="0" data-grid="1">
+    <div class="eyebrow">2 · <span class="ko">시스템 구성</span><span class="en">System</span></div>
+    <h2><span class="ko">Aurora가 두 번 등장한다</span><span class="en">Aurora appears twice</span></h2>
+    <div class="flow">
+      <div class="node"><b><span class="ko">입력</span><span class="en">Inputs</span></b> · <span class="ko">CAMS 전지구 분석 0.4° (PM, NO2, SO2, O3, CO + 기상) · ERA5 또는 IFS HRES T0 0.25° (26개 표면 변수, 13개 기압면)</span><span class="en">CAMS global analysis 0.4° (PM, NO2, SO2, O3, CO + meteorology) · ERA5 or IFS HRES T0 0.25° (26 surface variables, 13 levels)</span></div>
+      <div class="node model"><b>Aurora 0.4° Air Pollution</b> · <span class="ko">12시간 × 4 = 48 h. 로컬 GPU 또는 Foundry "Aurora" 엔드포인트</span><span class="en">12 h × 4 = 48 h. Local GPU or the Foundry "Aurora" endpoint</span></div>
+      <div class="node model"><b>Aurora 1.5</b> · <span class="ko">6시간 × 8 + 시간별 서브스텝 = 48개 시간별 기상장 (경계층 높이, 10 m 풍속, 기온, 이슬점, 강수, 돌풍)</span><span class="en">6 h × 8 + hourly sub-steps = 48 hourly fields (boundary-layer height, 10 m wind, temperature, dew point, rain, gusts)</span></div>
+      <div class="node"><b><span class="ko">델리 후처리</span><span class="en">Delhi post-processing</span></b> · <span class="ko">10개 지점 보간 → CPCB AQI → GRAP 단계 → 정체 진단(풍속 &lt; 10 km/h, 혼합층 &lt; 500 m) → hi/en/ko 메시지 → 푸시·SMS·WhatsApp·앱</span><span class="en">10-site interpolation → CPCB AQI → GRAP stage → stagnation (wind &lt; 10 km/h, mixing height &lt; 500 m) → hi/en/ko messages → push, SMS, WhatsApp, app</span></div>
+    </div>
+    <p class="ko"><b>왜 두 모델인가.</b> Aurora 1.5는 기상 전용이라 오염물질을 예측하지 않습니다. 대신 <b>시간 단위</b>로 확산 조건을 줍니다. Air Pollution 모델은 농도를 직접 예측하지만 12시간 간격·0.4°입니다. 둘을 합치면 "농도는 어느 수준인가"와 "밤 몇 시부터 정체가 시작되는가"를 함께 말할 수 있습니다.</p>
+    <p class="en"><b>Why two models.</b> Aurora 1.5 is weather-only and predicts no pollutants, but gives <b>hourly</b> dispersion conditions. The Air Pollution model predicts concentrations directly, at 12-hour steps and 0.4°. Together they answer "how high" and "from what hour tonight".</p>
+    <p class="ko"><b>"고해상도"의 의미.</b> (1) 시간: 1.5의 <code>fine_lead_times=[1,…,6]</code>으로 1시간 간격. (2) 공간: 지도의 가는 격자가 1.5의 0.25° 셀이고, 이를 10개 지점으로 양선형 보간합니다. 격자 자체는 도시 내부 차이를 해소하지 못합니다(§6).</p>
+    <p class="en"><b>What "high resolution" means.</b> (1) Time: hourly from 1.5 with <code>fine_lead_times=[1,…,6]</code>. (2) Space: the thin grid on the map is 1.5's 0.25° cells, bilinearly interpolated to ten sites. The grid itself cannot resolve intra-city differences (§6).</p>
+    <p class="ko"><b>연계.</b> 저장소의 <code>msresearch-aurora/</code>(microsoft/vibe-kit의 Aurora 스킬)에서 React 지도 프런트엔드, 검증 유틸리티, 파인튠 스타터를 가져옵니다. 체크포인트는 HuggingFace <code>microsoft/aurora</code>에서 받고, GPU가 없으면 <code>--mode foundry</code>로 Azure AI Foundry의 "Aurora"/"Aurora-1.5" 엔드포인트에 작업을 보냅니다.</p>
+    <p class="en"><b>Linkages.</b> The repository's <code>msresearch-aurora/</code> (the Aurora skill from microsoft/vibe-kit) supplies a React map frontend, validation utilities and a fine-tuning starter. Checkpoints come from HuggingFace <code>microsoft/aurora</code>; without a GPU, <code>--mode foundry</code> submits to the Azure AI Foundry "Aurora" and "Aurora-1.5" endpoints.</p>
+    <div class="step"><button type="button" data-go="3"><span class="ko">등장인물 →</span><span class="en">Cast →</span></button></div>
+  </section>
+
+  <section class="chapter" data-view="tile" data-step="0">
+    <div class="eyebrow">1 · <span class="ko">등장인물</span><span class="en">Cast</span></div>
+    <h2><span class="ko">누가 무엇을 받는가</span><span class="en">Who receives what</span></h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th><span class="ko">역할</span><span class="en">Role</span></th><th><span class="ko">원하는 것</span><span class="en">Wants</span></th><th><span class="ko">산출물</span><span class="en">Output</span></th></tr></thead>
+      <tbody>
+        <tr><td><span class="ko">일반 시민</span><span class="en">General public</span></td><td><span class="ko">오늘 밤/내일 아침 주의사항 한 줄</span><span class="en">One line for tonight or tomorrow morning</span></td><td><code>short</code></td></tr>
+        <tr><td><span class="ko">민감군과 보호자</span><span class="en">Sensitive groups, carers</span></td><td><span class="ko">구체적 행동과 시간대</span><span class="en">Concrete actions and time windows</span></td><td><code>long</code></td></tr>
+        <tr><td><span class="ko">운영자 (DPCC/CAQM)</span><span class="en">Operators (DPCC/CAQM)</span></td><td><span class="ko">정점 시각, GRAP 근거, 추세</span><span class="en">Peak time, GRAP basis, trend</span></td><td><code>summary_by_site.csv</code>, <code>bulletin_*.md</code></td></tr>
+        <tr><td><span class="ko">데이터/ML 엔지니어</span><span class="en">Data/ML engineers</span></td><td><span class="ko">재현 가능한 파이프라인</span><span class="en">Reproducible pipeline</span></td><td><code>--mode local|foundry</code></td></tr>
+      </tbody>
+    </table></div>
+    <p class="note ko">지도: 첫 예측 시각(11월 5일 18:30 IST)의 AQI 타일. 색이 CPCB 범주입니다.</p>
+    <p class="note en">Map: the AQI tile at the first forecast hour (5 Nov 18:30 IST). Colors are CPCB categories.</p>
+    <div class="step"><button type="button" data-go="4"><span class="ko">S1·S2 →</span><span class="en">S1·S2 →</span></button></div>
+  </section>
+
+  <section class="chapter" data-view="tile" data-step="0" data-grid="1">
+    <div class="eyebrow">3 · S1 · S2</div>
+    <h2><span class="ko">11월 5일 17:30 IST, 초기장과 예측 실행</span><span class="en">5 Nov 17:30 IST, initial conditions and the forecast run</span></h2>
+    <p class="ko">12 UTC(= 17:30 IST)의 CAMS 00/12 UTC 분석과 ERA5 06/12 UTC로 <code>Batch</code> 두 개를 만들고 정적 변수 pickle을 읽습니다. Air Pollution 4스텝(+12/24/36/48 h), Aurora 1.5 8스텝 × 6 서브스텝(+1…+48 h)을 GPU 한 장 또는 Foundry에서 돌립니다. 10분 뒤 10개 지점으로 보간하고 12시간 농도를 시간별로 선형 보간한 뒤, 1.5의 시간별 혼합층·풍속으로 정체 시간대를 표시합니다.</p>
+    <p class="en">At 12 UTC (17:30 IST) two <code>Batch</code> objects are built from the CAMS 00/12 UTC analysis and ERA5 06/12 UTC, plus the static pickles. Air Pollution runs 4 steps (+12/24/36/48 h); Aurora 1.5 runs 8 steps × 6 sub-steps (+1…+48 h) on one GPU or on Foundry. Ten minutes later the fields are interpolated to ten sites, the 12-hourly concentrations to hourly, and stagnant hours are flagged from 1.5's hourly mixing height and wind.</p>
+    <div class="step"><button type="button" data-go="5"><span class="ko">델리로 → 저녁 경보</span><span class="en">To Delhi → evening alert</span></button></div>
+  </section>
+
+  <section class="chapter" data-view="delhi" data-step="0" data-focus="Anand Vihar,ITO,Gurugram Vikas Sadan">
+    <div class="eyebrow">3 · S3 · S4</div>
     <h2><span class="ko">18:30 IST, 저녁 경보</span><span class="en">18:30 IST, the evening alert</span></h2>
-    <p class="ko">첫 예측 시각. 타일 전체가 이미 "매우 나쁨" 이상이고, 교통 지점(Anand Vihar, ITO, Gurugram)이 가장 높습니다. 지점별 AQI와 GRAP 단계를 계산해 푸시/SMS용 한 줄 메시지를 내보냅니다.</p>
-    <p class="en">The first forecast hour. The whole tile is already "Very Poor" or worse, with traffic sites (Anand Vihar, ITO, Gurugram) highest. Per-site AQI and GRAP stage are computed and the one-line push/SMS message goes out.</p>
-    <div class="msg"><div class="eyebrow"><span class="ko">시민용 short · 힌디어</span><span class="en">Citizen short message · Hindi</span></div>[वायु गुणवत्ता चेतावनी] Anand Vihar: अधिकतम AQI 500 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 321 µg/m³। स्वस्थ लोग भी प्रभावित।</div>
-    <div class="step"><button type="button" data-go="2"><span class="ko">지도에서 보기</span><span class="en">Show on map</span></button></div>
+    <p class="ko">첫 예측 시각. 델리 전체가 이미 "매우 나쁨" 이상이고, 교통 지점(Anand Vihar, ITO, Gurugram)이 가장 높습니다. 지점별 AQI와 GRAP 단계를 계산해 푸시/SMS용 한 줄 메시지를 내보냅니다. 운영자에게는 도시 헤드라인과 지점별 상세가 담긴 브리핑이 갑니다.</p>
+    <p class="en">The first forecast hour. All of Delhi is already "Very Poor" or worse, with traffic sites (Anand Vihar, ITO, Gurugram) highest. Per-site AQI and GRAP stage are computed and the one-line push/SMS message goes out; operators get a briefing with the city headline and per-site detail.</p>
+    <div class="msg"><div class="eyebrow"><span class="ko">시민용 short · 힌디어</span><span class="en">Citizen short message · Hindi</span></div><pre>[वायु गुणवत्ता चेतावनी] Anand Vihar: अधिकतम AQI 500 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 321 µg/m³। स्वस्थ लोग भी प्रभावित।</pre></div>
+    <div class="msg"><div class="eyebrow"><span class="ko">도시 헤드라인</span><span class="en">City headline</span></div><pre class="ko">델리 NCR 대기질 전망: 지역 중간값 최고 AQI 433 (위험), 최악 지점 Anand Vihar AQI 500 (위험), 11월 7일 05시 전후. GRAP 4단계 수준에 해당합니다.</pre><pre class="en">Delhi-NCR outlook: median peak AQI 433 (Severe); worst site Anand Vihar at AQI 500 (Severe) around 07 Nov 05:30 IST. Corresponds to GRAP Stage 4.</pre></div>
+    <div class="step"><button type="button" data-go="6"><span class="ko">밤 → 정체</span><span class="en">Night → stagnation</span></button></div>
   </section>
 
-  <section class="chapter" data-step="8" data-view="delhi" data-wind="1" data-focus="">
-    <div class="eyebrow">S6</div>
+  <section class="chapter" data-view="delhi" data-step="8" data-wind="1">
+    <div class="eyebrow">3 · S6</div>
     <h2><span class="ko">11월 6일 02:30 IST, 정체가 시작된다</span><span class="en">6 Nov 02:30 IST, stagnation sets in</span></h2>
-    <p class="ko">Aurora 1.5가 예측한 야간 혼합층은 150 m 안팎, 풍속은 4~5 km/h입니다. 지도의 짧은 화살표가 그 약한 바람입니다. 배출이 같아도 섞일 공기가 얇아지면 지표 농도가 오릅니다. 메시지에는 "밤~아침에 오염이 지표 근처에 쌓이기 쉽습니다"로 들어갑니다.</p>
-    <p class="en">Aurora 1.5 puts the night-time mixing layer near 150 m with winds of 4–5 km/h; the short arrows on the map are that weak wind. With the same emissions and a thinner layer of air to mix into, surface concentrations rise. The message reads: "pollution will tend to pool near the surface from night to morning".</p>
-    <div class="step"><button type="button" data-go="3"><span class="ko">지도에서 보기</span><span class="en">Show on map</span></button></div>
+    <p class="ko">Aurora 1.5가 예측한 야간 혼합층은 150 m 안팎, 풍속은 4~5 km/h입니다. 지도의 짧은 화살표가 그 약한 바람입니다. 배출이 같아도 섞일 공기가 얇아지면 지표 농도가 오릅니다. 메시지에는 "밤~아침에 오염이 지표 근처에 쌓이기 쉽습니다"로 들어가고, 민감군에게는 창문 닫기·새벽 운동 자제 리마인더를 보낼 수 있습니다.</p>
+    <p class="en">Aurora 1.5 puts the night-time mixing layer near 150 m with winds of 4–5 km/h; the short arrows on the map are that weak wind. With the same emissions and a thinner layer of air to mix into, surface concentrations rise. The message says "pollution will tend to pool near the surface from night to morning", and sensitive groups can get a reminder to close windows and skip early exercise.</p>
+    <div class="step"><button type="button" data-go="7"><span class="ko">정점 지점으로 →</span><span class="en">To the peak site →</span></button></div>
   </section>
 
-  <section class="chapter" data-step="35" data-view="delhi" data-wind="1" data-focus="Anand Vihar">
-    <div class="eyebrow">S7</div>
-    <h2><span class="ko">11월 7일 05:30 IST, 정점</span><span class="en">7 Nov 05:30 IST, the peak</span></h2>
-    <p class="ko">두 번째 새벽. Anand Vihar의 AQI가 500(위험)에 닿고 모든 지점이 400을 넘습니다. 이 시각이 지점별 요약표의 "정점 시각"이 되고, 06:00 IST 아침 업데이트는 등교·출근 전에 "오전 7~9시 최고치, 마스크 착용"을 보냅니다.</p>
-    <p class="en">The second pre-dawn. Anand Vihar reaches AQI 500 (Severe) and every site is above 400. This hour becomes the "peak time" in the per-site summary, and the 06:00 IST morning update sends "peak 07:00–09:00, wear a mask" before school and commute.</p>
-    <div class="msg"><div class="eyebrow"><span class="ko">운영자용 long · 발췌</span><span class="en">Operator long message · excerpt</span></div>
-      <span class="ko">현재 AQI 385 → 최고 AQI 500 (위험), 정점 11월 7일 05시 전후. 확산 조건: 37시간(야간·새벽 20시간) 동안 풍속 10 km/h 미만, 혼합층 500 m 미만의 정체. 행정 조치 안내: GRAP 4단계(위험+) 수준.</span>
-      <span class="en">AQI now 385, peaking at 500 (Severe) around 07 Nov 05:30 IST. Dispersion: stagnant for 37 h (20 h overnight), wind below 10 km/h, mixing height below 500 m. Measures: GRAP Stage IV (Severe+) level.</span></div>
-    <div class="step"><button type="button" data-go="4"><span class="ko">지도에서 보기</span><span class="en">Show on map</span></button></div>
+  <section class="chapter" data-view="hotspot" data-step="35" data-wind="1" data-focus="Anand Vihar">
+    <div class="eyebrow">3 · S7</div>
+    <h2><span class="ko">11월 7일 05:30 IST, 가장 심각한 곳</span><span class="en">7 Nov 05:30 IST, the worst-hit site</span></h2>
+    <p class="ko">두 번째 새벽. 동부 델리의 Anand Vihar(주간 버스터미널과 간선도로가 모인 교통 지점)가 AQI 500(위험)에 닿고, 인접한 ITO·Noida·Okhla도 450을 넘습니다. 이 시각이 지점별 요약표의 "정점 시각"이 되고, 06:00 IST 아침 업데이트는 등교·출근 전에 "오전 7~9시 최고치, 마스크 착용"을 보냅니다.</p>
+    <p class="en">The second pre-dawn. Anand Vihar in east Delhi (a traffic site where an interstate bus terminal meets arterial roads) reaches AQI 500 (Severe); neighbouring ITO, Noida and Okhla exceed 450. This hour becomes the "peak time" in the per-site summary, and the 06:00 IST morning update sends "peak 07:00–09:00, wear a mask" before school and commute.</p>
+    <div class="msg"><div class="eyebrow"><span class="ko">운영자용 long · Anand Vihar</span><span class="en">Operator long message · Anand Vihar</span></div>
+      <pre class="ko">- 현재 AQI 385 → 최고 AQI 500 (위험), 정점 11월 7일 05시 전후. 추세: 비슷한 수준 유지.
+- 주 오염물질: PM10. PM2.5 최대 321㎍/㎥, PM10 최대 514㎍/㎥.
+- 확산 조건: 37시간(야간·새벽 20시간) 동안 풍속 10 km/h 미만, 혼합층 500 m 미만의 정체(최저 약 133 m).
+- 건강 권고: 건강한 사람도 영향을 받습니다. 가능한 한 실내에 머무르고, 어린이·노인·호흡기·심장 질환자는 외출을 피하세요.
+- 행정 조치 안내: GRAP 4단계(위험+) 수준. 당국 공지를 확인하세요.</pre>
+      <pre class="en">- AQI now 385, peaking at 500 (Severe) around 07 Nov 05:30 IST. Trend: roughly steady.
+- Main pollutant: PM10. PM2.5 up to 321 ug/m3, PM10 up to 514 ug/m3.
+- Dispersion: stagnant for 37 h (20 h overnight), wind below 10 km/h, mixing height below 500 m (minimum about 133 m).
+- Health advice: even healthy people are affected. Stay indoors; children, older adults and people with lung or heart disease should avoid going out.
+- Measures: GRAP Stage IV (Severe+) level. Follow official notices.</pre></div>
+    <div class="step"><button type="button" data-go="8"><span class="ko">오후 →</span><span class="en">Afternoon →</span></button></div>
   </section>
 
-  <section class="chapter" data-step="44" data-view="tile" data-wind="1" data-focus="">
-    <div class="eyebrow">S6 · <span class="ko">오후</span><span class="en">afternoon</span></div>
+  <section class="chapter" data-view="tile" data-step="44" data-wind="1">
+    <div class="eyebrow">3 · S6 · <span class="ko">오후</span><span class="en">afternoon</span></div>
     <h2><span class="ko">11월 7일 14:30 IST, 낮의 숨 고르기</span><span class="en">7 Nov 14:30 IST, the afternoon breather</span></h2>
-    <p class="ko">혼합층이 1,000 m 가까이 올라가고 바람이 10 km/h를 넘는 몇 시간 동안 AQI가 400 아래로 내려갑니다. 그래도 "매우 나쁨"입니다. 이 구간이 민감군이 환기나 외출을 할 수 있는 창이고, 메시지는 그 시간대를 명시합니다.</p>
-    <p class="en">For a few hours the mixing layer climbs toward 1,000 m, winds exceed 10 km/h and the AQI dips below 400. It is still "Very Poor". This is the window in which sensitive groups can ventilate or go out, and the message names it.</p>
-    <div class="step"><button type="button" data-go="5"><span class="ko">지도에서 보기</span><span class="en">Show on map</span></button></div>
+    <p class="ko">혼합층이 1,000 m 가까이 올라가고 바람이 10 km/h를 넘는 몇 시간 동안 AQI가 400 아래로 내려갑니다. 그래도 "매우 나쁨"입니다. 이 구간이 민감군이 환기나 외출을 할 수 있는 창이고, 메시지는 그 시간대를 명시합니다. 사후(S8)에는 CPCB/DPCC 관측과 비교해 지점별 편향 보정 계수를 구합니다.</p>
+    <p class="en">For a few hours the mixing layer climbs toward 1,000 m, winds exceed 10 km/h and the AQI dips below 400. It is still "Very Poor". This is the window in which sensitive groups can ventilate or go out, and the message names it. Afterwards (S8) per-site predictions are compared with CPCB/DPCC observations to derive bias corrections.</p>
+    <div class="step"><button type="button" data-go="9"><span class="ko">메시지 설계 →</span><span class="en">Message design →</span></button></div>
   </section>
 
-  <section class="chapter" data-step="35" data-view="delhi" data-wind="0" data-coarse="1" data-focus="">
-    <div class="eyebrow">S8</div>
-    <h2><span class="ko">해상도의 진실, 그리고 검증</span><span class="en">The truth about resolution, and verification</span></h2>
-    <p class="ko">지도에 겹친 큰 사각형이 Air Pollution 모델의 0.4° 셀 하나입니다. 델리 NCT 전체가 두세 개 셀에 들어갑니다. 지점 간 차이는 보간의 결과이지 도로변 농도가 아닙니다. 그래서 S8에서 CPCB/DPCC 관측과 비교해 지점별 편향을 보정하고, 장기적으로는 <code>msresearch-aurora/starter-code</code>로 인도 지역 자료에 파인튜닝합니다.</p>
-    <p class="en">The large square overlaid on the map is one 0.4° cell of the Air Pollution model. All of Delhi NCT fits in two or three cells. Site-to-site differences are interpolation, not roadside concentrations. Scene S8 therefore compares with CPCB/DPCC observations to correct per-site bias, and in the longer run fine-tunes on regional data with <code>msresearch-aurora/starter-code</code>.</p>
-    <div class="step"><button type="button" data-go="6"><span class="ko">지도에서 보기</span><span class="en">Show on map</span></button></div>
+  <section class="chapter" data-view="delhi" data-step="35" data-focus="Anand Vihar">
+    <div class="eyebrow">4 · <span class="ko">메시지 설계 원칙</span><span class="en">Message design principles</span></div>
+    <h2><span class="ko">160자 안에 무엇·언제·어디·어떻게</span><span class="en">What, when, where and how in 160 characters</span></h2>
+    <ol class="ko">
+      <li><b>무엇(수치+범주)·언제(IST 정점 시각)·어디(지점)·어떻게(행동 1~2개)</b>. <code>short</code>는 SMS/푸시, <code>long</code>은 앱 상세·브리핑용.</li>
+      <li><b>범주는 CPCB 용어 그대로</b>(좋음/양호/보통/나쁨/매우 나쁨/위험). 뉴스·공식 앱과 일치해야 혼란이 없다.</li>
+      <li><b>민감군을 먼저</b> 호명한다(어린이·노인·임산부·호흡기 질환자).</li>
+      <li><b>GRAP 단계는 "해당 수준"으로만</b>. 발효는 CAQM 권한이므로 "시행될 수 있습니다"로 쓰고 공식 공지를 안내한다.</li>
+      <li><b>기상 근거 한 문장</b>. 시민이 "왜 밤에 더 나쁜가"를 이해하면 행동 순응도가 올라간다.</li>
+      <li><b>면책 문구 고정</b>: "AI 모델(Aurora) 기반 참고 정보이며 공식 경보는 CPCB/CAQM을 따르세요."</li>
+      <li>힌디어(1차), 영어(2차), 운영팀용 한국어. 템플릿은 <code>HEALTH_ADVICE</code>, <code>GRAP_ADVICE</code>, <code>CATEGORY_NAMES</code>에 모여 있어 보건 전문가가 코드 없이 검수한다.</li>
+    </ol>
+    <ol class="en">
+      <li><b>What (value and category), when (IST peak), where (site), how (one or two actions)</b>. <code>short</code> for SMS/push, <code>long</code> for app detail and briefings.</li>
+      <li><b>CPCB category names verbatim</b> (Good / Satisfactory / Moderate / Poor / Very Poor / Severe), matching the news and the official app.</li>
+      <li><b>Name sensitive groups first</b> (children, older adults, pregnant women, respiratory patients).</li>
+      <li><b>GRAP as "corresponding level" only</b>; enforcement is CAQM's call, so "may be enforced" plus a pointer to official notices.</li>
+      <li><b>One sentence of meteorological reasoning</b>; people who understand why nights are worse comply better.</li>
+      <li><b>A fixed disclaimer</b>: "AI-model (Aurora) guidance for information only; follow official CPCB/CAQM alerts."</li>
+      <li>Hindi first, English second, Korean for the operating team. Templates live in <code>HEALTH_ADVICE</code>, <code>GRAP_ADVICE</code> and <code>CATEGORY_NAMES</code> so health experts can review wording without code.</li>
+    </ol>
+    <div class="step"><button type="button" data-go="10"><span class="ko">산출물 →</span><span class="en">Output →</span></button></div>
   </section>
 
-  <section class="chapter" data-step="0" data-view="tile" data-wind="0" data-focus="">
-    <div class="eyebrow"><span class="ko">직접 실행</span><span class="en">Run it</span></div>
-    <h2><span class="ko">노트북과 스토리보드</span><span class="en">Notebook and storyboard</span></h2>
-    <p class="ko">같은 파이프라인을 노트북에서 셀 단위로 실행할 수 있습니다. demo 모드는 GPU와 데이터 없이 돌아갑니다. Colab과 Binder 링크는 저장소가 GitHub에 푸시된 뒤에 동작합니다.</p>
-    <p class="en">The same pipeline runs cell by cell in the notebook. Demo mode needs no GPU or data. The Colab and Binder links work once the repository is pushed to GitHub.</p>
+  <section class="chapter" data-view="delhi" data-step="35">
+    <div class="eyebrow">5 · <span class="ko">demo 모드 산출물</span><span class="en">Demo-mode output</span></div>
+    <h2><span class="ko">지점별 요약</span><span class="en">Per-site summary</span></h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th><span class="ko">지점</span><span class="en">Site</span></th><th class="num"><span class="ko">현재</span><span class="en">Now</span></th><th class="num"><span class="ko">최고</span><span class="en">Peak</span></th><th><span class="ko">주 오염물질</span><span class="en">Dominant</span></th><th class="num">GRAP</th><th class="num"><span class="ko">정체 h</span><span class="en">Stagnant h</span></th></tr></thead>
+      <tbody id="site-rows"></tbody>
+    </table></div>
+    <p class="note ko">정점은 모든 지점에서 11월 7일 05:30 IST 전후(새벽 혼합층 최저 133~143 m). 지도에 마우스를 올리면 지점·셀별 값이 뜹니다. 산출 파일: <code>pollutants_12h.csv</code>, <code>meteorology_hourly.csv</code>, <code>fused_hourly.csv</code>, <code>summary_by_site.csv</code>, <code>messages_{ko,en,hi}.json</code>, <code>bulletin_*.md</code>, <code>frontend/*.json</code>.</p>
+    <p class="note en">All sites peak around 07 Nov 05:30 IST (pre-dawn mixing-height minimum, 133–143 m). Hover the map for per-site and per-cell values. Output files: <code>pollutants_12h.csv</code>, <code>meteorology_hourly.csv</code>, <code>fused_hourly.csv</code>, <code>summary_by_site.csv</code>, <code>messages_{ko,en,hi}.json</code>, <code>bulletin_*.md</code>, <code>frontend/*.json</code>.</p>
+    <div class="step"><button type="button" data-go="11"><span class="ko">한계 →</span><span class="en">Limits →</span></button></div>
+  </section>
+
+  <section class="chapter" data-view="delhi" data-step="35" data-coarse="1">
+    <div class="eyebrow">6 · <span class="ko">한계와 책임 있는 사용</span><span class="en">Limits and responsible use</span></div>
+    <h2><span class="ko">해상도의 진실</span><span class="en">The truth about resolution</span></h2>
+    <p class="ko">지도에 겹친 큰 사각형이 Air Pollution 모델의 0.4° 셀 하나입니다. 델리 NCT 전체가 두세 개 셀에 들어갑니다.</p>
+    <p class="en">The large square on the map is one 0.4° cell of the Air Pollution model. All of Delhi NCT fits in two or three cells.</p>
+    <ul class="ko">
+      <li><b>공간 해상도</b>: 지점 간 차이는 보간 결과이며 도로변 농도가 아니다. 실제 서비스에는 관측소별 편향 보정이나 CPCB 데이터로의 파인튜닝이 필요하다.</li>
+      <li><b>시간 해상도</b>: 시간별 농도 곡선은 12시간 예측의 선형 보간이다. 시간별 구조의 근거는 1.5의 기상 변수이며 메시지에도 그렇게 표기한다.</li>
+      <li><b>입력 데이터</b>: 1.5는 IFS HRES T0로 파인튜닝되었고 이 예제는 ERA5를 쓴다. Air Pollution 모델은 CAMS 분석 전용이다.</li>
+      <li><b>1000 hPa 가스</b>: NO2/SO2/O3/CO는 1000 hPa 혼합비를 밀도로 환산한 근사치. AQI는 사실상 PM2.5/PM10이 주도한다.</li>
+      <li><b>운영 결정</b>: Aurora는 연구용 모델이며 전문가 검토 없는 운영 의사결정에 쓰여서는 안 된다.</li>
+    </ul>
+    <ul class="en">
+      <li><b>Spatial resolution</b>: site differences are interpolation, not roadside values. A real service needs per-station bias correction or fine-tuning on CPCB data.</li>
+      <li><b>Temporal resolution</b>: the hourly curve is a linear interpolation of 12-hour forecasts; the hourly structure comes from 1.5's meteorology and the messages say so.</li>
+      <li><b>Input data</b>: 1.5 was fine-tuned on IFS HRES T0; this example uses ERA5. The Air Pollution model is for CAMS analysis only.</li>
+      <li><b>Gases at 1000 hPa</b>: NO2/SO2/O3/CO are converted mixing ratios, an approximation; PM2.5/PM10 dominate the AQI.</li>
+      <li><b>Operational decisions</b>: Aurora is a research model and must not drive operational decisions without expert review.</li>
+    </ul>
+    <div class="step"><button type="button" data-go="12"><span class="ko">로드맵과 실행 →</span><span class="en">Roadmap and run →</span></button></div>
+  </section>
+
+  <section class="chapter" data-view="tile" data-step="35">
+    <div class="eyebrow">7 · <span class="ko">확장 로드맵 · 직접 실행</span><span class="en">Roadmap · run it</span></div>
+    <h2><span class="ko">다음 단계</span><span class="en">Next steps</span></h2>
+    <ol class="ko">
+      <li><b>불확실성</b>: <code>AuroraV1p5Ensemble</code> + <code>rollout_ensemble</code>로 "정체 확률 80%" 식의 표현.</li>
+      <li><b>CPCB 관측 보정</b>: 지점별 관측-예측 잔차 학습(선형/분위 매핑부터).</li>
+      <li><b>파인튜닝</b>: <code>msresearch-aurora/starter-code/</code>의 학습 루프로 Air Pollution 모델을 인도 지역 자료에 적응. 모델 측 요구사항은 <code>docs/finetuning.md</code>.</li>
+      <li><b>채널 연계</b>: <code>messages_hi.json</code>을 WhatsApp Business API, SMS, 델리 정부 앱으로. 거주 지역(핀코드)을 가장 가까운 지점에 매핑.</li>
+      <li><b>자동화</b>: 00/12 UTC마다 <code>delhi_aq.py --mode foundry --plot</code>을 크론으로.</li>
+    </ol>
+    <ol class="en">
+      <li><b>Uncertainty</b>: <code>AuroraV1p5Ensemble</code> with <code>rollout_ensemble</code> for "80% chance of stagnation".</li>
+      <li><b>CPCB correction</b>: learn per-site residuals (linear or quantile mapping first).</li>
+      <li><b>Fine-tuning</b>: adapt the Air Pollution model to regional data with the loop in <code>msresearch-aurora/starter-code/</code>; model-side requirements in <code>docs/finetuning.md</code>.</li>
+      <li><b>Channels</b>: push <code>messages_hi.json</code> to the WhatsApp Business API, SMS or the Delhi government app; map users to the nearest site by pin code.</li>
+      <li><b>Automation</b>: cron <code>delhi_aq.py --mode foundry --plot</code> at 00 and 12 UTC.</li>
+    </ol>
+    <h3><span class="ko">직접 실행하기</span><span class="en">Run it yourself</span></h3>
+    <p class="ko">demo 모드는 GPU와 데이터 없이 돌아갑니다. Colab과 Binder 링크는 저장소가 GitHub에 푸시된 뒤에 동작합니다.</p>
+    <p class="en">Demo mode needs no GPU or data. The Colab and Binder links work once the repository is pushed to GitHub.</p>
     <div class="badges">
       <a class="colab" href="https://colab.research.google.com/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb"><span class="l">notebook</span><span class="r">Open in Colab</span></a>
       <a class="binder" href="https://mybinder.org/v2/gh/playground-for-thinker/aurora/main?labpath=examples%2Fdelhi_air_quality%2Fexample_delhi_air_quality.ipynb"><span class="l">notebook</span><span class="r">launch Binder</span></a>
@@ -176,25 +320,26 @@ pre { font-family: var(--font-mono); font-size: 0.82rem; background: var(--surfa
 <pre>git clone https://github.com/playground-for-thinker/aurora.git &amp;&amp; cd aurora
 pip install -e . &amp;&amp; pip install matplotlib
 python examples/delhi_air_quality/delhi_aq.py --mode demo --date 2025-11-05 --plot --out outputs</pre>
-    <p class="note ko">지도 타일은 <code>outputs/frontend/</code>에 JSON으로도 저장되어 <code>msresearch-aurora</code>의 React 지도 프런트엔드에서 열 수 있습니다.</p>
-    <p class="note en">The map tile is also written as JSON to <code>outputs/frontend/</code> for the React map frontend in <code>msresearch-aurora</code>.</p>
+    <div class="step"><button type="button" data-go="0"><span class="ko">↑ 처음으로 (세계 지도)</span><span class="en">↑ Back to the start (world map)</span></button></div>
   </section>
 </main>
 
 <aside class="mapwrap">
-  <div class="mapcard" id="mapcard" style="position: relative;">
-    <svg id="map" viewBox="0 0 348 400" role="img" aria-label="Delhi NCR AQI map"></svg>
+  <div class="mapcard" id="mapcard">
+    <svg id="map" viewBox="0 900 32400 16200" role="img" aria-label="Story map"></svg>
     <div class="tip" id="tip"></div>
     <div class="controls">
       <input type="range" id="step" min="0" max="47" value="0" aria-label="forecast hour">
       <div class="when" id="when"></div>
       <div class="layers">
+        <label><span class="ko">보기</span><span class="en">View</span>
+          <select id="view">
+            <option value="world">World</option><option value="india">India</option><option value="tile">NCR</option><option value="delhi">Delhi</option><option value="hotspot">Anand Vihar</option>
+          </select></label>
         <label><input type="checkbox" id="lay-aqi" checked> AQI</label>
-        <label><input type="checkbox" id="lay-wind"> <span class="ko">바람 (1.5)</span><span class="en">wind (1.5)</span></label>
+        <label><input type="checkbox" id="lay-wind"> <span class="ko">바람</span><span class="en">wind</span></label>
         <label><input type="checkbox" id="lay-grid"> <span class="ko">0.25° 격자</span><span class="en">0.25° grid</span></label>
-        <label><input type="checkbox" id="lay-sites" checked> <span class="ko">지점</span><span class="en">sites</span></label>
         <label><input type="checkbox" id="lay-coarse"> <span class="ko">0.4° 셀</span><span class="en">0.4° cell</span></label>
-        <label><input type="checkbox" id="lay-zoom"> <span class="ko">델리 확대</span><span class="en">zoom to Delhi</span></label>
       </div>
     </div>
     <div class="legend" id="legend"></div>
@@ -209,25 +354,30 @@ python examples/delhi_air_quality/delhi_aq.py --mode demo --date 2025-11-05 --pl
 (function () {
   var D = window.SM_DATA;
   var root = document.getElementById("root");
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var CATS = [
     { max: 50, key: "good", ko: "좋음", en: "Good" }, { max: 100, key: "sat", ko: "양호", en: "Satisfactory" },
     { max: 200, key: "mod", ko: "보통", en: "Moderate" }, { max: 300, key: "poor", ko: "나쁨", en: "Poor" },
     { max: 400, key: "vpoor", ko: "매우 나쁨", en: "Very Poor" }, { max: 1e9, key: "sev", ko: "위험", en: "Severe" }
   ];
   function cat(a) { for (var i = 0; i < CATS.length; i++) if (a <= CATS[i].max) return CATS[i]; return CATS[5]; }
+  // name, lat, lon, label anchor, dx (screen units), dy
   var SITES = [
-    ["Anand Vihar", 28.647, 77.316], ["ITO", 28.629, 77.241], ["Punjabi Bagh", 28.674, 77.131], ["Rohini", 28.733, 77.120],
-    ["Jahangirpuri", 28.733, 77.171], ["R K Puram", 28.563, 77.187], ["Dwarka Sector 8", 28.571, 77.072],
-    ["Okhla Phase 2", 28.531, 77.271], ["Noida Sector 62", 28.625, 77.358], ["Gurugram Vikas Sadan", 28.450, 77.026]
+    ["Anand Vihar", 28.647, 77.316, "start", 1.6, -0.9], ["ITO", 28.629, 77.241, "end", -1.6, 0.9],
+    ["Punjabi Bagh", 28.674, 77.131, "end", -1.6, 0.9], ["Rohini", 28.733, 77.120, "end", -1.6, 0.9],
+    ["Jahangirpuri", 28.733, 77.171, "start", 1.6, 0.9], ["R K Puram", 28.563, 77.187, "start", 1.6, 2.6],
+    ["Dwarka Sector 8", 28.571, 77.072, "end", -1.6, 0.9], ["Okhla Phase 2", 28.531, 77.271, "start", 1.6, 2.4],
+    ["Noida Sector 62", 28.625, 77.358, "start", 1.6, 2.6], ["Gurugram Vikas Sadan", 28.450, 77.026, "start", 1.6, 0.9]
   ];
-  var LON0 = 76, LAT1 = 31.5, KX = 87, KY = 100; // equirectangular, scaled by cos(29.5 deg)
-  function px(lon) { return (lon - LON0) * KX; }
-  function py(lat) { return (LAT1 - lat) * KY; }
-  var VIEWS = { tile: "0 0 348 400", delhi: "58 236 84 96" };
-  var lang = "ko", step = 0;
-  var S = { aqi: true, wind: false, grid: false, sites: true, coarse: false, zoom: false };
+  var KX = 90, KY = 100; // plate carree, longitude compressed to match mid-latitude India
+  function px(lon) { return (lon + 180) * KX; }
+  function py(lat) { return (90 - lat) * KY; }
+  // Views as centre (lon, lat) and width in degrees of longitude; the SVG keeps a 2:1 aspect.
+  var VIEWS = { world: [20, 10, 360], india: [80, 22, 66], tile: [78, 29.5, 12], delhi: [77.12, 28.64, 1.25], hotspot: [77.29, 28.62, 0.42] };
+  function box(v) { var W = v[2] * KX, H = W / 2; return [px(v[0]) - W / 2, py(v[1]) - H / 2, W, H]; }
+  var lang = "ko", step = 0, curView = "world", cur = box(VIEWS.world), focus = [];
+  var S = { aqi: true, wind: false, grid: false, coarse: false };
 
-  // Language
   function setLang(l) {
     lang = l; root.setAttribute("data-lang", l); document.documentElement.lang = l;
     document.querySelectorAll(".lang-switch button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-set") === l)); });
@@ -238,140 +388,175 @@ python examples/delhi_air_quality/delhi_aq.py --mode demo --date 2025-11-05 --pl
   if (h === "en" || h === "ko") lang = h; else { try { var s0 = localStorage.getItem("storymap-lang"); if (s0 === "en" || s0 === "ko") lang = s0; } catch (e) {} }
   document.querySelectorAll(".lang-switch button").forEach(function (b) { b.addEventListener("click", function () { setLang(b.getAttribute("data-set")); }); });
 
-  // Time label (IST = UTC + 5:30)
-  var MON = { ko: "월", en: "Nov" };
   function istLabel(i) {
-    var t = new Date(D.times[i] + "Z"); t = new Date(t.getTime() + 330 * 60000);
+    var t = new Date(new Date(D.times[i] + "Z").getTime() + 330 * 60000);
     var d = t.getUTCDate(), hh = t.getUTCHours(), mm = t.getUTCMinutes();
     var hm = (hh < 10 ? "0" : "") + hh + ":" + (mm < 10 ? "0" : "") + mm;
     return lang === "ko" ? "11월 " + d + "일 " + hm + " IST" : d + " Nov " + hm + " IST";
   }
   function when() { document.getElementById("when").textContent = istLabel(step) + " · +" + (step + 1) + " h"; }
-
   function legend() {
     var el = document.getElementById("legend"); el.innerHTML = "";
     CATS.forEach(function (c, i) {
-      var lo = i ? CATS[i - 1].max + 1 : 0, hi = c.max > 1000 ? "401+" : lo + "–" + c.max;
-      var sp = document.createElement("span"); sp.innerHTML = "<i style='background: var(--aqi-" + c.key + ")'></i>" + c[lang] + " " + (c.max > 1000 ? "401+" : hi);
-      el.appendChild(sp);
+      var lo = i ? CATS[i - 1].max + 1 : 0, txt = c.max > 1000 ? "401+" : lo + "–" + c.max;
+      var sp = document.createElement("span"); sp.innerHTML = "<i style='background: var(--aqi-" + c.key + ")'></i>" + c[lang] + " " + txt; el.appendChild(sp);
     });
     document.getElementById("attr").textContent = D.attribution + (lang === "ko" ? " · 데이터: demo 모드 합성 예시" : " · Data: synthetic demo example");
   }
 
-  // Static layers
-  var svg = document.getElementById("map");
-  var NS = "http://www.w3.org/2000/svg";
+  var svg = document.getElementById("map"), NS = "http://www.w3.org/2000/svg";
   function el(n, a) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); return e; }
-  var gCells = el("g", { id: "cells" }), gGrid = el("g", { id: "grid" }), gBorders = el("g", { id: "borders" }), gDelhi = el("g", {}),
-      gCoarse = el("g", {}), gWind = el("g", {}), gSites = el("g", {}), gLabels = el("g", {});
-  [gCells, gGrid, gBorders, gDelhi, gCoarse, gWind, gSites, gLabels].forEach(function (g) { svg.appendChild(g); });
+  function pts(line) { return line.map(function (p) { return px(p[0]).toFixed(0) + "," + py(p[1]).toFixed(0); }).join(" "); }
+  var gWorld = el("g", {}), gIndia = el("g", {}), gStates = el("g", {}), gCells = el("g", {}), gGrid = el("g", {}), gTile = el("g", {}),
+      gDelhi = el("g", {}), gCoarse = el("g", {}), gWind = el("g", {}), gCities = el("g", {}), gSites = el("g", {}), gLabels = el("g", {}), gTitle = el("g", {});
+  [gWorld, gIndia, gStates, gCells, gGrid, gTile, gDelhi, gCoarse, gWind, gCities, gSites, gLabels, gTitle].forEach(function (g) { svg.appendChild(g); });
 
-  var nLat = D.lats.length, nLon = D.lons.length, dLat = 0.25, dLon = 0.25;
-  var rects = [];
+  D.world.forEach(function (poly) { gWorld.appendChild(el("polygon", { points: pts(poly), fill: "var(--land)", stroke: "var(--muted)", "stroke-opacity": "0.5", "stroke-linejoin": "round" })); });
+  D.india.forEach(function (poly) { gIndia.appendChild(el("polygon", { points: pts(poly), fill: "var(--india)", stroke: "var(--fg)", "stroke-opacity": "0.6", "stroke-linejoin": "round" })); });
+  D.states.forEach(function (r) { gStates.appendChild(el("polyline", { points: pts(r), fill: "none", stroke: "var(--muted)", "stroke-dasharray": "0", "stroke-linejoin": "round" })); });
+  var nLat = D.lats.length, nLon = D.lons.length, rects = [];
   for (var i = 0; i < nLat; i++) for (var j = 0; j < nLon; j++) {
-    var r = el("rect", { x: px(D.lons[j] - dLon / 2).toFixed(2), y: py(D.lats[i] + dLat / 2).toFixed(2), width: (dLon * KX).toFixed(2), height: (dLat * KY).toFixed(2), fill: "var(--map-land)", "data-i": i * nLon + j });
-    gCells.appendChild(r); rects.push(r);
-    gGrid.appendChild(el("rect", { x: px(D.lons[j] - dLon / 2).toFixed(2), y: py(D.lats[i] + dLat / 2).toFixed(2), width: (dLon * KX).toFixed(2), height: (dLat * KY).toFixed(2), fill: "none", stroke: "var(--muted)", "stroke-width": "0.25", "stroke-opacity": "0.6" }));
+    var a = { x: px(D.lons[j] - 0.125).toFixed(1), y: py(D.lats[i] + 0.125).toFixed(1), width: (0.25 * KX).toFixed(1), height: (0.25 * KY).toFixed(1) };
+    var r = el("rect", a); r.setAttribute("data-i", i * nLon + j); r.setAttribute("fill", "var(--land)"); gCells.appendChild(r); rects.push(r);
+    var g = el("rect", a); g.setAttribute("fill", "none"); g.setAttribute("stroke", "var(--muted)"); g.setAttribute("stroke-opacity", "0.6"); gGrid.appendChild(g);
   }
-  D.borders.forEach(function (line) {
-    gBorders.appendChild(el("polyline", { points: line.map(function (p) { return px(p[0]).toFixed(1) + "," + py(p[1]).toFixed(1); }).join(" "), fill: "none", stroke: "var(--muted)", "stroke-width": "0.6", "stroke-dasharray": "2 1.5" }));
+  var tileRect = el("rect", { x: px(76).toFixed(0), y: py(31.5).toFixed(0), width: (4 * KX).toFixed(0), height: (4 * KY).toFixed(0), fill: "none", stroke: "var(--accent)", "stroke-linejoin": "round" }); gTile.appendChild(tileRect);
+  var delhiPoly = el("polygon", { points: D.delhi.map(function (p) { return px(p[0]).toFixed(1) + "," + py(p[1]).toFixed(1); }).join(" "), fill: "none", stroke: "var(--fg)", "stroke-linejoin": "round" }); gDelhi.appendChild(delhiPoly);
+  var coarseRect = el("rect", { x: px(76.8).toFixed(1), y: py(28.8).toFixed(1), width: (0.4 * KX).toFixed(1), height: (0.4 * KY).toFixed(1), fill: "var(--haze)", "fill-opacity": "0.45", stroke: "var(--fg)" }); gCoarse.appendChild(coarseRect);
+  var coarseLabel = el("text", { x: px(77.0).toFixed(1), y: py(28.78).toFixed(1), "text-anchor": "middle" }); gCoarse.appendChild(coarseLabel);
+  var cityNodes = D.cities.map(function (c) {
+    var dot = el("circle", { cx: px(c[2]).toFixed(1), cy: py(c[1]).toFixed(1), fill: c[0] === "New Delhi" ? "var(--aqi-sev)" : "var(--fg)", stroke: "var(--surface)" });
+    var t = el("text", { x: px(c[2]).toFixed(1), y: py(c[1]).toFixed(1) }); t.textContent = c[0];
+    gCities.appendChild(dot); gCities.appendChild(t); return [dot, t, c];
   });
-  gDelhi.appendChild(el("polygon", { points: D.delhi.map(function (p) { return px(p[0]).toFixed(2) + "," + py(p[1]).toFixed(2); }).join(" "), fill: "none", stroke: "var(--fg)", "stroke-width": "0.9", "stroke-linejoin": "round" }));
-  // One 0.4 deg Air Pollution cell centred near Delhi (CAMS grid: multiples of 0.4).
-  gCoarse.appendChild(el("rect", { x: px(76.8).toFixed(2), y: py(28.8).toFixed(2), width: (0.4 * KX).toFixed(2), height: (0.4 * KY).toFixed(2), fill: "var(--haze)", "fill-opacity": "0.45", stroke: "var(--fg)", "stroke-width": "0.6", "stroke-dasharray": "1.5 1" }));
-  var coarseLabel = el("text", { x: px(77.0).toFixed(2), y: py(28.83).toFixed(2), "text-anchor": "middle", "font-size": "3" }); gCoarse.appendChild(coarseLabel);
+  var siteDots = SITES.map(function (s) { var c = el("circle", { cx: px(s[2]).toFixed(1), cy: py(s[1]).toFixed(1), fill: "var(--fg)", stroke: "var(--surface)" }); c.setAttribute("data-site", s[0]); gSites.appendChild(c); return c; });
+  var siteLabels = SITES.map(function (s) { var t = el("text", { "text-anchor": s[3] }); t.textContent = s[0]; gLabels.appendChild(t); return t; });
+  var titleText = el("text", {}); gTitle.appendChild(titleText);
+  var indiaTag = el("text", { x: px(78.5).toFixed(0), y: py(20).toFixed(0), "text-anchor": "middle", "font-weight": "600" }); gTitle.appendChild(indiaTag);
+  var delhiTag = el("text", { "text-anchor": "end", "font-weight": "600" }); gTitle.appendChild(delhiTag);
 
-  var siteDots = [];
-  SITES.forEach(function (s) {
-    var c = el("circle", { cx: px(s[2]).toFixed(2), cy: py(s[1]).toFixed(2), r: "1.6", fill: "var(--fg)", stroke: "var(--surface)", "stroke-width": "0.5", "data-site": s[0] });
-    gSites.appendChild(c); siteDots.push(c);
-  });
-  var labelNodes = {};
-  SITES.forEach(function (s) {
-    var t = el("text", { x: (px(s[2]) + 2.2).toFixed(2), y: (py(s[1]) + 1.1).toFixed(2), "font-size": "2.6", "paint-order": "stroke", stroke: "var(--surface)", "stroke-width": "0.8" });
-    t.textContent = s[0]; gLabels.appendChild(t); labelNodes[s[0]] = t;
-  });
-  var tileLabel = el("text", { x: "3", y: "6", "font-size": "4" }); svg.appendChild(tileLabel);
-  var delhiTag = el("text", { x: px(76.86).toFixed(2), y: py(28.9).toFixed(2), "font-size": "3", "font-weight": "600" }); svg.appendChild(delhiTag);
-
-  var focus = [];
-  function draw() {
-    var a = D.aqi[step];
-    rects.forEach(function (r, k) { r.setAttribute("fill", S.aqi ? "var(--aqi-" + cat(a[k]).key + ")" : "var(--map-land)"); r.setAttribute("fill-opacity", S.aqi ? "0.78" : "1"); });
-    gGrid.style.display = S.grid ? "" : "none";
-    gCoarse.style.display = S.coarse ? "" : "none";
+  // Sizes that must stay constant on screen are expressed relative to the Delhi view width.
+  var REF = VIEWS.delhi[2] * KX;
+  function setVB(b) {
+    cur = b; svg.setAttribute("viewBox", b.map(function (v) { return v.toFixed(1); }).join(" "));
+    var s = b[2] / REF, vbW = b[2], fs = 2.4 * s, big = vbW > 4000, mid = vbW > 1800 && !big;
+    svg.style.fontSize = fs + "px";
+    gWorld.setAttribute("stroke-width", (0.35 * Math.min(s, 300)).toFixed(2));
+    gIndia.setAttribute("stroke-width", (0.5 * Math.min(s, 80)).toFixed(2));
+    gIndia.style.display = vbW > 300 ? "" : "none";
+    gStates.setAttribute("stroke-width", (0.4 * s).toFixed(2)); gStates.style.display = big ? "none" : "";
+    gGrid.setAttribute("stroke-width", (0.22 * s).toFixed(2));
+    tileRect.setAttribute("stroke-width", (0.7 * Math.min(s, 60)).toFixed(2)); gTile.style.display = vbW < 500 ? "none" : "";
+    delhiPoly.setAttribute("stroke-width", (0.9 * Math.min(s, 9)).toFixed(2));
+    coarseRect.setAttribute("stroke-width", (0.5 * s).toFixed(2)); coarseRect.setAttribute("stroke-dasharray", (1.5 * s) + " " + (1 * s));
+    svg.style.setProperty("--sw", (0.7 * s) + "px");
+    svg.querySelectorAll("text").forEach(function (t) { t.setAttribute("stroke-width", (0.7 * s).toFixed(2)); });
     coarseLabel.textContent = lang === "ko" ? "0.4° 셀 1개" : "one 0.4° cell";
-    gSites.style.display = S.sites ? "" : "none";
-    gLabels.style.display = (S.sites && S.zoom) ? "" : "none";
-    svg.setAttribute("viewBox", S.zoom ? VIEWS.delhi : VIEWS.tile);
-    gBorders.style.display = S.zoom ? "none" : "";
-    tileLabel.style.display = S.zoom ? "none" : "";
-    tileLabel.textContent = lang === "ko" ? "델리 NCR 타일 27.5–31.5°N, 76–80°E" : "Delhi-NCR tile 27.5–31.5°N, 76–80°E";
+    gCities.style.display = (mid || big) ? "" : "none";
+    cityNodes.forEach(function (n) {
+      var isDelhi = n[2][0] === "New Delhi"; n[0].setAttribute("r", (isDelhi ? 1.8 : 1.2) * s); n[0].setAttribute("stroke-width", (0.5 * s).toFixed(2));
+      n[0].style.display = (big && !isDelhi) ? "none" : ""; n[1].style.display = (big && !isDelhi) ? "none" : "";
+      n[1].setAttribute("x", (px(n[2][2]) + 2.2 * s).toFixed(1)); n[1].setAttribute("y", (py(n[2][1]) + 0.9 * s).toFixed(1));
+    });
+    gSites.style.display = vbW < 1800 ? "" : "none"; gLabels.style.display = vbW < 160 ? "" : "none";
+    siteDots.forEach(function (c, k) { var f = focus.indexOf(SITES[k][0]) >= 0; c.setAttribute("r", ((f ? 2.1 : 1.4) * s).toFixed(2)); c.setAttribute("stroke-width", ((f ? 0.9 : 0.5) * s).toFixed(2)); c.setAttribute("stroke", f ? "var(--accent)" : "var(--surface)"); });
+    siteLabels.forEach(function (t, k) { var s0 = SITES[k]; t.setAttribute("x", (px(s0[2]) + s0[4] * s).toFixed(1)); t.setAttribute("y", (py(s0[1]) + s0[5] * s).toFixed(1)); t.setAttribute("font-weight", focus.indexOf(s0[0]) >= 0 ? "600" : "400"); });
+    titleText.setAttribute("x", (b[0] + 1.5 * s).toFixed(1)); titleText.setAttribute("y", (b[1] + 4 * s).toFixed(1)); titleText.setAttribute("font-size", (3 * s).toFixed(2));
+    indiaTag.setAttribute("font-size", (3.2 * s).toFixed(2)); indiaTag.style.display = big ? "" : "none"; indiaTag.textContent = lang === "ko" ? "인도" : "India";
+    delhiTag.style.display = (vbW < 1800 && vbW > 60) ? "" : "none"; delhiTag.setAttribute("x", (px(77.33) + 0).toFixed(1)); delhiTag.setAttribute("y", (py(28.88) - 1.2 * s).toFixed(1)); delhiTag.setAttribute("font-size", (2.8 * s).toFixed(2));
     delhiTag.textContent = lang === "ko" ? "델리 NCT" : "Delhi NCT";
-    delhiTag.setAttribute("font-size", S.zoom ? "2.6" : "4");
-    siteDots.forEach(function (c) { var f = focus.indexOf(c.getAttribute("data-site")) >= 0; c.setAttribute("r", S.zoom ? (f ? "2.2" : "1.4") : (f ? "2.6" : "1.6")); c.setAttribute("stroke", f ? "var(--accent)" : "var(--surface)"); c.setAttribute("stroke-width", f ? "0.9" : "0.5"); });
-    // wind arrows every other cell
+    drawWind(s, vbW);
+    titleText.textContent = title(vbW);
+  }
+  function title(vbW) {
+    if (vbW > 4000) return lang === "ko" ? "세계 · 인도의 위치" : "World · where India is";
+    if (vbW > 1800) return lang === "ko" ? "인도 · 델리 NCR 타일 (27.5–31.5°N, 76–80°E)" : "India · the Delhi-NCR tile (27.5–31.5°N, 76–80°E)";
+    if (vbW > 300) return lang === "ko" ? "델리 NCR 타일 · 0.25° 격자 AQI" : "Delhi-NCR tile · 0.25° AQI grid";
+    if (vbW > 60) return lang === "ko" ? "델리 NCT와 대표 지점 10곳" : "Delhi NCT and ten reporting sites";
+    return lang === "ko" ? "동부 델리 · Anand Vihar 주변" : "East Delhi · around Anand Vihar";
+  }
+  function drawWind(s, vbW) {
     while (gWind.firstChild) gWind.removeChild(gWind.firstChild);
-    if (S.wind) {
-      var w = D.wind[step], wd = D.wdir[step], st = S.zoom ? 1 : 2;
-      for (var i = 0; i < nLat; i += st) for (var j = 0; j < nLon; j += st) {
-        var k = i * nLon + j, cx = px(D.lons[j]), cy = py(D.lats[i]);
-        var len = Math.min(9, 1.2 + w[k] * 0.55) * (S.zoom ? 0.55 : 1);
-        var ang = -wd[k] * Math.PI / 180; // math convention, y down
-        var x2 = cx + Math.cos(ang) * len, y2 = cy + Math.sin(ang) * len;
-        gWind.appendChild(el("line", { x1: cx.toFixed(2), y1: cy.toFixed(2), x2: x2.toFixed(2), y2: y2.toFixed(2), stroke: "var(--fg)", "stroke-width": S.zoom ? "0.35" : "0.6", "stroke-opacity": "0.75", "stroke-linecap": "round" }));
-        gWind.appendChild(el("circle", { cx: x2.toFixed(2), cy: y2.toFixed(2), r: S.zoom ? "0.45" : "0.8", fill: "var(--fg)", "fill-opacity": "0.75" }));
-      }
+    if (!S.wind || vbW > 1800) return;
+    var w = D.wind[step], wd = D.wdir[step], st = vbW > 300 ? 2 : 1;
+    for (var i = 0; i < nLat; i += st) for (var j = 0; j < nLon; j += st) {
+      var k = i * nLon + j, cx = px(D.lons[j]), cy = py(D.lats[i]);
+      var len = Math.min(8, 1.2 + w[k] * 0.5) * s * 0.4;
+      var ang = -wd[k] * Math.PI / 180, x2 = cx + Math.cos(ang) * len, y2 = cy + Math.sin(ang) * len;
+      gWind.appendChild(el("line", { x1: cx.toFixed(1), y1: cy.toFixed(1), x2: x2.toFixed(1), y2: y2.toFixed(1), stroke: "var(--fg)", "stroke-width": (0.35 * s).toFixed(2), "stroke-opacity": "0.75", "stroke-linecap": "round" }));
+      gWind.appendChild(el("circle", { cx: x2.toFixed(1), cy: y2.toFixed(1), r: (0.5 * s).toFixed(2), fill: "var(--fg)", "fill-opacity": "0.75" }));
     }
   }
+  function draw() {
+    var a = D.aqi[step];
+    rects.forEach(function (r, k) { r.setAttribute("fill", S.aqi ? "var(--aqi-" + cat(a[k]).key + ")" : "var(--land)"); r.setAttribute("fill-opacity", S.aqi ? "0.8" : "1"); });
+    gGrid.style.display = S.grid ? "" : "none"; gCoarse.style.display = S.coarse ? "" : "none";
+    setVB(cur);
+  }
 
-  // Controls
+  // Smooth flight between views: centre moves linearly, width in log space, longer for bigger zoom changes.
+  var anim = null;
+  function flyTo(name) {
+    var to = box(VIEWS[name]); curView = name; document.getElementById("view").value = name;
+    if (anim) cancelAnimationFrame(anim);
+    if (reduced) { setVB(to); return; }
+    var from = cur.slice(), zoomRatio = Math.abs(Math.log(to[2] / from[2])), dur = Math.min(2800, 900 + 450 * zoomRatio);
+    var fx = from[0] + from[2] / 2, fy = from[1] + from[3] / 2, tx = to[0] + to[2] / 2, ty = to[1] + to[3] / 2, t0 = performance.now();
+    function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+    function frame(now) {
+      var t = Math.min(1, (now - t0) / dur), e = ease(t);
+      var w = Math.exp(Math.log(from[2]) + (Math.log(to[2]) - Math.log(from[2])) * e), hh = w / 2;
+      var cx = fx + (tx - fx) * e, cy = fy + (ty - fy) * e;
+      setVB([cx - w / 2, cy - hh / 2, w, hh]);
+      if (t < 1) anim = requestAnimationFrame(frame); else { anim = null; setVB(to); }
+    }
+    anim = requestAnimationFrame(frame);
+  }
+
   var slider = document.getElementById("step");
   slider.addEventListener("input", function () { step = +slider.value; when(); draw(); });
-  [["lay-aqi", "aqi"], ["lay-wind", "wind"], ["lay-grid", "grid"], ["lay-sites", "sites"], ["lay-coarse", "coarse"], ["lay-zoom", "zoom"]].forEach(function (p) {
-    var box = document.getElementById(p[0]); box.checked = S[p[1]];
-    box.addEventListener("change", function () { S[p[1]] = box.checked; draw(); });
+  document.getElementById("view").addEventListener("change", function (e) { flyTo(e.target.value); });
+  [["lay-aqi", "aqi"], ["lay-wind", "wind"], ["lay-grid", "grid"], ["lay-coarse", "coarse"]].forEach(function (p) {
+    var bx = document.getElementById(p[0]); bx.checked = S[p[1]]; bx.addEventListener("change", function () { S[p[1]] = bx.checked; draw(); });
   });
-  function syncBoxes() { document.getElementById("lay-wind").checked = S.wind; document.getElementById("lay-grid").checked = S.grid; document.getElementById("lay-coarse").checked = S.coarse; document.getElementById("lay-zoom").checked = S.zoom; }
+  function syncBoxes() { ["wind", "grid", "coarse"].forEach(function (k) { document.getElementById("lay-" + k).checked = S[k]; }); }
 
-  // Tooltip
   var tip = document.getElementById("tip"), card = document.getElementById("mapcard");
-  function showTip(evt, text) {
-    var r = card.getBoundingClientRect(); tip.textContent = text; tip.style.left = (evt.clientX - r.left) + "px"; tip.style.top = (evt.clientY - r.top) + "px"; tip.classList.add("on");
-  }
+  function showTip(evt, text) { var r = card.getBoundingClientRect(); tip.textContent = text; tip.style.left = (evt.clientX - r.left) + "px"; tip.style.top = (evt.clientY - r.top) + "px"; tip.classList.add("on"); }
   svg.addEventListener("mousemove", function (evt) {
-    var t = evt.target, k;
+    var t = evt.target;
     if (t.hasAttribute("data-site")) {
       var name = t.getAttribute("data-site"), ser = D.sites[name];
       showTip(evt, name + " · AQI " + ser.aqi[step] + " (" + cat(ser.aqi[step])[lang] + ") · PM2.5 " + ser.pm25[step] + " µg/m³ · BLH " + ser.blh[step] + " m" + (ser.stag[step] ? (lang === "ko" ? " · 정체" : " · stagnant") : ""));
-    } else if (t.hasAttribute("data-i")) {
-      k = +t.getAttribute("data-i");
+    } else if (t.hasAttribute("data-i") && cur[2] < 4000) {
+      var k = +t.getAttribute("data-i");
       showTip(evt, D.lats[Math.floor(k / nLon)].toFixed(2) + "°N " + D.lons[k % nLon].toFixed(2) + "°E · AQI " + D.aqi[step][k] + " (" + cat(D.aqi[step][k])[lang] + ") · " + D.wind[step][k] + " km/h");
     } else tip.classList.remove("on");
   });
   svg.addEventListener("mouseleave", function () { tip.classList.remove("on"); });
 
-  // Chapters drive the map
   var chapters = Array.prototype.slice.call(document.querySelectorAll(".chapter"));
   function apply(ch) {
     chapters.forEach(function (c) { c.classList.toggle("active", c === ch); });
     step = +ch.getAttribute("data-step"); slider.value = step;
-    S.zoom = ch.getAttribute("data-view") === "delhi";
-    S.wind = ch.getAttribute("data-wind") === "1";
-    S.grid = ch.getAttribute("data-grid") === "1";
-    S.coarse = ch.getAttribute("data-coarse") === "1";
+    S.wind = ch.getAttribute("data-wind") === "1"; S.grid = ch.getAttribute("data-grid") === "1"; S.coarse = ch.getAttribute("data-coarse") === "1";
     focus = (ch.getAttribute("data-focus") || "").split(",").filter(Boolean);
     syncBoxes(); when(); draw();
+    var v = ch.getAttribute("data-view"); if (v !== curView) flyTo(v);
   }
   if ("IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) apply(e.target); });
-    }, { rootMargin: "-40% 0px -50% 0px", threshold: 0 });
+    var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting) apply(e.target); }); }, { rootMargin: "-35% 0px -55% 0px", threshold: 0 });
     chapters.forEach(function (c) { io.observe(c); });
   }
   document.querySelectorAll(".step button").forEach(function (b) {
-    b.addEventListener("click", function () { var ch = chapters[+b.getAttribute("data-go")]; apply(ch); ch.scrollIntoView({ behavior: "smooth", block: "start" }); });
+    b.addEventListener("click", function () { var ch = chapters[+b.getAttribute("data-go")]; apply(ch); ch.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" }); });
   });
+
+  var rows = [["Anand Vihar", 385, 500, "PM10", 4, 37], ["ITO", 383, 498, "PM10", 4, 38], ["Punjabi Bagh", 346, 415, "PM2.5", 3, 38], ["Rohini", 337, 406, "PM2.5", 3, 38],
+    ["Jahangirpuri", 365, 452, "PM10", 4, 38], ["R K Puram", 335, 405, "PM2.5", 3, 38], ["Dwarka Sector 8", 336, 406, "PM2.5", 3, 38], ["Okhla Phase 2", 366, 453, "PM10", 4, 38],
+    ["Noida Sector 62", 340, 409, "PM2.5", 3, 38], ["Gurugram Vikas Sadan", 376, 479, "PM10", 4, 38]];
+  var tb = document.getElementById("site-rows");
+  rows.forEach(function (r) { var tr = document.createElement("tr"); tr.innerHTML = "<td>" + r[0] + "</td><td class='num'>" + r[1] + "</td><td class='num'>" + r[2] + "</td><td>" + r[3] + "</td><td class='num'>" + r[4] + "</td><td class='num'>" + r[5] + "</td>"; tb.appendChild(tr); });
 
   setLang(lang);
   apply(chapters[0]);
