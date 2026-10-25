@@ -4,7 +4,7 @@
 >
 > 이 한 줄의 메시지가 시민에게 도달하기까지, 무엇이 필요하고 Aurora가 어디서 쓰이는지를 장면별로 정리한 문서입니다.
 
-인터랙티브 버전(한국어 ⇄ English 전환 버튼): [https://claude.ai/artifact/6GkTNUq54pqXGZBVx7BGSE](https://claude.ai/artifact/6GkTNUq54pqXGZBVx7BGSE) · 영어 마크다운: `STORYBOARD.md`
+스토리 맵(지도 위 장면별 내러티브): [https://claude.ai/artifact/PKH8XS3B3Nb85WaVMbmZSW](https://claude.ai/artifact/PKH8XS3B3Nb85WaVMbmZSW) · 인터랙티브 스토리보드(한국어 ⇄ English 전환 버튼): [https://claude.ai/artifact/6GkTNUq54pqXGZBVx7BGSE](https://claude.ai/artifact/6GkTNUq54pqXGZBVx7BGSE) · 영어 마크다운: `STORYBOARD.md`
 
 관련 파일:
 
@@ -14,6 +14,7 @@
 | `example_delhi_air_quality.ipynb` | 스토리보드를 따라가며 실행하는 노트북 |
 | `README_kor.md` | 설치·실행 방법, 환경 변수, 바로 열어보기 링크 |
 | `storyboard.html` | 이 문서의 인터랙티브 버전(언어 전환, demo 그래프) |
+| `storymap.html`, `storymap_data.js` | 스토리 맵: 지도 위에서 장면별로 시간이 흐르는 버전 |
 
 ---
 

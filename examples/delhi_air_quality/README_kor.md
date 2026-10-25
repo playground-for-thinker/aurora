@@ -1,18 +1,22 @@
 # 뉴델리 대기질 조기경보 예제
 
+[![Story Map · 한국어/English](https://img.shields.io/badge/Story%20Map-%ED%95%9C%EA%B5%AD%EC%96%B4%20%2F%20English-0b6e8f?logo=googlemaps&logoColor=white)](https://claude.ai/artifact/PKH8XS3B3Nb85WaVMbmZSW) [![Storyboard · 한국어/English](https://img.shields.io/badge/Storyboard-%ED%95%9C%EA%B5%AD%EC%96%B4%20%2F%20English-0b6e8f?logo=readme&logoColor=white)](https://claude.ai/artifact/6GkTNUq54pqXGZBVx7BGSE) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/playground-for-thinker/aurora/main?labpath=examples%2Fdelhi_air_quality%2Fexample_delhi_air_quality.ipynb)
+
 Aurora 0.4° Air Pollution(오염물질 농도)과 Aurora 1.5(시간별 확산 기상)를 결합해 델리 NCR 10개 지점의 CPCB AQI·GRAP 단계를 산출하고, 시민용 경보 메시지(힌디어/영어/한국어)를 만드는 예제입니다. 전체 흐름과 설계 의도는 [`STORYBOARD_kor.md`](STORYBOARD_kor.md)를 보세요.
 
 ## 바로 열어보기
 
 | 무엇 | 링크 | 비고 |
 | - | - | - |
+| 스토리 맵 (지도 위 장면별 내러티브, 한국어 ⇄ English 전환) | [https://claude.ai/artifact/PKH8XS3B3Nb85WaVMbmZSW](https://claude.ai/artifact/PKH8XS3B3Nb85WaVMbmZSW) | 로컬 파일은 `storymap.html` + `storymap_data.js`. 48시간 AQI 타일, 바람, 지점, 델리 경계. 배지: 위 "Story Map" |
 | 스토리보드 (한국어 ⇄ English 전환 버튼) | [https://claude.ai/artifact/6GkTNUq54pqXGZBVx7BGSE](https://claude.ai/artifact/6GkTNUq54pqXGZBVx7BGSE) | 로컬 파일은 `storyboard.html`. 전환 상태는 `#ko` / `#en` 해시로도 지정 가능 |
 | 노트북 실행 (Google Colab) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb) | demo 모드는 GPU·데이터 불필요. 첫 셀이 `microsoft-aurora`와 `delhi_aq.py`를 자동으로 받습니다 |
 | 노트북 실행 (Binder, JupyterLab) | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/playground-for-thinker/aurora/main?labpath=examples%2Fdelhi_air_quality%2Fexample_delhi_air_quality.ipynb) | 첫 빌드는 수 분 소요 |
 | 노트북 미리보기 (nbviewer) | [https://nbviewer.org/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb](https://nbviewer.org/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb) | 실행 없이 읽기 |
 | 스토리보드 문서 | [`STORYBOARD_kor.md`](STORYBOARD_kor.md) · [`STORYBOARD.md`](STORYBOARD.md) | 마크다운 버전 |
+| 배지 SVG (자체 호스팅용) | [`badges/story-map.svg`](badges/story-map.svg) | shields.io 대신 쓸 수 있는 정적 배지 |
 
-Colab/Binder/nbviewer 링크는 `github.com/playground-for-thinker/aurora`의 `main` 브랜치를 가리키므로, 이 디렉터리가 GitHub에 푸시된 뒤에 동작합니다. 스토리보드 페이지 링크는 발행한 계정이 공유 설정을 바꿔야 다른 사람도 열 수 있습니다.
+배지 이미지는 shields.io, Colab, Binder가 제공합니다. Colab/Binder/nbviewer 링크는 `github.com/playground-for-thinker/aurora`의 `main` 브랜치를 가리키므로, 이 디렉터리가 GitHub에 푸시된 뒤에 동작합니다. 스토리보드 페이지 링크는 발행한 계정이 공유 설정을 바꿔야 다른 사람도 열 수 있습니다.
 
 ## 설치
 
