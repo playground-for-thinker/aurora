@@ -109,3 +109,17 @@ Demo-mode numbers are synthetic and imitate a typical November episode. Real for
 3. **Fine-tuning**: use `msresearch-aurora/starter-code/` (PyTorch Lightning loop, `vibe_tune_aurora.cli.train`) to adapt the Air Pollution model to regional CAMS reanalysis or gridded CPCB observations and reduce regional bias. Model-side requirements (normalisation statistics, `strict=False` loading) are in this repository's `docs/finetuning.md`; training-side guidance is in the skill's `docs/finetuning-guide.md`.
 4. **Channels**: a small adapter that pushes `messages_hi.json` to the WhatsApp Business API, an SMS gateway or the Delhi government app backend. Map users to the nearest site by residential pin code.
 5. **Automation**: run `python delhi_aq.py --mode foundry --plot` from cron at 00 and 12 UTC and archive the outputs in blob storage.
+
+## 8. Roadmap execution (initial condition 5 Nov 2025 12 UTC)
+
+The five roadmap items were run with `delhi_aq.py --mode hybrid --members 3`. Labels follow the story map.
+
+| Item | What ran | Label | Result |
+| - | - | - | - |
+| 1 Uncertainty | `AuroraV1p5Ensemble` with three seeds from the public ARCO-ERA5 initial condition; stagnation probability from each member's mixing height and wind | Aurora direct | Mean per-site stagnation probability 0.26–0.34, tile mean 0.50. Deterministic 1.5 night-time minimum mixing height 64–75 m |
+| 2 Observation correction | Per-site linear fit (obs = a + b × pred) | Additional method, synthetic observations | No public CPCB API, so the procedure ran on synthetic observations. `bias_correction.csv` |
+| 3 Fine-tuning | Smoke test of the msresearch-aurora starter (`test_finetuning_2t_var_pretrained`) | Additional method | 1 passed in 66 s (CPU). The real fine-tuning was not run for lack of regional training data |
+| 4 Delivery adapter | Postal-code to site mapping, per-language short payloads, dry-run log | Additional method | 20 items queued. `delivery_log.json` |
+| 5 Automation | Cron script for 00/12 UTC | Additional method | `run_delhi_aq_cron.sh` |
+
+Pollutant concentrations remain synthetic in this run (CAMS needs an Atmosphere Data Store account). Outputs are in `outputs/hybrid_2025-11-05/`; `provenance.json` there summarises the sources.

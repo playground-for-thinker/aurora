@@ -1,0 +1,207 @@
+{
+  "generated": "2026-10-25T13:24:58.892312+00:00",
+  "channel": "dryrun",
+  "count": 20,
+  "items": [
+    {
+      "subscriber": "sub-000",
+      "pincode": "110092",
+      "site": "Anand Vihar",
+      "lang": "hi",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 155,
+      "payload": "[वायु गुणवत्ता चेतावनी] Anand Vihar: अधिकतम AQI 500 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 321 µg/m³। स्वस्थ लोग भी प्रभावित।"
+    },
+    {
+      "subscriber": "sub-001",
+      "pincode": "110092",
+      "site": "Anand Vihar",
+      "lang": "en",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 166,
+      "payload": "[Air quality alert] Anand Vihar: peak AQI 500 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM10, PM2.5 up to 321 ug/m3. Even healthy people are affected."
+    },
+    {
+      "subscriber": "sub-002",
+      "pincode": "110002",
+      "site": "ITO",
+      "lang": "hi",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 147,
+      "payload": "[वायु गुणवत्ता चेतावनी] ITO: अधिकतम AQI 498 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 318 µg/m³। स्वस्थ लोग भी प्रभावित।"
+    },
+    {
+      "subscriber": "sub-003",
+      "pincode": "110002",
+      "site": "ITO",
+      "lang": "en",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 158,
+      "payload": "[Air quality alert] ITO: peak AQI 498 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM10, PM2.5 up to 318 ug/m3. Even healthy people are affected."
+    },
+    {
+      "subscriber": "sub-004",
+      "pincode": "110026",
+      "site": "Punjabi Bagh",
+      "lang": "hi",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 157,
+      "payload": "[वायु गुणवत्ता चेतावनी] Punjabi Bagh: अधिकतम AQI 415 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM2.5, PM2.5 अधिकतम 269 µg/m³। स्वस्थ लोग भी प्रभावित।"
+    },
+    {
+      "subscriber": "sub-005",
+      "pincode": "110026",
+      "site": "Punjabi Bagh",
+      "lang": "en",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 168,
+      "payload": "[Air quality alert] Punjabi Bagh: peak AQI 415 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM2.5, PM2.5 up to 269 ug/m3. Even healthy people are affected."
+    },
+    {
+      "subscriber": "sub-006",
+      "pincode": "110085",
+      "site": "Rohini",
+      "lang": "hi",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 151,
+      "payload": "[वायु गुणवत्ता चेतावनी] Rohini: अधिकतम AQI 406 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM2.5, PM2.5 अधिकतम 258 µg/m³। स्वस्थ लोग भी प्रभावित।"
+    },
+    {
+      "subscriber": "sub-007",
+      "pincode": "110085",
+      "site": "Rohini",
+      "lang": "en",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 162,
+      "payload": "[Air quality alert] Rohini: peak AQI 406 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM2.5, PM2.5 up to 258 ug/m3. Even healthy people are affected."
+    },
+    {
+      "subscriber": "sub-008",
+      "pincode": "110033",
+      "site": "Jahangirpuri",
+      "lang": "hi",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 156,
+      "payload": "[वायु गुणवत्ता चेतावनी] Jahangirpuri: अधिकतम AQI 452 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 295 µg/m³। स्वस्थ लोग भी प्रभावित।"
+    },
+    {
+      "subscriber": "sub-009",
+      "pincode": "110033",
+      "site": "Jahangirpuri",
+      "lang": "en",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 167,
+      "payload": "[Air quality alert] Jahangirpuri: peak AQI 452 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM10, PM2.5 up to 295 ug/m3. Even healthy people are affected."
+    },
+    {
+      "subscriber": "sub-010",
+      "pincode": "110022",
+      "site": "R K Puram",
+      "lang": "hi",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 154,
+      "payload": "[वायु गुणवत्ता चेतावनी] R K Puram: अधिकतम AQI 405 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM2.5, PM2.5 अधिकतम 256 µg/m³। स्वस्थ लोग भी प्रभावित।"
+    },
+    {
+      "subscriber": "sub-011",
+      "pincode": "110022",
+      "site": "R K Puram",
+      "lang": "en",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 165,
+      "payload": "[Air quality alert] R K Puram: peak AQI 405 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM2.5, PM2.5 up to 256 ug/m3. Even healthy people are affected."
+    },
+    {
+      "subscriber": "sub-012",
+      "pincode": "110077",
+      "site": "Dwarka Sector 8",
+      "lang": "hi",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 160,
+      "payload": "[वायु गुणवत्ता चेतावनी] Dwarka Sector 8: अधिकतम AQI 406 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM2.5, PM2.5 अधिकतम 257 µg/m³। स्वस्थ लोग भी प्रभावित।"
+    },
+    {
+      "subscriber": "sub-013",
+      "pincode": "110077",
+      "site": "Dwarka Sector 8",
+      "lang": "en",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 171,
+      "payload": "[Air quality alert] Dwarka Sector 8: peak AQI 406 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM2.5, PM2.5 up to 257 ug/m3. Even healthy people are affected."
+    },
+    {
+      "subscriber": "sub-014",
+      "pincode": "110020",
+      "site": "Okhla Phase 2",
+      "lang": "hi",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 157,
+      "payload": "[वायु गुणवत्ता चेतावनी] Okhla Phase 2: अधिकतम AQI 453 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 295 µg/m³। स्वस्थ लोग भी प्रभावित।"
+    },
+    {
+      "subscriber": "sub-015",
+      "pincode": "110020",
+      "site": "Okhla Phase 2",
+      "lang": "en",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 168,
+      "payload": "[Air quality alert] Okhla Phase 2: peak AQI 453 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM10, PM2.5 up to 295 ug/m3. Even healthy people are affected."
+    },
+    {
+      "subscriber": "sub-016",
+      "pincode": "201309",
+      "site": "Noida Sector 62",
+      "lang": "hi",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 160,
+      "payload": "[वायु गुणवत्ता चेतावनी] Noida Sector 62: अधिकतम AQI 409 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM2.5, PM2.5 अधिकतम 262 µg/m³। स्वस्थ लोग भी प्रभावित।"
+    },
+    {
+      "subscriber": "sub-017",
+      "pincode": "201309",
+      "site": "Noida Sector 62",
+      "lang": "en",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 171,
+      "payload": "[Air quality alert] Noida Sector 62: peak AQI 409 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM2.5, PM2.5 up to 262 ug/m3. Even healthy people are affected."
+    },
+    {
+      "subscriber": "sub-018",
+      "pincode": "122001",
+      "site": "Gurugram Vikas Sadan",
+      "lang": "hi",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 164,
+      "payload": "[वायु गुणवत्ता चेतावनी] Gurugram Vikas Sadan: अधिकतम AQI 479 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 308 µg/m³। स्वस्थ लोग भी प्रभावित।"
+    },
+    {
+      "subscriber": "sub-019",
+      "pincode": "122001",
+      "site": "Gurugram Vikas Sadan",
+      "lang": "en",
+      "channel": "dryrun",
+      "status": "queued (dry run)",
+      "chars": 175,
+      "payload": "[Air quality alert] Gurugram Vikas Sadan: peak AQI 479 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM10, PM2.5 up to 308 ug/m3. Even healthy people are affected."
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "city": "Delhi-NCR outlook: median peak AQI 433 (Severe); worst site Anand Vihar at AQI 500 (Severe) around 07 Nov 05:30 IST. Corresponds to GRAP Stage 4.",
+  "sites": [
+    {
+      "site": "Anand Vihar",
+      "lang": "en",
+      "category": "Severe",
+      "aqi_peak": 500,
+      "grap_stage": 4,
+      "peak_time_ist": "2025-11-07T05:30:00+05:30",
+      "short": "[Air quality alert] Anand Vihar: peak AQI 500 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM10, PM2.5 up to 321 ug/m3. Even healthy people are affected.",
+      "long": "■ Anand Vihar air-quality outlook (05 Nov 18:30 IST to 07 Nov 17:30 IST)\n- AQI now 385, peaking at 500 (Severe) around 07 Nov 05:30 IST. Trend: roughly steady.\n- Main pollutant: PM10. PM2.5 up to 321 ug/m3, PM10 up to 514 ug/m3.\n- Dispersion: Stagnant conditions (wind below 10 km/h, mixing height below 500 m) are expected for 12 h, 2 h of them overnight (minimum mixing height about 67 m). Pollution will tend to pool near the surface from night to morning.\n- Health advice: Even healthy people are affected. Stay indoors as much as possible; children, older adults and people with lung or heart disease should avoid going out. Use an air purifier and seek medical care if symptoms appear.\n- Measures: GRAP Stage IV (Severe+) level: truck entry restrictions, expanded work-from-home and online classes may be enforced. Follow official notices.\n- This is AI-model (Aurora) guidance for information only; follow official CPCB/CAQM alerts."
+    },
+    {
+      "site": "Dwarka Sector 8",
+      "lang": "en",
+      "category": "Severe",
+      "aqi_peak": 406,
+      "grap_stage": 3,
+      "peak_time_ist": "2025-11-07T05:30:00+05:30",
+      "short": "[Air quality alert] Dwarka Sector 8: peak AQI 406 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM2.5, PM2.5 up to 257 ug/m3. Even healthy people are affected.",
+      "long": "■ Dwarka Sector 8 air-quality outlook (05 Nov 18:30 IST to 07 Nov 17:30 IST)\n- AQI now 336, peaking at 406 (Severe) around 07 Nov 05:30 IST. Trend: roughly steady.\n- Main pollutant: PM2.5. PM2.5 up to 257 ug/m3, PM10 up to 412 ug/m3.\n- Dispersion: Stagnant conditions (wind below 10 km/h, mixing height below 500 m) are expected for 16 h, 6 h of them overnight (minimum mixing height about 71 m). Pollution will tend to pool near the surface from night to morning.\n- Health advice: Even healthy people are affected. Stay indoors as much as possible; children, older adults and people with lung or heart disease should avoid going out. Use an air purifier and seek medical care if symptoms appear.\n- Measures: GRAP Stage III (Severe) level: non-essential construction and demolition may be halted, older diesel/petrol vehicles restricted, primary schools may move online.\n- This is AI-model (Aurora) guidance for information only; follow official CPCB/CAQM alerts."
+    },
+    {
+      "site": "Gurugram Vikas Sadan",
+      "lang": "en",
+      "category": "Severe",
+      "aqi_peak": 479,
+      "grap_stage": 4,
+      "peak_time_ist": "2025-11-07T05:30:00+05:30",
+      "short": "[Air quality alert] Gurugram Vikas Sadan: peak AQI 479 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM10, PM2.5 up to 308 ug/m3. Even healthy people are affected.",
+      "long": "■ Gurugram Vikas Sadan air-quality outlook (05 Nov 18:30 IST to 07 Nov 17:30 IST)\n- AQI now 376, peaking at 479 (Severe) around 07 Nov 05:30 IST. Trend: roughly steady.\n- Main pollutant: PM10. PM2.5 up to 308 ug/m3, PM10 up to 494 ug/m3.\n- Dispersion: Stagnant conditions (wind below 10 km/h, mixing height below 500 m) are expected for 15 h, 5 h of them overnight (minimum mixing height about 68 m). Pollution will tend to pool near the surface from night to morning.\n- Health advice: Even healthy people are affected. Stay indoors as much as possible; children, older adults and people with lung or heart disease should avoid going out. Use an air purifier and seek medical care if symptoms appear.\n- Measures: GRAP Stage IV (Severe+) level: truck entry restrictions, expanded work-from-home and online classes may be enforced. Follow official notices.\n- This is AI-model (Aurora) guidance for information only; follow official CPCB/CAQM alerts."
+    },
+    {
+      "site": "ITO",
+      "lang": "en",
+      "category": "Severe",
+      "aqi_peak": 498,
+      "grap_stage": 4,
+      "peak_time_ist": "2025-11-07T05:30:00+05:30",
+      "short": "[Air quality alert] ITO: peak AQI 498 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM10, PM2.5 up to 318 ug/m3. Even healthy people are affected.",
+      "long": "■ ITO air-quality outlook (05 Nov 18:30 IST to 07 Nov 17:30 IST)\n- AQI now 383, peaking at 498 (Severe) around 07 Nov 05:30 IST. Trend: roughly steady.\n- Main pollutant: PM10. PM2.5 up to 318 ug/m3, PM10 up to 508 ug/m3.\n- Dispersion: Stagnant conditions (wind below 10 km/h, mixing height below 500 m) are expected for 13 h, 2 h of them overnight (minimum mixing height about 69 m). Pollution will tend to pool near the surface from night to morning.\n- Health advice: Even healthy people are affected. Stay indoors as much as possible; children, older adults and people with lung or heart disease should avoid going out. Use an air purifier and seek medical care if symptoms appear.\n- Measures: GRAP Stage IV (Severe+) level: truck entry restrictions, expanded work-from-home and online classes may be enforced. Follow official notices.\n- This is AI-model (Aurora) guidance for information only; follow official CPCB/CAQM alerts."
+    },
+    {
+      "site": "Jahangirpuri",
+      "lang": "en",
+      "category": "Severe",
+      "aqi_peak": 452,
+      "grap_stage": 4,
+      "peak_time_ist": "2025-11-07T05:30:00+05:30",
+      "short": "[Air quality alert] Jahangirpuri: peak AQI 452 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM10, PM2.5 up to 295 ug/m3. Even healthy people are affected.",
+      "long": "■ Jahangirpuri air-quality outlook (05 Nov 18:30 IST to 07 Nov 17:30 IST)\n- AQI now 365, peaking at 452 (Severe) around 07 Nov 05:30 IST. Trend: roughly steady.\n- Main pollutant: PM10. PM2.5 up to 295 ug/m3, PM10 up to 472 ug/m3.\n- Dispersion: Stagnant conditions (wind below 10 km/h, mixing height below 500 m) are expected for 14 h, 5 h of them overnight (minimum mixing height about 75 m). Pollution will tend to pool near the surface from night to morning.\n- Health advice: Even healthy people are affected. Stay indoors as much as possible; children, older adults and people with lung or heart disease should avoid going out. Use an air purifier and seek medical care if symptoms appear.\n- Measures: GRAP Stage IV (Severe+) level: truck entry restrictions, expanded work-from-home and online classes may be enforced. Follow official notices.\n- This is AI-model (Aurora) guidance for information only; follow official CPCB/CAQM alerts."
+    },
+    {
+      "site": "Noida Sector 62",
+      "lang": "en",
+      "category": "Severe",
+      "aqi_peak": 409,
+      "grap_stage": 3,
+      "peak_time_ist": "2025-11-07T05:30:00+05:30",
+      "short": "[Air quality alert] Noida Sector 62: peak AQI 409 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM2.5, PM2.5 up to 262 ug/m3. Even healthy people are affected.",
+      "long": "■ Noida Sector 62 air-quality outlook (05 Nov 18:30 IST to 07 Nov 17:30 IST)\n- AQI now 340, peaking at 409 (Severe) around 07 Nov 05:30 IST. Trend: roughly steady.\n- Main pollutant: PM2.5. PM2.5 up to 262 ug/m3, PM10 up to 420 ug/m3.\n- Dispersion: Stagnant conditions (wind below 10 km/h, mixing height below 500 m) are expected for 10 h, 1 h of them overnight (minimum mixing height about 64 m). Pollution will tend to pool near the surface from night to morning.\n- Health advice: Even healthy people are affected. Stay indoors as much as possible; children, older adults and people with lung or heart disease should avoid going out. Use an air purifier and seek medical care if symptoms appear.\n- Measures: GRAP Stage III (Severe) level: non-essential construction and demolition may be halted, older diesel/petrol vehicles restricted, primary schools may move online.\n- This is AI-model (Aurora) guidance for information only; follow official CPCB/CAQM alerts."
+    },
+    {
+      "site": "Okhla Phase 2",
+      "lang": "en",
+      "category": "Severe",
+      "aqi_peak": 453,
+      "grap_stage": 4,
+      "peak_time_ist": "2025-11-07T05:30:00+05:30",
+      "short": "[Air quality alert] Okhla Phase 2: peak AQI 453 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM10, PM2.5 up to 295 ug/m3. Even healthy people are affected.",
+      "long": "■ Okhla Phase 2 air-quality outlook (05 Nov 18:30 IST to 07 Nov 17:30 IST)\n- AQI now 366, peaking at 453 (Severe) around 07 Nov 05:30 IST. Trend: roughly steady.\n- Main pollutant: PM10. PM2.5 up to 295 ug/m3, PM10 up to 472 ug/m3.\n- Dispersion: Stagnant conditions (wind below 10 km/h, mixing height below 500 m) are expected for 11 h, 1 h of them overnight (minimum mixing height about 64 m). Pollution will tend to pool near the surface from night to morning.\n- Health advice: Even healthy people are affected. Stay indoors as much as possible; children, older adults and people with lung or heart disease should avoid going out. Use an air purifier and seek medical care if symptoms appear.\n- Measures: GRAP Stage IV (Severe+) level: truck entry restrictions, expanded work-from-home and online classes may be enforced. Follow official notices.\n- This is AI-model (Aurora) guidance for information only; follow official CPCB/CAQM alerts."
+    },
+    {
+      "site": "Punjabi Bagh",
+      "lang": "en",
+      "category": "Severe",
+      "aqi_peak": 415,
+      "grap_stage": 3,
+      "peak_time_ist": "2025-11-07T05:30:00+05:30",
+      "short": "[Air quality alert] Punjabi Bagh: peak AQI 415 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM2.5, PM2.5 up to 269 ug/m3. Even healthy people are affected.",
+      "long": "■ Punjabi Bagh air-quality outlook (05 Nov 18:30 IST to 07 Nov 17:30 IST)\n- AQI now 346, peaking at 415 (Severe) around 07 Nov 05:30 IST. Trend: roughly steady.\n- Main pollutant: PM2.5. PM2.5 up to 269 ug/m3, PM10 up to 431 ug/m3.\n- Dispersion: Stagnant conditions (wind below 10 km/h, mixing height below 500 m) are expected for 14 h, 5 h of them overnight (minimum mixing height about 74 m). Pollution will tend to pool near the surface from night to morning.\n- Health advice: Even healthy people are affected. Stay indoors as much as possible; children, older adults and people with lung or heart disease should avoid going out. Use an air purifier and seek medical care if symptoms appear.\n- Measures: GRAP Stage III (Severe) level: non-essential construction and demolition may be halted, older diesel/petrol vehicles restricted, primary schools may move online.\n- This is AI-model (Aurora) guidance for information only; follow official CPCB/CAQM alerts."
+    },
+    {
+      "site": "R K Puram",
+      "lang": "en",
+      "category": "Severe",
+      "aqi_peak": 405,
+      "grap_stage": 3,
+      "peak_time_ist": "2025-11-07T05:30:00+05:30",
+      "short": "[Air quality alert] R K Puram: peak AQI 405 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM2.5, PM2.5 up to 256 ug/m3. Even healthy people are affected.",
+      "long": "■ R K Puram air-quality outlook (05 Nov 18:30 IST to 07 Nov 17:30 IST)\n- AQI now 335, peaking at 405 (Severe) around 07 Nov 05:30 IST. Trend: roughly steady.\n- Main pollutant: PM2.5. PM2.5 up to 256 ug/m3, PM10 up to 410 ug/m3.\n- Dispersion: Stagnant conditions (wind below 10 km/h, mixing height below 500 m) are expected for 13 h, 3 h of them overnight (minimum mixing height about 71 m). Pollution will tend to pool near the surface from night to morning.\n- Health advice: Even healthy people are affected. Stay indoors as much as possible; children, older adults and people with lung or heart disease should avoid going out. Use an air purifier and seek medical care if symptoms appear.\n- Measures: GRAP Stage III (Severe) level: non-essential construction and demolition may be halted, older diesel/petrol vehicles restricted, primary schools may move online.\n- This is AI-model (Aurora) guidance for information only; follow official CPCB/CAQM alerts."
+    },
+    {
+      "site": "Rohini",
+      "lang": "en",
+      "category": "Severe",
+      "aqi_peak": 406,
+      "grap_stage": 3,
+      "peak_time_ist": "2025-11-07T05:30:00+05:30",
+      "short": "[Air quality alert] Rohini: peak AQI 406 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM2.5, PM2.5 up to 258 ug/m3. Even healthy people are affected.",
+      "long": "■ Rohini air-quality outlook (05 Nov 18:30 IST to 07 Nov 17:30 IST)\n- AQI now 337, peaking at 406 (Severe) around 07 Nov 05:30 IST. Trend: roughly steady.\n- Main pollutant: PM2.5. PM2.5 up to 258 ug/m3, PM10 up to 412 ug/m3.\n- Dispersion: Stagnant conditions (wind below 10 km/h, mixing height below 500 m) are expected for 16 h, 7 h of them overnight (minimum mixing height about 73 m). Pollution will tend to pool near the surface from night to morning.\n- Health advice: Even healthy people are affected. Stay indoors as much as possible; children, older adults and people with lung or heart disease should avoid going out. Use an air purifier and seek medical care if symptoms appear.\n- Measures: GRAP Stage III (Severe) level: non-essential construction and demolition may be halted, older diesel/petrol vehicles restricted, primary schools may move online.\n- This is AI-model (Aurora) guidance for information only; follow official CPCB/CAQM alerts."
+    }
+  ]
+}

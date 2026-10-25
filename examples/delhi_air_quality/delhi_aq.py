@@ -596,7 +596,10 @@ def slim_v15_prediction(pred: Batch) -> Batch:
         atmos_vars={"t": pred.atmos_vars["t"][:, :, lvl : lvl + 1].cpu()},
         static_vars={},
         metadata=dataclasses.replace(
-            pred.metadata, atmos_levels=(pred.metadata.atmos_levels[lvl],)
+            pred.metadata,
+            lat=pred.metadata.lat.cpu(),
+            lon=pred.metadata.lon.cpu(),
+            atmos_levels=(pred.metadata.atmos_levels[lvl],),
         ),
     )
 
@@ -1064,6 +1067,7 @@ def build_grid_forecast(
     ap_batches: Sequence[Batch],
     v15_input: Optional[Batch] = None,
     bbox: tuple[float, float, float, float] = FRONTEND_BBOX,
+    with_pm: bool = True,
 ) -> GridForecast:
     """Crop Aurora 1.5 hourly fields to `bbox` and overlay time-interpolated PM from the Air
     Pollution model (`ap_batches` should include the t0 analysis batch first)."""
@@ -1090,6 +1094,8 @@ def build_grid_forecast(
         "msl_hpa": np.stack([f["msl"] / 100.0 for _, f in steps]),
     }  # fmt: skip
 
+    if not with_pm:
+        return GridForecast(times, lat, lon, fields, has_analysis=v15_input is not None)
     # PM fields: regrid each 12-hourly AP batch onto the tile, then interpolate in time.
     ap_times = np.array([pd.Timestamp(b.metadata.time[0]).value for b in ap_batches], dtype=np.float64)
     for name in ("pm2p5", "pm10"):
@@ -1222,6 +1228,251 @@ def export_frontend_json(
 
 
 # ----------------------------------------------------------------------------------------------
+# Public ERA5 without credentials: Google ARCO-ERA5 (used by `--mode hybrid`)
+# ----------------------------------------------------------------------------------------------
+
+ARCO_ERA5_URL = "gs://gcp-public-data-arco-era5/ar/full_37-1h-0p25deg-chunk-1.zarr-v3"
+"""Analysis-ready ERA5 on Google Cloud, anonymous access, 0.25 deg, hourly, 37 levels."""
+
+ARCO_SURF: dict[str, str] = {  # ARCO long name -> CDS short name (as in V15_SURF_MAP keys)
+    "2m_temperature": "t2m", "10m_u_component_of_wind": "u10", "10m_v_component_of_wind": "v10",
+    "mean_sea_level_pressure": "msl", "2m_dewpoint_temperature": "d2m", "total_column_water_vapour": "tcwv",
+    "total_cloud_cover": "tcc", "100m_u_component_of_wind": "u100", "100m_v_component_of_wind": "v100",
+    "surface_pressure": "sp", "low_cloud_cover": "lcc", "medium_cloud_cover": "mcc", "high_cloud_cover": "hcc",
+    "skin_temperature": "skt", "soil_temperature_level_1": "stl1", "volumetric_soil_water_layer_1": "swvl1",
+    "sea_ice_cover": "siconc", "snow_depth": "sd",
+}  # fmt: skip
+ARCO_ATMOS: dict[str, str] = {
+    "temperature": "t", "u_component_of_wind": "u", "v_component_of_wind": "v",
+    "specific_humidity": "q", "geopotential": "z",
+}  # fmt: skip
+
+
+def fetch_arco_era5_for_v15(init_time: datetime, out_dir: Path) -> tuple[Path, Path]:
+    """Download the Aurora 1.5 input (init - 6 h and init) from ARCO-ERA5 into two NetCDF files.
+
+    Needs `gcsfs` and `zarr` (`pip install gcsfs zarr`). About 700 MB of network traffic per
+    initialisation; the result is cached in `out_dir`.
+    """
+    import xarray as xr
+
+    out_dir.mkdir(parents=True, exist_ok=True)
+    stem = init_time.strftime("%Y-%m-%dT%H") + "-arco-era5"
+    surf_path = out_dir / f"{stem}-surface-level.nc"
+    atmos_path = out_dir / f"{stem}-atmospheric.nc"
+    if surf_path.exists() and atmos_path.exists():
+        return surf_path, atmos_path
+
+    ds = xr.open_zarr(ARCO_ERA5_URL, chunks=None, storage_options={"token": "anon"})
+    times = [init_time - timedelta(hours=6), init_time]
+    logger.info("Reading ARCO-ERA5 surface variables for %s", times)
+    surf = ds[list(ARCO_SURF)].sel(time=times).load().rename(ARCO_SURF)
+    surf.to_netcdf(surf_path)
+    logger.info("Reading ARCO-ERA5 pressure-level variables")
+    atmos = ds[list(ARCO_ATMOS)].sel(time=times, level=list(LEVELS)).load().rename(ARCO_ATMOS)
+    atmos = atmos.rename({"level": "pressure_level"})
+    atmos.to_netcdf(atmos_path)
+    return surf_path, atmos_path
+
+
+# ----------------------------------------------------------------------------------------------
+# Roadmap item 1: ensemble stagnation probability (Aurora 1.5 Ensemble)
+# ----------------------------------------------------------------------------------------------
+
+
+def slim_to_tile(pred: Batch, bbox: tuple[float, float, float, float] = FRONTEND_BBOX) -> dict:
+    """Keep only blh / 10u / 10v on the map tile for one prediction (small enough for many members)."""
+    lat, lon = pred.metadata.lat.cpu().numpy(), pred.metadata.lon.cpu().numpy()
+    ii, jj = _crop_indices(lat, lon, bbox)
+    return {
+        "time": pred.metadata.time[0], "lat": lat[ii], "lon": lon[jj],
+        "blh": pred.surf_vars["blh"][0, -1].float().cpu().numpy()[np.ix_(ii, jj)],
+        "wind": np.hypot(pred.surf_vars["10u"][0, -1].float().cpu().numpy()[np.ix_(ii, jj)],
+                         pred.surf_vars["10v"][0, -1].float().cpu().numpy()[np.ix_(ii, jj)]),
+    }  # fmt: skip
+
+
+def run_v15_ensemble_tiles(
+    batch: Batch, steps: int, members: int, fine_lead_times: Sequence[float] = (1.0, 2.0, 3.0, 4.0, 5.0, 6.0),
+    device: str = "cuda", seed: int = 0, bbox: tuple[float, float, float, float] = FRONTEND_BBOX,
+) -> list[list[dict]]:
+    """Run `members` Aurora 1.5 Ensemble members one after another (batch size 1, distinct seeds)
+    and return, per member, the tile crops from :func:`slim_to_tile` for every hourly step."""
+    from aurora import AuroraV1p5Ensemble, rollout
+
+    model = AuroraV1p5Ensemble()
+    model.load_checkpoint()
+    model.eval()
+    model = model.to(device)
+    out: list[list[dict]] = []
+    with torch.inference_mode():
+        for m in range(members):
+            gen = torch.Generator(device=device).manual_seed(seed + m)
+            model.reset_noise()
+            logger.info("Ensemble member %d/%d", m + 1, members)
+            out.append([
+                slim_to_tile(p, bbox)
+                for p in rollout(model, batch, steps=steps, fine_lead_times=list(fine_lead_times), generator=gen)
+            ])  # fmt: skip
+    del model
+    if device.startswith("cuda"):
+        torch.cuda.empty_cache()
+    return out
+
+
+def ensemble_stagnation(member_tiles: list[list[dict]], sites: Sequence[Site] = DELHI_SITES) -> tuple[pd.DataFrame, dict]:
+    """Stagnation probability per site and hour, plus per-cell probability on the tile.
+
+    Returns (site frame with columns time, site, p_stagnant, blh_p10, blh_p50, blh_p90, wind_p50)
+    and a dict with keys times, lat, lon, p (array (T, H, W))."""
+    n = len(member_tiles)
+    T = len(member_tiles[0])
+    lat, lon = member_tiles[0][0]["lat"], member_tiles[0][0]["lon"]
+    times = [member_tiles[0][t]["time"] for t in range(T)]
+    stag = np.zeros((n, T, len(lat), len(lon)))
+    blh = np.zeros_like(stag)
+    wind = np.zeros_like(stag)
+    for m in range(n):
+        for t in range(T):
+            tile = member_tiles[m][t]
+            blh[m, t] = tile["blh"]; wind[m, t] = tile["wind"]
+            stag[m, t] = (tile["blh"] < STAGNANT_BLH_M) & (tile["wind"] < STAGNANT_WIND_MS)
+    p_cell = stag.mean(axis=0)
+    rows = []
+    for t in range(T):
+        for s in sites:
+            b = np.array([sample_points(blh[m, t], lat, lon, [s])[0] for m in range(n)])
+            w = np.array([sample_points(wind[m, t], lat, lon, [s])[0] for m in range(n)])
+            rows.append({
+                "time": times[t], "site": s.name,
+                "p_stagnant": float(np.mean((b < STAGNANT_BLH_M) & (w < STAGNANT_WIND_MS))),
+                "blh_p10": float(np.percentile(b, 10)), "blh_p50": float(np.percentile(b, 50)), "blh_p90": float(np.percentile(b, 90)),
+                "wind_p50": float(np.percentile(w, 50)), "members": n,
+            })  # fmt: skip
+    df = pd.DataFrame(rows)
+    df["time"] = pd.to_datetime(df["time"])
+    return df, {"times": times, "lat": lat, "lon": lon, "p": p_cell}
+
+
+def demo_ensemble_tiles(met: pd.DataFrame, grid: GridForecast, members: int = 10, seed: int = 1) -> list[list[dict]]:
+    """Synthetic ensemble for demo mode: perturb the demo tile's mixing height and wind member by
+    member (log-normal 25 % and 20 % spread). Not an Aurora output; labelled as simulated."""
+    rng = np.random.default_rng(seed)
+    out = []
+    for _m in range(members):
+        f_b = np.exp(rng.normal(0, 0.25)); f_w = np.exp(rng.normal(0, 0.20))
+        mem = []
+        for t, tm in enumerate(grid.times):
+            shape = grid.lat.shape + grid.lon.shape
+            hour = met[met["time"] == pd.Timestamp(tm)]
+            b0 = float(hour["blh_m"].mean()) if len(hour) else 300.0
+            blh = b0 * f_b * (1 + 0.1 * rng.standard_normal(shape))
+            wind = grid.fields["wind_ms"][t] * f_w * (1 + 0.1 * rng.standard_normal(shape))
+            mem.append({"time": tm, "lat": grid.lat, "lon": grid.lon, "blh": blh, "wind": wind})
+        out.append(mem)
+    return out
+
+
+# ----------------------------------------------------------------------------------------------
+# Roadmap item 2: per-site bias correction against observations
+# ----------------------------------------------------------------------------------------------
+
+
+def fit_bias_correction(pred: pd.DataFrame, obs: pd.DataFrame, var: str = "pm2p5") -> pd.DataFrame:
+    """Fit obs = a + b * pred per site by least squares and report RMSE before/after.
+
+    `pred` and `obs` share columns time, site, `var`. Returns one row per site with a, b,
+    rmse_before, rmse_after, n."""
+    m = pred.merge(obs, on=["time", "site"], suffixes=("_pred", "_obs"))
+    rows = []
+    for site, g in m.groupby("site", sort=False):
+        x, y = g[f"{var}_pred"].to_numpy(float), g[f"{var}_obs"].to_numpy(float)
+        if len(x) < 3 or np.std(x) < 1e-9:
+            continue
+        b, a = np.polyfit(x, y, 1)
+        rows.append({
+            "site": site, "a": float(a), "b": float(b), "n": int(len(x)),
+            "rmse_before": float(np.sqrt(np.mean((x - y) ** 2))),
+            "rmse_after": float(np.sqrt(np.mean((a + b * x - y) ** 2))),
+        })  # fmt: skip
+    return pd.DataFrame(rows)
+
+
+def apply_bias_correction(pred: pd.DataFrame, coef: pd.DataFrame, var: str = "pm2p5") -> pd.DataFrame:
+    out = pred.merge(coef[["site", "a", "b"]], on="site", how="left")
+    out[f"{var}_corrected"] = out["a"].fillna(0) + out["b"].fillna(1) * out[var]
+    return out.drop(columns=["a", "b"])
+
+
+def synthetic_observations(pred: pd.DataFrame, var: str = "pm2p5", seed: int = 2) -> pd.DataFrame:
+    """Stand-in for CPCB station data (not available without scraping their portal): the model
+    under-reads traffic sites by ~15 %, over-reads residential sites by ~8 %, plus noise."""
+    rng = np.random.default_rng(seed)
+    kinds = {s.name: s.kind for s in DELHI_SITES}
+    factor = {"traffic": 1.15, "industrial": 1.05, "residential": 0.92, "background": 0.9}
+    obs = pred[["time", "site", var]].copy()
+    obs[var] = obs[var] * obs["site"].map(lambda s: factor[kinds.get(s, "residential")]) * (
+        1 + 0.08 * rng.standard_normal(len(obs))
+    )
+    return obs
+
+
+# ----------------------------------------------------------------------------------------------
+# Roadmap items 4 and 5: delivery adapter (dry run) and scheduling
+# ----------------------------------------------------------------------------------------------
+
+PINCODE_TO_SITE: dict[str, str] = {
+    "110092": "Anand Vihar", "110002": "ITO", "110026": "Punjabi Bagh", "110085": "Rohini",
+    "110033": "Jahangirpuri", "110022": "R K Puram", "110077": "Dwarka Sector 8",
+    "110020": "Okhla Phase 2", "201309": "Noida Sector 62", "122001": "Gurugram Vikas Sadan",
+}  # fmt: skip
+"""Example mapping from a subscriber's postal code to the nearest reporting site."""
+
+
+def deliver_messages(messages: dict[str, list[dict]], out_dir: Path, channel: str = "dryrun") -> Path:
+    """Build per-subscriber payloads and write a delivery log. `dryrun` writes the log only; a real
+    adapter would POST each payload to WhatsApp Business API / an SMS gateway here."""
+    subscribers = [
+        {"id": f"sub-{i:03d}", "pincode": pc, "lang": lang}
+        for i, (pc, lang) in enumerate([(pc, lg) for pc in PINCODE_TO_SITE for lg in ("hi", "en")])
+    ]
+    by_site = {lang: {m["site"]: m for m in msgs} for lang, msgs in messages.items()}
+    log = []
+    for sub in subscribers:
+        site = PINCODE_TO_SITE[sub["pincode"]]
+        m = by_site.get(sub["lang"], {}).get(site)
+        if m is None:
+            continue
+        log.append({
+            "subscriber": sub["id"], "pincode": sub["pincode"], "site": site, "lang": sub["lang"],
+            "channel": channel, "status": "queued (dry run)" if channel == "dryrun" else "sent",
+            "chars": len(m["short"]), "payload": m["short"],
+        })  # fmt: skip
+    out_dir.mkdir(parents=True, exist_ok=True)
+    p = out_dir / "delivery_log.json"
+    with open(p, "w", encoding="utf-8") as f:
+        json.dump({"generated": datetime.now(timezone.utc).isoformat(), "channel": channel, "count": len(log), "items": log}, f, ensure_ascii=False, indent=2)
+    return p
+
+
+def write_cron_script(out_dir: Path, mode: str = "foundry") -> Path:
+    """Write a shell script and the crontab line that re-issue the forecast at 00 and 12 UTC."""
+    out_dir.mkdir(parents=True, exist_ok=True)
+    p = out_dir / "run_delhi_aq_cron.sh"
+    p.write_text(
+        "#!/usr/bin/env bash\n"
+        "# Re-issue the Delhi air-quality bulletin after each 00/12 UTC analysis becomes available.\n"
+        "# crontab -e  ->  30 2,14 * * *  /path/to/run_delhi_aq_cron.sh >> /var/log/delhi_aq.log 2>&1\n"
+        "set -euo pipefail\n"
+        "cd \"$(dirname \"$0\")\"\n"
+        f"python delhi_aq.py --mode {mode} --hours 48 --plot --out \"outputs/$(date -u +%Y-%m-%dT%H)\" -v\n",
+        encoding="utf-8",
+    )
+    p.chmod(0o755)
+    return p
+
+
+# ----------------------------------------------------------------------------------------------
 # Demo data (no downloads, no GPU)
 # ----------------------------------------------------------------------------------------------
 
@@ -1314,24 +1565,74 @@ class PipelineResult:
     messages: dict[str, list[dict]]
     city: dict[str, str]
     grid: Optional[GridForecast] = None
+    ensemble_sites: Optional[pd.DataFrame] = None
+    ensemble_tile: Optional[dict] = None
+    bias: Optional[pd.DataFrame] = None
+    provenance: dict = dataclasses.field(default_factory=dict)
 
 
 def run_pipeline(
     init_date: datetime,
     hours: int = 48,
-    mode: Literal["demo", "local", "foundry"] = "demo",
+    mode: Literal["demo", "hybrid", "local", "foundry"] = "demo",
     langs: Sequence[Lang] = ("ko", "en", "hi"),
     data_dir: Path = Path("~/downloads/delhi_aq").expanduser(),
     device: str = "cuda",
     sites: Sequence[Site] = DELHI_SITES,
+    members: int = 0,
 ) -> PipelineResult:
-    """Run the whole storyboard: forecasts -> Delhi extraction -> AQI -> messages."""
+    """Run the whole storyboard: forecasts -> Delhi extraction -> AQI -> messages.
+
+    Modes: `demo` (all synthetic), `hybrid` (real Aurora 1.5 meteorology from public ARCO-ERA5,
+    synthetic pollutants because CAMS needs an account), `local` / `foundry` (everything real).
+    `members > 0` adds the ensemble stagnation probability (Aurora 1.5 Ensemble, or a simulated
+    ensemble in demo mode)."""
     init_time = init_date.replace(hour=12, minute=0, second=0, microsecond=0, tzinfo=None)
+    prov = {"meteorology": "synthetic", "pollutants": "synthetic", "ensemble": "none", "init_time": init_time.isoformat()}
 
     grid: Optional[GridForecast] = None
+    ens_sites = ens_tile = None
     if mode == "demo":
         pollutants, met = demo_frames(init_time, hours=hours, sites=sites)
         grid = demo_grid_forecast(pollutants, met, sites)
+        if members > 0:
+            ens_sites, ens_tile = ensemble_stagnation(demo_ensemble_tiles(met, grid, members), sites)
+            prov["ensemble"] = f"simulated ({members} perturbed members)"
+    elif mode == "hybrid":
+        v15_steps = max(1, math.ceil(hours / 6))
+        logger.info("Fetching ARCO-ERA5 and building the Aurora 1.5 batch")
+        surf_nc, atmos_nc = fetch_arco_era5_for_v15(init_time, data_dir)
+        v15_batch = build_v15_batch(surf_nc, atmos_nc, load_static("aurora-0.25-v1.5-static.pickle"))
+        cache = data_dir / (init_time.strftime("%Y-%m-%dT%H") + f"-v15-preds-{v15_steps}x6.pt")
+        if cache.exists():
+            logger.info("Loading cached Aurora 1.5 predictions from %s", cache)
+            v15_preds = torch.load(cache, weights_only=False)
+        else:
+            logger.info("Running Aurora 1.5 for %d x 6 h with hourly sub-steps (local)", v15_steps)
+            v15_preds = run_v15(v15_batch, v15_steps, backend="local", device=device)
+            torch.save(v15_preds, cache)
+        v15_preds = [p for p in v15_preds if p.metadata.time[0] <= init_time + timedelta(hours=hours)]
+        met = extract_meteorology(v15_preds, sites)
+        pollutants, _ = demo_frames(init_time, hours=hours, sites=sites)
+        prov["meteorology"] = "Aurora 1.5 (ARCO-ERA5 initial condition)"
+        # Tile: real meteorology from 1.5, pollutant fields synthesised from the demo site series.
+        grid = demo_grid_forecast(pollutants, met, sites)
+        real = build_grid_forecast(v15_preds, [], v15_input=None, bbox=FRONTEND_BBOX, with_pm=False)
+        for k in ("wind_ms", "wind_dir", "t2m_c", "msl_hpa"):
+            grid.fields[k] = real.fields[k]
+        if members > 0:
+            ecache = data_dir / (init_time.strftime("%Y-%m-%dT%H") + f"-v15-ensemble-{members}m-{v15_steps}x6.pkl")
+            if ecache.exists():
+                logger.info("Loading cached ensemble tiles from %s", ecache)
+                with open(ecache, "rb") as f:
+                    tiles = pickle.load(f)
+            else:
+                tiles = run_v15_ensemble_tiles(v15_batch, v15_steps, members, device=device)
+                with open(ecache, "wb") as f:
+                    pickle.dump(tiles, f)
+            tiles = [[t for t in mem if t["time"] <= init_time + timedelta(hours=hours)] for mem in tiles]
+            ens_sites, ens_tile = ensemble_stagnation(tiles, sites)
+            prov["ensemble"] = f"Aurora 1.5 Ensemble ({members} members)"
     else:
         backend: Backend = "foundry" if mode == "foundry" else "local"
         ap_steps = max(1, math.ceil(hours / 12))
@@ -1356,12 +1657,21 @@ def run_pipeline(
         v15_preds = [p for p in v15_preds if p.metadata.time[0] <= init_time + timedelta(hours=hours)]
         met = extract_meteorology(v15_preds, sites)
         grid = build_grid_forecast(v15_preds, [ap_batch, *ap_preds], v15_input=v15_batch)
+        prov["meteorology"] = "Aurora 1.5"; prov["pollutants"] = "Aurora 0.4 Air Pollution"
+        if members > 0 and backend == "local":
+            tiles = run_v15_ensemble_tiles(v15_batch, v15_steps, members, device=device)
+            ens_sites, ens_tile = ensemble_stagnation(tiles, sites)
+            prov["ensemble"] = f"Aurora 1.5 Ensemble ({members} members)"
 
     fused = fuse(pollutants, met)
     summary = summarise(fused, sites)
     messages = {lang: build_messages(summary, lang) for lang in langs}
     city = {lang: city_message(summary, lang) for lang in langs}
-    return PipelineResult(pollutants, met, fused, summary, messages, city, grid)
+    # Roadmap item 2 (bias correction) with synthetic observations unless real ones are supplied.
+    obs = synthetic_observations(pollutants)
+    bias = fit_bias_correction(pollutants, obs)
+    prov["bias_correction"] = "linear fit per site against synthetic observations"
+    return PipelineResult(pollutants, met, fused, summary, messages, city, grid, ens_sites, ens_tile, bias, prov)
 
 
 def write_outputs(result: PipelineResult, out_dir: Path) -> list[Path]:
@@ -1394,6 +1704,19 @@ def write_outputs(result: PipelineResult, out_dir: Path) -> list[Path]:
 
     if result.grid is not None:
         paths.extend(export_frontend_json(result.grid, out_dir / "frontend"))
+    if result.ensemble_sites is not None:
+        _save_csv(result.ensemble_sites, "ensemble_stagnation_sites.csv")
+        t = result.ensemble_tile
+        np.savez_compressed(out_dir / "ensemble_stagnation_tile.npz", p=t["p"], lat=t["lat"], lon=t["lon"],
+                            times=np.array([pd.Timestamp(x).isoformat() for x in t["times"]]))  # fmt: skip
+        paths.append(out_dir / "ensemble_stagnation_tile.npz")
+    if result.bias is not None:
+        _save_csv(result.bias, "bias_correction.csv")
+    paths.append(deliver_messages(result.messages, out_dir))
+    paths.append(write_cron_script(out_dir))
+    with open(out_dir / "provenance.json", "w", encoding="utf-8") as f:
+        json.dump(result.provenance, f, ensure_ascii=False, indent=2)
+    paths.append(out_dir / "provenance.json")
     return paths
 
 
@@ -1427,7 +1750,8 @@ def plot_overview(result: PipelineResult, path: Optional[Path] = None):
 
 def main(argv: Optional[Sequence[str]] = None) -> None:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    parser.add_argument("--mode", choices=["demo", "local", "foundry"], default="demo")
+    parser.add_argument("--mode", choices=["demo", "hybrid", "local", "foundry"], default="demo")
+    parser.add_argument("--members", type=int, default=0, help="Ensemble members for the stagnation probability (0 = off).")
     parser.add_argument(
         "--date", default=None, help="Initialisation date YYYY-MM-DD (12 UTC). Default: today."
     )
@@ -1458,6 +1782,7 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
         langs=langs,  # type: ignore[arg-type]
         data_dir=Path(args.data_dir).expanduser(),
         device=args.device,
+        members=args.members,
     )
     out_dir = Path(args.out)
     paths = write_outputs(result, out_dir)

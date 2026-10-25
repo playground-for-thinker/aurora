@@ -113,3 +113,17 @@ demo 모드의 수치는 11월 전형적 에피소드를 흉내 낸 합성값이
 3. **파인튜닝**: `msresearch-aurora/starter-code/`(PyTorch Lightning 학습 루프, `vibe_tune_aurora.cli.train`)로 Air Pollution 모델을 인도 지역 CAMS 재분석 또는 격자화한 CPCB 관측에 파인튜닝하여 지역 편향 축소. 모델 측 요구사항(정규화 통계 등록, `strict=False` 로드)은 이 저장소의 `docs/finetuning.md`, 학습 측 가이드는 스킬의 `docs/finetuning-guide.md`.
 4. **채널 연계**: `messages_hi.json`을 WhatsApp Business API, SMS 게이트웨이, 또는 델리 정부 앱 백엔드로 전달하는 작은 어댑터. 지점은 사용자의 거주 지역(핀코드)으로 매핑.
 5. **자동화**: 00/12 UTC마다 `python delhi_aq.py --mode foundry --plot`을 크론으로 실행하고, 산출물을 블롭 스토리지에 적재.
+
+## 8. 로드맵 실행 결과 (2025년 11월 5일 12 UTC 초기장)
+
+로드맵 다섯 항목을 `delhi_aq.py --mode hybrid --members 3`로 실행했습니다. 표기 구분은 스토리 맵과 같습니다.
+
+| 항목 | 실행 내용 | 구분 | 결과 |
+| - | - | - | - |
+| 1 불확실성 | 공개 ARCO-ERA5 초기장으로 `AuroraV1p5Ensemble`을 시드 3개로 실행, 멤버별 혼합층·풍속으로 정체 확률 산출 | Aurora 직접 분석 | 지점별 평균 정체 확률 0.26~0.34, 타일 평균 0.50. 결정론 1.5 예측의 야간 최저 혼합층 64~75 m |
+| 2 관측 보정 | 지점별 선형 보정(관측 = a + b × 예측) | 추가 분석, 합성 관측 | CPCB 관측 API가 없어 합성 관측으로 절차만 실행. `bias_correction.csv` |
+| 3 파인튜닝 | msresearch-aurora 스타터의 스모크 테스트(`test_finetuning_2t_var_pretrained`) | 추가 분석 | 1 passed, 66 s(CPU). 인도 지역 학습 자료가 없어 본 파인튜닝은 미실행 |
+| 4 발송 어댑터 | 우편번호→지점 매핑, 언어별 short 메시지 payload, dry run 로그 | 추가 분석 | 20건 queued. `delivery_log.json` |
+| 5 자동화 | 00/12 UTC 크론 스크립트 생성 | 추가 분석 | `run_delhi_aq_cron.sh` |
+
+오염 농도는 이 실행에서도 합성값입니다(CAMS는 Atmosphere Data Store 계정 필요). 산출물은 `outputs/hybrid_2025-11-05/`, 출처 요약은 그 안의 `provenance.json`에 있습니다.

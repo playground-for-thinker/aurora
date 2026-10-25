@@ -31,6 +31,7 @@ pip install cdsapi matplotlib     # 데이터 다운로드와 시각화 (demo �
 | 모드 | 설명 | 필요한 것 |
 | - | - | - |
 | `demo` | 합성 데이터로 후처리(AQI, 메시지)만 실행 | 없음. 다운로드·GPU 불필요 |
+| `hybrid` | 기상은 **실제 Aurora 1.5**(공개 ARCO-ERA5 초기장, 계정 불필요), 오염 농도는 합성 | `pip install gcsfs zarr`, GPU(24 GB에서 확인), 체크포인트 다운로드(약 5 GB) |
 | `local` | CAMS/ERA5 다운로드 후 두 모델을 로컬 GPU에서 실행 | ADS·CDS 계정, HuggingFace 체크포인트 다운로드(수 GB), GPU |
 | `foundry` | 데이터는 로컬에서 준비, 추론은 Azure AI Foundry의 Aurora 엔드포인트에서 실행 | ADS·CDS 계정, Foundry 엔드포인트, Blob SAS URL |
 
@@ -38,6 +39,8 @@ pip install cdsapi matplotlib     # 데이터 다운로드와 시각화 (demo �
 cd examples/delhi_air_quality
 
 python delhi_aq.py --mode demo --date 2025-11-05 --hours 48 --out outputs
+python delhi_aq.py --mode demo --date 2025-11-05 --members 10 --out outputs          # + 시뮬레이션 앙상블
+python delhi_aq.py --mode hybrid --date 2025-11-05 --members 5 --device cuda -v --out outputs   # 실제 Aurora 1.5 + 앙상블
 python delhi_aq.py --mode local --date 2025-11-05 --hours 48 --device cuda --plot -v
 python delhi_aq.py --mode foundry --date 2025-11-05 --hours 48 --plot -v
 ```
@@ -51,6 +54,7 @@ python delhi_aq.py --mode foundry --date 2025-11-05 --hours 48 --plot -v
 - `messages_{ko,en,hi}.json`: 도시 헤드라인 + 지점별 `short`(푸시/SMS) / `long`(상세) 메시지
 - `bulletin_{ko,en,hi}.md`: 운영자용 브리핑
 - `overview.png` (`--plot`): PM2.5, 경계층 높이, 풍속 시계열
+- 로드맵 실행 산출물: `ensemble_stagnation_sites.csv`·`ensemble_stagnation_tile.npz`(앙상블 정체 확률, `--members`), `bias_correction.csv`(지점별 선형 보정, 합성 관측), `delivery_log.json`(발송 어댑터 dry run), `run_delhi_aq_cron.sh`(자동화), `provenance.json`(어느 값이 Aurora 직접 분석이고 어느 값이 합성·추가 분석인지)
 - `frontend/auroraForecast.json`, `frontend/auroraForecastPredictions.json`: 델리 NCR 타일(27.5~31.5°N, 76~80°E, 0.25°)의 시간별 격자. `msresearch-aurora` 지도 프런트엔드가 읽는 형식(아래 참고)
 
 ## 환경 변수
@@ -69,6 +73,16 @@ export FOUNDRY_ENDPOINT_AP=https://.../     export FOUNDRY_TOKEN_AP=...
 export FOUNDRY_ENDPOINT_V15=https://.../    export FOUNDRY_TOKEN_V15=...
 export BLOB_URL_WITH_SAS="https://<account>.blob.core.windows.net/<container>/<folder>?<read+write SAS>"
 ```
+
+## 스토리 맵 데이터 갱신
+
+스토리 맵(`storymap.html`)은 `storymap_data.js`를 읽습니다. 파이프라인 산출물 폴더에서 다시 만들려면:
+
+```bash
+python build_storymap_data.py outputs --finetune-log path/to/finetune_smoke.log
+```
+
+지도 경계(Natural Earth, geoBoundaries)는 기존 `storymap_data.js`에서 재사용하고, 타일·지점 시계열·앙상블 확률·편향 보정·발송 로그·크론 스크립트·출처(provenance)는 산출물에서 읽습니다. 페이지는 출처에 따라 각 장면에 "Aurora 직접 분석 / 추가 분석 / 합성" 태그를 붙입니다.
 
 ## msresearch-aurora 스킬과의 연계
 

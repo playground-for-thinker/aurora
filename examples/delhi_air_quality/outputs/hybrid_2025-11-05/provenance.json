@@ -1,0 +1,7 @@
+{
+  "meteorology": "Aurora 1.5 (ARCO-ERA5 initial condition)",
+  "pollutants": "synthetic",
+  "ensemble": "Aurora 1.5 Ensemble (3 members)",
+  "init_time": "2025-11-05T12:00:00",
+  "bias_correction": "linear fit per site against synthetic observations"
+}
