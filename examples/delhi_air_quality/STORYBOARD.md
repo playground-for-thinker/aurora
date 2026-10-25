@@ -2,7 +2,7 @@
 
 > "From tonight until tomorrow morning the AQI around Anand Vihar is expected to exceed 450. Keep windows closed and avoid outdoor activity before school."
 >
-> This document walks scene by scene through what it takes for that one line to reach a citizen, and where Aurora is used along the way. Korean version: `STORYBOARD_kor.md`. Story map (scene-by-scene narrative on a map, KO/EN switch): [https://claude.ai/artifact/PKH8XS3B3Nb85WaVMbmZSW](https://claude.ai/artifact/PKH8XS3B3Nb85WaVMbmZSW) (source: `storymap.html`). Interactive storyboard with a KO/EN switch: [https://claude.ai/artifact/6GkTNUq54pqXGZBVx7BGSE](https://claude.ai/artifact/6GkTNUq54pqXGZBVx7BGSE) (source: `storyboard.html`).
+> This document walks scene by scene through what it takes for that one line to reach a citizen, and where Aurora is used along the way. Korean version: `STORYBOARD_kor.md`. Story map (scene-by-scene narrative on a map; a JupyterGIS document opened on notebook.link): [English](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_en.jGIS) · [Korean](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_ko.jGIS) (source: `storymap/`, built by `build_storymap_jgis.py`; `storymap.html` is a single-file HTML version with a KO/EN switch). Interactive storyboard with a KO/EN switch: [https://claude.ai/artifact/6GkTNUq54pqXGZBVx7BGSE](https://claude.ai/artifact/6GkTNUq54pqXGZBVx7BGSE) (source: `storyboard.html`).
 
 Related files:
 

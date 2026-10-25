@@ -1,0 +1,12 @@
+{
+  "jupyter-lite-schema-version": 0,
+  "jupyter-config-data": {
+    "appName": "Delhi Smog Story Map · Aurora",
+    "spectaConfig": {
+      "topBar": {
+        "title": "Delhi Smog Story Map · Aurora 1.5 + Aurora Air Pollution",
+        "themeToggle": true
+      }
+    }
+  }
+}

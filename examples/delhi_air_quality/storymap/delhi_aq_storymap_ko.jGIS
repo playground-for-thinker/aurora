@@ -1,0 +1,3006 @@
+{
+  "schemaVersion": "0.6.0",
+  "sources": {
+    "02ada4df-b2bf-5cb0-937d-38ca784a3b60": {
+      "type": "RasterSource",
+      "name": "OpenStreetMap.Mapnik",
+      "parameters": {
+        "url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+        "minZoom": 0,
+        "maxZoom": 19,
+        "attribution": "(C) OpenStreetMap contributors",
+        "htmlAttribution": "",
+        "provider": "OpenStreetMap",
+        "bounds": [],
+        "urlParameters": {},
+        "interpolate": false
+      }
+    },
+    "49926da2-3435-5002-8d2a-718823cf05f3": {
+      "type": "GeoJSONSource",
+      "name": "AQI 11월 5일 18:30 IST Source",
+      "parameters": {
+        "path": "data/aqi_h00.geojson"
+      }
+    },
+    "6f484703-b553-556e-857b-492609c82f1e": {
+      "type": "GeoJSONSource",
+      "name": "AQI 11월 6일 02:30 IST Source",
+      "parameters": {
+        "path": "data/aqi_h08.geojson"
+      }
+    },
+    "4b615bc0-a587-545b-8d11-04fdbe6a22f2": {
+      "type": "GeoJSONSource",
+      "name": "AQI 11월 7일 05:30 IST Source",
+      "parameters": {
+        "path": "data/aqi_h35.geojson"
+      }
+    },
+    "5789e301-6ded-50ed-b3dc-33d1b19608e0": {
+      "type": "GeoJSONSource",
+      "name": "AQI 11월 7일 14:30 IST Source",
+      "parameters": {
+        "path": "data/aqi_h44.geojson"
+      }
+    },
+    "72a763e4-4d8b-5344-8f44-c711c030cb2e": {
+      "type": "GeoJSONSource",
+      "name": "정체 확률 11월 7일 05:30 IST Source",
+      "parameters": {
+        "path": "data/stagnation_probability_h35.geojson"
+      }
+    },
+    "f988a996-28d9-5203-afc2-60c08c76af97": {
+      "type": "GeoJSONSource",
+      "name": "0.4° 셀 1개 (Aurora Air Pollution) Source",
+      "parameters": {
+        "path": "data/coarse_cell.geojson"
+      }
+    },
+    "5ce0b17f-0453-5514-b7d1-39a1e0185986": {
+      "type": "GeoJSONSource",
+      "name": "10 m 바람 11월 6일 02:30 IST Source",
+      "parameters": {
+        "path": "data/wind_h08.geojson"
+      }
+    },
+    "60416b81-5ff3-5b22-bb95-37dc5f24f9ff": {
+      "type": "GeoJSONSource",
+      "name": "10 m 바람 11월 7일 05:30 IST Source",
+      "parameters": {
+        "path": "data/wind_h35.geojson"
+      }
+    },
+    "9049485a-bb37-5b8c-9bbe-26a38890ce55": {
+      "type": "GeoJSONSource",
+      "name": "10 m 바람 11월 7일 14:30 IST Source",
+      "parameters": {
+        "path": "data/wind_h44.geojson"
+      }
+    },
+    "4b8de692-0850-57e8-ad56-eea30e358ca4": {
+      "type": "GeoJSONSource",
+      "name": "델리 NCR 타일 (27.5–31.5°N, 76–80°E) Source",
+      "parameters": {
+        "path": "data/ncr_tile.geojson"
+      }
+    },
+    "84a1d1dd-daa9-5658-8772-f4bcdb88250b": {
+      "type": "GeoJSONSource",
+      "name": "델리 NCT 경계 Source",
+      "parameters": {
+        "path": "data/delhi_nct.geojson"
+      }
+    },
+    "06d19430-6089-5207-b0d8-ac6fd6d707c1": {
+      "type": "GeoJSONSource",
+      "name": "대표 지점 10곳 (색: 정점 범주) Source",
+      "parameters": {
+        "path": "data/sites.geojson"
+      }
+    },
+    "9e8f536c-dfd6-564c-81cf-d5eb32149dab": {
+      "type": "MarkerSource",
+      "name": "Anand Vihar Marker",
+      "parameters": {
+        "color": "#0b6e8f",
+        "feature": {
+          "coords": [
+            8606777.75,
+            3330793.31
+          ]
+        }
+      }
+    }
+  },
+  "layers": {
+    "f981b07b-39a0-5b57-80ab-02212426c96c": {
+      "type": "RasterLayer",
+      "name": "OpenStreetMap",
+      "visible": true,
+      "parameters": {
+        "source": "02ada4df-b2bf-5cb0-937d-38ca784a3b60",
+        "opacity": 1.0
+      }
+    },
+    "48e6a44f-01d9-5528-9ea1-0c98e76410b1": {
+      "type": "VectorLayer",
+      "name": "AQI 11월 5일 18:30 IST",
+      "visible": false,
+      "parameters": {
+        "source": "49926da2-3435-5002-8d2a-718823cf05f3",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "63c09748-5700-5053-8a8e-01e61af42297",
+              "rules": [
+                {
+                  "id": "69569b25-00c0-5d3b-addb-537b3762ceb5",
+                  "fields": [
+                    "category"
+                  ],
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "categorical",
+                        "params": {
+                          "colorRamp": "viridis",
+                          "fallback": [
+                            200,
+                            200,
+                            200,
+                            0.4
+                          ],
+                          "colorStops": [
+                            {
+                              "stop": "Good",
+                              "color": [
+                                46,
+                                139,
+                                87,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Satisfactory",
+                              "color": [
+                                127,
+                                178,
+                                65,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Moderate",
+                              "color": [
+                                212,
+                                167,
+                                44,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Poor",
+                              "color": [
+                                224,
+                                120,
+                                42,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Very Poor",
+                              "color": [
+                                200,
+                                74,
+                                59,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Severe",
+                              "color": [
+                                127,
+                                29,
+                                45,
+                                0.72
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "bd5aa367-b83c-58e9-95e2-348f6ab2ebbc",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            255,
+                            255,
+                            255,
+                            0.35
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 0.5
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "0545fd1b-6233-5bf3-8114-6e2276249283": {
+      "type": "VectorLayer",
+      "name": "AQI 11월 6일 02:30 IST",
+      "visible": false,
+      "parameters": {
+        "source": "6f484703-b553-556e-857b-492609c82f1e",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "02e33c79-2976-5649-97cd-015e7bcb2c92",
+              "rules": [
+                {
+                  "id": "06f68248-90c9-5f90-a2a0-a5e94187ca67",
+                  "fields": [
+                    "category"
+                  ],
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "categorical",
+                        "params": {
+                          "colorRamp": "viridis",
+                          "fallback": [
+                            200,
+                            200,
+                            200,
+                            0.4
+                          ],
+                          "colorStops": [
+                            {
+                              "stop": "Good",
+                              "color": [
+                                46,
+                                139,
+                                87,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Satisfactory",
+                              "color": [
+                                127,
+                                178,
+                                65,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Moderate",
+                              "color": [
+                                212,
+                                167,
+                                44,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Poor",
+                              "color": [
+                                224,
+                                120,
+                                42,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Very Poor",
+                              "color": [
+                                200,
+                                74,
+                                59,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Severe",
+                              "color": [
+                                127,
+                                29,
+                                45,
+                                0.72
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "3594e672-52e8-5c38-baaf-d3b1dc85b73f",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            255,
+                            255,
+                            255,
+                            0.35
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 0.5
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "17b93990-61a8-56e1-bd99-f124cd2bb61e": {
+      "type": "VectorLayer",
+      "name": "AQI 11월 7일 05:30 IST",
+      "visible": true,
+      "parameters": {
+        "source": "4b615bc0-a587-545b-8d11-04fdbe6a22f2",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "f20a07bc-6eb0-592f-a334-82a4f2f76258",
+              "rules": [
+                {
+                  "id": "6069701d-0193-5de7-943f-78094fb95bdd",
+                  "fields": [
+                    "category"
+                  ],
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "categorical",
+                        "params": {
+                          "colorRamp": "viridis",
+                          "fallback": [
+                            200,
+                            200,
+                            200,
+                            0.4
+                          ],
+                          "colorStops": [
+                            {
+                              "stop": "Good",
+                              "color": [
+                                46,
+                                139,
+                                87,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Satisfactory",
+                              "color": [
+                                127,
+                                178,
+                                65,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Moderate",
+                              "color": [
+                                212,
+                                167,
+                                44,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Poor",
+                              "color": [
+                                224,
+                                120,
+                                42,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Very Poor",
+                              "color": [
+                                200,
+                                74,
+                                59,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Severe",
+                              "color": [
+                                127,
+                                29,
+                                45,
+                                0.72
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "48165406-be3a-5c14-883d-86b4d1698e59",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            255,
+                            255,
+                            255,
+                            0.35
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 0.5
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "e69e3ce7-9d56-55db-a010-59ce1ed57185": {
+      "type": "VectorLayer",
+      "name": "AQI 11월 7일 14:30 IST",
+      "visible": false,
+      "parameters": {
+        "source": "5789e301-6ded-50ed-b3dc-33d1b19608e0",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "60bcfdb8-ed91-5914-89bc-0f260601217b",
+              "rules": [
+                {
+                  "id": "a7eb577e-1713-5d4f-b7f6-3bdc2f6fdb7d",
+                  "fields": [
+                    "category"
+                  ],
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "categorical",
+                        "params": {
+                          "colorRamp": "viridis",
+                          "fallback": [
+                            200,
+                            200,
+                            200,
+                            0.4
+                          ],
+                          "colorStops": [
+                            {
+                              "stop": "Good",
+                              "color": [
+                                46,
+                                139,
+                                87,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Satisfactory",
+                              "color": [
+                                127,
+                                178,
+                                65,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Moderate",
+                              "color": [
+                                212,
+                                167,
+                                44,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Poor",
+                              "color": [
+                                224,
+                                120,
+                                42,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Very Poor",
+                              "color": [
+                                200,
+                                74,
+                                59,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Severe",
+                              "color": [
+                                127,
+                                29,
+                                45,
+                                0.72
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "f74956fc-57bf-568e-b312-d17891b628bb",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            255,
+                            255,
+                            255,
+                            0.35
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 0.5
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "ee77f34a-064e-51b4-8600-d97abe9a3f6a": {
+      "type": "VectorLayer",
+      "name": "정체 확률 11월 7일 05:30 IST",
+      "visible": false,
+      "parameters": {
+        "source": "72a763e4-4d8b-5344-8f44-c711c030cb2e",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "314f5cd3-6029-5fe6-9fab-da0f1727b911",
+              "rules": [
+                {
+                  "id": "8a99a35d-1acf-5119-9dae-2bae7e5a5917",
+                  "fields": [
+                    "p_stagnant"
+                  ],
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "colorMap",
+                        "params": {
+                          "name": "Blues",
+                          "nShades": 5,
+                          "mode": "equal interval",
+                          "reverse": false,
+                          "fallback": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "domain": [
+                            0.0,
+                            1.0
+                          ],
+                          "colorStops": [
+                            {
+                              "stop": 0.0,
+                              "color": [
+                                11,
+                                110,
+                                143,
+                                0.0
+                              ]
+                            },
+                            {
+                              "stop": 1.0,
+                              "color": [
+                                11,
+                                110,
+                                143,
+                                0.85
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "e819354e-f04b-5b64-a0a2-c8866a366587": {
+      "type": "VectorLayer",
+      "name": "0.25° 격자 (Aurora 1.5)",
+      "visible": false,
+      "parameters": {
+        "source": "49926da2-3435-5002-8d2a-718823cf05f3",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "1c9c5d79-f962-5011-a809-5221a7dada50",
+              "rules": [
+                {
+                  "id": "19184e5d-0369-5ec7-9eb4-f82d9cce28ea",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            90,
+                            90,
+                            90,
+                            0.6
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 0.6
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "327e11d3-9b75-53b6-bf46-69893122c95e": {
+      "type": "VectorLayer",
+      "name": "0.4° 셀 1개 (Aurora Air Pollution)",
+      "visible": false,
+      "parameters": {
+        "source": "f988a996-28d9-5203-afc2-60c08c76af97",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "76d18365-ae00-573a-8763-bf19ec63153f",
+              "rules": [
+                {
+                  "id": "86c056e1-3c60-5436-b3a4-9d097a0ce8e5",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            120,
+                            110,
+                            90,
+                            0.35
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            40,
+                            40,
+                            40,
+                            1
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 1.5
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "0653729f-8bb0-52f8-b446-e0cbf98efc69": {
+      "type": "VectorLayer",
+      "name": "10 m 바람 11월 6일 02:30 IST",
+      "visible": false,
+      "parameters": {
+        "source": "5ce0b17f-0453-5514-b7d1-39a1e0185986",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "c7347fa9-a326-54ba-975c-5c6e70f324b1",
+              "rules": [
+                {
+                  "id": "e5c5e0f7-308a-5ae5-8726-874a3e6317a7",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            30,
+                            30,
+                            30,
+                            0.8
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 1.5
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "159119bb-8064-5577-a138-bb3877ae5cb9": {
+      "type": "VectorLayer",
+      "name": "10 m 바람 11월 7일 05:30 IST",
+      "visible": false,
+      "parameters": {
+        "source": "60416b81-5ff3-5b22-bb95-37dc5f24f9ff",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "6f5cbfa5-0546-5a1a-969c-fb38f0f0a70c",
+              "rules": [
+                {
+                  "id": "120528f5-f77f-5e79-b2b0-71c83e111c91",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            30,
+                            30,
+                            30,
+                            0.8
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 1.5
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "fffda4a6-60b9-5c9e-80f3-ea452b3c0edb": {
+      "type": "VectorLayer",
+      "name": "10 m 바람 11월 7일 14:30 IST",
+      "visible": false,
+      "parameters": {
+        "source": "9049485a-bb37-5b8c-9bbe-26a38890ce55",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "2221914e-b4d3-5957-a1af-f00db9b799bc",
+              "rules": [
+                {
+                  "id": "5e63c7ab-847f-5c0a-82a5-73009865638f",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            30,
+                            30,
+                            30,
+                            0.8
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 1.5
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "3f7ef5e4-0f42-5759-861f-f9dc101218e6": {
+      "type": "VectorLayer",
+      "name": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+      "visible": true,
+      "parameters": {
+        "source": "4b8de692-0850-57e8-ad56-eea30e358ca4",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "67bdd1de-45a2-584c-a647-617d64f23bd3",
+              "rules": [
+                {
+                  "id": "e3d211f6-8cab-5b0d-90c3-ff662b599280",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            11,
+                            110,
+                            143,
+                            1.0
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 2.0
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "973d59e9-2b64-5122-97bb-66b38774c7bc": {
+      "type": "VectorLayer",
+      "name": "델리 NCT 경계",
+      "visible": true,
+      "parameters": {
+        "source": "84a1d1dd-daa9-5658-8772-f4bcdb88250b",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "217ddec1-f70f-5d1a-aea0-e42da684a4f7",
+              "rules": [
+                {
+                  "id": "ebcc353b-6739-5e97-9bbe-f23c056d4f3f",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            30,
+                            30,
+                            30,
+                            0.9
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 2.0
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "b523f5ac-29b8-5822-944c-07938e038fcd": {
+      "type": "VectorLayer",
+      "name": "대표 지점 10곳 (색: 정점 범주)",
+      "visible": true,
+      "parameters": {
+        "source": "06d19430-6089-5207-b0d8-ac6fd6d707c1",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "610df6f5-736f-57f0-aa0e-6cab3401dce0",
+              "rules": [
+                {
+                  "id": "ba4e6035-b551-5075-aba3-1fac183cdc0c",
+                  "fields": [
+                    "category_peak"
+                  ],
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "categorical",
+                        "params": {
+                          "colorRamp": "viridis",
+                          "fallback": [
+                            60,
+                            60,
+                            60,
+                            1
+                          ],
+                          "colorStops": [
+                            {
+                              "stop": "Good",
+                              "color": [
+                                46,
+                                139,
+                                87,
+                                1.0
+                              ]
+                            },
+                            {
+                              "stop": "Satisfactory",
+                              "color": [
+                                127,
+                                178,
+                                65,
+                                1.0
+                              ]
+                            },
+                            {
+                              "stop": "Moderate",
+                              "color": [
+                                212,
+                                167,
+                                44,
+                                1.0
+                              ]
+                            },
+                            {
+                              "stop": "Poor",
+                              "color": [
+                                224,
+                                120,
+                                42,
+                                1.0
+                              ]
+                            },
+                            {
+                              "stop": "Very Poor",
+                              "color": [
+                                200,
+                                74,
+                                59,
+                                1.0
+                              ]
+                            },
+                            {
+                              "stop": "Severe",
+                              "color": [
+                                127,
+                                29,
+                                45,
+                                1.0
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "circle-fill-color"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "8341c672-1bc9-565d-97f6-6c476c99c7b6",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            255,
+                            255,
+                            255,
+                            1
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "circle-stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 1.5
+                        }
+                      },
+                      "encodings": [
+                        "circle-stroke-width"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "8011e67f-a2f9-51cd-8496-68f3e7f7321a",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 7
+                        }
+                      },
+                      "encodings": [
+                        "circle-radius"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "fe4c9c22-7866-5665-98f3-9dbaed720c1e": {
+      "type": "VectorLayer",
+      "name": "Anand Vihar",
+      "visible": false,
+      "parameters": {
+        "source": "9e8f536c-dfd6-564c-81cf-d5eb32149dab",
+        "opacity": 1.0,
+        "symbologyState": {}
+      }
+    },
+    "512627bc-5787-57fd-947f-178e61668da1": {
+      "type": "StorySegmentLayer",
+      "name": "1. 시민에게 닿는 한 줄의 대기질 경보",
+      "visible": true,
+      "parameters": {
+        "zoom": 1.97,
+        "extent": [
+          -18924313.43,
+          -7967317.54,
+          21150703.25,
+          14368684.28
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*Aurora 1.5 + Aurora Air Pollution · 스토리 맵*\n\nAurora는 Microsoft Research의 지구 시스템 파운데이션 모델입니다. 이 이야기는 그 모델로 인도 뉴델리의 48시간 대기질을 예측하고, 인도 CPCB 기준 AQI와 GRAP 단계로 바꿔 힌디어·영어·한국어 메시지를 만들기까지를 장면별로 따라갑니다. 지도는 세계에서 시작해 인도, 델리 수도권, 델리, 그리고 가장 심각한 지점으로 내려갑니다.\n\n### 표기 구분\n\n- **Aurora 직접 분석** — Aurora 모델이 실제 초기장으로 계산한 결과\n- **추가 분석 (다른 방법)** — Aurora 출력 위에 통계·규칙·소프트웨어로 더한 분석(AQI 환산, 정체 판정, 편향 보정, 발송, 자동화)\n- **합성·시뮬레이션** — 모델을 돌리지 않고 만든 예시 값(데모 모드, 계정이 필요한 자료의 대체)\n\n| 항목 | 출처 |\n| --- | --- |\n| 초기 시각 | 2025-11-05 12:00:00 UTC |\n| 기상 (혼합층·바람·기온) | Aurora 1.5 (ARCO-ERA5 initial condition) — Aurora 직접 분석 |\n| 오염 농도 (PM2.5, PM10, …) | 합성 — CAMS 자료는 Atmosphere Data Store 계정이 필요해 이 실행에서는 대체값 사용 |\n| 앙상블 | Aurora 1.5 Ensemble (3 members) — Aurora 직접 분석 |\n| AQI·GRAP·정체 판정·보정·발송·자동화 | 추가 분석 (CPCB 공식, 규칙, 최소제곱, 소프트웨어) |\n\n▶ 버튼으로 다음 장면으로 넘어가면 지도가 따라 움직입니다. 지도 장면에서는 ⓘ(Identify)로 셀과 지점의 값을 클릭해 볼 수 있습니다.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCT 경계",
+            "visible": false
+          },
+          {
+            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "visible": false
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "d39341ea-3d13-520e-bb6d-40e33539fd87": {
+      "type": "StorySegmentLayer",
+      "name": "2. 이 이야기에 나오는 약어",
+      "visible": true,
+      "parameters": {
+        "zoom": 1.97,
+        "extent": [
+          -18924313.43,
+          -7967317.54,
+          21150703.25,
+          14368684.28
+        ],
+        "enableIdentify": false,
+        "content": {
+          "contentMode": "markdown",
+          "markdown": "*용어 풀이*\n\n| 약어 | 영어 전체 이름 | 한국어 명칭 | 설명 |\n| --- | --- | --- | --- |\n| **AQI** | Air Quality Index | 대기질 지수 | 0~500 척도. 인도 CPCB 기준으로 좋음·양호·보통·나쁨·매우 나쁨·위험 6단계 |\n| **CPCB** | Central Pollution Control Board | 인도 중앙오염관리위원회 | 인도 환경부 산하 기관. 국가 AQI 기준과 전국 관측망을 운영 |\n| **GRAP** | Graded Response Action Plan | 단계별 대응 조치 계획 | AQI 구간별로 미리 정한 조치(1~4단계: 건설 제한, 차량 제한, 원격수업, 재택근무 등) |\n| **CAQM** | Commission for Air Quality Management in NCR and Adjoining Areas | 수도권 대기질관리위원회 | 델리 수도권의 대기질 정책 기구. GRAP 단계 발동 권한을 가짐 |\n| **DPCC** | Delhi Pollution Control Committee | 델리 오염관리위원회 | 델리 정부의 오염 관리 기관. 시내 관측소를 운영 |\n| **NCR** | National Capital Region | 델리 수도권 | 델리와 인접한 하리아나·우타르프라데시·라자스탄의 도시(구루그람, 노이다 등)를 묶은 권역 |\n| **NCT** | National Capital Territory of Delhi | 델리 수도직할지 | 델리의 행정 단위. 지도의 굵은 외곽선 |\n| **PM2.5** | particulate matter smaller than 2.5 micrometres | 초미세먼지 | 지름 2.5 µm 이하 입자. 단위 µg/m³ |\n| **PM10** | particulate matter smaller than 10 micrometres | 미세먼지 | 지름 10 µm 이하 입자. 단위 µg/m³ |\n| **CAMS** | Copernicus Atmosphere Monitoring Service | 코페르니쿠스 대기 모니터링 서비스 | EU의 전지구 대기 조성 분석·예보 서비스. Air Pollution 모델의 입력 |\n| **ERA5** | ECMWF Reanalysis, 5th generation | 유럽중기예보센터 5세대 재분석 자료 | 과거 기상을 격자로 재구성한 자료. 이 예제에서 Aurora 1.5의 입력 |\n| **IFS HRES T0** | Integrated Forecasting System, high resolution, analysis at lead time 0 | ECMWF 통합예보시스템 고해상도 초기 분석장 | Aurora 1.5가 파인튜닝된 실시간 입력 자료 |\n| **IST** | Indian Standard Time | 인도 표준시 | UTC+5:30 |\n| **BLH** | boundary-layer height | 대기경계층 높이(혼합층 높이) | 오염이 섞이는 하층 대기의 두께. 낮을수록 지표 농도가 오름 |\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCT 경계",
+            "visible": false
+          },
+          {
+            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "visible": false
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "4ce5d3f6-cd27-50ff-8ae1-daa1bb0f9685": {
+      "type": "StorySegmentLayer",
+      "name": "3. 왜 뉴델리이고, 왜 11월인가",
+      "visible": true,
+      "parameters": {
+        "zoom": 5.14,
+        "extent": [
+          6679169.45,
+          445640.11,
+          11131949.08,
+          4579425.81
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*0 · 배경*\n\n- 델리 NCR(수도권)은 매년 10월 말~1월에 세계 최악 수준의 미세먼지 에피소드를 겪습니다. 인접 주(펀자브, 하리아나)의 볏짚 소각, 디왈리 폭죽, 교통·건설·발전 배출이 겹치고, 겨울철 **낮은 혼합층(100~300 m)과 약한 바람**이 오염을 지표 근처에 가둡니다.\n- 인도 정부는 국가 AQI(CPCB 기준)와 단계별 대응계획 **GRAP**(CAQM 주관)을 운영합니다. AQI 구간별로 건설 중단, 차량 제한, 원격수업, 재택근무가 정해져 있어 **예보 → 단계 → 조치**의 연결이 제도적으로 존재합니다.\n- 핵심 질문은 \"얼마나 나빠질지\"가 아니라 **\"언제, 어느 지역에서, 어떤 기상 조건 때문에 나빠지며, 시민은 무엇을 해야 하는가\"**를 12~48시간 앞서 전달하는 것입니다.\n\n지도의 사각형이 이 예제가 다루는 델리 NCR 타일(27.5~31.5°N, 76~80°E)입니다.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCT 경계",
+            "visible": false
+          },
+          {
+            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "visible": false
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "146b2e6a-c4f3-5e5c-aaef-5848282781b2": {
+      "type": "StorySegmentLayer",
+      "name": "4. Aurora가 두 번 등장한다",
+      "visible": true,
+      "parameters": {
+        "zoom": 7.65,
+        "extent": [
+          8293302.06,
+          3061141.04,
+          9072538.5,
+          3829123.84
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*2 · 시스템 구성 · 기상: Aurora 1.5 · 농도: 합성 (CAMS 계정 필요)*\n\n1. **입력** · CAMS 전지구 분석 0.4° (PM, NO2, SO2, O3, CO + 기상) · ERA5 또는 IFS HRES T0 0.25° (26개 표면 변수, 13개 기압면)\n2. **Aurora 0.4° Air Pollution** · 12시간 × 4 = 48 h. 로컬 GPU 또는 Foundry \"Aurora\" 엔드포인트\n3. **Aurora 1.5** · 6시간 × 8 + 시간별 서브스텝 = 48개 시간별 기상장 (경계층 높이, 10 m 풍속, 기온, 이슬점, 강수, 돌풍)\n4. **델리 후처리** · 10개 지점 보간 → CPCB AQI → GRAP 단계 → 정체 진단(풍속 < 10 km/h, 혼합층 < 500 m) → hi/en/ko 메시지 → 푸시·SMS·WhatsApp·앱\n\n**왜 두 모델인가.** Aurora 1.5는 기상 전용이라 오염물질을 예측하지 않습니다. 대신 **시간 단위**로 확산 조건을 줍니다. Air Pollution 모델은 농도를 직접 예측하지만 12시간 간격·0.4°입니다. 둘을 합치면 \"농도는 어느 수준인가\"와 \"밤 몇 시부터 정체가 시작되는가\"를 함께 말할 수 있습니다.\n\n**\"고해상도\"의 의미.** (1) 시간: 1.5의 `fine_lead_times=[1,…,6]`으로 1시간 간격. (2) 공간: 지도의 가는 격자가 1.5의 0.25° 셀이고, 이를 10개 지점으로 양선형 보간합니다. 격자 자체는 도시 내부 차이를 해소하지 못합니다(§6).\n\n**연계.** 저장소의 `msresearch-aurora/`(microsoft/vibe-kit의 Aurora 스킬)에서 React 지도 프런트엔드, 검증 유틸리티, 파인튠 스타터를 가져옵니다. 체크포인트는 HuggingFace `microsoft/aurora`에서 받고, GPU가 없으면 `--mode foundry`로 Azure AI Foundry의 \"Aurora\"/\"Aurora-1.5\" 엔드포인트에 작업을 보냅니다.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "visible": true
+          },
+          {
+            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCT 경계",
+            "visible": true
+          },
+          {
+            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "eb57db79-fb3d-50d9-ad0c-43b07473b648": {
+      "type": "StorySegmentLayer",
+      "name": "5. 누가 무엇을 받는가",
+      "visible": true,
+      "parameters": {
+        "zoom": 7.65,
+        "extent": [
+          8293302.06,
+          3061141.04,
+          9072538.5,
+          3829123.84
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*1 · 등장인물 · 농도: 합성 (CAMS 계정 필요)*\n\n| 역할 | 원하는 것 | 산출물 |\n| --- | --- | --- |\n| 일반 시민 | 오늘 밤/내일 아침 주의사항 한 줄 | `short` |\n| 민감군과 보호자 | 구체적 행동과 시간대 | `long` |\n| 운영자 (DPCC/CAQM) | 정점 시각, GRAP 근거, 추세 | `summary_by_site.csv`, `bulletin_*.md` |\n| 데이터/ML 엔지니어 | 재현 가능한 파이프라인 | `--mode local|foundry` |\n\n지도: 첫 예측 시각(11월 5일 18:30 IST)의 AQI 타일. 색이 CPCB 범주입니다.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCT 경계",
+            "visible": true
+          },
+          {
+            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "650f47aa-48d9-5cf4-9424-64a7e71c6fb3": {
+      "type": "StorySegmentLayer",
+      "name": "6. 11월 5일 17:30 IST, 초기장과 예측 실행",
+      "visible": true,
+      "parameters": {
+        "zoom": 7.65,
+        "extent": [
+          8293302.06,
+          3061141.04,
+          9072538.5,
+          3829123.84
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*3 · S1 · S2 · 기상: Aurora 1.5 · 농도: 합성 (CAMS 계정 필요)*\n\n12 UTC(= 17:30 IST)의 CAMS 00/12 UTC 분석과 ERA5 06/12 UTC로 `Batch` 두 개를 만들고 정적 변수 pickle을 읽습니다. Air Pollution 4스텝(+12/24/36/48 h), Aurora 1.5 8스텝 × 6 서브스텝(+1…+48 h)을 GPU 한 장 또는 Foundry에서 돌립니다. 10분 뒤 10개 지점으로 보간하고 12시간 농도를 시간별로 선형 보간한 뒤, 1.5의 시간별 혼합층·풍속으로 정체 시간대를 표시합니다.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "visible": true
+          },
+          {
+            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCT 경계",
+            "visible": true
+          },
+          {
+            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "32d648e1-bd87-5fdd-a179-2fee9a18edb6": {
+      "type": "StorySegmentLayer",
+      "name": "7. 18:30 IST, 저녁 경보",
+      "visible": true,
+      "parameters": {
+        "zoom": 10.46,
+        "extent": [
+          8532638.97,
+          3274212.69,
+          8643958.46,
+          3382011.46
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*3 · S3 · S4 · 농도: 합성 (CAMS 계정 필요) · 추가 분석 (다른 방법)*\n\n첫 예측 시각. 델리 전체가 이미 \"매우 나쁨\" 이상이고, 교통 지점(Anand Vihar, ITO, Gurugram)이 가장 높습니다. 지점별 AQI와 GRAP 단계를 계산해 푸시/SMS용 한 줄 메시지를 내보냅니다. 운영자에게는 도시 헤드라인과 지점별 상세가 담긴 브리핑이 갑니다.\n\n**시민용 short · 힌디어**\n\n```text\n[वायु गुणवत्ता चेतावनी] Anand Vihar: अधिकतम AQI 500 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 321 µg/m³। स्वस्थ लोग भी प्रभावित।\n```\n\n**도시 헤드라인**\n\n```text\n델리 NCR 대기질 전망: 지역 중간값 최고 AQI 433 (위험), 최악 지점 Anand Vihar AQI 500 (위험), 11월 7일 05시 전후. GRAP 4단계 수준에 해당합니다.\n```\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCT 경계",
+            "visible": true
+          },
+          {
+            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "df614b00-9a4d-54da-a21a-c6bc262b18ee": {
+      "type": "StorySegmentLayer",
+      "name": "8. 11월 6일 02:30 IST, 정체가 시작된다",
+      "visible": true,
+      "parameters": {
+        "zoom": 10.46,
+        "extent": [
+          8532638.97,
+          3274212.69,
+          8643958.46,
+          3382011.46
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*3 · S6 · 기상: Aurora 1.5 · 추가 분석 (다른 방법)*\n\nAurora 1.5가 예측한 첫째 밤(11월 5일 22시~6일 08시) Anand Vihar의 혼합층은 최저 137 m, 풍속 중앙값은 11.1 km/h입니다. 지도의 짧은 선이 그 바람(셀 중심에서 바람이 불어가는 방향, 길이는 풍속)입니다. 배출이 같아도 섞일 공기가 얇아지면 지표 농도가 오릅니다. 메시지에는 \"밤~아침에 오염이 지표 근처에 쌓이기 쉽습니다\"로 들어가고, 민감군에게는 창문 닫기·새벽 운동 자제 리마인더를 보낼 수 있습니다.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCT 경계",
+            "visible": true
+          },
+          {
+            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "e314ecfa-4bd9-536f-81c2-f120b59135c0": {
+      "type": "StorySegmentLayer",
+      "name": "9. 11월 7일 05:30 IST, 가장 심각한 곳",
+      "visible": true,
+      "parameters": {
+        "zoom": 12.1,
+        "extent": [
+          8588298.71,
+          3312159.86,
+          8623920.95,
+          3345134.73
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*3 · S7 · 기상: Aurora 1.5 · 농도: 합성 (CAMS 계정 필요) · 추가 분석 (다른 방법)*\n\n두 번째 새벽. 동부 델리의 Anand Vihar(주간 버스터미널과 간선도로가 모인 교통 지점)가 AQI 500(위험)에 닿고, 인접한 ITO·Noida·Okhla도 450을 넘습니다. 이 시각이 지점별 요약표의 \"정점 시각\"이 되고, 06:00 IST 아침 업데이트는 등교·출근 전에 \"오전 7~9시 최고치, 마스크 착용\"을 보냅니다.\n\n**운영자용 long · Anand Vihar**\n\n```text\n- 현재 AQI 385 → 최고 AQI 500 (위험), 정점 11월 7일 05시 전후. 추세: 비슷한 수준 유지.\n- 주 오염물질: PM10. PM2.5 최대 321㎍/㎥, PM10 최대 514㎍/㎥.\n- 확산 조건: 향후 예측기간 중 12시간(야간·새벽 2시간) 동안 풍속 10 km/h 미만, 혼합층 500 m 미만의 정체 조건이 예상됩니다(최저 혼합층 약 67 m). 밤~아침에 오염이 지표 근처에 쌓이기 쉽습니다.\n- 건강 권고: 건강한 사람도 영향을 받습니다. 가능한 한 실내에 머무르고, 어린이·노인·호흡기·심장 질환자는 외출을 피하세요. 공기청정기를 사용하고 증상이 있으면 의료기관을 찾으세요.\n- 행정 조치 안내: GRAP 4단계(위험+) 수준: 트럭 진입 제한, 재택근무 확대, 학교 원격수업 전환 등 강력한 조치가 시행될 수 있습니다. 당국 공지를 확인하세요.\n- 이 예보는 AI 모델(Aurora) 기반 참고 정보이며, 공식 경보는 CPCB/CAQM 발표를 따르세요.\n```\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCT 경계",
+            "visible": true
+          },
+          {
+            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": true
+          }
+        ]
+      }
+    },
+    "8bcd4684-51ad-51ca-9617-076ec2f01d3e": {
+      "type": "StorySegmentLayer",
+      "name": "10. 11월 7일 14:30 IST, 낮의 숨 고르기",
+      "visible": true,
+      "parameters": {
+        "zoom": 7.65,
+        "extent": [
+          8293302.06,
+          3061141.04,
+          9072538.5,
+          3829123.84
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*3 · S6 · 오후 · 기상: Aurora 1.5 · 농도: 합성 (CAMS 계정 필요)*\n\n혼합층이 1,000 m 가까이 올라가고 바람이 10 km/h를 넘는 몇 시간 동안 AQI가 400 아래로 내려갑니다. 그래도 \"매우 나쁨\"입니다. 이 구간이 민감군이 환기나 외출을 할 수 있는 창이고, 메시지는 그 시간대를 명시합니다. 사후(S8)에는 CPCB/DPCC 관측과 비교해 지점별 편향 보정 계수를 구합니다.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCT 경계",
+            "visible": true
+          },
+          {
+            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "09c2bfb4-074c-5c2a-922d-9908f2c7ebbc": {
+      "type": "StorySegmentLayer",
+      "name": "11. 160자 안에 무엇·언제·어디·어떻게",
+      "visible": true,
+      "parameters": {
+        "zoom": 10.46,
+        "extent": [
+          8532638.97,
+          3274212.69,
+          8643958.46,
+          3382011.46
+        ],
+        "enableIdentify": false,
+        "content": {
+          "contentMode": "markdown",
+          "markdown": "*4 · 메시지 설계 원칙 · 추가 분석 (다른 방법)*\n\n1. **무엇(수치+범주)·언제(IST 정점 시각)·어디(지점)·어떻게(행동 1~2개)**. `short`는 SMS/푸시, `long`은 앱 상세·브리핑용.\n2. **범주는 CPCB 용어 그대로**(좋음/양호/보통/나쁨/매우 나쁨/위험). 뉴스·공식 앱과 일치해야 혼란이 없다.\n3. **민감군을 먼저** 호명한다(어린이·노인·임산부·호흡기 질환자).\n4. **GRAP 단계는 \"해당 수준\"으로만**. 발효는 CAQM 권한이므로 \"시행될 수 있습니다\"로 쓰고 공식 공지를 안내한다.\n5. **기상 근거 한 문장**. 시민이 \"왜 밤에 더 나쁜가\"를 이해하면 행동 순응도가 올라간다.\n6. **면책 문구 고정**: \"AI 모델(Aurora) 기반 참고 정보이며 공식 경보는 CPCB/CAQM을 따르세요.\"\n7. 힌디어(1차), 영어(2차), 운영팀용 한국어. 템플릿은 `HEALTH_ADVICE`, `GRAP_ADVICE`, `CATEGORY_NAMES`에 모여 있어 보건 전문가가 코드 없이 검수한다.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCT 경계",
+            "visible": true
+          },
+          {
+            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "a2e9ef3b-651d-55aa-87e6-2f8f20a6956c": {
+      "type": "StorySegmentLayer",
+      "name": "12. 지점별 요약",
+      "visible": true,
+      "parameters": {
+        "zoom": 10.46,
+        "extent": [
+          8532638.97,
+          3274212.69,
+          8643958.46,
+          3382011.46
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*5 · 산출물 · 농도: 합성 (CAMS 계정 필요) · 기상: Aurora 1.5 · 추가 분석 (다른 방법)*\n\n이 실행에서 혼합층·바람·기온은 Aurora 1.5가 ARCO-ERA5 초기장으로 계산한 값이고, 오염 농도는 합성 예시입니다(CAMS 계정 필요). 따라서 AQI 값 자체는 예시이지만 정체 시간대는 실제 모델 결과입니다.\n\n| 지점 | 현재 | 최고 | 범주 | 주 오염물질 | GRAP | 정체 h |\n| --- | ---: | ---: | --- | --- | ---: | ---: |\n| Anand Vihar | 385 | 500 | 위험 | PM10 | 4 | 12 |\n| Dwarka Sector 8 | 336 | 406 | 위험 | PM2.5 | 3 | 16 |\n| Gurugram Vikas Sadan | 376 | 479 | 위험 | PM10 | 4 | 15 |\n| ITO | 383 | 498 | 위험 | PM10 | 4 | 13 |\n| Jahangirpuri | 365 | 452 | 위험 | PM10 | 4 | 14 |\n| Noida Sector 62 | 340 | 409 | 위험 | PM2.5 | 3 | 10 |\n| Okhla Phase 2 | 366 | 453 | 위험 | PM10 | 4 | 11 |\n| Punjabi Bagh | 346 | 415 | 위험 | PM2.5 | 3 | 14 |\n| R K Puram | 335 | 405 | 위험 | PM2.5 | 3 | 13 |\n| Rohini | 337 | 406 | 위험 | PM2.5 | 3 | 16 |\n\n정점은 모든 지점에서 11월 7일 05:30 IST 전후(최저 혼합층 64–75 m). 지도의 지점 색은 정점 범주이고, ⓘ로 지점·셀을 클릭하면 값이 뜹니다. 산출 파일: `pollutants_12h.csv`, `meteorology_hourly.csv`, `fused_hourly.csv`, `summary_by_site.csv`, `messages_{ko,en,hi}.json`, `bulletin_*.md`, `frontend/*.json`.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCT 경계",
+            "visible": true
+          },
+          {
+            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "74ed9051-a889-58f5-8dce-4eaf06af3135": {
+      "type": "StorySegmentLayer",
+      "name": "13. 해상도의 진실",
+      "visible": true,
+      "parameters": {
+        "zoom": 10.46,
+        "extent": [
+          8532638.97,
+          3274212.69,
+          8643958.46,
+          3382011.46
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*6 · 한계와 책임 있는 사용 · 농도: 합성 (CAMS 계정 필요)*\n\n지도에 겹친 큰 사각형이 Air Pollution 모델의 0.4° 셀 하나입니다. 델리 NCT 전체가 두세 개 셀에 들어갑니다.\n\n- **공간 해상도**: 지점 간 차이는 보간 결과이며 도로변 농도가 아니다. 실제 서비스에는 관측소별 편향 보정이나 CPCB 데이터로의 파인튜닝이 필요하다.\n- **시간 해상도**: 시간별 농도 곡선은 12시간 예측의 선형 보간이다. 시간별 구조의 근거는 1.5의 기상 변수이며 메시지에도 그렇게 표기한다.\n- **입력 데이터**: 1.5는 IFS HRES T0로 파인튜닝되었고 이 예제는 ERA5를 쓴다. Air Pollution 모델은 CAMS 분석 전용이다.\n- **1000 hPa 가스**: NO2/SO2/O3/CO는 1000 hPa 혼합비를 밀도로 환산한 근사치. AQI는 사실상 PM2.5/PM10이 주도한다.\n- **운영 결정**: Aurora는 연구용 모델이며 전문가 검토 없는 운영 의사결정에 쓰여서는 안 된다.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "visible": true
+          },
+          {
+            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCT 경계",
+            "visible": true
+          },
+          {
+            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "f6d16e46-c162-5dd5-a187-c6812e9298a9": {
+      "type": "StorySegmentLayer",
+      "name": "14. 앙상블로 본 정체 확률",
+      "visible": true,
+      "parameters": {
+        "zoom": 10.46,
+        "extent": [
+          8532638.97,
+          3274212.69,
+          8643958.46,
+          3382011.46
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*로드맵 실행 1 · 불확실성 · 앙상블: Aurora 1.5 Ensemble · 추가 분석 (다른 방법)*\n\nAurora 1.5 Ensemble을 서로 다른 시드로 3번 실행해(멤버당 48시간, 시간별) 각 멤버의 혼합층과 바람으로 정체 여부를 판정하고, 정체인 멤버의 비율을 확률로 썼습니다. 모델이 실제로 계산한 불확실성입니다.\n\n지도의 파란 농담이 11월 7일 05:30 IST 셀별 정체 확률(멤버 중 풍속 10 km/h 미만·혼합층 500 m 미만인 비율)입니다. 표는 지점별로 첫째 밤(11월 5일 22시~6일 08시), 낮(6일 08~22시), 둘째 밤(6일 22시~7일 08시)의 평균 확률과 정점 시각의 혼합층 10~90퍼센타일입니다.\n\n| 지점 | 밤 1 | 낮 | 밤 2 | 정점 BLH p10–p90 (m) |\n| --- | ---: | ---: | ---: | ---: |\n| Anand Vihar | 3% | 21% | 43% | 79–107 |\n| ITO | 3% | 21% | 43% | 80–105 |\n| Punjabi Bagh | 12% | 24% | 50% | 86–101 |\n| Rohini | 12% | 28% | 50% | 87–100 |\n| Jahangirpuri | 12% | 28% | 50% | 85–102 |\n| R K Puram | 6% | 21% | 43% | 82–103 |\n| Dwarka Sector 8 | 18% | 26% | 50% | 88–99 |\n| Okhla Phase 2 | 0% | 19% | 40% | 78–107 |\n| Noida Sector 62 | 3% | 21% | 43% | 78–109 |\n| Gurugram Vikas Sadan | 18% | 26% | 57% | 86–95 |\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCT 경계",
+            "visible": true
+          },
+          {
+            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "39edf204-66d8-575e-8609-fa7b5aca27d7": {
+      "type": "StorySegmentLayer",
+      "name": "15. 지점별 선형 편향 보정",
+      "visible": true,
+      "parameters": {
+        "zoom": 10.46,
+        "extent": [
+          8532638.97,
+          3274212.69,
+          8643958.46,
+          3382011.46
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*로드맵 실행 2 · 관측 보정 · 추가 분석 (다른 방법) · 합성 관측*\n\n관측 = a + b × 예측 형태의 직선을 지점별로 최소제곱으로 맞추고, 보정 전후의 RMSE(평균 제곱근 오차)를 비교합니다. 실제 CPCB 관측은 공개 API가 없어 포털에서 긁어와야 하므로, 여기서는 **합성 관측**(교통 지점은 모델이 15% 낮게, 주거 지점은 8% 높게 읽는다고 가정하고 잡음을 더한 값)으로 절차만 실행했습니다. 표본이 12시간 간격 5개뿐이라 계수는 예시 수준입니다.\n\n| 지점 | a | b | n | RMSE 전 | RMSE 후 |\n| --- | ---: | ---: | ---: | ---: | ---: |\n| Anand Vihar | 201.9 | 0.36 | 5 | 44.2 | 22.5 |\n| ITO | 41.8 | 1.01 | 5 | 47.5 | 13.3 |\n| Punjabi Bagh | 52.8 | 0.67 | 5 | 22.8 | 4.0 |\n| Rohini | -30.6 | 1.06 | 5 | 19.5 | 5.8 |\n| Jahangirpuri | -11.2 | 1.11 | 5 | 19.5 | 11.2 |\n| R K Puram | -4.7 | 0.91 | 5 | 34.0 | 25.3 |\n| Dwarka Sector 8 | 7.8 | 0.92 | 5 | 9.8 | 5.4 |\n| Okhla Phase 2 | 63.8 | 0.77 | 5 | 16.1 | 10.9 |\n| Noida Sector 62 | -8.6 | 0.96 | 5 | 25.5 | 18.3 |\n| Gurugram Vikas Sadan | 189.4 | 0.42 | 5 | 48.7 | 15.2 |\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCT 경계",
+            "visible": true
+          },
+          {
+            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "b8b2a843-e052-5c13-83d0-5dbb2a59ed7b": {
+      "type": "StorySegmentLayer",
+      "name": "16. msresearch-aurora 스타터로 학습 루프 점검",
+      "visible": true,
+      "parameters": {
+        "zoom": 7.65,
+        "extent": [
+          8293302.06,
+          3061141.04,
+          9072538.5,
+          3829123.84
+        ],
+        "enableIdentify": false,
+        "content": {
+          "contentMode": "markdown",
+          "markdown": "*로드맵 실행 3 · 파인튜닝 · 추가 분석 (다른 방법)*\n\n인도 지역 학습 자료(격자화한 CPCB 관측이나 지역 CAMS 재분석)는 아직 없으므로 본 파인튜닝은 실행하지 않았습니다. 대신 스타터 코드의 스모크 테스트(`test_finetuning_2t_var_pretrained`: 번들된 미국 서부 ERA5 7일 자료로 사전학습 Aurora의 2 m 기온을 1 에포크 학습)를 돌려 학습 루프·체크포인트·옵티마이저가 이 환경에서 동작하는지 확인했습니다.\n\n**결과**\n\n```text\n스모크 테스트 통과 — 1 test(s) passed in 66 s\n```\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCT 경계",
+            "visible": true
+          },
+          {
+            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "907efed1-4302-5cbc-8c09-99a218ef342e": {
+      "type": "StorySegmentLayer",
+      "name": "17. 우편번호 → 지점 → 메시지",
+      "visible": true,
+      "parameters": {
+        "zoom": 10.46,
+        "extent": [
+          8532638.97,
+          3274212.69,
+          8643958.46,
+          3382011.46
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*로드맵 실행 4 · 발송 어댑터 · 추가 분석 (다른 방법)*\n\n구독자의 우편번호(PIN)를 가장 가까운 지점에 매핑하고 언어별 `short` 메시지를 payload로 만들어 발송 로그를 남깁니다. 이번 실행은 dry run이라 실제 전송 대신 \"queued\" 상태로 기록되며, 실제 어댑터는 이 자리에서 WhatsApp Business API나 SMS 게이트웨이에 POST합니다.\n\n| 항목 | 값 |\n| --- | --- |\n| 건수 | 20 |\n| 채널 | dryrun |\n| 언어 | en, hi |\n\n**로그 예시**\n\n```text\nsub-000 · PIN 110092 · Anand Vihar · hi · queued (dry run) · 155 chars\n  [वायु गुणवत्ता चेतावनी] Anand Vihar: अधिकतम AQI 500 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 321 µg/m³। स्वस्थ लोग भी प्रभावित।\nsub-001 · PIN 110092 · Anand Vihar · en · queued (dry run) · 166 chars\n  [Air quality alert] Anand Vihar: peak AQI 500 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM10, PM2.5 up to 321 ug/m3. Even healthy people are affected.\nsub-002 · PIN 110002 · ITO · hi · queued (dry run) · 147 chars\n  [वायु गुणवत्ता चेतावनी] ITO: अधिकतम AQI 498 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 318 µg/m³। स्वस्थ लोग भी प्रभावित।\n```\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCT 경계",
+            "visible": true
+          },
+          {
+            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "9930de0b-c055-5aa0-8618-4a1598afd6d6": {
+      "type": "StorySegmentLayer",
+      "name": "18. 00/12 UTC마다 다시 발행",
+      "visible": true,
+      "parameters": {
+        "zoom": 7.65,
+        "extent": [
+          8293302.06,
+          3061141.04,
+          9072538.5,
+          3829123.84
+        ],
+        "enableIdentify": false,
+        "content": {
+          "contentMode": "markdown",
+          "markdown": "*로드맵 실행 5 · 자동화 · 추가 분석 (다른 방법)*\n\n파이프라인이 자동으로 생성한 크론 스크립트입니다. 분석장이 도착한 뒤인 02:30/14:30 UTC(08:00/20:00 IST)에 실행되어 날짜별 폴더에 산출물을 남깁니다. 이 스토리 맵의 데이터 자체가 그 스크립트와 같은 명령(`delhi_aq.py`)의 실행 결과입니다.\n\n```bash\n#!/usr/bin/env bash\n# Re-issue the Delhi air-quality bulletin after each 00/12 UTC analysis becomes available.\n# crontab -e  ->  30 2,14 * * *  /path/to/run_delhi_aq_cron.sh >> /var/log/delhi_aq.log 2>&1\nset -euo pipefail\ncd \"$(dirname \"$0\")\"\npython delhi_aq.py --mode foundry --hours 48 --plot --out \"outputs/$(date -u +%Y-%m-%dT%H)\" -v\n```\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCT 경계",
+            "visible": true
+          },
+          {
+            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "eae7a854-2055-5fce-b774-1af9f692d459": {
+      "type": "StorySegmentLayer",
+      "name": "19. 실행한 것과 남은 것",
+      "visible": true,
+      "parameters": {
+        "zoom": 7.65,
+        "extent": [
+          8293302.06,
+          3061141.04,
+          9072538.5,
+          3829123.84
+        ],
+        "enableIdentify": false,
+        "content": {
+          "contentMode": "markdown",
+          "markdown": "*7 · 남은 과제 · 직접 실행*\n\n로드맵 다섯 항목은 위 장면에서 실행했습니다. 남은 것은 실제 CPCB 관측 연결, 인도 지역 자료로의 본 파인튜닝, 그리고 CAMS 계정을 붙여 오염 농도까지 Aurora로 계산하는 일입니다.\n\n1. **불확실성**: `AuroraV1p5Ensemble` + `rollout_ensemble`로 \"정체 확률 80%\" 식의 표현.\n2. **CPCB 관측 보정**: 지점별 관측-예측 잔차 학습(선형/분위 매핑부터).\n3. **파인튜닝**: `msresearch-aurora/starter-code/`의 학습 루프로 Air Pollution 모델을 인도 지역 자료에 적응. 모델 측 요구사항은 `docs/finetuning.md`.\n4. **채널 연계**: `messages_hi.json`을 WhatsApp Business API, SMS, 델리 정부 앱으로. 거주 지역(핀코드)을 가장 가까운 지점에 매핑.\n5. **자동화**: 00/12 UTC마다 `delhi_aq.py --mode foundry --plot`을 크론으로.\n\n### 직접 실행하기\n\ndemo 모드는 GPU와 데이터 없이 돌아갑니다.\n\n```bash\ngit clone https://github.com/playground-for-thinker/aurora.git && cd aurora\npip install -e . && pip install matplotlib\npython examples/delhi_air_quality/delhi_aq.py --mode demo --date 2025-11-05 --plot --out outputs\n```\n\n- 노트북: [Colab](https://colab.research.google.com/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb) · [Binder](https://mybinder.org/v2/gh/playground-for-thinker/aurora/main?labpath=examples%2Fdelhi_air_quality%2Fexample_delhi_air_quality.ipynb)\n- 스토리보드(장면별 설명 문서): [STORYBOARD_kor.md](https://github.com/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/STORYBOARD_kor.md) · [STORYBOARD.md](https://github.com/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/STORYBOARD.md)\n- 코드: [GitHub](https://github.com/playground-for-thinker/aurora/tree/main/examples/delhi_air_quality)\n\n이 스토리 맵은 JupyterGIS 문서(`.jGIS`)입니다. notebook.link의 JupyterLab 보기에서 레이어와 장면을 직접 편집할 수 있고, `build_storymap_jgis.py`로 파이프라인 산출물에서 다시 생성할 수 있습니다.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "델리 NCT 경계",
+            "visible": true
+          },
+          {
+            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    }
+  },
+  "layerTree": [
+    "f981b07b-39a0-5b57-80ab-02212426c96c",
+    "48e6a44f-01d9-5528-9ea1-0c98e76410b1",
+    "0545fd1b-6233-5bf3-8114-6e2276249283",
+    "17b93990-61a8-56e1-bd99-f124cd2bb61e",
+    "e69e3ce7-9d56-55db-a010-59ce1ed57185",
+    "ee77f34a-064e-51b4-8600-d97abe9a3f6a",
+    "e819354e-f04b-5b64-a0a2-c8866a366587",
+    "327e11d3-9b75-53b6-bf46-69893122c95e",
+    "0653729f-8bb0-52f8-b446-e0cbf98efc69",
+    "159119bb-8064-5577-a138-bb3877ae5cb9",
+    "fffda4a6-60b9-5c9e-80f3-ea452b3c0edb",
+    "3f7ef5e4-0f42-5759-861f-f9dc101218e6",
+    "973d59e9-2b64-5122-97bb-66b38774c7bc",
+    "b523f5ac-29b8-5822-944c-07938e038fcd",
+    "fe4c9c22-7866-5665-98f3-9dbaed720c1e",
+    "512627bc-5787-57fd-947f-178e61668da1",
+    "d39341ea-3d13-520e-bb6d-40e33539fd87",
+    "4ce5d3f6-cd27-50ff-8ae1-daa1bb0f9685",
+    "146b2e6a-c4f3-5e5c-aaef-5848282781b2",
+    "eb57db79-fb3d-50d9-ad0c-43b07473b648",
+    "650f47aa-48d9-5cf4-9424-64a7e71c6fb3",
+    "32d648e1-bd87-5fdd-a179-2fee9a18edb6",
+    "df614b00-9a4d-54da-a21a-c6bc262b18ee",
+    "e314ecfa-4bd9-536f-81c2-f120b59135c0",
+    "8bcd4684-51ad-51ca-9617-076ec2f01d3e",
+    "09c2bfb4-074c-5c2a-922d-9908f2c7ebbc",
+    "a2e9ef3b-651d-55aa-87e6-2f8f20a6956c",
+    "74ed9051-a889-58f5-8dce-4eaf06af3135",
+    "f6d16e46-c162-5dd5-a187-c6812e9298a9",
+    "39edf204-66d8-575e-8609-fa7b5aca27d7",
+    "b8b2a843-e052-5c13-83d0-5dbb2a59ed7b",
+    "907efed1-4302-5cbc-8c09-99a218ef342e",
+    "9930de0b-c055-5aa0-8618-4a1598afd6d6",
+    "eae7a854-2055-5fce-b774-1af9f692d459"
+  ],
+  "options": {
+    "latitude": 28.64,
+    "longitude": 77.12,
+    "zoom": 10.46,
+    "bearing": 0.0,
+    "pitch": 0.0,
+    "projection": "EPSG:3857",
+    "extent": [
+      8532638.97,
+      3274212.69,
+      8643958.46,
+      3382011.46
+    ],
+    "useExtent": false
+  },
+  "stories": {
+    "d69ab627-a58a-580c-a48a-3a730c07a991": {
+      "title": "델리 스모그 스토리 맵",
+      "storyType": "guided",
+      "storySegments": [
+        "512627bc-5787-57fd-947f-178e61668da1",
+        "d39341ea-3d13-520e-bb6d-40e33539fd87",
+        "4ce5d3f6-cd27-50ff-8ae1-daa1bb0f9685",
+        "146b2e6a-c4f3-5e5c-aaef-5848282781b2",
+        "eb57db79-fb3d-50d9-ad0c-43b07473b648",
+        "650f47aa-48d9-5cf4-9424-64a7e71c6fb3",
+        "32d648e1-bd87-5fdd-a179-2fee9a18edb6",
+        "df614b00-9a4d-54da-a21a-c6bc262b18ee",
+        "e314ecfa-4bd9-536f-81c2-f120b59135c0",
+        "8bcd4684-51ad-51ca-9617-076ec2f01d3e",
+        "09c2bfb4-074c-5c2a-922d-9908f2c7ebbc",
+        "a2e9ef3b-651d-55aa-87e6-2f8f20a6956c",
+        "74ed9051-a889-58f5-8dce-4eaf06af3135",
+        "f6d16e46-c162-5dd5-a187-c6812e9298a9",
+        "39edf204-66d8-575e-8609-fa7b5aca27d7",
+        "b8b2a843-e052-5c13-83d0-5dbb2a59ed7b",
+        "907efed1-4302-5cbc-8c09-99a218ef342e",
+        "9930de0b-c055-5aa0-8618-4a1598afd6d6",
+        "eae7a854-2055-5fce-b774-1af9f692d459"
+      ],
+      "showGradient": true
+    }
+  },
+  "viewState": {},
+  "annotations": {},
+  "presets": {},
+  "metadata": {
+    "generator": "examples/delhi_air_quality/build_storymap_jgis.py",
+    "language": "ko",
+    "attribution": "Boundaries: Natural Earth (public domain), geoBoundaries (CC BY 2.5 IN)",
+    "provenance": "{\"meteorology\": \"Aurora 1.5 (ARCO-ERA5 initial condition)\", \"pollutants\": \"synthetic\", \"ensemble\": \"Aurora 1.5 Ensemble (3 members)\", \"init_time\": \"2025-11-05T12:00:00\", \"bias_correction\": \"linear fit per site against synthetic observations\"}"
+  }
+}

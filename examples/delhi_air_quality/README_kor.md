@@ -1,6 +1,6 @@
 # 뉴델리 대기질 조기경보 예제
 
-[![Story Map · 한국어/English](https://img.shields.io/badge/Story%20Map-%ED%95%9C%EA%B5%AD%EC%96%B4%20%2F%20English-0b6e8f?logo=googlemaps&logoColor=white)](https://claude.ai/artifact/PKH8XS3B3Nb85WaVMbmZSW) [![Storyboard · 한국어/English](https://img.shields.io/badge/Storyboard-%ED%95%9C%EA%B5%AD%EC%96%B4%20%2F%20English-0b6e8f?logo=readme&logoColor=white)](https://claude.ai/artifact/6GkTNUq54pqXGZBVx7BGSE) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/playground-for-thinker/aurora/main?labpath=examples%2Fdelhi_air_quality%2Fexample_delhi_air_quality.ipynb)
+[![Story Map · 한국어](https://img.shields.io/badge/Story%20Map-%ED%95%9C%EA%B5%AD%EC%96%B4-0b6e8f?logo=jupyter&logoColor=white)](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_ko.jGIS) [![Story Map · English](https://img.shields.io/badge/Story%20Map-English-0b6e8f?logo=jupyter&logoColor=white)](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_en.jGIS) [![Storyboard · 한국어/English](https://img.shields.io/badge/Storyboard-%ED%95%9C%EA%B5%AD%EC%96%B4%20%2F%20English-0b6e8f?logo=readme&logoColor=white)](https://claude.ai/artifact/6GkTNUq54pqXGZBVx7BGSE) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/playground-for-thinker/aurora/main?labpath=examples%2Fdelhi_air_quality%2Fexample_delhi_air_quality.ipynb)
 
 Aurora 0.4° Air Pollution(오염물질 농도)과 Aurora 1.5(시간별 확산 기상)를 결합해 델리 NCR 10개 지점의 CPCB AQI·GRAP 단계를 산출하고, 시민용 경보 메시지(힌디어/영어/한국어)를 만드는 예제입니다. 전체 흐름과 설계 의도는 [`STORYBOARD_kor.md`](STORYBOARD_kor.md)를 보세요.
 
@@ -8,15 +8,17 @@ Aurora 0.4° Air Pollution(오염물질 농도)과 Aurora 1.5(시간별 확산 �
 
 | 무엇 | 링크 | 비고 |
 | - | - | - |
-| 스토리 맵 (지도 위 장면별 내러티브, 한국어 ⇄ English 전환) | [https://claude.ai/artifact/PKH8XS3B3Nb85WaVMbmZSW](https://claude.ai/artifact/PKH8XS3B3Nb85WaVMbmZSW) | 로컬 파일은 `storymap.html` + `storymap_data.js`. 48시간 AQI 타일, 바람, 지점, 델리 경계. 배지: 위 "Story Map" |
+| 스토리 맵 · 한국어 (JupyterGIS 문서, notebook.link) | [https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_ko.jGIS](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_ko.jGIS) | 전체 화면 발표(Specta). 편집기로 열기: [lab/?path=delhi_aq_storymap_ko.jGIS](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/lab/?path=delhi_aq_storymap_ko.jGIS). 파일은 `storymap/delhi_aq_storymap_ko.jGIS` + `storymap/data/`. 19개 장면, AQI 타일(4개 시각)·바람·정체 확률·지점·델리 경계. 배지: 위 "Story Map" |
+| 스토리 맵 · English | [https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_en.jGIS](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_en.jGIS) | 같은 레이어, 영어 장면. 단일 HTML 파일 버전(한국어 ⇄ English 전환, 로컬에서 바로 열기)은 `storymap.html` + `storymap_data.js` |
 | 스토리보드 (한국어 ⇄ English 전환 버튼) | [https://claude.ai/artifact/6GkTNUq54pqXGZBVx7BGSE](https://claude.ai/artifact/6GkTNUq54pqXGZBVx7BGSE) | 로컬 파일은 `storyboard.html`. 전환 상태는 `#ko` / `#en` 해시로도 지정 가능 |
 | 노트북 실행 (Google Colab) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb) | demo 모드는 GPU·데이터 불필요. 첫 셀이 `microsoft-aurora`와 `delhi_aq.py`를 자동으로 받습니다 |
 | 노트북 실행 (Binder, JupyterLab) | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/playground-for-thinker/aurora/main?labpath=examples%2Fdelhi_air_quality%2Fexample_delhi_air_quality.ipynb) | 첫 빌드는 수 분 소요 |
 | 노트북 미리보기 (nbviewer) | [https://nbviewer.org/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb](https://nbviewer.org/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb) | 실행 없이 읽기 |
 | 스토리보드 문서 | [`STORYBOARD_kor.md`](STORYBOARD_kor.md) · [`STORYBOARD.md`](STORYBOARD.md) | 마크다운 버전 |
+| 스토리보드 PDF (한국어) | [`STORYBOARD_kor.pdf`](STORYBOARD_kor.pdf) | `python make_storyboard_pdf.py STORYBOARD_kor.md STORYBOARD_kor.pdf`로 재생성 (Nanum 글꼴, reportlab) |
 | 배지 SVG (자체 호스팅용) | [`badges/story-map.svg`](badges/story-map.svg) | shields.io 대신 쓸 수 있는 정적 배지 |
 
-배지 이미지는 shields.io, Colab, Binder가 제공합니다. Colab/Binder/nbviewer 링크는 `github.com/playground-for-thinker/aurora`의 `main` 브랜치를 가리키므로, 이 디렉터리가 GitHub에 푸시된 뒤에 동작합니다. 스토리보드 페이지 링크는 발행한 계정이 공유 설정을 바꿔야 다른 사람도 열 수 있습니다.
+배지 이미지는 shields.io, Colab, Binder가 제공합니다. Colab/Binder/nbviewer 링크는 `github.com/playground-for-thinker/aurora`의 `main` 브랜치를 가리키므로, 이 디렉터리가 GitHub에 푸시된 뒤에 동작합니다. 스토리보드 페이지 링크는 발행한 계정이 공유 설정을 바꿔야 다른 사람도 열 수 있습니다. 스토리 맵 링크는 `storymap/` 폴더를 `storymap` 브랜치로 발행한 뒤(`./publish_storymap_branch.sh`, 자세한 내용은 [`storymap/README.md`](storymap/README.md)) 동작하며, 보는 사람에게 notebook.link 계정은 필요 없습니다.
 
 ## 설치
 
@@ -76,13 +78,20 @@ export BLOB_URL_WITH_SAS="https://<account>.blob.core.windows.net/<container>/<f
 
 ## 스토리 맵 데이터 갱신
 
-스토리 맵(`storymap.html`)은 `storymap_data.js`를 읽습니다. 파이프라인 산출물 폴더에서 다시 만들려면:
+스토리 맵은 두 가지 형태로 제공되며 둘 다 `storymap_data.js`를 읽습니다.
+
+- `storymap/*.jGIS` — JupyterGIS 문서. notebook.link·JupyterLab·JupyterLite에서 열리는 공개용 버전. 레이어는 `storymap/data/*.geojson`, notebook.link 환경은 `storymap/environment.yml` + `nblink-lock.json`. 자세한 내용은 [`storymap/README.md`](storymap/README.md)
+- `storymap.html` — 단일 HTML 파일. 로컬에서 바로 열어보는 버전(한국어 ⇄ English 전환)
+
+파이프라인 산출물 폴더에서 다시 만들려면:
 
 ```bash
-python build_storymap_data.py outputs --finetune-log path/to/finetune_smoke.log
+python build_storymap_data.py outputs --finetune-log path/to/finetune_smoke.log   # storymap_data.js
+python build_storymap_jgis.py                                                   # storymap/*.jGIS + storymap/data/*.geojson
+./publish_storymap_branch.sh                                                    # storymap 브랜치로 발행 → notebook.link 링크 활성화
 ```
 
-지도 경계(Natural Earth, geoBoundaries)는 기존 `storymap_data.js`에서 재사용하고, 타일·지점 시계열·앙상블 확률·편향 보정·발송 로그·크론 스크립트·출처(provenance)는 산출물에서 읽습니다. 페이지는 출처에 따라 각 장면에 "Aurora 직접 분석 / 추가 분석 / 합성" 태그를 붙입니다.
+지도 경계(Natural Earth, geoBoundaries)는 기존 `storymap_data.js`에서 재사용하고, 타일·지점 시계열·앙상블 확률·편향 보정·발송 로그·크론 스크립트·출처(provenance)는 산출물에서 읽습니다. 두 버전 모두 출처에 따라 각 장면에 "Aurora 직접 분석 / 추가 분석 / 합성" 태그를 붙입니다.
 
 ## msresearch-aurora 스킬과의 연계
 

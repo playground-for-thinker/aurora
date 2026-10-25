@@ -1,0 +1,3006 @@
+{
+  "schemaVersion": "0.6.0",
+  "sources": {
+    "1cae0fee-f5df-5fa4-b5d1-e8b895a4e99c": {
+      "type": "RasterSource",
+      "name": "OpenStreetMap.Mapnik",
+      "parameters": {
+        "url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+        "minZoom": 0,
+        "maxZoom": 19,
+        "attribution": "(C) OpenStreetMap contributors",
+        "htmlAttribution": "",
+        "provider": "OpenStreetMap",
+        "bounds": [],
+        "urlParameters": {},
+        "interpolate": false
+      }
+    },
+    "8022c8e4-c238-5093-823d-d32d72ca8c96": {
+      "type": "GeoJSONSource",
+      "name": "AQI 5 Nov 18:30 IST Source",
+      "parameters": {
+        "path": "data/aqi_h00.geojson"
+      }
+    },
+    "61f2bdf8-567c-55f9-8c66-691eba1bcf75": {
+      "type": "GeoJSONSource",
+      "name": "AQI 6 Nov 02:30 IST Source",
+      "parameters": {
+        "path": "data/aqi_h08.geojson"
+      }
+    },
+    "4652df8b-d20f-51ac-a544-dd066afa767e": {
+      "type": "GeoJSONSource",
+      "name": "AQI 7 Nov 05:30 IST Source",
+      "parameters": {
+        "path": "data/aqi_h35.geojson"
+      }
+    },
+    "b2a52c48-a5a1-5978-9825-83f5806afa7a": {
+      "type": "GeoJSONSource",
+      "name": "AQI 7 Nov 14:30 IST Source",
+      "parameters": {
+        "path": "data/aqi_h44.geojson"
+      }
+    },
+    "4a8fe063-323d-5db3-965a-5a94301b9314": {
+      "type": "GeoJSONSource",
+      "name": "P(stagnant) 7 Nov 05:30 IST Source",
+      "parameters": {
+        "path": "data/stagnation_probability_h35.geojson"
+      }
+    },
+    "f120e061-7ddc-5f2d-b30c-cbf84ddfacee": {
+      "type": "GeoJSONSource",
+      "name": "One 0.4° cell (Aurora Air Pollution) Source",
+      "parameters": {
+        "path": "data/coarse_cell.geojson"
+      }
+    },
+    "40e70f10-e3de-570f-ab65-9b3b057b3b16": {
+      "type": "GeoJSONSource",
+      "name": "10 m wind 6 Nov 02:30 IST Source",
+      "parameters": {
+        "path": "data/wind_h08.geojson"
+      }
+    },
+    "6acc18a1-bfc4-5abf-8642-9d14870e2891": {
+      "type": "GeoJSONSource",
+      "name": "10 m wind 7 Nov 05:30 IST Source",
+      "parameters": {
+        "path": "data/wind_h35.geojson"
+      }
+    },
+    "372e6420-9973-5474-b809-a4ba733ea04c": {
+      "type": "GeoJSONSource",
+      "name": "10 m wind 7 Nov 14:30 IST Source",
+      "parameters": {
+        "path": "data/wind_h44.geojson"
+      }
+    },
+    "d0b98006-54ae-5156-b328-a086bdca2fb8": {
+      "type": "GeoJSONSource",
+      "name": "Delhi-NCR tile (27.5–31.5°N, 76–80°E) Source",
+      "parameters": {
+        "path": "data/ncr_tile.geojson"
+      }
+    },
+    "7346bcb8-de36-5a20-8d97-da029dd35202": {
+      "type": "GeoJSONSource",
+      "name": "Delhi NCT boundary Source",
+      "parameters": {
+        "path": "data/delhi_nct.geojson"
+      }
+    },
+    "aa52f8e4-ad48-53d6-86ec-0a20144313dc": {
+      "type": "GeoJSONSource",
+      "name": "Ten reporting sites (colour: peak category) Source",
+      "parameters": {
+        "path": "data/sites.geojson"
+      }
+    },
+    "dd406173-4ac8-55ea-a34d-282f5d5c6dc0": {
+      "type": "MarkerSource",
+      "name": "Anand Vihar Marker",
+      "parameters": {
+        "color": "#0b6e8f",
+        "feature": {
+          "coords": [
+            8606777.75,
+            3330793.31
+          ]
+        }
+      }
+    }
+  },
+  "layers": {
+    "df3c771f-51e9-5289-bb0b-284273924658": {
+      "type": "RasterLayer",
+      "name": "OpenStreetMap",
+      "visible": true,
+      "parameters": {
+        "source": "1cae0fee-f5df-5fa4-b5d1-e8b895a4e99c",
+        "opacity": 1.0
+      }
+    },
+    "ee2531a6-23fa-5db3-8289-12a808582c05": {
+      "type": "VectorLayer",
+      "name": "AQI 5 Nov 18:30 IST",
+      "visible": false,
+      "parameters": {
+        "source": "8022c8e4-c238-5093-823d-d32d72ca8c96",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "f85ad050-3ce8-592a-9662-85c0933d3dfa",
+              "rules": [
+                {
+                  "id": "806eeb6a-35e1-57cf-a1c9-f08d71222c48",
+                  "fields": [
+                    "category"
+                  ],
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "categorical",
+                        "params": {
+                          "colorRamp": "viridis",
+                          "fallback": [
+                            200,
+                            200,
+                            200,
+                            0.4
+                          ],
+                          "colorStops": [
+                            {
+                              "stop": "Good",
+                              "color": [
+                                46,
+                                139,
+                                87,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Satisfactory",
+                              "color": [
+                                127,
+                                178,
+                                65,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Moderate",
+                              "color": [
+                                212,
+                                167,
+                                44,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Poor",
+                              "color": [
+                                224,
+                                120,
+                                42,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Very Poor",
+                              "color": [
+                                200,
+                                74,
+                                59,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Severe",
+                              "color": [
+                                127,
+                                29,
+                                45,
+                                0.72
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "6fb24b06-e32f-5f1f-9081-551d9e23ce72",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            255,
+                            255,
+                            255,
+                            0.35
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 0.5
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "abb68004-d27d-58bb-bca7-8d6bfdf2f9be": {
+      "type": "VectorLayer",
+      "name": "AQI 6 Nov 02:30 IST",
+      "visible": false,
+      "parameters": {
+        "source": "61f2bdf8-567c-55f9-8c66-691eba1bcf75",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "d31a6324-8671-508d-a469-f442ab320195",
+              "rules": [
+                {
+                  "id": "dfa4071e-08e5-59fd-a4be-cd369f42c57c",
+                  "fields": [
+                    "category"
+                  ],
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "categorical",
+                        "params": {
+                          "colorRamp": "viridis",
+                          "fallback": [
+                            200,
+                            200,
+                            200,
+                            0.4
+                          ],
+                          "colorStops": [
+                            {
+                              "stop": "Good",
+                              "color": [
+                                46,
+                                139,
+                                87,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Satisfactory",
+                              "color": [
+                                127,
+                                178,
+                                65,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Moderate",
+                              "color": [
+                                212,
+                                167,
+                                44,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Poor",
+                              "color": [
+                                224,
+                                120,
+                                42,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Very Poor",
+                              "color": [
+                                200,
+                                74,
+                                59,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Severe",
+                              "color": [
+                                127,
+                                29,
+                                45,
+                                0.72
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "895f0202-7a87-57b2-b6be-63d98944e99f",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            255,
+                            255,
+                            255,
+                            0.35
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 0.5
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "04eaa86c-bc4e-5cf8-99a3-45584f69c77d": {
+      "type": "VectorLayer",
+      "name": "AQI 7 Nov 05:30 IST",
+      "visible": true,
+      "parameters": {
+        "source": "4652df8b-d20f-51ac-a544-dd066afa767e",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "cd8302ed-7911-521b-8426-629d95b24914",
+              "rules": [
+                {
+                  "id": "43daebcc-7ecb-5c59-aa61-8a980f0dafd5",
+                  "fields": [
+                    "category"
+                  ],
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "categorical",
+                        "params": {
+                          "colorRamp": "viridis",
+                          "fallback": [
+                            200,
+                            200,
+                            200,
+                            0.4
+                          ],
+                          "colorStops": [
+                            {
+                              "stop": "Good",
+                              "color": [
+                                46,
+                                139,
+                                87,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Satisfactory",
+                              "color": [
+                                127,
+                                178,
+                                65,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Moderate",
+                              "color": [
+                                212,
+                                167,
+                                44,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Poor",
+                              "color": [
+                                224,
+                                120,
+                                42,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Very Poor",
+                              "color": [
+                                200,
+                                74,
+                                59,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Severe",
+                              "color": [
+                                127,
+                                29,
+                                45,
+                                0.72
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "8a473439-128f-536f-bde8-ba7a601295ff",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            255,
+                            255,
+                            255,
+                            0.35
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 0.5
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "25937c39-d90c-524b-b95d-4a0d36a070ad": {
+      "type": "VectorLayer",
+      "name": "AQI 7 Nov 14:30 IST",
+      "visible": false,
+      "parameters": {
+        "source": "b2a52c48-a5a1-5978-9825-83f5806afa7a",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "e3d7b7ba-b4e6-58cc-b045-eb7aa725cab2",
+              "rules": [
+                {
+                  "id": "9596d5ce-a981-5a29-ab61-bec74c0652f8",
+                  "fields": [
+                    "category"
+                  ],
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "categorical",
+                        "params": {
+                          "colorRamp": "viridis",
+                          "fallback": [
+                            200,
+                            200,
+                            200,
+                            0.4
+                          ],
+                          "colorStops": [
+                            {
+                              "stop": "Good",
+                              "color": [
+                                46,
+                                139,
+                                87,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Satisfactory",
+                              "color": [
+                                127,
+                                178,
+                                65,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Moderate",
+                              "color": [
+                                212,
+                                167,
+                                44,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Poor",
+                              "color": [
+                                224,
+                                120,
+                                42,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Very Poor",
+                              "color": [
+                                200,
+                                74,
+                                59,
+                                0.72
+                              ]
+                            },
+                            {
+                              "stop": "Severe",
+                              "color": [
+                                127,
+                                29,
+                                45,
+                                0.72
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "9b9ea597-7c52-51f5-8ff9-52f61d82be75",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            255,
+                            255,
+                            255,
+                            0.35
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 0.5
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "ccba6808-0da2-5d6b-b440-05e9395c3e59": {
+      "type": "VectorLayer",
+      "name": "P(stagnant) 7 Nov 05:30 IST",
+      "visible": false,
+      "parameters": {
+        "source": "4a8fe063-323d-5db3-965a-5a94301b9314",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "d7513c0b-fab7-5c28-9abc-062d0204f2b8",
+              "rules": [
+                {
+                  "id": "a176f12e-d927-5be6-9fe1-b31bfeab6185",
+                  "fields": [
+                    "p_stagnant"
+                  ],
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "colorMap",
+                        "params": {
+                          "name": "Blues",
+                          "nShades": 5,
+                          "mode": "equal interval",
+                          "reverse": false,
+                          "fallback": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "domain": [
+                            0.0,
+                            1.0
+                          ],
+                          "colorStops": [
+                            {
+                              "stop": 0.0,
+                              "color": [
+                                11,
+                                110,
+                                143,
+                                0.0
+                              ]
+                            },
+                            {
+                              "stop": 1.0,
+                              "color": [
+                                11,
+                                110,
+                                143,
+                                0.85
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "1ae54c13-c037-5ad1-9389-79e9f5195627": {
+      "type": "VectorLayer",
+      "name": "0.25° grid (Aurora 1.5)",
+      "visible": false,
+      "parameters": {
+        "source": "8022c8e4-c238-5093-823d-d32d72ca8c96",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "1f1f9c07-dd1d-5211-9698-df5ba687a5af",
+              "rules": [
+                {
+                  "id": "7b26b27f-7959-5152-8134-18cf3d7678fa",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            90,
+                            90,
+                            90,
+                            0.6
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 0.6
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "ffc5b112-49fb-5db9-b7da-afe3f947551e": {
+      "type": "VectorLayer",
+      "name": "One 0.4° cell (Aurora Air Pollution)",
+      "visible": false,
+      "parameters": {
+        "source": "f120e061-7ddc-5f2d-b30c-cbf84ddfacee",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "e31faa79-0eee-50ef-be94-d882c6bac658",
+              "rules": [
+                {
+                  "id": "159b4c7d-c8cf-5e2a-b0a0-8ef32a53678a",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            120,
+                            110,
+                            90,
+                            0.35
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            40,
+                            40,
+                            40,
+                            1
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 1.5
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "dc662fa4-01b7-5437-bc62-e5b5ddfae677": {
+      "type": "VectorLayer",
+      "name": "10 m wind 6 Nov 02:30 IST",
+      "visible": false,
+      "parameters": {
+        "source": "40e70f10-e3de-570f-ab65-9b3b057b3b16",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "7ee4b7ef-9753-5113-a5ae-7a3b7745b947",
+              "rules": [
+                {
+                  "id": "6af51080-217d-59db-bbcd-fffb81b36302",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            30,
+                            30,
+                            30,
+                            0.8
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 1.5
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "9d5771c5-6b2b-5eef-8f50-69b4badea527": {
+      "type": "VectorLayer",
+      "name": "10 m wind 7 Nov 05:30 IST",
+      "visible": false,
+      "parameters": {
+        "source": "6acc18a1-bfc4-5abf-8642-9d14870e2891",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "9e8a20e2-ec06-5307-9833-319c1ea4cc1e",
+              "rules": [
+                {
+                  "id": "90551563-2dc8-5220-89d8-b9fcef45fbd4",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            30,
+                            30,
+                            30,
+                            0.8
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 1.5
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "e1fc9d68-86d2-5b14-ab6f-94fb0f27f130": {
+      "type": "VectorLayer",
+      "name": "10 m wind 7 Nov 14:30 IST",
+      "visible": false,
+      "parameters": {
+        "source": "372e6420-9973-5474-b809-a4ba733ea04c",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "5c7f3a05-8881-5634-bb27-4eb397af3fed",
+              "rules": [
+                {
+                  "id": "4f18ac75-d299-561b-b39e-64264ea1873d",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            30,
+                            30,
+                            30,
+                            0.8
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 1.5
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "17db14fc-9723-50e2-abee-87f180631cbd": {
+      "type": "VectorLayer",
+      "name": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+      "visible": true,
+      "parameters": {
+        "source": "d0b98006-54ae-5156-b328-a086bdca2fb8",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "d38dbe97-e8d6-5f0b-9bdc-ebad48089f9a",
+              "rules": [
+                {
+                  "id": "186015f8-74fe-5fd1-9237-42b6bb4a5c2b",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            11,
+                            110,
+                            143,
+                            1.0
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 2.0
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "60b85afc-3e21-5b73-9b5e-3926a11092bf": {
+      "type": "VectorLayer",
+      "name": "Delhi NCT boundary",
+      "visible": true,
+      "parameters": {
+        "source": "7346bcb8-de36-5a20-8d97-da029dd35202",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "381e579a-c6c8-517b-8959-915efc8a322b",
+              "rules": [
+                {
+                  "id": "fe4cc946-03f0-5728-aa18-cc550fd4656b",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "fill-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            30,
+                            30,
+                            30,
+                            0.9
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 2.0
+                        }
+                      },
+                      "encodings": [
+                        "stroke-width"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "fd48ad04-c75c-5117-8266-16c8ae260cad": {
+      "type": "VectorLayer",
+      "name": "Ten reporting sites (colour: peak category)",
+      "visible": true,
+      "parameters": {
+        "source": "aa52f8e4-ad48-53d6-86ec-0a20144313dc",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "2c5caa6f-d7db-5076-aa82-2106efa599f8",
+              "rules": [
+                {
+                  "id": "6667b63e-5e2e-5067-9049-c01b011bb714",
+                  "fields": [
+                    "category_peak"
+                  ],
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "categorical",
+                        "params": {
+                          "colorRamp": "viridis",
+                          "fallback": [
+                            60,
+                            60,
+                            60,
+                            1
+                          ],
+                          "colorStops": [
+                            {
+                              "stop": "Good",
+                              "color": [
+                                46,
+                                139,
+                                87,
+                                1.0
+                              ]
+                            },
+                            {
+                              "stop": "Satisfactory",
+                              "color": [
+                                127,
+                                178,
+                                65,
+                                1.0
+                              ]
+                            },
+                            {
+                              "stop": "Moderate",
+                              "color": [
+                                212,
+                                167,
+                                44,
+                                1.0
+                              ]
+                            },
+                            {
+                              "stop": "Poor",
+                              "color": [
+                                224,
+                                120,
+                                42,
+                                1.0
+                              ]
+                            },
+                            {
+                              "stop": "Very Poor",
+                              "color": [
+                                200,
+                                74,
+                                59,
+                                1.0
+                              ]
+                            },
+                            {
+                              "stop": "Severe",
+                              "color": [
+                                127,
+                                29,
+                                45,
+                                1.0
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "circle-fill-color"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "2bc2316c-1b33-56a6-bc72-7804b8b9c4c1",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            255,
+                            255,
+                            255,
+                            1
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "circle-stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 1.5
+                        }
+                      },
+                      "encodings": [
+                        "circle-stroke-width"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "86b8070f-1205-5560-9571-0cfe84664363",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 7
+                        }
+                      },
+                      "encodings": [
+                        "circle-radius"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "84ec3636-3621-5dee-b051-c2707eec5584": {
+      "type": "VectorLayer",
+      "name": "Anand Vihar",
+      "visible": false,
+      "parameters": {
+        "source": "dd406173-4ac8-55ea-a34d-282f5d5c6dc0",
+        "opacity": 1.0,
+        "symbologyState": {}
+      }
+    },
+    "1865902a-d85b-550b-bd0e-36486e716487": {
+      "type": "StorySegmentLayer",
+      "name": "1. One line of air-quality warning that reaches a citizen",
+      "visible": true,
+      "parameters": {
+        "zoom": 1.97,
+        "extent": [
+          -18924313.43,
+          -7967317.54,
+          21150703.25,
+          14368684.28
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*Aurora 1.5 + Aurora Air Pollution · story map*\n\nAurora is Microsoft Research's foundation model for the Earth system. This story follows it from a 48-hour forecast for New Delhi to a CPCB AQI, a GRAP stage and a message in Hindi, English and Korean. The map starts at the world and descends to India, the capital region, Delhi and the worst-hit site.\n\n### How results are labelled\n\n- **Aurora direct** — computed by an Aurora model from a real initial condition\n- **Additional method** — analysis added on top of Aurora output by statistics, rules or software (AQI conversion, stagnation rule, bias correction, delivery, scheduling)\n- **Synthetic** — example values produced without running the model (demo mode, stand-ins for data that needs an account)\n\n| Item | Source |\n| --- | --- |\n| Initial time | 2025-11-05 12:00:00 UTC |\n| Weather (mixing height, wind, temperature) | Aurora 1.5 (ARCO-ERA5 initial condition) — Aurora direct |\n| Pollutants (PM2.5, PM10, …) | synthetic — CAMS data needs an Atmosphere Data Store account, so stand-in values were used |\n| Ensemble | Aurora 1.5 Ensemble (3 members) — Aurora direct |\n| AQI, GRAP, stagnation rule, correction, delivery, scheduling | additional methods (CPCB formula, rules, least squares, software) |\n\nUse the ▶ button to move to the next scene; the map follows. In map scenes the ⓘ (Identify) button lets you click cells and sites for their values.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi NCT boundary",
+            "visible": false
+          },
+          {
+            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "visible": false
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "52c8330c-7f15-5091-b102-671604cbf174": {
+      "type": "StorySegmentLayer",
+      "name": "2. Abbreviations used in this story",
+      "visible": true,
+      "parameters": {
+        "zoom": 1.97,
+        "extent": [
+          -18924313.43,
+          -7967317.54,
+          21150703.25,
+          14368684.28
+        ],
+        "enableIdentify": false,
+        "content": {
+          "contentMode": "markdown",
+          "markdown": "*Glossary*\n\n| Abbr. | Full name | Meaning |\n| --- | --- | --- |\n| **AQI** | Air Quality Index | 0–500 scale with six CPCB categories from Good to Severe |\n| **CPCB** | Central Pollution Control Board | India's national pollution regulator; runs the national AQI and monitoring network |\n| **GRAP** | Graded Response Action Plan | Pre-agreed measures by AQI band (Stages I–IV: construction limits, vehicle restrictions, online classes, work-from-home) |\n| **CAQM** | Commission for Air Quality Management in NCR and Adjoining Areas | The statutory body for air quality in Delhi-NCR; it invokes GRAP stages |\n| **DPCC** | Delhi Pollution Control Committee | Delhi government's pollution agency; operates the city's monitoring stations |\n| **NCR** | National Capital Region | Delhi plus neighbouring cities in Haryana, Uttar Pradesh and Rajasthan (Gurugram, Noida and others) |\n| **NCT** | National Capital Territory of Delhi | Delhi's administrative territory; the bold outline on the map |\n| **PM2.5** | particulate matter smaller than 2.5 micrometres | Particles up to 2.5 µm across, in µg/m³ |\n| **PM10** | particulate matter smaller than 10 micrometres | Particles up to 10 µm across, in µg/m³ |\n| **CAMS** | Copernicus Atmosphere Monitoring Service | The EU's global atmospheric-composition analysis and forecast service; input to the Air Pollution model |\n| **ERA5** | ECMWF Reanalysis, 5th generation | A gridded reconstruction of past weather; the Aurora 1.5 input in this example |\n| **IFS HRES T0** | Integrated Forecasting System, high resolution, analysis at lead time 0 | The real-time input Aurora 1.5 was fine-tuned on |\n| **IST** | Indian Standard Time | UTC+5:30 |\n| **BLH** | boundary-layer height | Depth of the lower atmosphere in which pollution mixes; lower means higher surface concentrations |\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi NCT boundary",
+            "visible": false
+          },
+          {
+            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "visible": false
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "0b119b3d-5f97-5c21-b3db-de60ba1ea50d": {
+      "type": "StorySegmentLayer",
+      "name": "3. Why Delhi, why November",
+      "visible": true,
+      "parameters": {
+        "zoom": 5.14,
+        "extent": [
+          6679169.45,
+          445640.11,
+          11131949.08,
+          4579425.81
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*0 · Background*\n\n- Delhi-NCR suffers some of the world's worst particulate episodes from late October to January. Stubble burning in Punjab and Haryana, Diwali fireworks and traffic, construction and power emissions coincide with winter's **shallow mixing layer (100–300 m) and weak winds**, which trap pollution near the ground.\n- India runs a national AQI (CPCB scale) and a staged response plan, **GRAP** (run by CAQM). AQI bands map to construction bans, vehicle restrictions, online classes and work-from-home, so **forecast → stage → action** already exists.\n- The question is not \"how bad\" but **\"when, where, because of which weather, and what should citizens do\"**, 12 to 48 hours ahead.\n\nThe square on the map is the Delhi-NCR tile this example covers (27.5–31.5°N, 76–80°E).\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi NCT boundary",
+            "visible": false
+          },
+          {
+            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "visible": false
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "91508891-f045-5e80-bec6-b1fc6b74b3f0": {
+      "type": "StorySegmentLayer",
+      "name": "4. Aurora appears twice",
+      "visible": true,
+      "parameters": {
+        "zoom": 7.65,
+        "extent": [
+          8293302.06,
+          3061141.04,
+          9072538.5,
+          3829123.84
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*2 · System · Weather: Aurora 1.5 · Pollutants: synthetic (CAMS needs an account)*\n\n1. **Inputs** · CAMS global analysis 0.4° (PM, NO2, SO2, O3, CO + meteorology) · ERA5 or IFS HRES T0 0.25° (26 surface variables, 13 levels)\n2. **Aurora 0.4° Air Pollution** · 12 h × 4 = 48 h. Local GPU or the Foundry \"Aurora\" endpoint\n3. **Aurora 1.5** · 6 h × 8 + hourly sub-steps = 48 hourly fields (boundary-layer height, 10 m wind, temperature, dew point, rain, gusts)\n4. **Delhi post-processing** · 10-site interpolation → CPCB AQI → GRAP stage → stagnation (wind < 10 km/h, mixing height < 500 m) → hi/en/ko messages → push, SMS, WhatsApp, app\n\n**Why two models.** Aurora 1.5 is weather-only and predicts no pollutants, but gives **hourly** dispersion conditions. The Air Pollution model predicts concentrations directly, at 12-hour steps and 0.4°. Together they answer \"how high\" and \"from what hour tonight\".\n\n**What \"high resolution\" means.** (1) Time: hourly from 1.5 with `fine_lead_times=[1,…,6]`. (2) Space: the thin grid on the map is 1.5's 0.25° cells, bilinearly interpolated to ten sites. The grid itself cannot resolve intra-city differences (§6).\n\n**Linkages.** The repository's `msresearch-aurora/` (the Aurora skill from microsoft/vibe-kit) supplies a React map frontend, validation utilities and a fine-tuning starter. Checkpoints come from HuggingFace `microsoft/aurora`; without a GPU, `--mode foundry` submits to the Azure AI Foundry \"Aurora\" and \"Aurora-1.5\" endpoints.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "visible": true
+          },
+          {
+            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi NCT boundary",
+            "visible": true
+          },
+          {
+            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "c67849c2-bb8d-55f9-b505-69ae46706293": {
+      "type": "StorySegmentLayer",
+      "name": "5. Who receives what",
+      "visible": true,
+      "parameters": {
+        "zoom": 7.65,
+        "extent": [
+          8293302.06,
+          3061141.04,
+          9072538.5,
+          3829123.84
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*1 · Cast · Pollutants: synthetic (CAMS needs an account)*\n\n| Role | Wants | Output |\n| --- | --- | --- |\n| General public | One line for tonight or tomorrow morning | `short` |\n| Sensitive groups, carers | Concrete actions and time windows | `long` |\n| Operators (DPCC/CAQM) | Peak time, GRAP basis, trend | `summary_by_site.csv`, `bulletin_*.md` |\n| Data/ML engineers | Reproducible pipeline | `--mode local|foundry` |\n\nMap: the AQI tile at the first forecast hour (5 Nov 18:30 IST). Colors are CPCB categories.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi NCT boundary",
+            "visible": true
+          },
+          {
+            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "c1896115-b9fc-5632-8f9e-49e098de3061": {
+      "type": "StorySegmentLayer",
+      "name": "6. 5 Nov 17:30 IST, initial conditions and the forecast run",
+      "visible": true,
+      "parameters": {
+        "zoom": 7.65,
+        "extent": [
+          8293302.06,
+          3061141.04,
+          9072538.5,
+          3829123.84
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*3 · S1 · S2 · Weather: Aurora 1.5 · Pollutants: synthetic (CAMS needs an account)*\n\nAt 12 UTC (17:30 IST) two `Batch` objects are built from the CAMS 00/12 UTC analysis and ERA5 06/12 UTC, plus the static pickles. Air Pollution runs 4 steps (+12/24/36/48 h); Aurora 1.5 runs 8 steps × 6 sub-steps (+1…+48 h) on one GPU or on Foundry. Ten minutes later the fields are interpolated to ten sites, the 12-hourly concentrations to hourly, and stagnant hours are flagged from 1.5's hourly mixing height and wind.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "visible": true
+          },
+          {
+            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi NCT boundary",
+            "visible": true
+          },
+          {
+            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "93323641-31b6-58bb-a749-c9d5d7b6c55d": {
+      "type": "StorySegmentLayer",
+      "name": "7. 18:30 IST, the evening alert",
+      "visible": true,
+      "parameters": {
+        "zoom": 10.46,
+        "extent": [
+          8532638.97,
+          3274212.69,
+          8643958.46,
+          3382011.46
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*3 · S3 · S4 · Pollutants: synthetic (CAMS needs an account) · Additional method*\n\nThe first forecast hour. All of Delhi is already \"Very Poor\" or worse, with traffic sites (Anand Vihar, ITO, Gurugram) highest. Per-site AQI and GRAP stage are computed and the one-line push/SMS message goes out; operators get a briefing with the city headline and per-site detail.\n\n**Citizen short message · Hindi**\n\n```text\n[वायु गुणवत्ता चेतावनी] Anand Vihar: अधिकतम AQI 500 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 321 µg/m³। स्वस्थ लोग भी प्रभावित।\n```\n\n**City headline**\n\n```text\nDelhi-NCR outlook: median peak AQI 433 (Severe); worst site Anand Vihar at AQI 500 (Severe) around 07 Nov 05:30 IST. Corresponds to GRAP Stage 4.\n```\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi NCT boundary",
+            "visible": true
+          },
+          {
+            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "6266babb-a30c-5c7f-b71d-975d76ae2e7b": {
+      "type": "StorySegmentLayer",
+      "name": "8. 6 Nov 02:30 IST, stagnation sets in",
+      "visible": true,
+      "parameters": {
+        "zoom": 10.46,
+        "extent": [
+          8532638.97,
+          3274212.69,
+          8643958.46,
+          3382011.46
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*3 · S6 · Weather: Aurora 1.5 · Additional method*\n\nFor the first night (5 Nov 22:00 to 6 Nov 08:00) Aurora 1.5 puts Anand Vihar's mixing layer as low as 137 m with a median wind of 11.1 km/h; the short lines on the map are that wind (from the cell centre toward where the air moves, length by speed). With the same emissions and a thinner layer of air to mix into, surface concentrations rise. The message says \"pollution will tend to pool near the surface from night to morning\", and sensitive groups can get a reminder to close windows and skip early exercise.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi NCT boundary",
+            "visible": true
+          },
+          {
+            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "f5bf1ab1-7652-5f51-8080-697800cfd3e4": {
+      "type": "StorySegmentLayer",
+      "name": "9. 7 Nov 05:30 IST, the worst-hit site",
+      "visible": true,
+      "parameters": {
+        "zoom": 12.1,
+        "extent": [
+          8588298.71,
+          3312159.86,
+          8623920.95,
+          3345134.73
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*3 · S7 · Weather: Aurora 1.5 · Pollutants: synthetic (CAMS needs an account) · Additional method*\n\nThe second pre-dawn. Anand Vihar in east Delhi (a traffic site where an interstate bus terminal meets arterial roads) reaches AQI 500 (Severe); neighbouring ITO, Noida and Okhla exceed 450. This hour becomes the \"peak time\" in the per-site summary, and the 06:00 IST morning update sends \"peak 07:00–09:00, wear a mask\" before school and commute.\n\n**Operator long message · Anand Vihar**\n\n```text\n- AQI now 385, peaking at 500 (Severe) around 07 Nov 05:30 IST. Trend: roughly steady.\n- Main pollutant: PM10. PM2.5 up to 321 ug/m3, PM10 up to 514 ug/m3.\n- Dispersion: Stagnant conditions (wind below 10 km/h, mixing height below 500 m) are expected for 12 h, 2 h of them overnight (minimum mixing height about 67 m). Pollution will tend to pool near the surface from night to morning.\n- Health advice: Even healthy people are affected. Stay indoors as much as possible; children, older adults and people with lung or heart disease should avoid going out. Use an air purifier and seek medical care if symptoms appear.\n- Measures: GRAP Stage IV (Severe+) level: truck entry restrictions, expanded work-from-home and online classes may be enforced. Follow official notices.\n- This is AI-model (Aurora) guidance for information only; follow official CPCB/CAQM alerts.\n```\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi NCT boundary",
+            "visible": true
+          },
+          {
+            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": true
+          }
+        ]
+      }
+    },
+    "b34bc34f-b4f7-5a1f-bf30-ccf262b6f756": {
+      "type": "StorySegmentLayer",
+      "name": "10. 7 Nov 14:30 IST, the afternoon breather",
+      "visible": true,
+      "parameters": {
+        "zoom": 7.65,
+        "extent": [
+          8293302.06,
+          3061141.04,
+          9072538.5,
+          3829123.84
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*3 · S6 · afternoon · Weather: Aurora 1.5 · Pollutants: synthetic (CAMS needs an account)*\n\nFor a few hours the mixing layer climbs toward 1,000 m, winds exceed 10 km/h and the AQI dips below 400. It is still \"Very Poor\". This is the window in which sensitive groups can ventilate or go out, and the message names it. Afterwards (S8) per-site predictions are compared with CPCB/DPCC observations to derive bias corrections.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi NCT boundary",
+            "visible": true
+          },
+          {
+            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "48ca768a-a8cc-5596-a246-2cd45f23ca39": {
+      "type": "StorySegmentLayer",
+      "name": "11. What, when, where and how in 160 characters",
+      "visible": true,
+      "parameters": {
+        "zoom": 10.46,
+        "extent": [
+          8532638.97,
+          3274212.69,
+          8643958.46,
+          3382011.46
+        ],
+        "enableIdentify": false,
+        "content": {
+          "contentMode": "markdown",
+          "markdown": "*4 · Message design principles · Additional method*\n\n1. **What (value and category), when (IST peak), where (site), how (one or two actions)**. `short` for SMS/push, `long` for app detail and briefings.\n2. **CPCB category names verbatim** (Good / Satisfactory / Moderate / Poor / Very Poor / Severe), matching the news and the official app.\n3. **Name sensitive groups first** (children, older adults, pregnant women, respiratory patients).\n4. **GRAP as \"corresponding level\" only**; enforcement is CAQM's call, so \"may be enforced\" plus a pointer to official notices.\n5. **One sentence of meteorological reasoning**; people who understand why nights are worse comply better.\n6. **A fixed disclaimer**: \"AI-model (Aurora) guidance for information only; follow official CPCB/CAQM alerts.\"\n7. Hindi first, English second, Korean for the operating team. Templates live in `HEALTH_ADVICE`, `GRAP_ADVICE` and `CATEGORY_NAMES` so health experts can review wording without code.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi NCT boundary",
+            "visible": true
+          },
+          {
+            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "dd150d0f-bd3b-5aee-8612-2e31aa56d7d3": {
+      "type": "StorySegmentLayer",
+      "name": "12. Per-site summary",
+      "visible": true,
+      "parameters": {
+        "zoom": 10.46,
+        "extent": [
+          8532638.97,
+          3274212.69,
+          8643958.46,
+          3382011.46
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*5 · Output · Pollutants: synthetic (CAMS needs an account) · Weather: Aurora 1.5 · Additional method*\n\nIn this run mixing height, wind and temperature come from Aurora 1.5 initialised with ARCO-ERA5; pollutant concentrations are synthetic (CAMS needs an account). The AQI values are therefore illustrative, while the stagnation hours are real model output.\n\n| Site | Now | Peak | Category | Dominant | GRAP | Stagnant h |\n| --- | ---: | ---: | --- | --- | ---: | ---: |\n| Anand Vihar | 385 | 500 | Severe | PM10 | 4 | 12 |\n| Dwarka Sector 8 | 336 | 406 | Severe | PM2.5 | 3 | 16 |\n| Gurugram Vikas Sadan | 376 | 479 | Severe | PM10 | 4 | 15 |\n| ITO | 383 | 498 | Severe | PM10 | 4 | 13 |\n| Jahangirpuri | 365 | 452 | Severe | PM10 | 4 | 14 |\n| Noida Sector 62 | 340 | 409 | Severe | PM2.5 | 3 | 10 |\n| Okhla Phase 2 | 366 | 453 | Severe | PM10 | 4 | 11 |\n| Punjabi Bagh | 346 | 415 | Severe | PM2.5 | 3 | 14 |\n| R K Puram | 335 | 405 | Severe | PM2.5 | 3 | 13 |\n| Rohini | 337 | 406 | Severe | PM2.5 | 3 | 16 |\n\nAll sites peak around 7 Nov 05:30 IST (minimum mixing height 64–75 m). Site colours on the map are the peak category; use ⓘ to click sites and cells for values. Output files: `pollutants_12h.csv`, `meteorology_hourly.csv`, `fused_hourly.csv`, `summary_by_site.csv`, `messages_{ko,en,hi}.json`, `bulletin_*.md`, `frontend/*.json`.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi NCT boundary",
+            "visible": true
+          },
+          {
+            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "cbe121fe-e65d-5426-b726-de7e93c78357": {
+      "type": "StorySegmentLayer",
+      "name": "13. The truth about resolution",
+      "visible": true,
+      "parameters": {
+        "zoom": 10.46,
+        "extent": [
+          8532638.97,
+          3274212.69,
+          8643958.46,
+          3382011.46
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*6 · Limits and responsible use · Pollutants: synthetic (CAMS needs an account)*\n\nThe large square on the map is one 0.4° cell of the Air Pollution model. All of Delhi NCT fits in two or three cells.\n\n- **Spatial resolution**: site differences are interpolation, not roadside values. A real service needs per-station bias correction or fine-tuning on CPCB data.\n- **Temporal resolution**: the hourly curve is a linear interpolation of 12-hour forecasts; the hourly structure comes from 1.5's meteorology and the messages say so.\n- **Input data**: 1.5 was fine-tuned on IFS HRES T0; this example uses ERA5. The Air Pollution model is for CAMS analysis only.\n- **Gases at 1000 hPa**: NO2/SO2/O3/CO are converted mixing ratios, an approximation; PM2.5/PM10 dominate the AQI.\n- **Operational decisions**: Aurora is a research model and must not drive operational decisions without expert review.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "visible": true
+          },
+          {
+            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi NCT boundary",
+            "visible": true
+          },
+          {
+            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "19eb2671-b259-5107-af34-9bcf3e50fd4e": {
+      "type": "StorySegmentLayer",
+      "name": "14. Stagnation probability from the ensemble",
+      "visible": true,
+      "parameters": {
+        "zoom": 10.46,
+        "extent": [
+          8532638.97,
+          3274212.69,
+          8643958.46,
+          3382011.46
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*Roadmap run 1 · uncertainty · Ensemble: Aurora 1.5 Ensemble · Additional method*\n\nAurora 1.5 Ensemble was run 3 times with different seeds (48 hourly steps each); each member's mixing height and wind decide stagnation, and the share of stagnant members is the probability. This is uncertainty the model computed.\n\nThe blue shading on the map is the per-cell stagnation probability at 7 Nov 05:30 IST (share of members with wind below 10 km/h and mixing height below 500 m). The table gives each site's mean probability for the first night (5 Nov 22:00 to 6 Nov 08:00), the day (6 Nov 08:00–22:00) and the second night, plus the 10th–90th percentile mixing height at the peak hour.\n\n| Site | Night 1 | Day | Night 2 | Peak BLH p10–p90 (m) |\n| --- | ---: | ---: | ---: | ---: |\n| Anand Vihar | 3% | 21% | 43% | 79–107 |\n| ITO | 3% | 21% | 43% | 80–105 |\n| Punjabi Bagh | 12% | 24% | 50% | 86–101 |\n| Rohini | 12% | 28% | 50% | 87–100 |\n| Jahangirpuri | 12% | 28% | 50% | 85–102 |\n| R K Puram | 6% | 21% | 43% | 82–103 |\n| Dwarka Sector 8 | 18% | 26% | 50% | 88–99 |\n| Okhla Phase 2 | 0% | 19% | 40% | 78–107 |\n| Noida Sector 62 | 3% | 21% | 43% | 78–109 |\n| Gurugram Vikas Sadan | 18% | 26% | 57% | 86–95 |\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi NCT boundary",
+            "visible": true
+          },
+          {
+            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "ba9dde96-1655-59ad-a284-42ddd44a5be9": {
+      "type": "StorySegmentLayer",
+      "name": "15. Per-site linear bias correction",
+      "visible": true,
+      "parameters": {
+        "zoom": 10.46,
+        "extent": [
+          8532638.97,
+          3274212.69,
+          8643958.46,
+          3382011.46
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*Roadmap run 2 · observation correction · Additional method · Synthetic observations*\n\nA straight line obs = a + b × pred is fitted per site by least squares and the RMSE before and after correction compared. Real CPCB observations have no public API and must be scraped, so the procedure runs on **synthetic observations** (the model assumed to read 15% low at traffic sites and 8% high at residential sites, plus noise). With only five 12-hourly samples the coefficients are illustrative.\n\n| Site | a | b | n | RMSE before | RMSE after |\n| --- | ---: | ---: | ---: | ---: | ---: |\n| Anand Vihar | 201.9 | 0.36 | 5 | 44.2 | 22.5 |\n| ITO | 41.8 | 1.01 | 5 | 47.5 | 13.3 |\n| Punjabi Bagh | 52.8 | 0.67 | 5 | 22.8 | 4.0 |\n| Rohini | -30.6 | 1.06 | 5 | 19.5 | 5.8 |\n| Jahangirpuri | -11.2 | 1.11 | 5 | 19.5 | 11.2 |\n| R K Puram | -4.7 | 0.91 | 5 | 34.0 | 25.3 |\n| Dwarka Sector 8 | 7.8 | 0.92 | 5 | 9.8 | 5.4 |\n| Okhla Phase 2 | 63.8 | 0.77 | 5 | 16.1 | 10.9 |\n| Noida Sector 62 | -8.6 | 0.96 | 5 | 25.5 | 18.3 |\n| Gurugram Vikas Sadan | 189.4 | 0.42 | 5 | 48.7 | 15.2 |\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi NCT boundary",
+            "visible": true
+          },
+          {
+            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "9a8e1fdb-6f99-5850-8d38-d7950f9322d7": {
+      "type": "StorySegmentLayer",
+      "name": "16. Checking the training loop with the msresearch-aurora starter",
+      "visible": true,
+      "parameters": {
+        "zoom": 7.65,
+        "extent": [
+          8293302.06,
+          3061141.04,
+          9072538.5,
+          3829123.84
+        ],
+        "enableIdentify": false,
+        "content": {
+          "contentMode": "markdown",
+          "markdown": "*Roadmap run 3 · fine-tuning · Additional method*\n\nThere is no regional training set yet (gridded CPCB observations or regional CAMS reanalysis), so the real fine-tuning was not run. Instead the starter's smoke test (`test_finetuning_2t_var_pretrained`: one epoch of 2 m temperature on the bundled seven-day western-USA ERA5 slice from the pretrained Aurora) was run to confirm the training loop, checkpointing and optimiser work in this environment.\n\n**Result**\n\n```text\nSmoke test passed — 1 test(s) passed in 66 s\n```\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi NCT boundary",
+            "visible": true
+          },
+          {
+            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "92e764f6-9160-5a38-9019-5e5a6c5d9e42": {
+      "type": "StorySegmentLayer",
+      "name": "17. Postal code → site → message",
+      "visible": true,
+      "parameters": {
+        "zoom": 10.46,
+        "extent": [
+          8532638.97,
+          3274212.69,
+          8643958.46,
+          3382011.46
+        ],
+        "enableIdentify": true,
+        "content": {
+          "contentMode": "map",
+          "markdown": "*Roadmap run 4 · delivery adapter · Additional method*\n\nEach subscriber's postal code is mapped to the nearest site, the per-language `short` message becomes the payload and a delivery log is written. This run is a dry run, so items are logged as \"queued\"; a real adapter would POST to the WhatsApp Business API or an SMS gateway here.\n\n| Item | Value |\n| --- | --- |\n| Items | 20 |\n| Channel | dryrun |\n| Languages | en, hi |\n\n**Log sample**\n\n```text\nsub-000 · PIN 110092 · Anand Vihar · hi · queued (dry run) · 155 chars\n  [वायु गुणवत्ता चेतावनी] Anand Vihar: अधिकतम AQI 500 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 321 µg/m³। स्वस्थ लोग भी प्रभावित।\nsub-001 · PIN 110092 · Anand Vihar · en · queued (dry run) · 166 chars\n  [Air quality alert] Anand Vihar: peak AQI 500 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM10, PM2.5 up to 321 ug/m3. Even healthy people are affected.\nsub-002 · PIN 110002 · ITO · hi · queued (dry run) · 147 chars\n  [वायु गुणवत्ता चेतावनी] ITO: अधिकतम AQI 498 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 318 µg/m³। स्वस्थ लोग भी प्रभावित।\n```\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi NCT boundary",
+            "visible": true
+          },
+          {
+            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "276514ce-c832-51da-9660-4adc760257b7": {
+      "type": "StorySegmentLayer",
+      "name": "18. Re-issue at 00 and 12 UTC",
+      "visible": true,
+      "parameters": {
+        "zoom": 7.65,
+        "extent": [
+          8293302.06,
+          3061141.04,
+          9072538.5,
+          3829123.84
+        ],
+        "enableIdentify": false,
+        "content": {
+          "contentMode": "markdown",
+          "markdown": "*Roadmap run 5 · automation · Additional method*\n\nThe cron script generated by the pipeline. It runs at 02:30 and 14:30 UTC (08:00 and 20:00 IST), after the analyses arrive, and writes outputs to a dated folder. The data in this story map are themselves the result of the same command (`delhi_aq.py`).\n\n```bash\n#!/usr/bin/env bash\n# Re-issue the Delhi air-quality bulletin after each 00/12 UTC analysis becomes available.\n# crontab -e  ->  30 2,14 * * *  /path/to/run_delhi_aq_cron.sh >> /var/log/delhi_aq.log 2>&1\nset -euo pipefail\ncd \"$(dirname \"$0\")\"\npython delhi_aq.py --mode foundry --hours 48 --plot --out \"outputs/$(date -u +%Y-%m-%dT%H)\" -v\n```\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi NCT boundary",
+            "visible": true
+          },
+          {
+            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    },
+    "b564f209-1f69-5393-8d4e-0227389eb8a1": {
+      "type": "StorySegmentLayer",
+      "name": "19. Done and still to do",
+      "visible": true,
+      "parameters": {
+        "zoom": 7.65,
+        "extent": [
+          8293302.06,
+          3061141.04,
+          9072538.5,
+          3829123.84
+        ],
+        "enableIdentify": false,
+        "content": {
+          "contentMode": "markdown",
+          "markdown": "*7 · What remains · run it*\n\nThe five roadmap items were run in the scenes above. What remains: connecting real CPCB observations, the actual fine-tuning on regional data, and attaching a CAMS account so pollutant concentrations also come from Aurora.\n\n1. **Uncertainty**: `AuroraV1p5Ensemble` with `rollout_ensemble` for \"80% chance of stagnation\".\n2. **CPCB correction**: learn per-site residuals (linear or quantile mapping first).\n3. **Fine-tuning**: adapt the Air Pollution model to regional data with the loop in `msresearch-aurora/starter-code/`; model-side requirements in `docs/finetuning.md`.\n4. **Channels**: push `messages_hi.json` to the WhatsApp Business API, SMS or the Delhi government app; map users to the nearest site by pin code.\n5. **Automation**: cron `delhi_aq.py --mode foundry --plot` at 00 and 12 UTC.\n\n### Run it yourself\n\nDemo mode needs no GPU or data.\n\n```bash\ngit clone https://github.com/playground-for-thinker/aurora.git && cd aurora\npip install -e . && pip install matplotlib\npython examples/delhi_air_quality/delhi_aq.py --mode demo --date 2025-11-05 --plot --out outputs\n```\n\n- Notebook: [Colab](https://colab.research.google.com/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb) · [Binder](https://mybinder.org/v2/gh/playground-for-thinker/aurora/main?labpath=examples%2Fdelhi_air_quality%2Fexample_delhi_air_quality.ipynb)\n- Storyboard (scene-by-scene document): [STORYBOARD.md](https://github.com/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/STORYBOARD.md) · [STORYBOARD_kor.md](https://github.com/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/STORYBOARD_kor.md)\n- Code: [GitHub](https://github.com/playground-for-thinker/aurora/tree/main/examples/delhi_air_quality)\n\nThis story map is a JupyterGIS document (`.jGIS`). Open it in notebook.link's JupyterLab view to edit layers and scenes, or rebuild it from pipeline outputs with `build_storymap_jgis.py`.\n",
+          "image": "",
+          "imageCaption": ""
+        },
+        "transition": {
+          "type": "smooth",
+          "time": 2.0
+        },
+        "layerOverride": [
+          {
+            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "visible": true
+          },
+          {
+            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "visible": false
+          },
+          {
+            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "visible": false
+          },
+          {
+            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Delhi NCT boundary",
+            "visible": true
+          },
+          {
+            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "visible": true
+          },
+          {
+            "targetLayer": "Anand Vihar",
+            "visible": false
+          }
+        ]
+      }
+    }
+  },
+  "layerTree": [
+    "df3c771f-51e9-5289-bb0b-284273924658",
+    "ee2531a6-23fa-5db3-8289-12a808582c05",
+    "abb68004-d27d-58bb-bca7-8d6bfdf2f9be",
+    "04eaa86c-bc4e-5cf8-99a3-45584f69c77d",
+    "25937c39-d90c-524b-b95d-4a0d36a070ad",
+    "ccba6808-0da2-5d6b-b440-05e9395c3e59",
+    "1ae54c13-c037-5ad1-9389-79e9f5195627",
+    "ffc5b112-49fb-5db9-b7da-afe3f947551e",
+    "dc662fa4-01b7-5437-bc62-e5b5ddfae677",
+    "9d5771c5-6b2b-5eef-8f50-69b4badea527",
+    "e1fc9d68-86d2-5b14-ab6f-94fb0f27f130",
+    "17db14fc-9723-50e2-abee-87f180631cbd",
+    "60b85afc-3e21-5b73-9b5e-3926a11092bf",
+    "fd48ad04-c75c-5117-8266-16c8ae260cad",
+    "84ec3636-3621-5dee-b051-c2707eec5584",
+    "1865902a-d85b-550b-bd0e-36486e716487",
+    "52c8330c-7f15-5091-b102-671604cbf174",
+    "0b119b3d-5f97-5c21-b3db-de60ba1ea50d",
+    "91508891-f045-5e80-bec6-b1fc6b74b3f0",
+    "c67849c2-bb8d-55f9-b505-69ae46706293",
+    "c1896115-b9fc-5632-8f9e-49e098de3061",
+    "93323641-31b6-58bb-a749-c9d5d7b6c55d",
+    "6266babb-a30c-5c7f-b71d-975d76ae2e7b",
+    "f5bf1ab1-7652-5f51-8080-697800cfd3e4",
+    "b34bc34f-b4f7-5a1f-bf30-ccf262b6f756",
+    "48ca768a-a8cc-5596-a246-2cd45f23ca39",
+    "dd150d0f-bd3b-5aee-8612-2e31aa56d7d3",
+    "cbe121fe-e65d-5426-b726-de7e93c78357",
+    "19eb2671-b259-5107-af34-9bcf3e50fd4e",
+    "ba9dde96-1655-59ad-a284-42ddd44a5be9",
+    "9a8e1fdb-6f99-5850-8d38-d7950f9322d7",
+    "92e764f6-9160-5a38-9019-5e5a6c5d9e42",
+    "276514ce-c832-51da-9660-4adc760257b7",
+    "b564f209-1f69-5393-8d4e-0227389eb8a1"
+  ],
+  "options": {
+    "latitude": 28.64,
+    "longitude": 77.12,
+    "zoom": 10.46,
+    "bearing": 0.0,
+    "pitch": 0.0,
+    "projection": "EPSG:3857",
+    "extent": [
+      8532638.97,
+      3274212.69,
+      8643958.46,
+      3382011.46
+    ],
+    "useExtent": false
+  },
+  "stories": {
+    "f77940d8-056d-51f8-9548-360d3a7367af": {
+      "title": "Delhi Smog Story Map",
+      "storyType": "guided",
+      "storySegments": [
+        "1865902a-d85b-550b-bd0e-36486e716487",
+        "52c8330c-7f15-5091-b102-671604cbf174",
+        "0b119b3d-5f97-5c21-b3db-de60ba1ea50d",
+        "91508891-f045-5e80-bec6-b1fc6b74b3f0",
+        "c67849c2-bb8d-55f9-b505-69ae46706293",
+        "c1896115-b9fc-5632-8f9e-49e098de3061",
+        "93323641-31b6-58bb-a749-c9d5d7b6c55d",
+        "6266babb-a30c-5c7f-b71d-975d76ae2e7b",
+        "f5bf1ab1-7652-5f51-8080-697800cfd3e4",
+        "b34bc34f-b4f7-5a1f-bf30-ccf262b6f756",
+        "48ca768a-a8cc-5596-a246-2cd45f23ca39",
+        "dd150d0f-bd3b-5aee-8612-2e31aa56d7d3",
+        "cbe121fe-e65d-5426-b726-de7e93c78357",
+        "19eb2671-b259-5107-af34-9bcf3e50fd4e",
+        "ba9dde96-1655-59ad-a284-42ddd44a5be9",
+        "9a8e1fdb-6f99-5850-8d38-d7950f9322d7",
+        "92e764f6-9160-5a38-9019-5e5a6c5d9e42",
+        "276514ce-c832-51da-9660-4adc760257b7",
+        "b564f209-1f69-5393-8d4e-0227389eb8a1"
+      ],
+      "showGradient": true
+    }
+  },
+  "viewState": {},
+  "annotations": {},
+  "presets": {},
+  "metadata": {
+    "generator": "examples/delhi_air_quality/build_storymap_jgis.py",
+    "language": "en",
+    "attribution": "Boundaries: Natural Earth (public domain), geoBoundaries (CC BY 2.5 IN)",
+    "provenance": "{\"meteorology\": \"Aurora 1.5 (ARCO-ERA5 initial condition)\", \"pollutants\": \"synthetic\", \"ensemble\": \"Aurora 1.5 Ensemble (3 members)\", \"init_time\": \"2025-11-05T12:00:00\", \"bias_correction\": \"linear fit per site against synthetic observations\"}"
+  }
+}

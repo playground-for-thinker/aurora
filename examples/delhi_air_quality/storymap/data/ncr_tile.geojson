@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[76,27.5],[80,27.5],[80,31.5],[76,31.5],[76,27.5]]]},"properties":{"name":"Delhi-NCR tile","resolution_deg":0.25}}]}
