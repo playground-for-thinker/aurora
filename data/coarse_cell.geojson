@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[76.8,28.4],[77.2,28.4],[77.2,28.8],[76.8,28.8],[76.8,28.4]]]},"properties":{"name":"one 0.4° cell of Aurora Air Pollution","resolution_deg":0.4}}]}
