@@ -1,0 +1,476 @@
+<title>Delhi Air-Quality Storyboard</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a sticky language bar over a single reading column (~68ch), with full-width bands for the
+   system diagram and the demo chart. Semantic AQI colors follow the CPCB scale and are never the accent. */
+:root {
+  --bg: #f3f6f8;
+  --surface: #ffffff;
+  --fg: #16212b;
+  --muted: #5a6875;
+  --line: #d6dee5;
+  --accent: #0b6e8f;
+  --accent-soft: #dbeef5;
+  --haze: #e9e2d6;          /* smog band used to shade stagnant hours */
+  --series-pm: #2a78d6;
+  --series-blh: #eb6834;
+  --aqi-good: #1f8a3c; --aqi-sat: #5f9e1b; --aqi-mod: #b8860b; --aqi-poor: #d9711a; --aqi-vpoor: #c0392b; --aqi-sev: #7b1d1d;
+  --font-display: "IBM Plex Sans KR", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-body: "Noto Sans KR", "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111920; --surface: #18232c; --fg: #e5ebf0; --muted: #9aa8b4; --line: #2b3843;
+    --accent: #4cb6d8; --accent-soft: #15333f; --haze: #3a3328;
+    --series-pm: #3987e5; --series-blh: #d95926;
+    --aqi-good: #4cc26a; --aqi-sat: #8fc43a; --aqi-mod: #e0b33a; --aqi-poor: #ef8a3a; --aqi-vpoor: #ef6a5a; --aqi-sev: #d9534f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111920; --surface: #18232c; --fg: #e5ebf0; --muted: #9aa8b4; --line: #2b3843;
+  --accent: #4cb6d8; --accent-soft: #15333f; --haze: #3a3328;
+  --series-pm: #3987e5; --series-blh: #d95926;
+  --aqi-good: #4cc26a; --aqi-sat: #8fc43a; --aqi-mod: #e0b33a; --aqi-poor: #ef8a3a; --aqi-vpoor: #ef6a5a; --aqi-sev: #d9534f;
+  color-scheme: dark;
+}
+
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.65; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+* { box-sizing: border-box; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; line-height: 1.25; margin: 0; }
+h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1.45rem; font-weight: 600; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+h3 { font-size: 1.1rem; font-weight: 600; margin-top: 1.75rem; }
+p, li { max-width: 68ch; }
+p { margin: 0.75rem 0; }
+ul, ol { padding-left: 1.3rem; margin: 0.6rem 0; }
+li { margin: 0.3rem 0; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+code, pre { font-family: var(--font-mono); font-size: 0.86em; }
+code { background: var(--accent-soft); padding: 0.05em 0.35em; border-radius: 4px; }
+pre { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 0.9rem 1rem; overflow-x: auto; line-height: 1.5; }
+pre code { background: none; padding: 0; }
+.eyebrow { font-family: var(--font-display); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+
+/* Sticky language bar */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); }
+.bar-inner { max-width: 1040px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  padding-block: 0.6rem; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.bar-title { font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; }
+.lang-switch { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; background: var(--bg); }
+.lang-switch button { font: inherit; font-family: var(--font-display); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.04em;
+  border: 0; background: transparent; color: var(--muted); padding: 0.35rem 0.95rem; border-radius: 999px; cursor: pointer; }
+.lang-switch button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.lang-switch button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Language visibility */
+[data-lang="ko"] .en { display: none !important; }
+[data-lang="en"] .ko { display: none !important; }
+
+.wrap { max-width: 1040px; margin: 0 auto; padding-block: 2.5rem 4rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.lede { font-size: 1.1rem; color: var(--muted); max-width: 62ch; }
+.quote { margin: 1.5rem 0; padding: 1rem 1.25rem; border-left: 3px solid var(--accent); background: var(--surface); border-radius: 0 8px 8px 0; max-width: 72ch; }
+.quote p { margin: 0.25rem 0; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; margin: 1.5rem 0; }
+.fact { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 0.8rem 1rem; }
+.fact b { display: block; font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.fact span { color: var(--muted); font-size: 0.86rem; }
+
+table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+.table-wrap { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+th, td { text-align: left; padding: 0.55rem 0.75rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--font-display); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.03em; color: var(--muted); background: var(--bg); }
+tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; text-align: right; }
+
+/* System diagram */
+.flow { display: grid; grid-template-columns: 1.1fr auto 1.3fr auto 1fr auto 0.8fr; gap: 0.6rem; align-items: center; margin: 1.25rem 0; }
+.flow .col { display: grid; gap: 0.6rem; min-width: 0; }
+.flow .node { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 0.7rem 0.85rem; font-size: 0.86rem; line-height: 1.45; min-width: 0; }
+.flow .node.model { border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); }
+.flow .node b { display: block; font-family: var(--font-display); font-weight: 600; font-size: 0.9rem; }
+.flow .node small { color: var(--muted); display: block; }
+.flow .arrow { color: var(--muted); font-size: 1.3rem; text-align: center; }
+@media (max-width: 760px) {
+  .flow { grid-template-columns: 1fr; }
+  .flow .arrow { transform: rotate(90deg); }
+}
+
+/* Scenes */
+.scenes { list-style: none; padding: 0; margin: 1.25rem 0; display: grid; gap: 0; border-left: 2px solid var(--line); }
+.scene { display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.5rem 1rem; padding: 0.8rem 0 0.8rem 1.1rem; position: relative; }
+.scene::before { content: ""; position: absolute; left: -6px; top: 1.25rem; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+.scene .when { font-family: var(--font-mono); font-size: 0.82rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.scene .what { min-width: 0; }
+.scene .what b { font-family: var(--font-display); }
+.scene .what p { margin: 0.2rem 0 0; font-size: 0.95rem; }
+@media (max-width: 560px) { .scene { grid-template-columns: 1fr; } }
+
+/* Chart */
+.chart-card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 1rem 1rem 0.6rem; margin: 1.25rem 0; position: relative; }
+.chart-card h3 { margin-top: 0; font-size: 1rem; }
+.chart-card .sub { color: var(--muted); font-size: 0.86rem; margin: 0.2rem 0 0.6rem; }
+.chart-card svg { width: 100%; height: auto; display: block; }
+.chart-card svg text { font-family: var(--font-mono); font-size: 11px; fill: var(--muted); }
+.chart-card .tip { position: absolute; pointer-events: none; background: var(--fg); color: var(--bg); font-family: var(--font-mono); font-size: 12px;
+  padding: 6px 8px; border-radius: 6px; white-space: nowrap; transform: translate(-50%, -110%); opacity: 0; transition: opacity .1s; }
+.chart-card .tip.on { opacity: 1; }
+.swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -2px; margin-right: 6px; border: 1px solid var(--line); }
+
+/* Messages */
+.msg { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 0.9rem 1rem; margin: 0.9rem 0; max-width: 78ch; }
+.msg .eyebrow { margin-bottom: 0.3rem; }
+.msg pre { border: 0; padding: 0; background: none; white-space: pre-wrap; font-size: 0.86rem; }
+.pill { display: inline-block; padding: 0.1rem 0.55rem; border-radius: 999px; font-size: 0.78rem; font-family: var(--font-display); font-weight: 600; color: #fff; }
+.pill.sev { background: var(--aqi-sev); } .pill.vpoor { background: var(--aqi-vpoor); } .pill.poor { background: var(--aqi-poor); }
+.pill.mod { background: var(--aqi-mod); } .pill.sat { background: var(--aqi-sat); } .pill.good { background: var(--aqi-good); }
+
+.links { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+.links a { display: block; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 0.8rem 1rem; text-decoration: none; color: var(--fg); min-width: 0; }
+.links a:hover { border-color: var(--accent); }
+.links a b { display: block; font-family: var(--font-display); color: var(--accent); }
+.links a span { color: var(--muted); font-size: 0.86rem; }
+.note { font-size: 0.9rem; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div id="root" data-lang="ko">
+<div class="bar"><div class="bar-inner">
+  <div class="bar-title"><span class="ko">뉴델리 대기질 조기경보 스토리보드</span><span class="en">Delhi Air-Quality Early Warning Storyboard</span></div>
+  <div class="lang-switch" role="group" aria-label="Language">
+    <button type="button" id="btn-ko" aria-pressed="true" data-set="ko">한국어</button>
+    <button type="button" id="btn-en" aria-pressed="false" data-set="en">English</button>
+  </div>
+</div></div>
+
+<main class="wrap">
+  <div class="eyebrow"><span class="ko">Aurora 1.5 + Aurora Air Pollution · 예제 스토리보드</span><span class="en">Aurora 1.5 + Aurora Air Pollution · example storyboard</span></div>
+  <h1><span class="ko">시민에게 닿는 한 줄의 대기질 경보</span><span class="en">One line of air-quality warning that reaches a citizen</span></h1>
+  <p class="lede ko">Microsoft Research의 지구 시스템 파운데이션 모델 Aurora로 뉴델리의 48시간 대기질을 예측하고, 인도 CPCB 기준의 AQI와 GRAP 단계로 바꿔 힌디어·영어·한국어 메시지를 만들기까지의 과정을 장면별로 정리했습니다.</p>
+  <p class="lede en">How a 48-hour New Delhi air-quality forecast from Aurora, Microsoft Research's Earth-system foundation model, becomes a CPCB AQI, a GRAP stage and a message in Hindi, English and Korean. Told scene by scene.</p>
+
+  <div class="quote">
+    <p class="ko"><span class="pill sev">위험 · AQI 500</span></p>
+    <p class="en"><span class="pill sev">Severe · AQI 500</span></p>
+    <p class="ko">"[대기질 경보] Anand Vihar: 최고 AQI 500 (위험), 11월 7일 05시 전후 정점 예상. 주 오염물질 PM10, PM2.5 최대 321㎍/㎥. 건강한 사람도 영향을 받습니다."</p>
+    <p class="en">"[Air quality alert] Anand Vihar: peak AQI 500 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM10, PM2.5 up to 321 ug/m3. Even healthy people are affected."</p>
+    <p class="note ko">demo 모드 출력 예시. 합성 데이터이며 실제 예보가 아닙니다.</p>
+    <p class="note en">Example output from demo mode. Synthetic data, not a real forecast.</p>
+  </div>
+
+  <div class="facts">
+    <div class="fact"><b>2</b><span class="ko">Aurora 모델 (Air Pollution 0.4° + 1.5 0.25°)</span><span class="en">Aurora models (Air Pollution 0.4° + 1.5 at 0.25°)</span></div>
+    <div class="fact"><b>48 h</b><span class="ko">예측 기간, 1.5는 1시간 간격</span><span class="en">forecast horizon, hourly from Aurora 1.5</span></div>
+    <div class="fact"><b>10</b><span class="ko">델리 NCR 대표 지점</span><span class="en">Delhi-NCR reporting sites</span></div>
+    <div class="fact"><b>3</b><span class="ko">메시지 언어 (hi · en · ko)</span><span class="en">message languages (hi · en · ko)</span></div>
+  </div>
+
+  <h2><span class="ko">0. 배경: 왜 뉴델리이고, 왜 11월인가</span><span class="en">0. Background: why Delhi, why November</span></h2>
+  <ul class="ko">
+    <li>델리 NCR은 매년 10월 말~1월에 세계 최악 수준의 미세먼지 에피소드를 겪습니다. 인접 주의 볏짚 소각, 디왈리 폭죽, 교통·건설·발전 배출이 겹치고, 겨울철 <b>낮은 혼합층(경계층 높이 100~300 m)과 약한 바람</b>이 오염을 지표 근처에 가둡니다.</li>
+    <li>인도는 국가 AQI(CPCB 기준)와 단계별 대응계획 <b>GRAP</b>(Graded Response Action Plan, CAQM 주관)을 운영합니다. AQI 구간별로 건설 중단, 차량 제한, 학교 원격수업, 재택근무 같은 조치가 정해져 있어 <b>예보 → 단계 → 조치</b>의 연결이 제도적으로 이미 존재합니다.</li>
+    <li>따라서 핵심 질문은 "얼마나 나빠질지"가 아니라 <b>"언제, 어느 지역에서, 어떤 기상 조건 때문에 나빠지며, 시민은 무엇을 해야 하는가"</b>를 12~48시간 앞서 전달하는 것입니다.</li>
+  </ul>
+  <ul class="en">
+    <li>Delhi-NCR suffers some of the world's worst particulate episodes from late October to January. Stubble burning in neighbouring states, Diwali fireworks and traffic, construction and power emissions coincide with winter's <b>shallow mixing layer (100–300 m) and weak winds</b>, which trap pollution near the ground.</li>
+    <li>India runs a national AQI (CPCB scale) and a staged response plan, <b>GRAP</b> (Graded Response Action Plan, run by CAQM). AQI bands map to construction bans, vehicle restrictions, online classes and work-from-home, so the chain <b>forecast → stage → action</b> already exists.</li>
+    <li>The question is therefore not "how bad will it get" but <b>"when, where, because of which weather, and what should citizens do"</b>, delivered 12 to 48 hours ahead.</li>
+  </ul>
+
+  <h2><span class="ko">1. 등장인물</span><span class="en">1. Cast</span></h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th><span class="ko">역할</span><span class="en">Role</span></th><th><span class="ko">원하는 것</span><span class="en">What they want</span></th><th><span class="ko">이 예제의 산출물</span><span class="en">Output in this example</span></th></tr></thead>
+    <tbody>
+      <tr><td><span class="ko">일반 시민</span><span class="en">General public</span></td><td><span class="ko">오늘 밤/내일 아침에 무엇을 조심할지 한 줄로</span><span class="en">One line on what to watch tonight or tomorrow morning</span></td><td><code>messages_*.json</code> → <code>short</code></td></tr>
+      <tr><td><span class="ko">민감군과 보호자</span><span class="en">Sensitive groups and carers</span></td><td><span class="ko">구체적인 행동 지침과 시간대</span><span class="en">Concrete actions and time windows</span></td><td><span class="ko"><code>long</code> 메시지의 건강 권고·확산 조건</span><span class="en">Health and dispersion lines in <code>long</code></span></td></tr>
+      <tr><td><span class="ko">운영자 (DPCC/CAQM, 서비스 운영팀)</span><span class="en">Operators (DPCC/CAQM, service team)</span></td><td><span class="ko">지점별 정점 시각, GRAP 단계 근거, 추세</span><span class="en">Peak time per site, basis for the GRAP stage, trend</span></td><td><code>summary_by_site.csv</code>, <code>bulletin_*.md</code></td></tr>
+      <tr><td><span class="ko">데이터/ML 엔지니어</span><span class="en">Data/ML engineers</span></td><td><span class="ko">재현 가능한 파이프라인, 로컬/클라우드 전환</span><span class="en">Reproducible pipeline, local or cloud</span></td><td><code>delhi_aq.py --mode local|foundry</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <h2><span class="ko">2. 시스템 구성: Aurora가 두 번 등장한다</span><span class="en">2. System: Aurora appears twice</span></h2>
+  <div class="flow">
+    <div class="col">
+      <div class="node"><b><span class="ko">CAMS 전지구 분석 0.4°</span><span class="en">CAMS global analysis 0.4°</span></b><small>PM1/2.5/10, NO2, SO2, O3, CO<span class="ko"> + 기상 변수</span><span class="en"> + meteorology</span></small></div>
+      <div class="node"><b><span class="ko">ERA5 또는 IFS HRES T0 0.25°</span><span class="en">ERA5 or IFS HRES T0 0.25°</span></b><small><span class="ko">26개 표면 변수, 13개 기압면</span><span class="en">26 surface variables, 13 pressure levels</span></small></div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="col">
+      <div class="node model"><b>Aurora 0.4° Air Pollution</b><small><span class="ko">12시간 × 4 = 48 h. 로컬 GPU 또는 Foundry "Aurora" 엔드포인트</span><span class="en">12 h × 4 = 48 h. Local GPU or the Foundry "Aurora" endpoint</span></small></div>
+      <div class="node model"><b>Aurora 1.5</b><small><span class="ko">6시간 × 8 + 시간별 서브스텝 = 48개 시간별 예측 (경계층 높이, 10 m 풍속, 기온, 이슬점, 강수, 돌풍)</span><span class="en">6 h × 8 + hourly sub-steps = 48 hourly predictions (boundary-layer height, 10 m wind, temperature, dew point, rain, gusts)</span></small></div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="col">
+      <div class="node"><b><span class="ko">델리 후처리</span><span class="en">Delhi post-processing</span></b><small><span class="ko">10개 지점 보간 · CPCB AQI · GRAP 단계 · 정체 진단 (풍속 &lt; 10 km/h, 혼합층 &lt; 500 m)</span><span class="en">10-site interpolation · CPCB AQI · GRAP stage · stagnation (wind &lt; 10 km/h, mixing height &lt; 500 m)</span></small></div>
+      <div class="node"><b><span class="ko">지도 타일</span><span class="en">Map tile</span></b><small><span class="ko">27.5~31.5°N, 76~80°E 시간별 격자 → msresearch-aurora 프런트엔드</span><span class="en">27.5–31.5°N, 76–80°E hourly grid → msresearch-aurora frontend</span></small></div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="col">
+      <div class="node"><b><span class="ko">메시지</span><span class="en">Messages</span></b><small>hi · en · ko, short / long<br><span class="ko">푸시 · SMS · WhatsApp · 앱</span><span class="en">push · SMS · WhatsApp · app</span></small></div>
+    </div>
+  </div>
+
+  <h3><span class="ko">왜 두 모델인가</span><span class="en">Why two models</span></h3>
+  <p class="ko">Aurora 1.5는 기상 전용 모델이라 오염물질을 예측하지 않습니다. 대신 <b>시간 단위</b>로 경계층 높이(<code>blh</code>), 풍속, 강수 같은 <b>확산 조건</b>을 줍니다. Aurora Air Pollution은 오염물질 농도를 직접 예측하지만 12시간 간격·0.4° 해상도입니다. 두 모델을 합치면 "농도는 어느 수준인가"와 "밤 몇 시부터 정체가 시작되는가"를 함께 말할 수 있습니다.</p>
+  <p class="en">Aurora 1.5 is a weather model and does not predict pollutants. What it adds is <b>hourly</b> dispersion conditions: boundary-layer height (<code>blh</code>), wind, precipitation. Aurora Air Pollution predicts concentrations directly, but at 12-hour steps and 0.4°. Together they answer both "how high is the concentration" and "from what hour tonight does stagnation set in".</p>
+
+  <h3><span class="ko">"고해상도"의 의미</span><span class="en">What "high resolution" means here</span></h3>
+  <p class="ko">(1) <b>시간 해상도</b>: Aurora 1.5의 <code>fine_lead_times=[1,…,6]</code>으로 1시간 간격 예측. (2) <b>공간 표현</b>: 0.4°/0.25° 격자를 델리 NCR 10개 대표 지점으로 양선형 보간. 격자 자체가 도시 내부 차이를 해소하지는 못하므로 지점 간 차이는 주로 지역 평균의 공간 경향입니다(§6).</p>
+  <p class="en">(1) <b>Temporal</b>: hourly predictions from Aurora 1.5 with <code>fine_lead_times=[1,…,6]</code>. (2) <b>Spatial presentation</b>: bilinear interpolation of the 0.4°/0.25° grids to ten Delhi-NCR sites. The grid cannot resolve intra-city differences, so site-to-site differences mostly reflect the regional gradient (§6).</p>
+
+  <h3><span class="ko">msresearch-aurora 스킬과 Azure AI Foundry 연계</span><span class="en">Linkage with the msresearch-aurora skill and Azure AI Foundry</span></h3>
+  <p class="ko">저장소의 <code>msresearch-aurora/</code>(microsoft/vibe-kit의 Aurora 스킬)에서 세 가지를 가져옵니다. 노르웨이 예제의 React 지도 프런트엔드(같은 JSON 스키마로 델리 타일을 내보냄), 검증 유틸리티(<code>validate_grid.py</code>, <code>check_divergence.py</code>, <code>validate_forecast.py</code>), 그리고 파인튠 스타터 <code>starter-code/</code>. 체크포인트는 HuggingFace <code>microsoft/aurora</code>에서 내려받고, GPU가 없으면 <code>--mode foundry</code>로 Azure AI Foundry의 "Aurora"/"Aurora-1.5" 엔드포인트에 <code>aurora.foundry.submit</code>으로 작업을 보냅니다.</p>
+  <p class="en">Three things come from the repository's <code>msresearch-aurora/</code> directory (the Aurora skill from microsoft/vibe-kit): the Norway example's React map frontend (the pipeline exports a Delhi tile in the same JSON schema), validation utilities (<code>validate_grid.py</code>, <code>check_divergence.py</code>, <code>validate_forecast.py</code>), and the fine-tuning starter in <code>starter-code/</code>. Checkpoints come from HuggingFace <code>microsoft/aurora</code>; without a GPU, <code>--mode foundry</code> submits to the Azure AI Foundry "Aurora" and "Aurora-1.5" endpoints through <code>aurora.foundry.submit</code>.</p>
+
+  <h2><span class="ko">3. 장면별 타임라인 (11월 5일 발행 예)</span><span class="en">3. Scene-by-scene timeline (issued 5 November)</span></h2>
+  <ol class="scenes">
+    <li class="scene"><div class="when">17:30 IST<br>= 12 UTC</div><div class="what"><b>S1 · <span class="ko">초기장 확보</span><span class="en">Initial conditions</span></b><p class="ko">CAMS 00/12 UTC 분석, ERA5(또는 HRES T0) 06/12 UTC 다운로드. 정적 변수 pickle 로드. <code>Batch</code> 2개 구성.</p><p class="en">Download CAMS 00/12 UTC analysis and ERA5 (or HRES T0) 06/12 UTC. Load static pickles. Build two <code>Batch</code> objects.</p></div></li>
+    <li class="scene"><div class="when">17:40</div><div class="what"><b>S2 · <span class="ko">예측 실행</span><span class="en">Run forecasts</span></b><p class="ko">Air Pollution 4스텝(+12/24/36/48 h), Aurora 1.5 8스텝 × 6 서브스텝(+1…+48 h). GPU 1장 또는 Foundry.</p><p class="en">Air Pollution 4 steps (+12/24/36/48 h); Aurora 1.5 8 steps × 6 sub-steps (+1…+48 h). One GPU or Foundry.</p></div></li>
+    <li class="scene"><div class="when">17:50</div><div class="what"><b>S3 · <span class="ko">델리 추출·융합</span><span class="en">Extract and fuse</span></b><p class="ko">10개 지점 보간. 12시간 농도를 시간별로 선형 보간하고, 1.5의 시간별 <code>blh</code>·풍속으로 정체 시간대 표시. CPCB AQI·주 오염물질·GRAP 단계 산출.</p><p class="en">Interpolate to 10 sites. Interpolate 12-hourly concentrations to hourly, flag stagnant hours from 1.5's hourly <code>blh</code> and wind. Compute CPCB AQI, dominant pollutant, GRAP stage.</p></div></li>
+    <li class="scene"><div class="when">18:00</div><div class="what"><b>S4 · <span class="ko">저녁 경보 발송</span><span class="en">Evening alert</span></b><p class="ko">지점별 <code>short</code> 메시지(푸시/SMS). 위 인용문이 그 예입니다.</p><p class="en">Per-site <code>short</code> message (push/SMS). The quote at the top is an example.</p></div></li>
+    <li class="scene"><div class="when">18:00</div><div class="what"><b>S4b · <span class="ko">지도 확인</span><span class="en">Map check</span></b><p class="ko"><code>outputs/frontend/*.json</code>을 msresearch-aurora 프런트엔드에 넣어 타일 전체의 공간 패턴(남동쪽 정체, 풍향)을 눈으로 확인.</p><p class="en">Load <code>outputs/frontend/*.json</code> into the msresearch-aurora frontend to see the spatial pattern over the tile (south-eastern stagnation, wind direction).</p></div></li>
+    <li class="scene"><div class="when">18:00</div><div class="what"><b>S5 · <span class="ko">운영자 브리핑</span><span class="en">Operator briefing</span></b><p class="ko"><code>bulletin_ko.md</code>: 도시 헤드라인 + 지점별 상세(정점 시각, 추세, 정체 시간, GRAP 조치 안내). CAQM 공식 단계와 대조.</p><p class="en"><code>bulletin_en.md</code>: city headline plus per-site detail (peak time, trend, stagnant hours, GRAP guidance). Compared with the official CAQM stage.</p></div></li>
+    <li class="scene"><div class="when">22:00–08:00</div><div class="what"><b>S6 · <span class="ko">정체 구간</span><span class="en">Stagnation window</span></b><p class="ko">1.5가 예측한 야간 혼합층 150~300 m, 풍속 1~2 m/s. 메시지에 "밤~아침에 오염이 지표 근처에 쌓이기 쉽습니다"로 반영. 민감군 리마인더(창문 닫기, 새벽 운동 자제) 발송 가능.</p><p class="en">Night-time mixing layer of 150–300 m and 1–2 m/s winds from Aurora 1.5. Reflected as "pollution will tend to pool near the surface from night to morning". Reminders for sensitive groups can go out.</p></div></li>
+    <li class="scene"><div class="when"><span class="ko">다음 날</span><span class="en">next day</span> 06:00</div><div class="what"><b>S7 · <span class="ko">아침 업데이트</span><span class="en">Morning update</span></b><p class="ko">00 UTC 초기장으로 재실행(크론). 등교·출근 전 "오전 7~9시 최고치, 마스크 착용".</p><p class="en">Re-run from the 00 UTC initial condition (cron). "Peak 07:00–09:00, wear a mask" before school and commute.</p></div></li>
+    <li class="scene"><div class="when"><span class="ko">사후</span><span class="en">afterwards</span></div><div class="what"><b>S8 · <span class="ko">검증</span><span class="en">Verification</span></b><p class="ko">CPCB/DPCC 관측(SAMEER, CPCB CCR)과 지점별 예측 비교. 편향 보정 계수 산출 → 다음 발행에 반영.</p><p class="en">Compare per-site predictions with CPCB/DPCC observations (SAMEER, CPCB CCR). Derive bias corrections for the next issue.</p></div></li>
+  </ol>
+
+  <h2><span class="ko">4. demo 모드 산출물</span><span class="en">4. Demo-mode output</span></h2>
+  <p class="ko">아래 그래프는 <code>python delhi_aq.py --mode demo --date 2025-11-05</code>가 만든 Anand Vihar 지점의 48시간 시계열입니다. 합성 데이터이며 11월 전형적 에피소드를 흉내 낸 값입니다. 음영은 정체 조건(풍속 10 km/h 미만이고 혼합층 500 m 미만)인 시간입니다.</p>
+  <p class="en">The chart shows the 48-hour series at Anand Vihar produced by <code>python delhi_aq.py --mode demo --date 2025-11-05</code>. The data are synthetic and imitate a typical November episode. Shaded hours meet the stagnation criteria (wind below 10 km/h and mixing height below 500 m).</p>
+
+  <div class="chart-card" id="chart-pm">
+    <h3><span class="swatch" style="background: var(--series-pm)"></span><span class="ko">PM2.5 (㎍/㎥), Anand Vihar</span><span class="en">PM2.5 (µg/m³), Anand Vihar</span></h3>
+    <p class="sub ko">12시간 간격 Air Pollution 예측을 시간별로 선형 보간. 점선은 CPCB "위험" 하한(250 ㎍/㎥).</p>
+    <p class="sub en">12-hourly Air Pollution forecast, linearly interpolated to hourly. Dotted line: CPCB "Severe" threshold (250 µg/m³).</p>
+    <div class="tip" id="tip-pm"></div>
+  </div>
+  <div class="chart-card" id="chart-blh">
+    <h3><span class="swatch" style="background: var(--series-blh)"></span><span class="ko">경계층 높이 (m), Anand Vihar</span><span class="en">Boundary-layer height (m), Anand Vihar</span></h3>
+    <p class="sub ko">Aurora 1.5 시간별 출력. 점선은 정체 기준 500 m.</p>
+    <p class="sub en">Hourly Aurora 1.5 output. Dotted line: 500 m stagnation threshold.</p>
+    <div class="tip" id="tip-blh"></div>
+  </div>
+
+  <h3><span class="ko">지점별 요약</span><span class="en">Per-site summary</span></h3>
+  <div class="table-wrap"><table>
+    <thead><tr>
+      <th><span class="ko">지점</span><span class="en">Site</span></th><th><span class="ko">유형</span><span class="en">Type</span></th>
+      <th class="num"><span class="ko">현재 AQI</span><span class="en">AQI now</span></th><th class="num"><span class="ko">최고 AQI</span><span class="en">Peak AQI</span></th>
+      <th><span class="ko">범주</span><span class="en">Category</span></th><th><span class="ko">주 오염물질</span><span class="en">Dominant</span></th>
+      <th class="num">GRAP</th><th class="num"><span class="ko">정체 시간 (야간)</span><span class="en">Stagnant h (night)</span></th>
+    </tr></thead>
+    <tbody id="site-rows"></tbody>
+  </table></div>
+  <p class="note ko">정점 시각은 모든 지점에서 11월 7일 05:30 IST 전후(새벽 혼합층 최저). 최저 혼합층 약 133~143 m.</p>
+  <p class="note en">All sites peak around 07 Nov 05:30 IST (pre-dawn mixing-height minimum). Minimum mixing height about 133–143 m.</p>
+
+  <h3><span class="ko">메시지 예시</span><span class="en">Sample messages</span></h3>
+  <div class="msg"><div class="eyebrow"><span class="ko">도시 헤드라인</span><span class="en">City headline</span></div>
+    <pre class="ko">델리 NCR 대기질 전망: 지역 중간값 최고 AQI 433 (위험), 최악 지점 Anand Vihar AQI 500 (위험), 11월 7일 05시 전후. GRAP 4단계 수준에 해당합니다.</pre>
+    <pre class="en">Delhi-NCR outlook: median peak AQI 433 (Severe); worst site Anand Vihar at AQI 500 (Severe) around 07 Nov 05:30 IST. Corresponds to GRAP Stage 4.</pre></div>
+  <div class="msg"><div class="eyebrow"><span class="ko">시민용 short (힌디어, 1차 언어)</span><span class="en">Citizen short message (Hindi, primary language)</span></div>
+    <pre>[वायु गुणवत्ता चेतावनी] Anand Vihar: अधिकतम AQI 500 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 321 µg/m³। स्वस्थ लोग भी प्रभावित।</pre></div>
+  <div class="msg"><div class="eyebrow"><span class="ko">운영자용 long</span><span class="en">Operator long message</span></div>
+    <pre class="ko">■ Anand Vihar 대기질 예보 (11월 5일 18시 ~ 11월 7일 17시)
+- 현재 AQI 385 → 최고 AQI 500 (위험), 정점 11월 7일 05시 전후. 추세: 비슷한 수준 유지.
+- 주 오염물질: PM10. PM2.5 최대 321㎍/㎥, PM10 최대 514㎍/㎥.
+- 확산 조건: 향후 예측기간 중 37시간(야간·새벽 20시간) 동안 풍속 10 km/h 미만, 혼합층 500 m 미만의 정체 조건이 예상됩니다(최저 혼합층 약 133 m). 밤~아침에 오염이 지표 근처에 쌓이기 쉽습니다.
+- 건강 권고: 건강한 사람도 영향을 받습니다. 가능한 한 실내에 머무르고, 어린이·노인·호흡기·심장 질환자는 외출을 피하세요. 공기청정기를 사용하고 증상이 있으면 의료기관을 찾으세요.
+- 행정 조치 안내: GRAP 4단계(위험+) 수준: 트럭 진입 제한, 재택근무 확대, 학교 원격수업 전환 등 강력한 조치가 시행될 수 있습니다. 당국 공지를 확인하세요.
+- 이 예보는 AI 모델(Aurora) 기반 참고 정보이며, 공식 경보는 CPCB/CAQM 발표를 따르세요.</pre>
+    <pre class="en">■ Anand Vihar air-quality outlook (05 Nov 18:30 IST to 07 Nov 17:30 IST)
+- AQI now 385, peaking at 500 (Severe) around 07 Nov 05:30 IST. Trend: roughly steady.
+- Main pollutant: PM10. PM2.5 up to 321 ug/m3, PM10 up to 514 ug/m3.
+- Dispersion: Stagnant conditions (wind below 10 km/h, mixing height below 500 m) are expected for 37 h, 20 h of them overnight (minimum mixing height about 133 m). Pollution will tend to pool near the surface from night to morning.
+- Health advice: Even healthy people are affected. Stay indoors as much as possible; children, older adults and people with lung or heart disease should avoid going out. Use an air purifier and seek medical care if symptoms appear.
+- Measures: GRAP Stage IV (Severe+) level: truck entry restrictions, expanded work-from-home and online classes may be enforced. Follow official notices.
+- This is AI-model (Aurora) guidance for information only; follow official CPCB/CAQM alerts.</pre></div>
+
+  <h2><span class="ko">5. 메시지 설계 원칙</span><span class="en">5. Message design principles</span></h2>
+  <ol class="ko">
+    <li><b>무엇(수치+범주)·언제(IST 정점 시각)·어디(지점)·어떻게(행동 1~2개)</b>를 160자 안에 담는다. <code>short</code>는 SMS/푸시, <code>long</code>은 앱 상세·브리핑용.</li>
+    <li><b>범주는 CPCB 용어를 그대로</b> 쓴다(좋음/양호/보통/나쁨/매우 나쁨/위험). 뉴스·공식 앱의 용어와 일치해야 혼란이 없다.</li>
+    <li><b>행동 지침은 민감군을 먼저</b> 호명한다(어린이·노인·임산부·호흡기 질환자).</li>
+    <li><b>GRAP 단계는 "해당 수준"으로만 표현</b>한다. 실제 조치 발효는 CAQM 권한이므로 "시행될 수 있습니다"로 쓰고 공식 공지를 안내한다.</li>
+    <li><b>기상 근거를 한 문장 포함</b>한다. 시민이 "왜 밤에 더 나쁜가"를 이해하면 행동 순응도가 올라간다.</li>
+    <li><b>면책 문구 고정</b>: "AI 모델(Aurora) 기반 참고 정보이며 공식 경보는 CPCB/CAQM을 따르세요."</li>
+    <li>언어는 힌디어(1차), 영어(2차), 운영팀용 한국어. 모든 템플릿은 <code>delhi_aq.py</code>의 <code>HEALTH_ADVICE</code>, <code>GRAP_ADVICE</code>, <code>CATEGORY_NAMES</code>에 모여 있어 보건 전문가가 코드 변경 없이 검수할 수 있다.</li>
+  </ol>
+  <ol class="en">
+    <li>Put <b>what (value and category), when (IST peak), where (site), how (one or two actions)</b> in under 160 characters. <code>short</code> for SMS/push, <code>long</code> for app detail and briefings.</li>
+    <li><b>Use CPCB category names verbatim</b> (Good / Satisfactory / Moderate / Poor / Very Poor / Severe) so they match the news and the official app.</li>
+    <li><b>Name sensitive groups first</b> (children, older adults, pregnant women, respiratory patients).</li>
+    <li><b>Describe GRAP stages as "corresponding level" only.</b> Enforcement is CAQM's call: write "may be enforced" and point to official notices.</li>
+    <li><b>Include one sentence of meteorological reasoning.</b> People who understand why nights are worse comply better.</li>
+    <li><b>A fixed disclaimer</b>: "AI-model (Aurora) guidance for information only; follow official CPCB/CAQM alerts."</li>
+    <li>Hindi first, English second, Korean for the operating team. All templates live in <code>HEALTH_ADVICE</code>, <code>GRAP_ADVICE</code> and <code>CATEGORY_NAMES</code> in <code>delhi_aq.py</code>, so health experts can review wording without touching code.</li>
+  </ol>
+
+  <h2><span class="ko">6. 한계와 책임 있는 사용</span><span class="en">6. Limits and responsible use</span></h2>
+  <ul class="ko">
+    <li><b>공간 해상도</b>: Air Pollution 모델은 0.4°(약 40 km). 지점 간 차이는 보간 결과이며 교차로·공단 수준의 농도는 표현하지 못한다. 실제 서비스에는 관측소별 편향 보정이나 CPCB 데이터로의 파인튜닝이 필요하다.</li>
+    <li><b>시간 해상도</b>: 시간별 농도 곡선은 12시간 예측의 선형 보간이다. 시간별 구조의 근거는 Aurora 1.5의 기상 변수이며 메시지에도 그렇게 표기한다.</li>
+    <li><b>입력 데이터</b>: Aurora 1.5는 IFS HRES T0로 파인튜닝되었다. 이 예제는 접근이 쉬운 ERA5를 쓰므로 정확도가 보장되지 않는다. Air Pollution 모델은 CAMS 분석 전용이다.</li>
+    <li><b>1000 hPa 가스 농도</b>: NO2/SO2/O3/CO는 1000 hPa 혼합비를 밀도로 환산한 근사치다. AQI 판정은 사실상 PM2.5/PM10이 주도한다.</li>
+    <li><b>운영 결정</b>: Aurora는 연구용 모델이며 전문가 검토 없는 운영 의사결정에 쓰여서는 안 된다. 메시지에는 항상 공식 경보를 따르라는 문구가 들어간다.</li>
+  </ul>
+  <ul class="en">
+    <li><b>Spatial resolution</b>: the Air Pollution model runs at 0.4° (about 40 km). Site differences are interpolation; roadside or industrial-estate concentrations are not resolved. A real service needs per-station bias correction or fine-tuning on CPCB data.</li>
+    <li><b>Temporal resolution</b>: the hourly concentration curve is a linear interpolation of 12-hour forecasts. The hourly structure comes from Aurora 1.5's meteorology, and the messages say so.</li>
+    <li><b>Input data</b>: Aurora 1.5 was fine-tuned on IFS HRES T0; this example uses ERA5, so accuracy is not guaranteed. The Air Pollution model is for CAMS analysis only.</li>
+    <li><b>Gases at 1000 hPa</b>: NO2/SO2/O3/CO are 1000 hPa mixing ratios converted with air density, an approximation. PM2.5/PM10 dominate the AQI in practice.</li>
+    <li><b>Operational decisions</b>: Aurora is a research model and must not drive operational decisions without expert review. Every message points to official alerts.</li>
+  </ul>
+
+  <h2><span class="ko">7. 확장 로드맵</span><span class="en">7. Roadmap</span></h2>
+  <ol class="ko">
+    <li><b>불확실성</b>: <code>AuroraV1p5Ensemble</code> + <code>rollout_ensemble</code>로 "정체 확률 80%" 식의 확률 표현.</li>
+    <li><b>CPCB 관측 보정</b>: 지점별 관측-예측 잔차 학습(선형/분위 매핑부터).</li>
+    <li><b>파인튜닝</b>: <code>msresearch-aurora/starter-code/</code>의 학습 루프로 Air Pollution 모델을 인도 지역 자료에 적응. 모델 측 요구사항은 <code>docs/finetuning.md</code>.</li>
+    <li><b>채널 연계</b>: <code>messages_hi.json</code>을 WhatsApp Business API, SMS 게이트웨이, 델리 정부 앱으로 전달하는 어댑터. 거주 지역(핀코드)을 가장 가까운 지점에 매핑.</li>
+    <li><b>자동화</b>: 00/12 UTC마다 <code>delhi_aq.py --mode foundry --plot</code>을 크론으로 실행하고 산출물을 블롭 스토리지에 적재.</li>
+  </ol>
+  <ol class="en">
+    <li><b>Uncertainty</b>: <code>AuroraV1p5Ensemble</code> with <code>rollout_ensemble</code> for statements like "80% chance of stagnation".</li>
+    <li><b>CPCB correction</b>: learn per-site residuals between observations and forecasts (linear or quantile mapping first).</li>
+    <li><b>Fine-tuning</b>: adapt the Air Pollution model to regional data with the training loop in <code>msresearch-aurora/starter-code/</code>. Model-side requirements are in <code>docs/finetuning.md</code>.</li>
+    <li><b>Channels</b>: an adapter pushing <code>messages_hi.json</code> to the WhatsApp Business API, an SMS gateway or the Delhi government app. Map users to the nearest site by pin code.</li>
+    <li><b>Automation</b>: run <code>delhi_aq.py --mode foundry --plot</code> from cron at 00 and 12 UTC and archive outputs in blob storage.</li>
+  </ol>
+
+  <h2><span class="ko">8. 직접 실행하기</span><span class="en">8. Run it yourself</span></h2>
+  <p class="ko">demo 모드는 다운로드와 GPU 없이 후처리(AQI, 메시지, 지도 타일)만 실행합니다. Colab 링크는 저장소가 GitHub에 푸시된 뒤에 동작합니다.</p>
+  <p class="en">Demo mode runs only the post-processing (AQI, messages, map tile) without downloads or a GPU. The Colab link works once the repository is pushed to GitHub.</p>
+  <div class="links">
+    <a href="https://colab.research.google.com/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb"><b>Google Colab</b><span class="ko">노트북을 브라우저에서 바로 실행 (demo 모드)</span><span class="en">Run the notebook in the browser (demo mode)</span></a>
+    <a href="https://mybinder.org/v2/gh/playground-for-thinker/aurora/main?labpath=examples%2Fdelhi_air_quality%2Fexample_delhi_air_quality.ipynb"><b>Binder</b><span class="ko">JupyterLab 환경에서 실행 (첫 빌드는 느림)</span><span class="en">Run in JupyterLab (first build is slow)</span></a>
+    <a href="https://github.com/playground-for-thinker/aurora/tree/main/examples/delhi_air_quality"><b>GitHub</b><span class="ko">코드, 스토리보드 문서, 노트북</span><span class="en">Code, storyboard documents, notebook</span></a>
+    <a href="https://huggingface.co/microsoft/aurora"><b>microsoft/aurora</b><span class="ko">체크포인트와 정적 변수 (HuggingFace)</span><span class="en">Checkpoints and static variables (HuggingFace)</span></a>
+  </div>
+<pre><code>git clone https://github.com/playground-for-thinker/aurora.git &amp;&amp; cd aurora
+pip install -e . &amp;&amp; pip install matplotlib
+python examples/delhi_air_quality/delhi_aq.py --mode demo --date 2025-11-05 --plot --out outputs</code></pre>
+</main>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById("root");
+  function setLang(lang) {
+    root.setAttribute("data-lang", lang);
+    document.documentElement.lang = lang;
+    document.querySelectorAll(".lang-switch button").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-set") === lang));
+    });
+    try { localStorage.setItem("storyboard-lang", lang); } catch (e) {}
+  }
+  var initial = "ko";
+  var h = (location.hash || "").replace("#", "");
+  if (h === "en" || h === "ko") initial = h;
+  else { try { var s = localStorage.getItem("storyboard-lang"); if (s === "en" || s === "ko") initial = s; } catch (e) {} }
+  setLang(initial);
+  document.querySelectorAll(".lang-switch button").forEach(function (b) {
+    b.addEventListener("click", function () { setLang(b.getAttribute("data-set")); });
+  });
+
+  // Demo data: Anand Vihar, 48 hourly steps from 05 Nov 2025 18:30 IST (13:00 UTC).
+  var PM = [231,238,244,251,257,264,271,277,284,290,297,304,300,296,292,288,284,280,276,272,268,264,260,256,261,266,272,277,283,288,294,299,305,310,316,321,315,308,302,296,289,283,277,271,264,258,252,245];
+  var BLH = [308,190,166,152,145,148,158,160,153,151,143,152,149,158,169,202,316,498,722,896,1098,970,653,478,299,210,160,145,147,148,160,133,155,145,140,157,166,149,157,209,313,502,750,877,1052,884,646,486];
+  var WIND = [7.0,5.0,4.5,3.3,3.7,4.1,4.5,4.3,4.0,4.8,3.9,4.1,3.8,4.3,4.7,4.5,5.8,5.6,8.0,8.4,9.7,9.9,8.5,7.3,5.6,5.7,4.2,4.3,5.3,4.5,5.2,4.8,4.6,5.2,5.7,4.4,4.9,5.1,5.0,4.9,6.5,6.7,8.1,9.1,10.1,10.2,8.8,8.9];
+  var STAG = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1];
+  var START_IST_H = 18.5; // 18:30 IST
+  function istLabel(i) {
+    var h = START_IST_H + i, d = 5 + Math.floor(h / 24); h = h % 24;
+    var hh = Math.floor(h), mm = Math.round((h - hh) * 60);
+    return (d < 10 ? "0" : "") + d + " Nov " + (hh < 10 ? "0" : "") + hh + ":" + (mm < 10 ? "0" : "") + mm;
+  }
+
+  function chart(containerId, tipId, values, color, yMax, yTicks, threshold, unit) {
+    var W = 920, H = 230, L = 52, R = 16, T = 12, B = 34;
+    var n = values.length;
+    var x = function (i) { return L + (W - L - R) * i / (n - 1); };
+    var y = function (v) { return T + (H - T - B) * (1 - v / yMax); };
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="time series">';
+    // stagnant shading: contiguous runs
+    var i = 0;
+    while (i < n) {
+      if (STAG[i]) { var j = i; while (j + 1 < n && STAG[j + 1]) j++;
+        s += '<rect x="' + (x(i) - (W - L - R) / (n - 1) / 2).toFixed(1) + '" y="' + T + '" width="' + ((x(j) - x(i)) + (W - L - R) / (n - 1)).toFixed(1) + '" height="' + (H - T - B) + '" fill="var(--haze)" />';
+        i = j + 1; } else i++;
+    }
+    yTicks.forEach(function (t) {
+      s += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(t).toFixed(1) + '" y2="' + y(t).toFixed(1) + '" stroke="var(--line)" stroke-width="1" />';
+      s += '<text x="' + (L - 8) + '" y="' + (y(t) + 4).toFixed(1) + '" text-anchor="end">' + t + '</text>';
+    });
+    if (threshold != null) {
+      s += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(threshold).toFixed(1) + '" y2="' + y(threshold).toFixed(1) + '" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 4" />';
+    }
+    // x ticks every 6 h from the first forecast hour (18:30 IST); the 00:30 tick shows the date.
+    for (var k = 0; k < n; k += 6) {
+      s += '<line x1="' + x(k).toFixed(1) + '" x2="' + x(k).toFixed(1) + '" y1="' + (H - B) + '" y2="' + (H - B + 5) + '" stroke="var(--line)" />';
+      var lab = istLabel(k).slice(7); if (lab === "00:30") lab = istLabel(k).slice(0, 6);
+      s += '<text x="' + x(k).toFixed(1) + '" y="' + (H - B + 18) + '" text-anchor="middle">' + lab + '</text>';
+    }
+    s += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - B) + '" y2="' + (H - B) + '" stroke="var(--line)" />';
+    var d = values.map(function (v, idx) { return (idx ? "L" : "M") + x(idx).toFixed(1) + " " + y(v).toFixed(1); }).join(" ");
+    s += '<path d="' + d + '" fill="none" stroke="' + color + '" stroke-width="2" stroke-linejoin="round" />';
+    // endpoint and peak labels
+    var pk = values.indexOf(Math.max.apply(null, values));
+    s += '<circle cx="' + x(pk).toFixed(1) + '" cy="' + y(values[pk]).toFixed(1) + '" r="4" fill="' + color + '" stroke="var(--surface)" stroke-width="2" />';
+    s += '<text x="' + x(pk).toFixed(1) + '" y="' + (y(values[pk]) - 9).toFixed(1) + '" text-anchor="middle" style="fill: var(--fg)">' + values[pk] + unit + '</text>';
+    var mn = values.indexOf(Math.min.apply(null, values));
+    s += '<circle cx="' + x(mn).toFixed(1) + '" cy="' + y(values[mn]).toFixed(1) + '" r="4" fill="' + color + '" stroke="var(--surface)" stroke-width="2" />';
+    s += '<text x="' + x(mn).toFixed(1) + '" y="' + (y(values[mn]) + 16).toFixed(1) + '" text-anchor="middle" style="fill: var(--fg)">' + values[mn] + unit + '</text>';
+    s += '<line id="' + containerId + '-cur" x1="0" x2="0" y1="' + T + '" y2="' + (H - B) + '" stroke="var(--fg)" stroke-width="1" opacity="0" />';
+    s += '<rect x="' + L + '" y="' + T + '" width="' + (W - L - R) + '" height="' + (H - T - B) + '" fill="transparent" id="' + containerId + '-hit" />';
+    s += '</svg>';
+    var card = document.getElementById(containerId);
+    card.insertAdjacentHTML("beforeend", s);
+    var svg = card.querySelector("svg"), hit = document.getElementById(containerId + "-hit"), cur = document.getElementById(containerId + "-cur"), tip = document.getElementById(tipId);
+    function move(ev) {
+      var rect = svg.getBoundingClientRect();
+      var px = (ev.clientX - rect.left) / rect.width * W;
+      var idx = Math.max(0, Math.min(n - 1, Math.round((px - L) / (W - L - R) * (n - 1))));
+      cur.setAttribute("x1", x(idx)); cur.setAttribute("x2", x(idx)); cur.setAttribute("opacity", "0.5");
+      tip.textContent = istLabel(idx) + " IST · " + values[idx] + unit + " · " + (WIND[idx]).toFixed(1) + " km/h" + (STAG[idx] ? " · stagnant" : "");
+      tip.style.left = (x(idx) / W * rect.width) + "px";
+      tip.style.top = (rect.top - card.getBoundingClientRect().top + y(values[idx]) / H * rect.height) + "px";
+      tip.classList.add("on");
+    }
+    hit.addEventListener("mousemove", move);
+    hit.addEventListener("touchmove", function (e) { if (e.touches[0]) move(e.touches[0]); }, { passive: true });
+    hit.addEventListener("mouseleave", function () { tip.classList.remove("on"); cur.setAttribute("opacity", "0"); });
+  }
+  chart("chart-pm", "tip-pm", PM, "var(--series-pm)", 400, [0, 100, 200, 300, 400], 250, " µg/m³");
+  chart("chart-blh", "tip-blh", BLH, "var(--series-blh)", 1200, [0, 300, 600, 900, 1200], 500, " m");
+
+  var rows = [
+    ["Anand Vihar", "traffic", 385, 500, "Severe", "PM10", 4, 37, 20],
+    ["ITO", "traffic", 383, 498, "Severe", "PM10", 4, 38, 20],
+    ["Punjabi Bagh", "residential", 346, 415, "Severe", "PM2.5", 3, 38, 20],
+    ["Rohini", "residential", 337, 406, "Severe", "PM2.5", 3, 38, 20],
+    ["Jahangirpuri", "industrial", 365, 452, "Severe", "PM10", 4, 38, 20],
+    ["R K Puram", "residential", 335, 405, "Severe", "PM2.5", 3, 38, 20],
+    ["Dwarka Sector 8", "residential", 336, 406, "Severe", "PM2.5", 3, 38, 20],
+    ["Okhla Phase 2", "industrial", 366, 453, "Severe", "PM10", 4, 38, 20],
+    ["Noida Sector 62", "residential", 340, 409, "Severe", "PM2.5", 3, 38, 20],
+    ["Gurugram Vikas Sadan", "traffic", 376, 479, "Severe", "PM10", 4, 38, 20]
+  ];
+  var kindKo = { traffic: "교통", residential: "주거", industrial: "공업" };
+  var catKo = { Severe: "위험", "Very Poor": "매우 나쁨", Poor: "나쁨" };
+  var tb = document.getElementById("site-rows");
+  rows.forEach(function (r) {
+    var tr = document.createElement("tr");
+    tr.innerHTML = "<td>" + r[0] + "</td><td><span class='ko'>" + kindKo[r[1]] + "</span><span class='en'>" + r[1] + "</span></td>" +
+      "<td class='num'>" + r[2] + "</td><td class='num'>" + r[3] + "</td>" +
+      "<td><span class='pill sev'><span class='ko'>" + catKo[r[4]] + "</span><span class='en'>" + r[4] + "</span></span></td>" +
+      "<td>" + r[5] + "</td><td class='num'>" + r[6] + "</td><td class='num'>" + r[7] + " (" + r[8] + ")</td>";
+    tb.appendChild(tr);
+  });
+})();
+</script>

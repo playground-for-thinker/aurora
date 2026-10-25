@@ -102,6 +102,14 @@ print(prediction.surf_vars["2t"])
 
 더 자세한 사용법과 사용 가능한 모델 목록은 [문서](https://microsoft.github.io/aurora)를 읽어주세요.
 
+## 예제: 뉴델리 대기질 조기경보
+
+`examples/delhi_air_quality/`에 Aurora 1.5(시간별 확산 기상)와 Aurora Air Pollution(오염물질 농도)을 결합해 델리 NCR의 CPCB AQI·GRAP 단계와 시민용 경보 메시지(힌디어/영어/한국어)를 만드는 예제가 있습니다.
+
+- 스토리보드 (한국어 ⇄ English 전환): [https://claude.ai/artifact/6GkTNUq54pqXGZBVx7BGSE](https://claude.ai/artifact/6GkTNUq54pqXGZBVx7BGSE)
+- 노트북 바로 실행: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/playground-for-thinker/aurora/main?labpath=examples%2Fdelhi_air_quality%2Fexample_delhi_air_quality.ipynb)
+- 설명과 실행 방법: [`examples/delhi_air_quality/README_kor.md`](examples/delhi_air_quality/README_kor.md)
+
 ## 기여하기
 
 [`CONTRIBUTING.md`](CONTRIBUTING.md)를 참고하세요.
