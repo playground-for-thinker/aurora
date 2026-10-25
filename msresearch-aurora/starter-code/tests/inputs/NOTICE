@@ -1,0 +1,7 @@
+NOTICES
+The datasets in this directory incorporate material as listed below or described in the data.
+- Copernicus Climate Data Store (https://cds.climate.copernicus.eu/): The data was directly generated 
+  using Copernicus Climate Change Service information [2025], and may contain modifications to that data 
+  for data processing. Neither the European Commission nor ECMWF is responsible for any use of the data. 
+  These datasets are free to distribute via the Creative Commons BY license 
+  (https://creativecommons.org/licenses/by/4.0/).

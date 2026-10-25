@@ -105,6 +105,10 @@ select = [
 ]
 ignore = ["F811", "B018"]
 
+[tool.ruff.lint.per-file-ignores]
+# Example scripts contain long multilingual message templates.
+"examples/*" = ["E501"]
+
 [tool.ruff.lint.isort]
 known-local-folder = ["aurora"]
 
