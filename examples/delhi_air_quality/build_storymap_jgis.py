@@ -101,6 +101,16 @@ def extent(view: str) -> list[float]:
     return [a[0], a[1], b[0], b[1]]
 
 
+def initial_view(view: str) -> dict:
+    """Document-level centre and zoom matching the widened extent of a scene (used instead of
+    `useExtent`, which made the map re-fit to the document extent after every scene change)."""
+    x0, y0, x1, y1 = VIEWS[view]
+    w = x1 - x0
+    x0, x1 = (-40.0, 320.0) if view == "world" else (x0 - 0.233 * w, x1 + 0.967 * w)
+    return {"longitude": round((x0 + x1) / 2, 4), "latitude": round((y0 + y1) / 2, 4),
+            "zoom": round(math.log2(360.0 * 1000.0 / ((x1 - x0) * 256.0)), 2)}  # fmt: skip
+
+
 def zoom(view: str) -> float:
     """Approximate web-mercator zoom at which the extent fills a 1000 px wide map."""
     x0, _, x1, _ = VIEWS[view]
@@ -561,14 +571,12 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
         "layers": layers,
         "layerTree": tree,
         "options": {
-            "latitude": 28.64,
-            "longitude": 77.12,
-            "zoom": zoom("delhi"),
+            **initial_view(first_view),
             "bearing": 0.0,
             "pitch": 0.0,
             "projection": "EPSG:3857",
             "extent": extent(first_view),
-            "useExtent": True,
+            "useExtent": False,
         },  # fmt: skip
         "stories": {
             story_id: {
