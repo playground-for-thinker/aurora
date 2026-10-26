@@ -2400,7 +2400,7 @@
       8751604.41,
       3382011.46
     ],
-    "useExtent": false
+    "useExtent": true
   },
   "stories": {
     "d69ab627-a58a-580c-a48a-3a730c07a991": {
@@ -2422,8 +2422,7 @@
       ],
       "showGradient": true,
       "storyPanelOpacity": 0.86,
-      "markdownSegmentOpacity": 0.95,
-      "overlayContentWidth": "78%"
+      "overlayContentWidth": "100%"
     }
   },
   "viewState": {},
