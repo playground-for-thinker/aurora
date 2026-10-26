@@ -11,8 +11,8 @@ hosted service: open it in JupyterLab/JupyterLite with [JupyterGIS](https://gith
 | - | - |
 | `delhi_aq_storymap_ko.jGIS` | 한국어 스토리 맵 (19 장면) · Korean story map (19 scenes) |
 | `delhi_aq_storymap_en.jGIS` | English story map (19 scenes) |
-| `storyboard_ko.ipynb`, `storyboard_en.ipynb` | 스토리보드 노트북(Specta 아티클): `STORYBOARD_kor.md`/`STORYBOARD.md`의 장면별 설명 + 브라우저에서 그리는 Anand Vihar 48시간 그래프와 지점별 표 · storyboard notebooks (Specta article): the scene-by-scene text plus charts computed in the browser |
-| `data/*.json` | 노트북이 읽는 Anand Vihar 시계열과 지점별 요약 · series and per-site summary read by the notebooks |
+| `storyboard_ko.ipynb`, `storyboard_en.ipynb` | 발표용 스토리보드 슬라이드 12장 (Specta slides): 왼쪽 그림, 오른쪽 설명, 코드 없음 · 12-slide storyboard for a general audience: figure left, narration right, no code |
+| `img/{ko,en}/*.png` | 슬라이드 그림 (노트북에도 내장됨) · slide figures (also embedded in the notebooks) |
 | `data/*.geojson` | 두 문서가 공유하는 레이어 · layers shared by both documents: AQI tile at 4 forecast hours, 10 m wind, stagnation probability, sites, Delhi NCT, NCR tile, 0.4° cell |
 | `environment.yml`, `nblink-lock.json` | notebook.link 환경 (`xeus-python`, `jupytergis-lite`, `specta`, `matplotlib`) · environment and lock file read by notebook.link |
 | `jupyter-lite.json` | 앱 이름과 Specta 상단 바 설정 · app name and Specta top-bar settings |
@@ -28,8 +28,8 @@ notebook.link은 GitHub 저장소 URL 앞에 `notebook.link/`를 붙이면 열�
 | 스토리 맵 · 한국어 (Specta 전체 화면) | `https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_ko.jGIS` |
 | Story map · English (Specta, full screen) | `https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_en.jGIS` |
 | JupyterGIS 편집기 · editor (layers, segments, Preview Mode) | `https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/lab/?path=delhi_aq_storymap_ko.jGIS` |
-| 스토리보드 · 한국어 (Specta 아티클) | `https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_ko.ipynb` |
-| Storyboard · English (Specta article) | `https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_en.ipynb` |
+| 스토리보드 · 한국어 (Specta 슬라이드, 장마다 English ⇄ 한국어 전환) | `https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_ko.ipynb` |
+| Storyboard · English (Specta slides) | `https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_en.ipynb` |
 | JupyterLab 파일 탐색기 · file browser | `https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/lab/` |
 
 처음 열 때 notebook.link가 `environment.yml` + `nblink-lock.json`을 읽어 WebAssembly 패키지를 설치합니다(수십 초). 편집기에서는 왼쪽
@@ -49,14 +49,14 @@ cd examples/delhi_air_quality
 python build_storymap_data.py outputs/hybrid_2025-11-05 --finetune-log outputs/hybrid_2025-11-05/finetune_smoke.log  # storymap_data.js
 python build_storymap_jgis.py                       # storymap/*.jGIS + storymap/data/*.geojson
 python build_storymap_jgis.py --story-type "Vertical Scroll"   # scrolling layout instead of guided ▶ steps
-python build_storyboard_notebooks.py               # storymap/storyboard_{ko,en}.ipynb + data/*.json from STORYBOARD*.md
+python build_storyboard_slides.py                  # storymap/storyboard_{ko,en}.ipynb + img/ (12 slides, figures via matplotlib + Nanum fonts)
 ```
 
 `build_storymap_jgis.py` reads `storymap_data.js` (the same data file as `storymap.html`) and writes plain JSON following the
 JupyterGIS project schema 0.6.0. Every scene is a `StorySegmentLayer` with an extent, markdown and layer-visibility overrides, so the
 file can also be edited in the JupyterGIS UI and saved back.
 
-The storyboard notebooks keep their executed outputs so they also render on GitHub/nbviewer; on notebook.link Specta re-runs the two hidden code cells in the browser (chart labels are English in both languages because the browser build of matplotlib has no Hangul font).
+The storyboard notebooks contain markdown cells only (one per slide, figures embedded as data URIs), so Specta shows them without starting a kernel; in the JupyterLab view they open as a normal notebook.
 
 After editing `environment.yml`: `pip install mambajs && mambajs create-lock environment.yml nblink-lock.json`.
 
