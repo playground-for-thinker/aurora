@@ -76,7 +76,7 @@ def table(header: list[str], rows: list[list[str]], align: str | None = None) ->
         + "</tr>"
         for r in rows
     )
-    return f"<table style='border-collapse:collapse; width:100%; table-layout:fixed; word-break:break-word; font-size:.8em; margin:.4em 0 .6em;'><thead><tr>{th}</tr></thead><tbody>{trs}</tbody></table>"
+    return f"<table style='border-collapse:collapse; width:100%; table-layout:fixed; word-break:break-word; font-size:.86em; margin:.4em 0 .6em;'><thead><tr>{th}</tr></thead><tbody>{trs}</tbody></table>"
 
 
 # ------------------------------------------------------------------------------------ scenes

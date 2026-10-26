@@ -85,19 +85,29 @@ def merc(lon: float, lat: float) -> list[float]:
     ]
 
 
+CARD_WIDTH = "40vw"  # viewport-relative: a % width resolves against a narrower story container
+
+
+def widen(view: str) -> tuple[float, float]:
+    """Longitude span of the widened extent: 2.5x the view, with the view centred 30% across, i.e.
+    in the middle of the map area left of the 40%-wide text card."""
+    x0, _, x1, _ = VIEWS[view]
+    if view == "world":
+        return -40.0, 320.0
+    w = x1 - x0
+    cx = (x0 + x1) / 2
+    return cx - 0.75 * w, cx + 1.75 * w
+
+
 def extent(view: str) -> list[float]:
     """Web-mercator extent of a scene.
 
-    The text card covers the right third of the map, so each extent is widened to 2.2x: OpenLayers
-    fits the widened extent to the full width and the region of interest ends up centred in the
-    visible left two thirds. The world view is shifted so that India sits a third of the
-    way across.
+    The text card covers the right 40% of the map, so each extent is widened (see `widen`): OpenLayers
+    fits the widened extent to the full width and the region of interest ends up in the visible map
+    area on the left.
     """
     x0, y0, x1, y1 = VIEWS[view]
-    # Extended extent 2.2x as wide as the view (aspect > 2, so it fits the viewport width), with the
-    # view centred a third of the way across, i.e. in the middle of the visible left two thirds.
-    w = x1 - x0
-    x0, x1 = (-40.0, 320.0) if view == "world" else (x0 - 0.233 * w, x1 + 0.967 * w)
+    x0, x1 = widen(view)
     a, b = merc(x0, y0), merc(x1, y1)
     return [a[0], a[1], b[0], b[1]]
 
@@ -106,8 +116,7 @@ def initial_view(view: str) -> dict:
     """Document-level centre and zoom matching the widened extent of a scene (used instead of
     `useExtent`, which made the map re-fit to the document extent after every scene change)."""
     x0, y0, x1, y1 = VIEWS[view]
-    w = x1 - x0
-    x0, x1 = (-40.0, 320.0) if view == "world" else (x0 - 0.233 * w, x1 + 0.967 * w)
+    x0, x1 = widen(view)
     return {"longitude": round((x0 + x1) / 2, 4), "latitude": round((y0 + y1) / 2, 4),
             "zoom": round(math.log2(360.0 * 1000.0 / ((x1 - x0) * 256.0)), 2)}  # fmt: skip
 
@@ -394,22 +403,206 @@ def probability_symbology(layer_id: str) -> dict:
 # The scene text is shared with the storyboard slides (storyboard_scenes.py) and written for a
 # general audience. It is HTML with sizes in em; the wrapper below sets the base size for the story
 # panel. The panel renders markdown with JupyterLab's rendermime, which keeps inline styles.
-BODY_STYLE = "font-size:16px; line-height:1.5; min-height:84vh;"
+BODY_STYLE = "font-size:18px; line-height:1.55; min-height:84vh;"
 MUTED = "#64748b"
 
 
-def scene_html(sc: dict) -> str:
+def legend_html(m: dict, lang: str) -> str:
+    """What the map shows in this scene: AQI colours, probability ramp, wind, rings, labels."""
+
+    def sw(c: str) -> str:
+        return f"<span style='display:inline-block; width:.9em; height:.9em; background:{c}; border-radius:2px; vertical-align:-.1em; margin-right:.25em;'></span>"
+
+    parts = []
+    if m["prob"]:
+        parts.append("<span style='display:inline-block; width:5em; height:.8em; background:linear-gradient(to right, rgba(11,110,143,.05), rgba(11,110,143,.85)); vertical-align:-.05em; margin-right:.3em;'></span>"
+                     + text(lang, "정체 확률 0 → 100%", "stagnation probability 0 → 100%"))  # fmt: skip
+    elif m["aqi"]:
+        parts.append(" ".join(f"{sw(c[3])}{c[2] if lang == 'ko' else c[1]}" for c in CATS))
+    if m["wind"]:
+        parts.append(
+            text(
+                lang,
+                "검은 선 = 10 m 바람 (방향·세기)",
+                "black lines = 10 m wind (direction, strength)",
+            )
+        )
+    if m["grid"]:
+        parts.append(
+            text(
+                lang,
+                "가는 격자 = Aurora 1.5 계산 칸 (0.25°)",
+                "thin grid = Aurora 1.5 cells (0.25°)",
+            )
+        )
+    if m["coarse"]:
+        parts.append(
+            text(
+                lang,
+                "점선 사각형 = 대기오염 모델 칸 하나 (0.4°)",
+                "dashed square = one air-pollution model cell (0.4°)",
+            )
+        )
+    if m["view"] in ("delhi", "hotspot"):
+        parts.append(
+            text(
+                lang,
+                "점 = 대표 지점 10곳, 이름 옆 숫자 = Aurora 예측값",
+                "dots = ten sites, number next to the name = Aurora forecast",
+            )
+        )
+    if not parts:
+        return ""
+    body = "".join(f"<div style='margin:.15em 0;'>{x}</div>" for x in parts)
+    return (f"<div style='margin-top:.8em; padding:.5em .7em; border:1px solid rgba(100,116,139,.35); border-radius:8px; font-size:.78em;'>"
+            f"<b style='color:{MUTED};'>{text(lang, '지도 보기', 'On the map')}</b>{body}</div>")  # fmt: skip
+
+
+def scene_html(sc: dict, lang: str) -> str:
     return (f"<div style='{BODY_STYLE}'><div style='font-size:.8em; color:{MUTED}; letter-spacing:.03em; margin:0 0 .5em;'>{sc['eyebrow']}</div>"
-            f"{sc['body']}</div>")  # fmt: skip
+            f"{sc['body']}{legend_html(sc['map'], lang)}</div>")  # fmt: skip
 
 
 def chapters(D: dict, lang: str) -> list[dict]:
     out = []
     for sc in scenes(D, lang):
         m = sc["map"]
-        out.append({"key": sc["key"], "title": sc["title"], "html": scene_html(sc), "fig": sc["fig"], "view": m["view"], "aqi": m["aqi"], "wind": m["wind"],
+        out.append({"key": sc["key"], "title": sc["title"], "html": scene_html(sc, lang), "fig": sc["fig"], "view": m["view"], "aqi": m["aqi"], "wind": m["wind"],
                     "grid": m["grid"], "coarse": m["coarse"], "prob": m["prob"], "marker": m["marker"]})  # fmt: skip
     return out
+
+
+# --------------------------------------------------------------------------------------- labels
+TOWNS = [  # NCR towns for the tile view
+    # towns adjoining Delhi (Gurugram, Noida, Ghaziabad, Faridabad) are left out: they crowd the New Delhi label
+    ("Sonipat", 28.99, 77.02), ("Meerut", 28.98, 77.71), ("Panipat", 29.39, 76.97), ("Rohtak", 28.90, 76.61),
+    ("Karnal", 29.69, 76.99), ("Alwar", 27.55, 76.60), ("Mathura", 27.49, 77.67), ("Aligarh", 27.88, 78.08),
+    ("Chandigarh", 30.73, 76.78), ("Dehradun", 30.32, 78.03), ("Agra", 27.18, 78.01),
+]  # fmt: skip
+LABEL_BOXES = {  # lon0, lat0, lon1, lat1 covered by each label image
+    "world": (40.0, -5.0, 120.0, 50.0), "india": (60.0, 4.0, 100.0, 38.0), "tile": (74.5, 26.5, 81.5, 32.5),
+    "delhi": (76.65, 28.2, 77.65, 29.05), "hotspot": (77.15, 28.5, 77.47, 28.76),
+}  # fmt: skip
+LABEL_PLACE = {  # site -> (dx, dy) in view widths, horizontal anchor; keeps neighbouring labels apart
+    "Anand Vihar": (0.02, 0.045, "left"), "ITO": (-0.02, 0.0, "right"), "Punjabi Bagh": (-0.02, 0.0, "right"),
+    "Rohini": (-0.02, 0.0, "right"), "Jahangirpuri": (0.02, 0.0, "left"), "R K Puram": (0.0, -0.04, "center"),
+    "Dwarka Sector 8": (-0.02, 0.0, "right"), "Okhla Phase 2": (0.02, -0.01, "left"),
+    "Noida Sector 62": (0.02, -0.03, "left"), "Gurugram Vikas Sadan": (0.02, 0.0, "left"),
+}  # fmt: skip
+LABEL_PX_PER_DEG = {
+    "world": 12,
+    "india": 40,
+    "tile": 230,
+    "delhi": 1600,
+    "hotspot": 5000,
+}  # ~2x screen scale
+
+
+def _merc_y(lat: float) -> float:
+    return math.degrees(math.log(math.tan(math.pi / 4 + math.radians(lat) / 2)))
+
+
+def render_labels(D: dict, lang: str, out_dir: Path) -> dict[str, tuple[str, list]]:
+    """Draw place names (and, for sites, Aurora values) on transparent PNGs in Web Mercator space.
+
+    Returns {key: (path relative to the .jGIS, corner coordinates)} for ImageSource layers."""
+    import matplotlib.pyplot as plt
+    from matplotlib import patheffects
+
+    out_dir.mkdir(parents=True, exist_ok=True)
+    halo = [patheffects.withStroke(linewidth=7, foreground="white")]
+    res: dict[str, tuple[str, list]] = {}
+    summary = {r[0]: r for r in D.get("summary", [])}
+    ens = D.get("ensemble") or {}
+
+    def canvas(view: str):
+        x0, y0, x1, y1 = LABEL_BOXES[view]
+        k = LABEL_PX_PER_DEG[view]
+        wpx, hpx = (x1 - x0) * k, (_merc_y(y1) - _merc_y(y0)) * k
+        fig = plt.figure(figsize=(wpx / 100, hpx / 100), dpi=100)
+        ax = fig.add_axes([0, 0, 1, 1])
+        ax.set_xlim(x0, x1)
+        ax.set_ylim(_merc_y(y0), _merc_y(y1))
+        ax.axis("off")
+        fig.patch.set_alpha(0)
+        return fig, ax
+
+    def save(key: str, view: str, fig) -> None:
+        rel = f"labels/{lang}/{key}.png"
+        fig.savefig(out_dir / f"{key}.png", transparent=True, dpi=100)
+        plt.close(fig)
+        x0, y0, x1, y1 = LABEL_BOXES[view]
+        res[key] = (rel, [[x0, y1], [x1, y1], [x1, y0], [x0, y0]])
+
+    def put(ax, lon, lat, label, size, dot=None, dx=0.0, weight="bold", ha="left", dy=0.0):
+        if dot:
+            ax.scatter(
+                [lon],
+                [_merc_y(lat)],
+                s=dot,
+                c="#1e293b",
+                edgecolors="white",
+                linewidths=2,
+                zorder=3,
+            )
+        ax.text(lon + dx, _merc_y(lat + dy), label, fontsize=size, fontweight=weight, color="#1e293b",
+                ha=ha, va="center", path_effects=halo, zorder=4)  # fmt: skip
+
+    # world: India and Delhi
+    fig, ax = canvas("world")
+    put(ax, 79.0, 22.0, text(lang, "인도", "India"), 34, ha="center")
+    put(ax, 77.21, 28.61, text(lang, "뉴델리", "New Delhi"), 28, dot=200, dx=1.8)
+    save("world", "world", fig)
+    # india: major cities
+    fig, ax = canvas("india")
+    for name, la, lo in D["cities"]:
+        put(
+            ax,
+            lo,
+            la,
+            name,
+            30 if name == "New Delhi" else 24,
+            dot=300 if name == "New Delhi" else 170,
+            dx=0.55,
+        )
+    save("india", "india", fig)
+    # tile: NCR towns
+    fig, ax = canvas("tile")
+    put(ax, 77.21, 28.61, text(lang, "뉴델리", "New Delhi"), 32, dot=360, dx=0.08)
+    for name, la, lo in TOWNS:
+        put(ax, lo, la, name, 24, dot=150, dx=0.06, weight="normal")
+    save("tile", "tile", fig)
+    # sites with Aurora values per scene
+    for view in ("delhi", "hotspot"):
+        k = 1.0 if view == "delhi" else 0.32
+        for step_key in ("h00", "h08", "h35", "prob"):
+            if view == "hotspot" and step_key != "h35":
+                continue
+            fig, ax = canvas(view)
+            for name, la, lo in [(s[0], s[1], s[2]) for s in SITES]:
+                ser = D["sites"].get(name, {})
+                if step_key == "prob":
+                    pv = (ens.get("sites", {}).get(name) or {}).get("p")
+                    val = f"{text(lang, '정체', 'P(stag.)')} {round(100 * pv[35])}%" if pv else ""
+                else:
+                    a = ser.get("aqi", [None] * 48)[STEPS[step_key]]
+                    val = f"AQI {a}" if a is not None else ""
+                big = name == HOTSPOT or view == "hotspot"
+                pdx, pdy, ha = LABEL_PLACE.get(name, (0.02, 0.0, "left"))
+                put(ax, lo, la, f"{name}\n{val}", 30 if big else 24, dx=pdx * k, dy=pdy * k, ha=ha)
+            save(f"sites_{view}_{step_key}", view, fig)
+    _ = summary
+    return res
+
+
+def label_key(view: str, ch: dict) -> str:
+    if view in ("world", "india", "tile"):
+        return view
+    if view == "hotspot":
+        return "sites_hotspot_h35"
+    if ch["prob"]:
+        return "sites_delhi_prob"
+    return f"sites_delhi_{ch['aqi'] if ch['aqi'] in ('h00', 'h08') else 'h35'}"
 
 
 def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) -> dict:
@@ -552,6 +745,17 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
         False,
     )
 
+    for key, (rel, coords) in render_labels(D, lang, HERE / "storymap" / "labels" / lang).items():
+        sid = add_source(
+            f"labels_{key}", "ImageSource", f"labels {key}", {"path": rel, "coordinates": coords}
+        )
+        add_layer(
+            f"labels_{key}",
+            "ImageLayer",
+            t("지명·값 라벨 ", "Labels ") + key,
+            {"source": sid, "opacity": 1.0},
+            False,
+        )
     toggles = [k for k in names if k != "basemap"]
     chs = chapters(D, lang)
     # The non-map figures of the storyboard slides (schematics, charts, diagrams) are shown at the
@@ -587,6 +791,7 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
             on.add("alert_peak")
         if ch["view"] in ("world", "india"):
             on -= {"sites", "delhi"}
+        on.add("labels_" + label_key(ch["view"], ch))
         params = {
             "zoom": zoom(ch["view"]), "extent": extent(ch["view"]),
             "enableIdentify": True,
@@ -596,7 +801,7 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
                 "image": image,
                 "imageCaption": caption,
                 "paneAlignment": "end",
-                "panelWidth": "34%",
+                "panelWidth": CARD_WIDTH,
             },
             "transition": {"type": "linear", "time": 1.5},
             "layerOverride": [{"targetLayer": ids[k], "visible": k in on} for k in toggles],
