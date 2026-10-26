@@ -403,8 +403,9 @@ def probability_symbology(layer_id: str) -> dict:
 # The scene text is shared with the storyboard slides (storyboard_scenes.py) and written for a
 # general audience. It is HTML with sizes in em; the wrapper below sets the base size for the story
 # panel. The panel renders markdown with JupyterLab's rendermime, which keeps inline styles.
-BODY_STYLE = "font-size:18px; line-height:1.55; min-height:84vh;"
+BODY_STYLE = "font-size:18px; line-height:1.6; min-height:84vh;"
 MUTED = "#64748b"
+NBLINK_LAB = "https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/lab/"
 
 
 def legend_html(m: dict, lang: str) -> str:
@@ -451,15 +452,16 @@ def legend_html(m: dict, lang: str) -> str:
                 "dots = ten sites, number next to the name = Aurora forecast",
             )
         )
-    if not parts:
-        return ""
+    lab = f"{NBLINK_LAB}?path=delhi_aq_storymap_{lang}.jGIS"
+    parts.append(text(lang, f"변수별 켜고 끄기: <a href='{lab}'>편집 보기</a>의 Layers 패널(눈 아이콘)",
+                            f"Switch each variable on or off: Layers panel (eye icons) in the <a href='{lab}'>editor view</a>"))  # fmt: skip
     body = "".join(f"<div style='margin:.15em 0;'>{x}</div>" for x in parts)
     return (f"<div style='margin-top:.8em; padding:.5em .7em; border:1px solid rgba(100,116,139,.35); border-radius:8px; font-size:.78em;'>"
-            f"<b style='color:{MUTED};'>{text(lang, '지도 보기', 'On the map')}</b>{body}</div>")  # fmt: skip
+            f"<b style='opacity:.8;'>{text(lang, '지도 보기', 'On the map')}</b>{body}</div>")  # fmt: skip
 
 
 def scene_html(sc: dict, lang: str) -> str:
-    return (f"<div style='{BODY_STYLE}'><div style='font-size:.8em; color:{MUTED}; letter-spacing:.03em; margin:0 0 .5em;'>{sc['eyebrow']}</div>"
+    return (f"<div style='{BODY_STYLE}'><div style='font-size:.78em; opacity:.7; letter-spacing:.04em; text-transform:uppercase; margin:0 0 .6em;'>{sc['eyebrow']}</div>"
             f"{sc['body']}{legend_html(sc['map'], lang)}</div>")  # fmt: skip
 
 
@@ -603,6 +605,32 @@ def label_key(view: str, ch: dict) -> str:
     if ch["prob"]:
         return "sites_delhi_prob"
     return f"sites_delhi_{ch['aqi'] if ch['aqi'] in ('h00', 'h08') else 'h35'}"
+
+
+def grouped_tree(tree: list[str], ids: dict[str, str], t) -> list:
+    """Layer tree with one group per kind of variable, so the JupyterLab Layers panel offers a tidy
+    on/off (eye) switch per Aurora variable. Story segments stay at the top level."""
+    key_of = {v: k for k, v in ids.items()}
+    groups = [
+        (
+            t("Aurora 분석 결과", "Aurora results"),
+            lambda k: k.startswith(("aqi_", "prob_", "wind_")),
+        ),
+        (t("격자·해상도", "Grids and resolution"), lambda k: k in ("grid", "coarse")),
+        (t("경계", "Boundaries"), lambda k: k in ("tile", "delhi")),
+        (
+            t("지점·경보", "Sites and alerts"),
+            lambda k: k in ("sites", "marker") or k.startswith("alert_"),
+        ),
+        (t("지명·값 라벨", "Labels"), lambda k: k.startswith("labels_")),
+    ]
+    out: list = [lid for lid in tree if key_of.get(lid) == "basemap"]
+    for name, pick in groups:
+        members = [lid for lid in tree if pick(key_of.get(lid, ""))]
+        if members:
+            out.append({"name": name, "layers": members, "visible": True, "parameters": {}})
+    out += [lid for lid in tree if key_of.get(lid, "").startswith("segment_")]
+    return out
 
 
 def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) -> dict:
@@ -821,7 +849,7 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
         "schemaVersion": "0.6.0",
         "sources": sources,
         "layers": layers,
-        "layerTree": tree,
+        "layerTree": grouped_tree(tree, ids, t),
         "options": {
             **initial_view(first_view),
             "bearing": 0.0,

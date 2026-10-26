@@ -11,10 +11,14 @@ city* has to own (amber); messages are phone bubbles. Numbers come from `storyma
 
 from __future__ import annotations
 
+import re
 from datetime import datetime, timedelta
 
 NBLINK = "https://notebook.link/github/playground-for-thinker/aurora/tree/storymap"
 TEAL, AMBER, INK, MUTED, PAPER = "#0b6e8f", "#b7791f", "#1e293b", "#64748b", "#f8fafc"
+# Card HTML must read on light and dark themes: text inherits the theme colour, boxes use
+# translucent tints, and accents are mid-tone colours that keep contrast on white and on black.
+ACC_TEAL, ACC_AMBER = "#1d8fb5", "#c98a2b"
 HOTSPOT = "Anand Vihar"
 
 
@@ -36,35 +40,39 @@ def esc(s: str) -> str:
 def ul(items: list[str]) -> str:
     return (
         "<ul style='margin:0 0 .5em 1.1em; padding:0;'>"
-        + "".join(f"<li style='margin:0 0 .35em 0;'>{i}</li>" for i in items)
+        + "".join(f"<li style='margin:0 0 .45em 0;'>{i}</li>" for i in items)
         + "</ul>"
     )
 
 
 def note(body: str) -> str:
-    return f"<div style='background:{PAPER}; border:1px solid #cbd5e1; padding:.45em .7em; border-radius:8px; margin:.5em 0; font-size:.9em; color:{INK};'>{body}</div>"
+    return f"<div style='background:rgba(100,116,139,.12); border:1px solid rgba(100,116,139,.35); padding:.5em .75em; border-radius:8px; margin:.6em 0; font-size:.92em;'>{body}</div>"
 
 
 def sys_box(lang: str, body: str) -> str:
-    return (f"<div style='background:#e6f3f7; border-left:6px solid {TEAL}; padding:.45em .7em; border-radius:8px; margin:.5em 0; font-size:.9em; color:{INK};'>"
-            f"<b style='color:{TEAL};'>{text(lang, '현 시스템이 보여주는 것', 'What this system shows')}</b> · {body}</div>")  # fmt: skip
+    return (f"<div style='background:rgba(29,143,181,.14); border-left:6px solid {ACC_TEAL}; padding:.5em .75em; border-radius:8px; margin:.6em 0; font-size:.92em;'>"
+            f"<b style='color:{ACC_TEAL};'>{text(lang, '현 시스템이 보여주는 것', 'What this system shows')}</b> · {body}</div>")  # fmt: skip
 
 
 def gov_box(lang: str, body: str) -> str:
-    return (f"<div style='background:#fff4e0; border-left:6px solid {AMBER}; padding:.45em .7em; border-radius:8px; margin:.5em 0; font-size:.9em; color:{INK};'>"
-            f"<b style='color:{AMBER};'>{text(lang, '정부·시가 할 일', 'Government and city')}</b> · {body}</div>")  # fmt: skip
+    return (f"<div style='background:rgba(201,138,43,.16); border-left:6px solid {ACC_AMBER}; padding:.5em .75em; border-radius:8px; margin:.6em 0; font-size:.92em;'>"
+            f"<b style='color:{ACC_AMBER};'>{text(lang, '정부·시가 할 일', 'Government and city')}</b> · {body}</div>")  # fmt: skip
 
 
 def phone(label: str, body: str, dark: bool = True) -> str:
-    bg, fg = ("#0f172a", "#f8fafc") if dark else ("#e2e8f0", INK)
-    return (f"<div style='background:{bg}; color:{fg}; padding:.5em .8em; border-radius:14px; margin:.5em 0; font-size:.85em; line-height:1.4;'>"
+    style = (
+        "background:#0f172a; color:#f8fafc; border:1px solid rgba(148,163,184,.45);"
+        if dark
+        else "background:rgba(100,116,139,.16);"
+    )
+    return (f"<div style='{style} padding:.55em .85em; border-radius:14px; margin:.6em 0; font-size:.9em; line-height:1.45;'>"
             f"<div style='font-size:.75em; opacity:.7; margin-bottom:.15em;'>📱 {label}</div>{esc(body)}</div>")  # fmt: skip
 
 
 def table(header: list[str], rows: list[list[str]], align: str | None = None) -> str:
     al = (align or "l" * len(header)).ljust(len(header), "l")
     th = "".join(
-        f"<th style='text-align:{'right' if al[k] == 'r' else 'left'}; padding:.3em .45em; border-bottom:2px solid rgba(100,116,139,.5); color:{MUTED}; font-size:.9em;'>{h}</th>"
+        f"<th style='text-align:{'right' if al[k] == 'r' else 'left'}; padding:.3em .45em; border-bottom:2px solid rgba(100,116,139,.5); opacity:.8; font-size:.9em;'>{h}</th>"
         for k, h in enumerate(header)
     )
     trs = "".join(
@@ -157,7 +165,7 @@ def scenes(D: dict, lang: str) -> list[dict]:
                 ),
             ]
         )
-        + f"<div style='font-size:.8em; color:{MUTED};'>{tag_met} · {tag_pm} · {t('초기 시각', 'initial time')} {PV.get('init_time', '').replace('T', ' ')} UTC</div>",
+        + f"<div style='font-size:.82em; opacity:.75;'>{tag_met} · {tag_pm} · {t('초기 시각', 'initial time')} {PV.get('init_time', '').replace('T', ' ')} UTC</div>",
         (
             "map",
             {
@@ -302,7 +310,7 @@ def scenes(D: dict, lang: str) -> list[dict]:
                 ],
             ],
         )
-        + f"<div style='font-size:.8em; color:{MUTED};'>{t('그래프: Anand Vihar의 AQI와 혼합층. 파란 띠가 정체 시간(바람 10 km/h 미만, 혼합층 500 m 미만).', 'Chart: AQI and mixing height at Anand Vihar; blue bands are stagnant hours (wind below 10 km/h, mixing height below 500 m).')}</div>",
+        + f"<div style='font-size:.82em; opacity:.75;'>{t('그래프: Anand Vihar의 AQI와 혼합층. 파란 띠가 정체 시간(바람 10 km/h 미만, 혼합층 500 m 미만).', 'Chart: AQI and mixing height at Anand Vihar; blue bands are stagnant hours (wind below 10 km/h, mixing height below 500 m).')}</div>",
         ("timeline", {}),
         "delhi",
         aqi="h00",
@@ -662,4 +670,6 @@ def scenes(D: dict, lang: str) -> list[dict]:
         "delhi",
         aqi="h35",
     )
+    for sc in S:
+        sc["eyebrow"] = re.sub(r"^\d+ · ", "", sc["eyebrow"])
     return S

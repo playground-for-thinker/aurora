@@ -569,7 +569,7 @@ def fig_message_anatomy(D: dict, lang: str):
 
 
 def fig_roles(lang: str):
-    fig, ax = plt.subplots(figsize=(7, 4.9))
+    fig, ax = plt.subplots(figsize=(7, 5.8))
     ax.set_xlim(0, 10)
     ax.set_ylim(0, 10)
     ax.axis("off")
@@ -579,17 +579,27 @@ def fig_roles(lang: str):
     gov_items = text(lang,
         "• 공식 관측망(CPCB/DPCC) 연결과 검증\n• 지점별 편향 보정, 지역 자료로 파인튜닝\n• GRAP 발령·집행 (CAQM 권한)\n• 구독자 등록, 우편번호 → 지점 매핑\n• 공식 채널 발송 (SMS · WhatsApp · 앱)\n• 보건 문구 검수, 취약계층 지원\n• 시민 홍보·교육, 민원 대응",
         "• Connect and verify the official monitors (CPCB/DPCC)\n• Per-site bias correction, fine-tuning on regional data\n• Invoke and enforce GRAP (CAQM's authority)\n• Subscriber registry, postal code → site mapping\n• Official channels (SMS · WhatsApp · app)\n• Health wording review, support for vulnerable groups\n• Public communication and education")  # fmt: skip
+    import textwrap
+
+    def wrap(items: str, width: int) -> str:
+        # each bullet wrapped to the box width, continuation lines indented under the text
+        return "\n".join(
+            textwrap.fill(ln, width, subsequent_indent="   ") for ln in items.split("\n")
+        )
+
+    width = 24 if lang == "ko" else 31
+    sys_items, gov_items = wrap(sys_items, width), wrap(gov_items, width)
     for x, title, body, fc, ec in [
         (
             0.3,
-            text(lang, "현 시스템이 보여주는 것", "What this system shows"),
+            text(lang, "현 시스템이 보여주는 것", "What this\nsystem shows"),
             sys_items,
             "#e6f3f7",
             TEAL,
         ),
         (
             5.2,
-            text(lang, "정부·시가 맡아야 할 것", "What government and city must own"),
+            text(lang, "정부·시가 맡아야 할 것", "What government and\ncity must own"),
             gov_items,
             "#fff4e0",
             AMBER,
@@ -606,11 +616,14 @@ def fig_roles(lang: str):
             title,
             ha="center",
             va="center",
-            fontsize=11.5,
+            fontsize=11.5 if lang == "ko" else 11,
             fontweight="bold",
             color=ec,
+            linespacing=1.15,
         )
-        ax.text(x + 0.25, 8.3, body, ha="left", va="top", fontsize=9.3, color=INK, linespacing=1.6)
+        ax.text(
+            x + 0.25, 8.05, body, ha="left", va="top", fontsize=9.3, color=INK, linespacing=1.45
+        )
     arrow(ax, (4.8, 5.0), (5.2, 5.0), color=INK)
     ax.text(5.0, 5.35, text(lang, "인계", "hand-off"), ha="center", fontsize=8, color=INK)
     return fig
@@ -743,13 +756,13 @@ def slide_html(
 ) -> str:
     other = "en" if lang == "ko" else "ko"
     switch = text(lang, "English ▸", "한국어 ▸")
-    return f"""<div style="position:relative; width:100%; text-align:left; color:{INK}; font-size:20px; line-height:1.45;">
+    return f"""<div style="position:relative; width:100%; text-align:left; font-size:20px; line-height:1.45;">
 <div style="position:absolute; top:-6px; right:0;"><a href="{NBLINK}/specta/?path=storyboard_{other}.ipynb" style="font-size:14px; background:{TEAL}; color:#fff; padding:4px 14px; border-radius:999px; text-decoration:none; font-weight:600;">{switch}</a></div>
 <div style="display:flex; gap:26px; align-items:flex-start; width:100%;">
 <div style="flex:0 0 48%; max-width:48%;"><img src="{img_uri}" alt="{title}" style="width:100%; border-radius:10px; box-shadow:0 2px 12px rgba(15,23,42,.18);"></div>
 <div style="flex:1 1 52%;">
-<div style="font-size:13px; color:{MUTED}; letter-spacing:.05em;">{n} / {total} · {eyebrow}</div>
-<h2 style="font-size:29px; margin:4px 0 12px; color:{TEAL}; line-height:1.2;">{title}</h2>
+<div style="font-size:13px; opacity:.7; letter-spacing:.05em;">{n} / {total} · {eyebrow}</div>
+<h2 style="font-size:29px; margin:4px 0 12px; color:#1d8fb5; line-height:1.2;">{title}</h2>
 {body}
 </div></div></div>"""
 
