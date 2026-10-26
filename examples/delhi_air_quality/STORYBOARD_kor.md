@@ -129,3 +129,36 @@ demo 모드의 수치는 11월 전형적 에피소드를 흉내 낸 합성값이
 | 5 자동화 | 00/12 UTC 크론 스크립트 생성 | 추가 분석 | `run_delhi_aq_cron.sh` |
 
 오염 농도는 이 실행에서도 합성값입니다(CAMS는 Atmosphere Data Store 계정 필요). 산출물은 `outputs/hybrid_2025-11-05/`, 출처 요약은 그 안의 `provenance.json`에 있습니다.
+
+## 9. 공개용 스토리 맵과 발표 슬라이드 (notebook.link)
+
+위 내용을 일반인 대상으로 다시 쓴 두 가지 공개 버전이 `storymap/` 폴더에 있습니다. 둘 다 Claude 등 특정 서비스에 묶이지 않고 [notebook.link](https://notebook.link)에서 브라우저만으로 열립니다. 장면 텍스트는 `storyboard_scenes.py` 한 곳에서 관리해 두 버전이 같은 서술을 공유하며, 코드·파일 이름·실행 옵션은 모두 뺐습니다.
+
+| 버전 | 링크 | 구성 |
+| - | - | - |
+| 스토리 맵 (JupyterGIS `.jGIS`) | [한국어](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_ko.jGIS) · [English](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_en.jGIS) | 지도가 화면을 채우고 오른쪽에 장면 카드가 스크롤됩니다. 세계 → 인도 → 델리 수도권 → 델리 → Anand Vihar 순으로 지도가 좁혀집니다. 레이어: 4개 시각의 AQI 타일, 10 m 바람, 정체 확률, 10개 지점, 델리 경계, 0.4° 셀 |
+| 발표 슬라이드 (Specta) | [한국어](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_ko.ipynb) · [English](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_en.ipynb) | 12장. 왼쪽 그림(지도·개념도·그래프), 오른쪽 설명. 각 장 오른쪽 위 버튼으로 한국어 ⇄ English 전환 |
+
+12개 장면은 다음 순서입니다. 각 장면에서 **현 시스템이 보여주는 것**(청록 박스)과 **정부·시가 맡아야 할 것**(주황 박스)을 구분해 적었고, 시민에게 가는 메시지는 휴대폰 말풍선으로 보여 줍니다.
+
+| 장면 | 제목 | 지도 |
+| - | - | - |
+| 1 | 시민에게 닿는 한 줄의 대기질 경보 | 세계 |
+| 2 | 왜 델리이고, 왜 11월인가 | 인도 |
+| 3 | Aurora가 두 번 등장한다 | 델리 수도권 타일 |
+| 4 | 48시간: 저녁 경보에서 아침 업데이트까지 | 델리 |
+| 5 | 11월 5일 18:30 IST, 저녁 경보 | 델리 |
+| 6 | 11월 6일 02:30 IST, 정체가 시작된다 | 델리 + 바람 |
+| 7 | 11월 7일 05:30 IST, 가장 심각한 곳 | Anand Vihar |
+| 8 | "정체 확률 80%"로 말하기 | 델리 + 정체 확률 |
+| 9 | 160자 안에 무엇·언제·어디·왜·어떻게 | 델리 |
+| 10 | 시스템이 보여주는 것과 정부·시가 맡아야 할 것 | 델리 |
+| 11 | 해상도의 진실, 그리고 책임 있는 사용 | 델리 + 0.4° 셀 |
+| 12 | 실행해 본 것과 남은 것 | 델리 |
+
+역할 구분의 요지는 다음과 같습니다.
+
+- 현 시스템: 48시간 오염 농도·기상 예측(Aurora), 10개 지점 AQI와 GRAP 해당 수준, 정체 시간대와 확률(앙상블), 힌디어·영어·한국어 메시지 초안, 운영자 브리핑·지도·그래프, 00/12 UTC 자동 재발행, 발송 로그(dry run).
+- 정부·시: 공식 관측망(CPCB/DPCC) 연결과 검증, 지점별 보정과 지역 자료 추가 학습, GRAP 발령·집행(CAQM 권한), 구독자 등록과 우편번호→지점 매핑, 공식 채널(SMS·WhatsApp·앱) 발송, 보건 문구 검수와 취약계층 지원, 시민 홍보·교육.
+
+다시 만들려면 `python build_storymap_jgis.py`, `python build_storyboard_slides.py`를 실행하고, `main`에 커밋한 뒤 `./publish_storymap_branch.sh`로 `storymap` 브랜치를 갱신합니다(notebook.link는 50 MB 이하의 저장소 트리만 읽으므로 `storymap/` 폴더만 별도 브랜치로 발행합니다).
