@@ -58,7 +58,8 @@ JupyterGIS project schema 0.6.0. Every scene is a `StorySegmentLayer` with an ex
 file can also be edited in the JupyterGIS UI and saved back. The story type is "Vertical Scroll" in a split-screen layout: the map fills the left two thirds and each
 scene is a slightly translucent card in the right third that scrolls over it; scene extents are extended eastwards so the region of
 interest sits in the visible left two thirds. The scene text is shared with the slides (`storyboard_scenes.py`), written for a general
-audience, and emitted as HTML with a 16 px base size so tables fit the card. The split is fixed in the Specta view; in the JupyterLab
+audience, and emitted as HTML with a 16 px base size so tables fit the card. Scenes whose slide figure is not a map (schematics, charts, diagrams) show that figure at the top of
+the card, so the story map and the slides stay in step. The split is fixed in the Specta view; in the JupyterLab
 view (`lab/?path=...`) the Story panel is a normal side panel whose divider can be dragged. The scene text is HTML
 with an 18 px base size so it stays readable and tables fit on one screen.
 
