@@ -511,6 +511,7 @@ def render_labels(D: dict, lang: str, out_dir: Path) -> dict[str, tuple[str, lis
     import matplotlib.pyplot as plt
     from matplotlib import patheffects
 
+    setup_fonts(lang)  # Hangul glyphs: the label images are drawn before the scene figures
     out_dir.mkdir(parents=True, exist_ok=True)
     halo = [patheffects.withStroke(linewidth=7, foreground="white")]
     res: dict[str, tuple[str, list]] = {}
