@@ -9,9 +9,10 @@ hosted service: open it in JupyterLab/JupyterLite with [JupyterGIS](https://gith
 
 | 파일 / File | 내용 / Content |
 | - | - |
-| `delhi_aq_storymap_ko.jGIS` | 한국어 스토리 맵 (19 장면) · Korean story map (19 scenes) |
-| `delhi_aq_storymap_en.jGIS` | English story map (19 scenes) |
+| `delhi_aq_storymap_ko.jGIS` | 한국어 스토리 맵 (12 장면, 슬라이드와 같은 서술) · Korean story map (12 scenes, same narration as the slides) |
+| `delhi_aq_storymap_en.jGIS` | English story map (12 scenes) |
 | `storyboard_ko.ipynb`, `storyboard_en.ipynb` | 발표용 스토리보드 슬라이드 12장 (Specta slides): 왼쪽 그림, 오른쪽 설명, 코드 없음 · 12-slide storyboard for a general audience: figure left, narration right, no code |
+| `storyboard_scenes.py` (상위 폴더) | 두 산출물이 공유하는 장면 텍스트 · scene narration shared by the story map and the slides |
 | `img/{ko,en}/*.png` | 슬라이드 그림 (노트북에도 내장됨) · slide figures (also embedded in the notebooks) |
 | `data/*.geojson` | 두 문서가 공유하는 레이어 · layers shared by both documents: AQI tile at 4 forecast hours, 10 m wind, stagnation probability, sites, Delhi NCT, NCR tile, 0.4° cell |
 | `environment.yml`, `nblink-lock.json` | notebook.link 환경 (`xeus-python`, `jupytergis-lite`, `specta`, `matplotlib`) · environment and lock file read by notebook.link |
@@ -54,10 +55,11 @@ python build_storyboard_slides.py                  # storymap/storyboard_{ko,en}
 
 `build_storymap_jgis.py` reads `storymap_data.js` (the same data file as `storymap.html`) and writes plain JSON following the
 JupyterGIS project schema 0.6.0. Every scene is a `StorySegmentLayer` with an extent, markdown and layer-visibility overrides, so the
-file can also be edited in the JupyterGIS UI and saved back. The story type is "Vertical Scroll" in a split-screen layout: each scene
-is a slightly translucent card filling the left half and the map shows in the right half (`--overlay` builds a 48% card on the right
-instead); scene extents are doubled westwards so the region of interest sits in the visible right half. The split is fixed in the
-Specta view; in the JupyterLab view (`lab/?path=...`) the Story panel is a normal side panel whose divider can be dragged. The scene text is HTML
+file can also be edited in the JupyterGIS UI and saved back. The story type is "Vertical Scroll" in a split-screen layout: the map fills the left two thirds and each
+scene is a slightly translucent card in the right third that scrolls over it; scene extents are extended eastwards so the region of
+interest sits in the visible left two thirds. The scene text is shared with the slides (`storyboard_scenes.py`), written for a general
+audience, and emitted as HTML with a 16 px base size so tables fit the card. The split is fixed in the Specta view; in the JupyterLab
+view (`lab/?path=...`) the Story panel is a normal side panel whose divider can be dragged. The scene text is HTML
 with an 18 px base size so it stays readable and tables fit on one screen.
 
 The storyboard notebooks contain markdown cells only (one per slide, figures embedded as data URIs), so Specta shows them without starting a kernel; in the JupyterLab view they open as a normal notebook.
