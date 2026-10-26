@@ -245,6 +245,13 @@ def build_geojson(D: dict) -> dict[str, dict]:
             props["p_stagnant_h35"] = ens["sites"][name]["p"][STEPS["h35"]]
         feats.append(feature("Point", [lon, lat], props))
     out["data/sites.geojson"] = collection(feats)
+    by_name = {f["properties"]["site"]: f for f in feats}
+    out["data/alert_sites_evening.geojson"] = collection(
+        [by_name[n] for n in ("Anand Vihar", "ITO", "Gurugram Vikas Sadan") if n in by_name]
+    )
+    out["data/alert_sites_peak.geojson"] = collection(
+        [f for f in feats if f["properties"].get("aqi_h35", 0) >= 450]
+    )
 
     out["data/delhi_nct.geojson"] = collection(
         [
@@ -356,6 +363,14 @@ def sites_symbology(layer_id: str) -> dict:
     ])  # fmt: skip
 
 
+def ring_symbology(layer_id: str) -> dict:
+    """Large accent ring around a site: where an alert or message is issued in the current scene."""
+    return grammar(layer_id, [
+        rgba_rule(uid(layer_id, "ring"), fill=[11, 110, 143, 0.15], stroke=hex_rgba(ACCENT, 1.0), width=3.0, circle=True),
+        {"id": uid(layer_id, "radius"), "mappings": [{"scale": {"scheme": "constant_num", "params": {"value": 14}}, "encodings": ["circle-radius"]}]},
+    ])  # fmt: skip
+
+
 def outline_symbology(
     layer_id: str, stroke: list[float], width: float, fill: list[float] | None = None
 ) -> dict:
@@ -406,7 +421,10 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
     sources: dict[str, dict] = {}
     layers: dict[str, dict] = {}
     tree: list[str] = []
-    names: dict[str, str] = {}  # logical key -> layer name (layerOverride targets layers by name)
+    names: dict[str, str] = {}  # logical key -> layer name
+    ids: dict[
+        str, str
+    ] = {}  # logical key -> layer id (layerOverride.targetLayer is compared with the id)
 
     def add_source(key: str, stype: str, name: str, params: dict) -> str:
         sid = uid(lang, "source", key)
@@ -418,6 +436,7 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
         layers[lid] = {"type": ltype, "name": name, "visible": visible, "parameters": params}
         tree.append(lid)
         names[key] = name
+        ids[key] = lid
         return lid
 
     def geojson_layer(
@@ -505,6 +524,18 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
         sites_symbology,
         visible=True,
     )
+    geojson_layer(
+        "alert_evening",
+        "data/alert_sites_evening.geojson",
+        t("저녁 경보 대상 지점 (교통)", "Evening alert sites (traffic)"),
+        ring_symbology,
+    )
+    geojson_layer(
+        "alert_peak",
+        "data/alert_sites_peak.geojson",
+        t("정점 AQI 450 이상 지점", "Sites at or above AQI 450 at the peak"),
+        ring_symbology,
+    )
     hs = next(s for s in SITES if s[0] == HOTSPOT)
     marker_src = add_source(
         "marker",
@@ -538,6 +569,10 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
             on.add("prob_h35")
         if ch["marker"]:
             on.add("marker")
+        if ch["key"] == "evening":
+            on.add("alert_evening")
+        if ch["key"] in ("peak", "message"):
+            on.add("alert_peak")
         if ch["view"] in ("world", "india"):
             on -= {"sites", "delhi"}
         params = {
@@ -552,7 +587,7 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
                 "panelWidth": "34%",
             },
             "transition": {"type": "linear", "time": 1.5},
-            "layerOverride": [{"targetLayer": names[k], "visible": k in on} for k in toggles],
+            "layerOverride": [{"targetLayer": ids[k], "visible": k in on} for k in toggles],
         }  # fmt: skip
         segments.append(
             add_layer(
