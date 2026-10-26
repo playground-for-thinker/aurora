@@ -1342,12 +1342,12 @@
       "name": "1. 시민에게 닿는 한 줄의 대기질 경보",
       "visible": true,
       "parameters": {
-        "zoom": 10.46,
+        "zoom": 1.97,
         "extent": [
-          8506701.53,
-          3274212.69,
-          8751604.41,
-          3382011.46
+          -4452779.63,
+          -6446275.84,
+          35622237.05,
+          11753184.62
         ],
         "enableIdentify": true,
         "content": {
@@ -1359,8 +1359,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -1409,11 +1409,11 @@
           },
           {
             "targetLayer": "델리 NCT 경계",
-            "visible": true
+            "visible": false
           },
           {
             "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
-            "visible": true
+            "visible": false
           },
           {
             "targetLayer": "Anand Vihar",
@@ -1444,8 +1444,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -1529,8 +1529,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -1614,8 +1614,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -1699,8 +1699,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -1784,8 +1784,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -1869,8 +1869,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -1954,8 +1954,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -2039,8 +2039,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -2107,12 +2107,12 @@
       "name": "10. 시스템이 보여주는 것과 정부·시가 맡아야 할 것",
       "visible": true,
       "parameters": {
-        "zoom": 7.65,
+        "zoom": 10.46,
         "extent": [
-          8111739.97,
-          3061141.04,
-          9826060.13,
-          3829123.84
+          8506701.53,
+          3274212.69,
+          8751604.41,
+          3382011.46
         ],
         "enableIdentify": true,
         "content": {
@@ -2124,8 +2124,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -2209,8 +2209,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -2277,12 +2277,12 @@
       "name": "12. 실행해 본 것과 남은 것",
       "visible": true,
       "parameters": {
-        "zoom": 7.65,
+        "zoom": 10.46,
         "extent": [
-          8111739.97,
-          3061141.04,
-          9826060.13,
-          3829123.84
+          8506701.53,
+          3274212.69,
+          8751604.41,
+          3382011.46
         ],
         "enableIdentify": true,
         "content": {
@@ -2294,8 +2294,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -2388,17 +2388,17 @@
     "f9dac00e-b6f7-51b8-abcb-89f682728b83"
   ],
   "options": {
-    "longitude": 77.517,
-    "latitude": 28.625,
-    "zoom": 9.32,
+    "longitude": 140.0,
+    "latitude": 11.0,
+    "zoom": 1.97,
     "bearing": 0.0,
     "pitch": 0.0,
     "projection": "EPSG:3857",
     "extent": [
-      8506701.53,
-      3274212.69,
-      8751604.41,
-      3382011.46
+      -4452779.63,
+      -6446275.84,
+      35622237.05,
+      11753184.62
     ],
     "useExtent": false
   },
