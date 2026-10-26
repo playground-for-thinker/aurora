@@ -241,7 +241,7 @@ def fig_mixing_layer(lang: str):
     rng = np.random.default_rng(3)
     for ax, (blh, label, n_dots) in zip(axes, [
         (1000, text(lang, "낮 · 혼합층 약 1,000 m · 바람 10 km/h 이상", "Day · mixing layer ≈ 1,000 m · wind > 10 km/h"), 120),
-        (150, text(lang, "밤 · 혼합층 100~300 m · 바람 약함", "Night · mixing layer 100–300 m · light wind"), 120),
+        (150, text(lang, "밤 · 혼합층 100–300 m · 바람 약함", "Night · mixing layer 100–300 m · light wind"), 120),
     ]):  # fmt: skip
         ax.set_xlim(0, 10)
         ax.set_ylim(0, 1300)
@@ -521,7 +521,7 @@ def fig_message_anatomy(D: dict, lang: str):
         (text(lang, "언제: IST 정점 시각", "When: peak time in IST"), 7.3),
         (text(lang, "어디: 지점 이름", "Where: site name"), 6.0),
         (text(lang, "왜: 기상 근거 한 문장", "Why: one sentence of weather"), 4.7),
-        (text(lang, "어떻게: 행동 1~2개", "How: one or two actions"), 3.4),
+        (text(lang, "어떻게: 행동 1–2개", "How: one or two actions"), 3.4),
         (
             text(
                 lang,
@@ -738,7 +738,7 @@ def fig_roadmap(D: dict, lang: str):
 
 # ------------------------------------------------------------------------------------ slides
 def esc(s: str) -> str:
-    return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    return s.replace("~", "–").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
 def ul(items: list[str]) -> str:
@@ -884,11 +884,11 @@ def build_slides(D: dict, lang: str, img_dir: Path) -> list[dict]:
             ul(
                 [
                     t(
-                        "델리 수도권은 매년 10월 말~1월에 세계 최악 수준의 미세먼지를 겪습니다. 볏짚 소각, 디왈리 폭죽, 교통·건설·발전 배출이 겹칩니다.",
+                        "델리 수도권은 매년 10월 말–1월에 세계 최악 수준의 미세먼지를 겪습니다. 볏짚 소각, 디왈리 폭죽, 교통·건설·발전 배출이 겹칩니다.",
                         "Delhi-NCR suffers some of the world's worst particulate pollution from late October to January: stubble burning, Diwali fireworks, traffic, construction and power plants.",
                     ),
                     t(
-                        "겨울밤에는 <b>혼합층이 100~300 m로 낮아지고 바람이 약해져</b> 오염이 지표 근처에 갇힙니다. 같은 배출량이라도 밤이 더 나쁩니다.",
+                        "겨울밤에는 <b>혼합층이 100–300 m로 낮아지고 바람이 약해져</b> 오염이 지표 근처에 갇힙니다. 같은 배출량이라도 밤이 더 나쁩니다.",
                         "On winter nights the <b>mixing layer drops to 100–300 m and winds die down</b>, trapping pollution near the ground. Same emissions, worse nights.",
                     ),
                     t(
@@ -899,7 +899,7 @@ def build_slides(D: dict, lang: str, img_dir: Path) -> list[dict]:
             )
             + f"<div style='background:{PAPER}; border:1px solid #cbd5e1; padding:9px 14px; border-radius:8px; font-size:18px;'>"
             + t(
-                '핵심 질문은 "얼마나 나빠질까"가 아니라 <b>"언제, 어디서, 왜 나빠지고, 시민은 무엇을 해야 하는가"</b>를 12~48시간 앞서 전하는 것입니다.',
+                '핵심 질문은 "얼마나 나빠질까"가 아니라 <b>"언제, 어디서, 왜 나빠지고, 시민은 무엇을 해야 하는가"</b>를 12–48시간 앞서 전하는 것입니다.',
                 'The question is not "how bad" but <b>"when, where, why, and what should citizens do"</b>, 12 to 48 hours ahead.',
             )
             + "</div>",
@@ -957,7 +957,7 @@ def build_slides(D: dict, lang: str, img_dir: Path) -> list[dict]:
                         t("초기장·예측", "Analyses, forecast"),
                         t(
                             "12 UTC 분석 자료 확보, 두 모델 실행 (약 10분)",
-                            "12 UTC analyses arrive, both models run (~10 min)",
+                            "12 UTC analyses arrive, both models run (about 10 min)",
                         ),
                     ],
                     [
@@ -1129,7 +1129,7 @@ def build_slides(D: dict, lang: str, img_dir: Path) -> list[dict]:
                         "The second pre-dawn. Anand Vihar in east Delhi (a traffic site at a bus terminal and arterial roads) reaches AQI 500; ITO, Noida and Okhla exceed 450.",
                     ),
                     t(
-                        '06:00 아침 업데이트는 등교·출근 전에 "오전 7~9시 최고치, 마스크 착용"을 보냅니다.',
+                        '06:00 아침 업데이트는 등교·출근 전에 "오전 7–9시 최고치, 마스크 착용"을 보냅니다.',
                         'The 06:00 morning update sends "peak 07:00–09:00, wear a mask" before school and commute.',
                     ),
                 ]
@@ -1229,7 +1229,7 @@ def build_slides(D: dict, lang: str, img_dir: Path) -> list[dict]:
             ul(
                 [
                     t(
-                        "<b>무엇</b>(수치+CPCB 범주) · <b>언제</b>(IST 정점) · <b>어디</b>(지점) · <b>어떻게</b>(행동 1~2개). 짧은 문장은 SMS·푸시, 긴 문장은 앱·브리핑용.",
+                        "<b>무엇</b>(수치+CPCB 범주) · <b>언제</b>(IST 정점) · <b>어디</b>(지점) · <b>어떻게</b>(행동 1–2개). 짧은 문장은 SMS·푸시, 긴 문장은 앱·브리핑용.",
                         "<b>What</b> (value + CPCB category) · <b>when</b> (IST peak) · <b>where</b> (site) · <b>how</b> (one or two actions). Short for SMS/push, long for the app and briefings.",
                     ),
                     t(
@@ -1361,7 +1361,7 @@ def build_slides(D: dict, lang: str, img_dir: Path) -> list[dict]:
                         "Everything that remains presupposes <b>cooperation with government and city</b>: official observations, regional fine-tuning, pollutant data (CAMS).",
                     ),
                     t(
-                        '한 줄 요약: Aurora는 "언제, 어디서, 왜"를 12~48시간 앞서 계산해 주고, 그것을 시민의 행동으로 바꾸는 마지막 구간은 제도와 채널의 몫입니다.',
+                        '한 줄 요약: Aurora는 "언제, 어디서, 왜"를 12–48시간 앞서 계산해 주고, 그것을 시민의 행동으로 바꾸는 마지막 구간은 제도와 채널의 몫입니다.',
                         'In one line: Aurora computes "when, where and why" 12 to 48 hours ahead; turning that into citizens\' actions is the job of institutions and channels.',
                     ),
                 ]

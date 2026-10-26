@@ -3,7 +3,7 @@
 Build a JupyterGIS story map (`.jGIS`) from `storymap_data.js`, for notebook.link.
 
     python build_storymap_jgis.py                       # writes storymap/ next to this script
-    python build_storymap_jgis.py --story-type "Vertical Scroll"
+    python build_storymap_jgis.py --story-type guided        # step-through side panel instead of scrolling
 
 The output folder is self-contained and has no dependency on Claude or on any other hosted
 service: two `.jGIS` documents (Korean and English) share the GeoJSON layers written to
@@ -12,7 +12,10 @@ service: two `.jGIS` documents (Korean and English) share the GeoJSON layers wri
 and start the story from the Story panel; the Specta view of notebook.link plays it full screen.
 
 The `.jGIS` files are plain JSON following the JupyterGIS project schema (schemaVersion 0.6.0, the
-version shipped by `jupytergis-lite` 0.16.x on emscripten-forge). Story stops are
+version shipped by `jupytergis-lite` 0.16.x on emscripten-forge). The default story type is "Vertical
+Scroll" in a split-screen layout: the map occupies the left half and each scene's text is an opaque
+card filling the right half that scrolls over it (`--overlay` gives a translucent 48% card instead);
+the text is emitted as HTML so its type size is readable. Story stops are
 `StorySegmentLayer` entries: each one carries an extent, markdown and a list of layer-visibility
 overrides, which is how the AQI tile, wind, probability and marker layers are switched per scene.
 """
@@ -22,6 +25,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import re
 import uuid
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -54,7 +58,7 @@ SITES = [
 ]
 # Scene extents as (min lon, min lat, max lon, max lat).
 VIEWS = {
-    "world": (-170.0, -58.0, 190.0, 78.0),
+    "world": (-170.0, -50.0, 190.0, 72.0),
     "india": (60.0, 4.0, 100.0, 38.0),
     "tile": (74.5, 26.5, 81.5, 32.5),
     "delhi": (76.65, 28.2, 77.65, 29.05),
@@ -79,8 +83,20 @@ def merc(lon: float, lat: float) -> list[float]:
     ]
 
 
+SPLIT = True  # split screen: map in the left half, text card in the right half
+
+
 def extent(view: str) -> list[float]:
+    """Web-mercator extent of a scene.
+
+    In split-screen layout the right half of the map is covered by the text card, so the extent is
+    doubled eastwards: OpenLayers fits the doubled extent to the full width and the region of
+    interest ends up in the visible left half. The world view is instead shifted so that India sits a
+    quarter of the way across.
+    """
     x0, y0, x1, y1 = VIEWS[view]
+    if SPLIT:
+        x0, x1 = (-10.0, 350.0) if view == "world" else (x0, x0 + 2 * (x1 - x0))
     a, b = merc(x0, y0), merc(x1, y1)
     return [a[0], a[1], b[0], b[1]]
 
@@ -1082,6 +1098,118 @@ def chapters(D: dict, lang: str) -> list[dict]:
     return S
 
 
+# --------------------------------------------------------------------------------------- HTML
+# The story panel renders markdown with JupyterLab's rendermime, which keeps inline styles. The
+# scene text is therefore emitted as HTML so the type size, line height and table layout are under
+# our control (the stock panel type is small and tables wrap). Tildes are replaced because the
+# markdown renderer turns "22시~08시 ... 1~2" into strikethrough.
+BODY_STYLE = "font-size:18px; line-height:1.55;"
+MUTED = "#64748b"
+
+
+def esc(s: str) -> str:
+    return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def inline(s: str) -> str:
+    s = esc(s.replace("~", "–"))
+    s = re.sub(
+        r"`([^`]+)`",
+        r"<code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>\1</code>",
+        s,
+    )
+    s = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", s)
+    s = re.sub(r"\[([^\]]+)\]\((https?://[^)]+)\)", r"<a href='\2'>\1</a>", s)
+    return s
+
+
+def md_to_html(md: str) -> str:
+    lines = md.split("\n")
+    out: list[str] = []
+    i = 0
+    while i < len(lines):
+        ln = lines[i]
+        if ln.startswith("```"):
+            j = i + 1
+            while j < len(lines) and not lines[j].startswith("```"):
+                j += 1
+            code = esc("\n".join(lines[i + 1 : j]).replace("~", "–"))
+            out.append(
+                f"<pre style='font-size:15px; line-height:1.45; white-space:pre-wrap; background:rgba(100,116,139,.12); padding:8px 11px; border-radius:8px; margin:6px 0 10px;'>{code}</pre>"
+            )
+            i = j + 1
+        elif ln.startswith("### "):
+            out.append(f"<h3 style='font-size:20px; margin:12px 0 6px;'>{inline(ln[4:])}</h3>")
+            i += 1
+        elif ln.startswith("|"):
+            j = i
+            while j < len(lines) and lines[j].startswith("|"):
+                j += 1
+            rows = [
+                [
+                    c.strip()
+                    for c in re.split(r"\|(?=(?:[^`]*`[^`]*`)*[^`]*$)", r.strip().strip("|"))
+                ]
+                for r in lines[i:j]
+            ]
+            width = max(len(r) for r in rows)
+            aligns = (
+                ["right" if c.endswith(":") else "left" for c in rows[1]] if len(rows) > 1 else []
+            )
+            aligns = (aligns + ["left"] * width)[:width]
+            th = "".join(
+                f"<th style='text-align:{aligns[k]}; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:{MUTED}; font-size:14px; white-space:nowrap;'>{inline(c)}</th>"
+                for k, c in enumerate(rows[0])
+            )
+            trs = "".join(
+                "<tr>"
+                + "".join(
+                    f"<td style='text-align:{aligns[k]}; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:{'nowrap' if aligns[k] == 'right' else 'normal'};'>{inline(c)}</td>"
+                    for k, c in enumerate(r)
+                )
+                + "</tr>"
+                for r in rows[2:]
+            )
+            out.append(
+                f"<table style='border-collapse:collapse; width:100%; font-size:16px; margin:6px 0 10px;'><thead><tr>{th}</tr></thead><tbody>{trs}</tbody></table>"
+            )
+            i = j
+        elif ln.startswith("- ") or re.match(r"\d+\. ", ln):
+            ordered = not ln.startswith("- ")
+            j = i
+            items = []
+            while j < len(lines) and (lines[j].startswith("- ") or re.match(r"\d+\. ", lines[j])):
+                items.append(re.sub(r"^(- |\d+\. )", "", lines[j]))
+                j += 1
+            tag = "ol" if ordered else "ul"
+            out.append(
+                f"<{tag} style='margin:0 0 10px 22px; padding:0;'>"
+                + "".join(f"<li style='margin:0 0 5px;'>{inline(x)}</li>" for x in items)
+                + f"</{tag}>"
+            )
+            i = j
+        elif ln.strip() == "":
+            i += 1
+        elif ln.startswith("*") and ln.endswith("*") and not ln.startswith("**"):
+            out.append(
+                f"<div style='font-size:14px; color:{MUTED}; letter-spacing:.03em; margin:0 0 8px;'>{inline(ln.strip('*'))}</div>"
+            )
+            i += 1
+        else:
+            j = i
+            para = []
+            while (
+                j < len(lines)
+                and lines[j].strip()
+                and not re.match(r"(```|### |\||- |\d+\. )", lines[j])
+            ):
+                para.append(lines[j])
+                j += 1
+            out.append(f"<p style='margin:0 0 10px;'>{inline(' '.join(para))}</p>")
+            i = j
+    return f"<div style='{BODY_STYLE}'>" + "".join(out) + "</div>"
+
+
 # --------------------------------------------------------------------------------------- document
 def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) -> dict:
     ko = lang == "ko"
@@ -1228,7 +1356,14 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
         params = {
             "zoom": zoom(ch["view"]), "extent": extent(ch["view"]),
             "enableIdentify": ch["mode"] == "map",
-            "content": {"contentMode": ch["mode"], "markdown": ch["md"], "image": "", "imageCaption": ""},
+            "content": {
+                "contentMode": ch["mode"],
+                "markdown": md_to_html(ch["md"]),
+                "image": "",
+                "imageCaption": "",
+                "paneAlignment": "end" if ch["mode"] == "map" else "center",
+                "panelWidth": "50%" if SPLIT else "48%",
+            },
             "transition": {"type": "smooth", "time": 2.0},
             "layerOverride": [{"targetLayer": names[k], "visible": k in on} for k in toggles],
         }  # fmt: skip
@@ -1264,6 +1399,9 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
                 "storyType": story_type,
                 "storySegments": segments,
                 "showGradient": True,
+                "storyPanelOpacity": 1.0 if SPLIT else 0.92,
+                "markdownSegmentOpacity": 0.95,
+                "overlayContentWidth": "78%",
             }
         },
         "viewState": {},
@@ -1296,11 +1434,18 @@ def main() -> None:
     ap.add_argument(
         "--story-type",
         choices=["guided", "Vertical Scroll"],
-        default="guided",
+        default="Vertical Scroll",
         help="JupyterGIS story type",
     )
     ap.add_argument("--langs", default="ko,en", help="comma-separated languages to build (ko, en)")
+    ap.add_argument(
+        "--overlay",
+        action="store_true",
+        help="translucent 48%% card over the map instead of the split screen",
+    )
     a = ap.parse_args()
+    global SPLIT
+    SPLIT = not a.overlay
 
     D = load_data(a.data)
     geo = build_geojson(D)
