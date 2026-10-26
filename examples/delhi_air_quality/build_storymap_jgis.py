@@ -29,7 +29,8 @@ import uuid
 from datetime import datetime, timedelta
 from pathlib import Path
 
-from storyboard_scenes import scenes
+from build_storyboard_slides import make_figure, png_data_uri, setup_fonts
+from storyboard_scenes import scenes, text
 
 HERE = Path(__file__).resolve().parent
 NS = uuid.UUID("5a0c4f3e-2d9b-4b7e-9c1a-7d6e5f4a3b2c")  # namespace for reproducible ids
@@ -406,7 +407,7 @@ def chapters(D: dict, lang: str) -> list[dict]:
     out = []
     for sc in scenes(D, lang):
         m = sc["map"]
-        out.append({"key": sc["key"], "title": sc["title"], "html": scene_html(sc), "view": m["view"], "aqi": m["aqi"], "wind": m["wind"],
+        out.append({"key": sc["key"], "title": sc["title"], "html": scene_html(sc), "fig": sc["fig"], "view": m["view"], "aqi": m["aqi"], "wind": m["wind"],
                     "grid": m["grid"], "coarse": m["coarse"], "prob": m["prob"], "marker": m["marker"]})  # fmt: skip
     return out
 
@@ -553,9 +554,20 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
 
     toggles = [k for k in names if k != "basemap"]
     chs = chapters(D, lang)
+    # The non-map figures of the storyboard slides (schematics, charts, diagrams) are shown at the
+    # top of the matching scene card; scenes whose slide figure is a map use the live map instead.
+    setup_fonts(lang)
+    img_dir = HERE / "storymap" / "img" / lang
+    img_dir.mkdir(parents=True, exist_ok=True)
     first_view = chs[0]["view"]
     segments: list[str] = []
     for i, ch in enumerate(chs):
+        image, caption = "", ""
+        if ch["fig"][0] != "map":
+            image = png_data_uri(
+                make_figure(D, lang, ch["fig"]), img_dir / f"{i + 1:02d}_{ch['key']}.png"
+            )
+            caption = text(lang, "그림 · ", "Figure · ") + ch["title"]
         on = {"tile", "delhi", "sites"}
         if ch["aqi"]:
             on.add(f"aqi_{ch['aqi']}")
@@ -581,8 +593,8 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
             "content": {
                 "contentMode": "map",
                 "markdown": ch["html"],
-                "image": "",
-                "imageCaption": "",
+                "image": image,
+                "imageCaption": caption,
                 "paneAlignment": "end",
                 "panelWidth": "34%",
             },
