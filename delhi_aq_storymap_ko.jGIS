@@ -100,6 +100,20 @@
         "path": "data/sites.geojson"
       }
     },
+    "d16ee156-c079-5953-afb2-89f0f086267c": {
+      "type": "GeoJSONSource",
+      "name": "저녁 경보 대상 지점 (교통) Source",
+      "parameters": {
+        "path": "data/alert_sites_evening.geojson"
+      }
+    },
+    "50852590-f002-5a44-aec6-958cee6b5730": {
+      "type": "GeoJSONSource",
+      "name": "정점 AQI 450 이상 지점 Source",
+      "parameters": {
+        "path": "data/alert_sites_peak.geojson"
+      }
+    },
     "9e8f536c-dfd6-564c-81cf-d5eb32149dab": {
       "type": "MarkerSource",
       "name": "Anand Vihar Marker",
@@ -1327,6 +1341,170 @@
         }
       }
     },
+    "1309563d-132b-57e3-b4fc-d53336ad762f": {
+      "type": "VectorLayer",
+      "name": "저녁 경보 대상 지점 (교통)",
+      "visible": false,
+      "parameters": {
+        "source": "d16ee156-c079-5953-afb2-89f0f086267c",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "c61565b1-837b-5475-82cc-e4be74356cac",
+              "rules": [
+                {
+                  "id": "1fb6c9f1-9f65-5599-ae94-24b012724bfc",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            11,
+                            110,
+                            143,
+                            0.15
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "circle-fill-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            11,
+                            110,
+                            143,
+                            1.0
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "circle-stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 3.0
+                        }
+                      },
+                      "encodings": [
+                        "circle-stroke-width"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "685c612a-e2ca-5717-b823-b1d9fa8929f1",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 14
+                        }
+                      },
+                      "encodings": [
+                        "circle-radius"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "b0890172-250a-5fe6-bb10-e94ff03c924f": {
+      "type": "VectorLayer",
+      "name": "정점 AQI 450 이상 지점",
+      "visible": false,
+      "parameters": {
+        "source": "50852590-f002-5a44-aec6-958cee6b5730",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "842d9af9-893e-5319-9cb2-9239ca0e452a",
+              "rules": [
+                {
+                  "id": "a7cf1460-7d84-501b-9846-637088bed5f9",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            11,
+                            110,
+                            143,
+                            0.15
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "circle-fill-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            11,
+                            110,
+                            143,
+                            1.0
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "circle-stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 3.0
+                        }
+                      },
+                      "encodings": [
+                        "circle-stroke-width"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "db4ecde8-59a9-52ba-9993-90e7e3ae35bf",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 14
+                        }
+                      },
+                      "encodings": [
+                        "circle-radius"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
     "fe4c9c22-7866-5665-98f3-9dbaed720c1e": {
       "type": "VectorLayer",
       "name": "Anand Vihar",
@@ -1364,59 +1542,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "targetLayer": "48e6a44f-01d9-5528-9ea1-0c98e76410b1",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "targetLayer": "0545fd1b-6233-5bf3-8114-6e2276249283",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "targetLayer": "17b93990-61a8-56e1-bd99-f124cd2bb61e",
             "visible": true
           },
           {
-            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "targetLayer": "e69e3ce7-9d56-55db-a010-59ce1ed57185",
             "visible": false
           },
           {
-            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "targetLayer": "ee77f34a-064e-51b4-8600-d97abe9a3f6a",
             "visible": false
           },
           {
-            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "targetLayer": "e819354e-f04b-5b64-a0a2-c8866a366587",
             "visible": false
           },
           {
-            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "targetLayer": "327e11d3-9b75-53b6-bf46-69893122c95e",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "targetLayer": "0653729f-8bb0-52f8-b446-e0cbf98efc69",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "targetLayer": "159119bb-8064-5577-a138-bb3877ae5cb9",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "targetLayer": "fffda4a6-60b9-5c9e-80f3-ea452b3c0edb",
             "visible": false
           },
           {
-            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "3f7ef5e4-0f42-5759-861f-f9dc101218e6",
             "visible": true
           },
           {
-            "targetLayer": "델리 NCT 경계",
+            "targetLayer": "973d59e9-2b64-5122-97bb-66b38774c7bc",
             "visible": false
           },
           {
-            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "targetLayer": "b523f5ac-29b8-5822-944c-07938e038fcd",
             "visible": false
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "1309563d-132b-57e3-b4fc-d53336ad762f",
+            "visible": false
+          },
+          {
+            "targetLayer": "b0890172-250a-5fe6-bb10-e94ff03c924f",
+            "visible": false
+          },
+          {
+            "targetLayer": "fe4c9c22-7866-5665-98f3-9dbaed720c1e",
             "visible": false
           }
         ]
@@ -1449,59 +1635,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "targetLayer": "48e6a44f-01d9-5528-9ea1-0c98e76410b1",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "targetLayer": "0545fd1b-6233-5bf3-8114-6e2276249283",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "targetLayer": "17b93990-61a8-56e1-bd99-f124cd2bb61e",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "targetLayer": "e69e3ce7-9d56-55db-a010-59ce1ed57185",
             "visible": false
           },
           {
-            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "targetLayer": "ee77f34a-064e-51b4-8600-d97abe9a3f6a",
             "visible": false
           },
           {
-            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "targetLayer": "e819354e-f04b-5b64-a0a2-c8866a366587",
             "visible": false
           },
           {
-            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "targetLayer": "327e11d3-9b75-53b6-bf46-69893122c95e",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "targetLayer": "0653729f-8bb0-52f8-b446-e0cbf98efc69",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "targetLayer": "159119bb-8064-5577-a138-bb3877ae5cb9",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "targetLayer": "fffda4a6-60b9-5c9e-80f3-ea452b3c0edb",
             "visible": false
           },
           {
-            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "3f7ef5e4-0f42-5759-861f-f9dc101218e6",
             "visible": true
           },
           {
-            "targetLayer": "델리 NCT 경계",
+            "targetLayer": "973d59e9-2b64-5122-97bb-66b38774c7bc",
             "visible": false
           },
           {
-            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "targetLayer": "b523f5ac-29b8-5822-944c-07938e038fcd",
             "visible": false
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "1309563d-132b-57e3-b4fc-d53336ad762f",
+            "visible": false
+          },
+          {
+            "targetLayer": "b0890172-250a-5fe6-bb10-e94ff03c924f",
+            "visible": false
+          },
+          {
+            "targetLayer": "fe4c9c22-7866-5665-98f3-9dbaed720c1e",
             "visible": false
           }
         ]
@@ -1534,59 +1728,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "targetLayer": "48e6a44f-01d9-5528-9ea1-0c98e76410b1",
             "visible": true
           },
           {
-            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "targetLayer": "0545fd1b-6233-5bf3-8114-6e2276249283",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "targetLayer": "17b93990-61a8-56e1-bd99-f124cd2bb61e",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "targetLayer": "e69e3ce7-9d56-55db-a010-59ce1ed57185",
             "visible": false
           },
           {
-            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "targetLayer": "ee77f34a-064e-51b4-8600-d97abe9a3f6a",
             "visible": false
           },
           {
-            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "targetLayer": "e819354e-f04b-5b64-a0a2-c8866a366587",
             "visible": true
           },
           {
-            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "targetLayer": "327e11d3-9b75-53b6-bf46-69893122c95e",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "targetLayer": "0653729f-8bb0-52f8-b446-e0cbf98efc69",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "targetLayer": "159119bb-8064-5577-a138-bb3877ae5cb9",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "targetLayer": "fffda4a6-60b9-5c9e-80f3-ea452b3c0edb",
             "visible": false
           },
           {
-            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "3f7ef5e4-0f42-5759-861f-f9dc101218e6",
             "visible": true
           },
           {
-            "targetLayer": "델리 NCT 경계",
+            "targetLayer": "973d59e9-2b64-5122-97bb-66b38774c7bc",
             "visible": true
           },
           {
-            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "targetLayer": "b523f5ac-29b8-5822-944c-07938e038fcd",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "1309563d-132b-57e3-b4fc-d53336ad762f",
+            "visible": false
+          },
+          {
+            "targetLayer": "b0890172-250a-5fe6-bb10-e94ff03c924f",
+            "visible": false
+          },
+          {
+            "targetLayer": "fe4c9c22-7866-5665-98f3-9dbaed720c1e",
             "visible": false
           }
         ]
@@ -1619,59 +1821,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "targetLayer": "48e6a44f-01d9-5528-9ea1-0c98e76410b1",
             "visible": true
           },
           {
-            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "targetLayer": "0545fd1b-6233-5bf3-8114-6e2276249283",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "targetLayer": "17b93990-61a8-56e1-bd99-f124cd2bb61e",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "targetLayer": "e69e3ce7-9d56-55db-a010-59ce1ed57185",
             "visible": false
           },
           {
-            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "targetLayer": "ee77f34a-064e-51b4-8600-d97abe9a3f6a",
             "visible": false
           },
           {
-            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "targetLayer": "e819354e-f04b-5b64-a0a2-c8866a366587",
             "visible": false
           },
           {
-            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "targetLayer": "327e11d3-9b75-53b6-bf46-69893122c95e",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "targetLayer": "0653729f-8bb0-52f8-b446-e0cbf98efc69",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "targetLayer": "159119bb-8064-5577-a138-bb3877ae5cb9",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "targetLayer": "fffda4a6-60b9-5c9e-80f3-ea452b3c0edb",
             "visible": false
           },
           {
-            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "3f7ef5e4-0f42-5759-861f-f9dc101218e6",
             "visible": true
           },
           {
-            "targetLayer": "델리 NCT 경계",
+            "targetLayer": "973d59e9-2b64-5122-97bb-66b38774c7bc",
             "visible": true
           },
           {
-            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "targetLayer": "b523f5ac-29b8-5822-944c-07938e038fcd",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "1309563d-132b-57e3-b4fc-d53336ad762f",
+            "visible": false
+          },
+          {
+            "targetLayer": "b0890172-250a-5fe6-bb10-e94ff03c924f",
+            "visible": false
+          },
+          {
+            "targetLayer": "fe4c9c22-7866-5665-98f3-9dbaed720c1e",
             "visible": false
           }
         ]
@@ -1704,59 +1914,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "targetLayer": "48e6a44f-01d9-5528-9ea1-0c98e76410b1",
             "visible": true
           },
           {
-            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "targetLayer": "0545fd1b-6233-5bf3-8114-6e2276249283",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "targetLayer": "17b93990-61a8-56e1-bd99-f124cd2bb61e",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "targetLayer": "e69e3ce7-9d56-55db-a010-59ce1ed57185",
             "visible": false
           },
           {
-            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "targetLayer": "ee77f34a-064e-51b4-8600-d97abe9a3f6a",
             "visible": false
           },
           {
-            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "targetLayer": "e819354e-f04b-5b64-a0a2-c8866a366587",
             "visible": false
           },
           {
-            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "targetLayer": "327e11d3-9b75-53b6-bf46-69893122c95e",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "targetLayer": "0653729f-8bb0-52f8-b446-e0cbf98efc69",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "targetLayer": "159119bb-8064-5577-a138-bb3877ae5cb9",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "targetLayer": "fffda4a6-60b9-5c9e-80f3-ea452b3c0edb",
             "visible": false
           },
           {
-            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "3f7ef5e4-0f42-5759-861f-f9dc101218e6",
             "visible": true
           },
           {
-            "targetLayer": "델리 NCT 경계",
+            "targetLayer": "973d59e9-2b64-5122-97bb-66b38774c7bc",
             "visible": true
           },
           {
-            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "targetLayer": "b523f5ac-29b8-5822-944c-07938e038fcd",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "1309563d-132b-57e3-b4fc-d53336ad762f",
+            "visible": true
+          },
+          {
+            "targetLayer": "b0890172-250a-5fe6-bb10-e94ff03c924f",
+            "visible": false
+          },
+          {
+            "targetLayer": "fe4c9c22-7866-5665-98f3-9dbaed720c1e",
             "visible": false
           }
         ]
@@ -1789,59 +2007,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "targetLayer": "48e6a44f-01d9-5528-9ea1-0c98e76410b1",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "targetLayer": "0545fd1b-6233-5bf3-8114-6e2276249283",
             "visible": true
           },
           {
-            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "targetLayer": "17b93990-61a8-56e1-bd99-f124cd2bb61e",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "targetLayer": "e69e3ce7-9d56-55db-a010-59ce1ed57185",
             "visible": false
           },
           {
-            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "targetLayer": "ee77f34a-064e-51b4-8600-d97abe9a3f6a",
             "visible": false
           },
           {
-            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "targetLayer": "e819354e-f04b-5b64-a0a2-c8866a366587",
             "visible": false
           },
           {
-            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "targetLayer": "327e11d3-9b75-53b6-bf46-69893122c95e",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "targetLayer": "0653729f-8bb0-52f8-b446-e0cbf98efc69",
             "visible": true
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "targetLayer": "159119bb-8064-5577-a138-bb3877ae5cb9",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "targetLayer": "fffda4a6-60b9-5c9e-80f3-ea452b3c0edb",
             "visible": false
           },
           {
-            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "3f7ef5e4-0f42-5759-861f-f9dc101218e6",
             "visible": true
           },
           {
-            "targetLayer": "델리 NCT 경계",
+            "targetLayer": "973d59e9-2b64-5122-97bb-66b38774c7bc",
             "visible": true
           },
           {
-            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "targetLayer": "b523f5ac-29b8-5822-944c-07938e038fcd",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "1309563d-132b-57e3-b4fc-d53336ad762f",
+            "visible": false
+          },
+          {
+            "targetLayer": "b0890172-250a-5fe6-bb10-e94ff03c924f",
+            "visible": false
+          },
+          {
+            "targetLayer": "fe4c9c22-7866-5665-98f3-9dbaed720c1e",
             "visible": false
           }
         ]
@@ -1874,59 +2100,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "targetLayer": "48e6a44f-01d9-5528-9ea1-0c98e76410b1",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "targetLayer": "0545fd1b-6233-5bf3-8114-6e2276249283",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "targetLayer": "17b93990-61a8-56e1-bd99-f124cd2bb61e",
             "visible": true
           },
           {
-            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "targetLayer": "e69e3ce7-9d56-55db-a010-59ce1ed57185",
             "visible": false
           },
           {
-            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "targetLayer": "ee77f34a-064e-51b4-8600-d97abe9a3f6a",
             "visible": false
           },
           {
-            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "targetLayer": "e819354e-f04b-5b64-a0a2-c8866a366587",
             "visible": false
           },
           {
-            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "targetLayer": "327e11d3-9b75-53b6-bf46-69893122c95e",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "targetLayer": "0653729f-8bb0-52f8-b446-e0cbf98efc69",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "targetLayer": "159119bb-8064-5577-a138-bb3877ae5cb9",
             "visible": true
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "targetLayer": "fffda4a6-60b9-5c9e-80f3-ea452b3c0edb",
             "visible": false
           },
           {
-            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "3f7ef5e4-0f42-5759-861f-f9dc101218e6",
             "visible": true
           },
           {
-            "targetLayer": "델리 NCT 경계",
+            "targetLayer": "973d59e9-2b64-5122-97bb-66b38774c7bc",
             "visible": true
           },
           {
-            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "targetLayer": "b523f5ac-29b8-5822-944c-07938e038fcd",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "1309563d-132b-57e3-b4fc-d53336ad762f",
+            "visible": false
+          },
+          {
+            "targetLayer": "b0890172-250a-5fe6-bb10-e94ff03c924f",
+            "visible": true
+          },
+          {
+            "targetLayer": "fe4c9c22-7866-5665-98f3-9dbaed720c1e",
             "visible": true
           }
         ]
@@ -1959,59 +2193,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "targetLayer": "48e6a44f-01d9-5528-9ea1-0c98e76410b1",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "targetLayer": "0545fd1b-6233-5bf3-8114-6e2276249283",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "targetLayer": "17b93990-61a8-56e1-bd99-f124cd2bb61e",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "targetLayer": "e69e3ce7-9d56-55db-a010-59ce1ed57185",
             "visible": false
           },
           {
-            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "targetLayer": "ee77f34a-064e-51b4-8600-d97abe9a3f6a",
             "visible": true
           },
           {
-            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "targetLayer": "e819354e-f04b-5b64-a0a2-c8866a366587",
             "visible": false
           },
           {
-            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "targetLayer": "327e11d3-9b75-53b6-bf46-69893122c95e",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "targetLayer": "0653729f-8bb0-52f8-b446-e0cbf98efc69",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "targetLayer": "159119bb-8064-5577-a138-bb3877ae5cb9",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "targetLayer": "fffda4a6-60b9-5c9e-80f3-ea452b3c0edb",
             "visible": false
           },
           {
-            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "3f7ef5e4-0f42-5759-861f-f9dc101218e6",
             "visible": true
           },
           {
-            "targetLayer": "델리 NCT 경계",
+            "targetLayer": "973d59e9-2b64-5122-97bb-66b38774c7bc",
             "visible": true
           },
           {
-            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "targetLayer": "b523f5ac-29b8-5822-944c-07938e038fcd",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "1309563d-132b-57e3-b4fc-d53336ad762f",
+            "visible": false
+          },
+          {
+            "targetLayer": "b0890172-250a-5fe6-bb10-e94ff03c924f",
+            "visible": false
+          },
+          {
+            "targetLayer": "fe4c9c22-7866-5665-98f3-9dbaed720c1e",
             "visible": false
           }
         ]
@@ -2044,59 +2286,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "targetLayer": "48e6a44f-01d9-5528-9ea1-0c98e76410b1",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "targetLayer": "0545fd1b-6233-5bf3-8114-6e2276249283",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "targetLayer": "17b93990-61a8-56e1-bd99-f124cd2bb61e",
             "visible": true
           },
           {
-            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "targetLayer": "e69e3ce7-9d56-55db-a010-59ce1ed57185",
             "visible": false
           },
           {
-            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "targetLayer": "ee77f34a-064e-51b4-8600-d97abe9a3f6a",
             "visible": false
           },
           {
-            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "targetLayer": "e819354e-f04b-5b64-a0a2-c8866a366587",
             "visible": false
           },
           {
-            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "targetLayer": "327e11d3-9b75-53b6-bf46-69893122c95e",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "targetLayer": "0653729f-8bb0-52f8-b446-e0cbf98efc69",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "targetLayer": "159119bb-8064-5577-a138-bb3877ae5cb9",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "targetLayer": "fffda4a6-60b9-5c9e-80f3-ea452b3c0edb",
             "visible": false
           },
           {
-            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "3f7ef5e4-0f42-5759-861f-f9dc101218e6",
             "visible": true
           },
           {
-            "targetLayer": "델리 NCT 경계",
+            "targetLayer": "973d59e9-2b64-5122-97bb-66b38774c7bc",
             "visible": true
           },
           {
-            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "targetLayer": "b523f5ac-29b8-5822-944c-07938e038fcd",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "1309563d-132b-57e3-b4fc-d53336ad762f",
+            "visible": false
+          },
+          {
+            "targetLayer": "b0890172-250a-5fe6-bb10-e94ff03c924f",
+            "visible": true
+          },
+          {
+            "targetLayer": "fe4c9c22-7866-5665-98f3-9dbaed720c1e",
             "visible": true
           }
         ]
@@ -2129,59 +2379,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "targetLayer": "48e6a44f-01d9-5528-9ea1-0c98e76410b1",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "targetLayer": "0545fd1b-6233-5bf3-8114-6e2276249283",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "targetLayer": "17b93990-61a8-56e1-bd99-f124cd2bb61e",
             "visible": true
           },
           {
-            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "targetLayer": "e69e3ce7-9d56-55db-a010-59ce1ed57185",
             "visible": false
           },
           {
-            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "targetLayer": "ee77f34a-064e-51b4-8600-d97abe9a3f6a",
             "visible": false
           },
           {
-            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "targetLayer": "e819354e-f04b-5b64-a0a2-c8866a366587",
             "visible": false
           },
           {
-            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "targetLayer": "327e11d3-9b75-53b6-bf46-69893122c95e",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "targetLayer": "0653729f-8bb0-52f8-b446-e0cbf98efc69",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "targetLayer": "159119bb-8064-5577-a138-bb3877ae5cb9",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "targetLayer": "fffda4a6-60b9-5c9e-80f3-ea452b3c0edb",
             "visible": false
           },
           {
-            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "3f7ef5e4-0f42-5759-861f-f9dc101218e6",
             "visible": true
           },
           {
-            "targetLayer": "델리 NCT 경계",
+            "targetLayer": "973d59e9-2b64-5122-97bb-66b38774c7bc",
             "visible": true
           },
           {
-            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "targetLayer": "b523f5ac-29b8-5822-944c-07938e038fcd",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "1309563d-132b-57e3-b4fc-d53336ad762f",
+            "visible": false
+          },
+          {
+            "targetLayer": "b0890172-250a-5fe6-bb10-e94ff03c924f",
+            "visible": false
+          },
+          {
+            "targetLayer": "fe4c9c22-7866-5665-98f3-9dbaed720c1e",
             "visible": false
           }
         ]
@@ -2214,59 +2472,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "targetLayer": "48e6a44f-01d9-5528-9ea1-0c98e76410b1",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "targetLayer": "0545fd1b-6233-5bf3-8114-6e2276249283",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "targetLayer": "17b93990-61a8-56e1-bd99-f124cd2bb61e",
             "visible": true
           },
           {
-            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "targetLayer": "e69e3ce7-9d56-55db-a010-59ce1ed57185",
             "visible": false
           },
           {
-            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "targetLayer": "ee77f34a-064e-51b4-8600-d97abe9a3f6a",
             "visible": false
           },
           {
-            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "targetLayer": "e819354e-f04b-5b64-a0a2-c8866a366587",
             "visible": true
           },
           {
-            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "targetLayer": "327e11d3-9b75-53b6-bf46-69893122c95e",
             "visible": true
           },
           {
-            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "targetLayer": "0653729f-8bb0-52f8-b446-e0cbf98efc69",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "targetLayer": "159119bb-8064-5577-a138-bb3877ae5cb9",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "targetLayer": "fffda4a6-60b9-5c9e-80f3-ea452b3c0edb",
             "visible": false
           },
           {
-            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "3f7ef5e4-0f42-5759-861f-f9dc101218e6",
             "visible": true
           },
           {
-            "targetLayer": "델리 NCT 경계",
+            "targetLayer": "973d59e9-2b64-5122-97bb-66b38774c7bc",
             "visible": true
           },
           {
-            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "targetLayer": "b523f5ac-29b8-5822-944c-07938e038fcd",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "1309563d-132b-57e3-b4fc-d53336ad762f",
+            "visible": false
+          },
+          {
+            "targetLayer": "b0890172-250a-5fe6-bb10-e94ff03c924f",
+            "visible": false
+          },
+          {
+            "targetLayer": "fe4c9c22-7866-5665-98f3-9dbaed720c1e",
             "visible": false
           }
         ]
@@ -2299,59 +2565,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 11월 5일 18:30 IST",
+            "targetLayer": "48e6a44f-01d9-5528-9ea1-0c98e76410b1",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 6일 02:30 IST",
+            "targetLayer": "0545fd1b-6233-5bf3-8114-6e2276249283",
             "visible": false
           },
           {
-            "targetLayer": "AQI 11월 7일 05:30 IST",
+            "targetLayer": "17b93990-61a8-56e1-bd99-f124cd2bb61e",
             "visible": true
           },
           {
-            "targetLayer": "AQI 11월 7일 14:30 IST",
+            "targetLayer": "e69e3ce7-9d56-55db-a010-59ce1ed57185",
             "visible": false
           },
           {
-            "targetLayer": "정체 확률 11월 7일 05:30 IST",
+            "targetLayer": "ee77f34a-064e-51b4-8600-d97abe9a3f6a",
             "visible": false
           },
           {
-            "targetLayer": "0.25° 격자 (Aurora 1.5)",
+            "targetLayer": "e819354e-f04b-5b64-a0a2-c8866a366587",
             "visible": false
           },
           {
-            "targetLayer": "0.4° 셀 1개 (Aurora Air Pollution)",
+            "targetLayer": "327e11d3-9b75-53b6-bf46-69893122c95e",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 6일 02:30 IST",
+            "targetLayer": "0653729f-8bb0-52f8-b446-e0cbf98efc69",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 05:30 IST",
+            "targetLayer": "159119bb-8064-5577-a138-bb3877ae5cb9",
             "visible": false
           },
           {
-            "targetLayer": "10 m 바람 11월 7일 14:30 IST",
+            "targetLayer": "fffda4a6-60b9-5c9e-80f3-ea452b3c0edb",
             "visible": false
           },
           {
-            "targetLayer": "델리 NCR 타일 (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "3f7ef5e4-0f42-5759-861f-f9dc101218e6",
             "visible": true
           },
           {
-            "targetLayer": "델리 NCT 경계",
+            "targetLayer": "973d59e9-2b64-5122-97bb-66b38774c7bc",
             "visible": true
           },
           {
-            "targetLayer": "대표 지점 10곳 (색: 정점 범주)",
+            "targetLayer": "b523f5ac-29b8-5822-944c-07938e038fcd",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "1309563d-132b-57e3-b4fc-d53336ad762f",
+            "visible": false
+          },
+          {
+            "targetLayer": "b0890172-250a-5fe6-bb10-e94ff03c924f",
+            "visible": false
+          },
+          {
+            "targetLayer": "fe4c9c22-7866-5665-98f3-9dbaed720c1e",
             "visible": false
           }
         ]
@@ -2373,6 +2647,8 @@
     "3f7ef5e4-0f42-5759-861f-f9dc101218e6",
     "973d59e9-2b64-5122-97bb-66b38774c7bc",
     "b523f5ac-29b8-5822-944c-07938e038fcd",
+    "1309563d-132b-57e3-b4fc-d53336ad762f",
+    "b0890172-250a-5fe6-bb10-e94ff03c924f",
     "fe4c9c22-7866-5665-98f3-9dbaed720c1e",
     "c47c2ae4-1f6b-5a2b-a97d-75aa8226bff7",
     "0b007aa0-2d75-5bbb-85c2-3cf44b141e10",

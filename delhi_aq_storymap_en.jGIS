@@ -100,6 +100,20 @@
         "path": "data/sites.geojson"
       }
     },
+    "3a1cb061-ae6d-5428-8eb2-ca8f6fb3aff7": {
+      "type": "GeoJSONSource",
+      "name": "Evening alert sites (traffic) Source",
+      "parameters": {
+        "path": "data/alert_sites_evening.geojson"
+      }
+    },
+    "37a65f84-5e31-5a55-9ec2-3916cb5bb3f9": {
+      "type": "GeoJSONSource",
+      "name": "Sites at or above AQI 450 at the peak Source",
+      "parameters": {
+        "path": "data/alert_sites_peak.geojson"
+      }
+    },
     "dd406173-4ac8-55ea-a34d-282f5d5c6dc0": {
       "type": "MarkerSource",
       "name": "Anand Vihar Marker",
@@ -1327,6 +1341,170 @@
         }
       }
     },
+    "894f14d3-b405-5476-a45e-880c2b3e82db": {
+      "type": "VectorLayer",
+      "name": "Evening alert sites (traffic)",
+      "visible": false,
+      "parameters": {
+        "source": "3a1cb061-ae6d-5428-8eb2-ca8f6fb3aff7",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "c9aca006-ff35-57a6-9ef5-0214c6ab2e93",
+              "rules": [
+                {
+                  "id": "67c2d35a-e2b7-5f35-a752-b17f1367a015",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            11,
+                            110,
+                            143,
+                            0.15
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "circle-fill-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            11,
+                            110,
+                            143,
+                            1.0
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "circle-stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 3.0
+                        }
+                      },
+                      "encodings": [
+                        "circle-stroke-width"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "a112fc4a-608e-51bc-a471-9b798e223fd2",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 14
+                        }
+                      },
+                      "encodings": [
+                        "circle-radius"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f0ca72b2-d186-58ce-8e7b-443f61339679": {
+      "type": "VectorLayer",
+      "name": "Sites at or above AQI 450 at the peak",
+      "visible": false,
+      "parameters": {
+        "source": "37a65f84-5e31-5a55-9ec2-3916cb5bb3f9",
+        "opacity": 1.0,
+        "symbologyState": {
+          "layers": [
+            {
+              "id": "c71ac779-9c49-5e85-935c-589cc979b5b5",
+              "rules": [
+                {
+                  "id": "7afda3f0-73a8-5d7c-9fc4-4449b22a00f6",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            11,
+                            110,
+                            143,
+                            0.15
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "circle-fill-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_rgba",
+                        "params": {
+                          "value": [
+                            11,
+                            110,
+                            143,
+                            1.0
+                          ]
+                        }
+                      },
+                      "encodings": [
+                        "circle-stroke-color"
+                      ]
+                    },
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 3.0
+                        }
+                      },
+                      "encodings": [
+                        "circle-stroke-width"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "e43334eb-b003-5e50-97bf-a4f3d56fb732",
+                  "mappings": [
+                    {
+                      "scale": {
+                        "scheme": "constant_num",
+                        "params": {
+                          "value": 14
+                        }
+                      },
+                      "encodings": [
+                        "circle-radius"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
     "84ec3636-3621-5dee-b051-c2707eec5584": {
       "type": "VectorLayer",
       "name": "Anand Vihar",
@@ -1364,59 +1542,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "targetLayer": "ee2531a6-23fa-5db3-8289-12a808582c05",
             "visible": false
           },
           {
-            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "targetLayer": "abb68004-d27d-58bb-bca7-8d6bfdf2f9be",
             "visible": false
           },
           {
-            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "targetLayer": "04eaa86c-bc4e-5cf8-99a3-45584f69c77d",
             "visible": true
           },
           {
-            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "targetLayer": "25937c39-d90c-524b-b95d-4a0d36a070ad",
             "visible": false
           },
           {
-            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "targetLayer": "ccba6808-0da2-5d6b-b440-05e9395c3e59",
             "visible": false
           },
           {
-            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "targetLayer": "1ae54c13-c037-5ad1-9389-79e9f5195627",
             "visible": false
           },
           {
-            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "targetLayer": "ffc5b112-49fb-5db9-b7da-afe3f947551e",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "targetLayer": "dc662fa4-01b7-5437-bc62-e5b5ddfae677",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "targetLayer": "9d5771c5-6b2b-5eef-8f50-69b4badea527",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "targetLayer": "e1fc9d68-86d2-5b14-ab6f-94fb0f27f130",
             "visible": false
           },
           {
-            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "17db14fc-9723-50e2-abee-87f180631cbd",
             "visible": true
           },
           {
-            "targetLayer": "Delhi NCT boundary",
+            "targetLayer": "60b85afc-3e21-5b73-9b5e-3926a11092bf",
             "visible": false
           },
           {
-            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "targetLayer": "fd48ad04-c75c-5117-8266-16c8ae260cad",
             "visible": false
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "894f14d3-b405-5476-a45e-880c2b3e82db",
+            "visible": false
+          },
+          {
+            "targetLayer": "f0ca72b2-d186-58ce-8e7b-443f61339679",
+            "visible": false
+          },
+          {
+            "targetLayer": "84ec3636-3621-5dee-b051-c2707eec5584",
             "visible": false
           }
         ]
@@ -1449,59 +1635,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "targetLayer": "ee2531a6-23fa-5db3-8289-12a808582c05",
             "visible": false
           },
           {
-            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "targetLayer": "abb68004-d27d-58bb-bca7-8d6bfdf2f9be",
             "visible": false
           },
           {
-            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "targetLayer": "04eaa86c-bc4e-5cf8-99a3-45584f69c77d",
             "visible": false
           },
           {
-            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "targetLayer": "25937c39-d90c-524b-b95d-4a0d36a070ad",
             "visible": false
           },
           {
-            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "targetLayer": "ccba6808-0da2-5d6b-b440-05e9395c3e59",
             "visible": false
           },
           {
-            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "targetLayer": "1ae54c13-c037-5ad1-9389-79e9f5195627",
             "visible": false
           },
           {
-            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "targetLayer": "ffc5b112-49fb-5db9-b7da-afe3f947551e",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "targetLayer": "dc662fa4-01b7-5437-bc62-e5b5ddfae677",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "targetLayer": "9d5771c5-6b2b-5eef-8f50-69b4badea527",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "targetLayer": "e1fc9d68-86d2-5b14-ab6f-94fb0f27f130",
             "visible": false
           },
           {
-            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "17db14fc-9723-50e2-abee-87f180631cbd",
             "visible": true
           },
           {
-            "targetLayer": "Delhi NCT boundary",
+            "targetLayer": "60b85afc-3e21-5b73-9b5e-3926a11092bf",
             "visible": false
           },
           {
-            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "targetLayer": "fd48ad04-c75c-5117-8266-16c8ae260cad",
             "visible": false
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "894f14d3-b405-5476-a45e-880c2b3e82db",
+            "visible": false
+          },
+          {
+            "targetLayer": "f0ca72b2-d186-58ce-8e7b-443f61339679",
+            "visible": false
+          },
+          {
+            "targetLayer": "84ec3636-3621-5dee-b051-c2707eec5584",
             "visible": false
           }
         ]
@@ -1534,59 +1728,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "targetLayer": "ee2531a6-23fa-5db3-8289-12a808582c05",
             "visible": true
           },
           {
-            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "targetLayer": "abb68004-d27d-58bb-bca7-8d6bfdf2f9be",
             "visible": false
           },
           {
-            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "targetLayer": "04eaa86c-bc4e-5cf8-99a3-45584f69c77d",
             "visible": false
           },
           {
-            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "targetLayer": "25937c39-d90c-524b-b95d-4a0d36a070ad",
             "visible": false
           },
           {
-            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "targetLayer": "ccba6808-0da2-5d6b-b440-05e9395c3e59",
             "visible": false
           },
           {
-            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "targetLayer": "1ae54c13-c037-5ad1-9389-79e9f5195627",
             "visible": true
           },
           {
-            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "targetLayer": "ffc5b112-49fb-5db9-b7da-afe3f947551e",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "targetLayer": "dc662fa4-01b7-5437-bc62-e5b5ddfae677",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "targetLayer": "9d5771c5-6b2b-5eef-8f50-69b4badea527",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "targetLayer": "e1fc9d68-86d2-5b14-ab6f-94fb0f27f130",
             "visible": false
           },
           {
-            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "17db14fc-9723-50e2-abee-87f180631cbd",
             "visible": true
           },
           {
-            "targetLayer": "Delhi NCT boundary",
+            "targetLayer": "60b85afc-3e21-5b73-9b5e-3926a11092bf",
             "visible": true
           },
           {
-            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "targetLayer": "fd48ad04-c75c-5117-8266-16c8ae260cad",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "894f14d3-b405-5476-a45e-880c2b3e82db",
+            "visible": false
+          },
+          {
+            "targetLayer": "f0ca72b2-d186-58ce-8e7b-443f61339679",
+            "visible": false
+          },
+          {
+            "targetLayer": "84ec3636-3621-5dee-b051-c2707eec5584",
             "visible": false
           }
         ]
@@ -1619,59 +1821,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "targetLayer": "ee2531a6-23fa-5db3-8289-12a808582c05",
             "visible": true
           },
           {
-            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "targetLayer": "abb68004-d27d-58bb-bca7-8d6bfdf2f9be",
             "visible": false
           },
           {
-            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "targetLayer": "04eaa86c-bc4e-5cf8-99a3-45584f69c77d",
             "visible": false
           },
           {
-            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "targetLayer": "25937c39-d90c-524b-b95d-4a0d36a070ad",
             "visible": false
           },
           {
-            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "targetLayer": "ccba6808-0da2-5d6b-b440-05e9395c3e59",
             "visible": false
           },
           {
-            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "targetLayer": "1ae54c13-c037-5ad1-9389-79e9f5195627",
             "visible": false
           },
           {
-            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "targetLayer": "ffc5b112-49fb-5db9-b7da-afe3f947551e",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "targetLayer": "dc662fa4-01b7-5437-bc62-e5b5ddfae677",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "targetLayer": "9d5771c5-6b2b-5eef-8f50-69b4badea527",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "targetLayer": "e1fc9d68-86d2-5b14-ab6f-94fb0f27f130",
             "visible": false
           },
           {
-            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "17db14fc-9723-50e2-abee-87f180631cbd",
             "visible": true
           },
           {
-            "targetLayer": "Delhi NCT boundary",
+            "targetLayer": "60b85afc-3e21-5b73-9b5e-3926a11092bf",
             "visible": true
           },
           {
-            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "targetLayer": "fd48ad04-c75c-5117-8266-16c8ae260cad",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "894f14d3-b405-5476-a45e-880c2b3e82db",
+            "visible": false
+          },
+          {
+            "targetLayer": "f0ca72b2-d186-58ce-8e7b-443f61339679",
+            "visible": false
+          },
+          {
+            "targetLayer": "84ec3636-3621-5dee-b051-c2707eec5584",
             "visible": false
           }
         ]
@@ -1704,59 +1914,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "targetLayer": "ee2531a6-23fa-5db3-8289-12a808582c05",
             "visible": true
           },
           {
-            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "targetLayer": "abb68004-d27d-58bb-bca7-8d6bfdf2f9be",
             "visible": false
           },
           {
-            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "targetLayer": "04eaa86c-bc4e-5cf8-99a3-45584f69c77d",
             "visible": false
           },
           {
-            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "targetLayer": "25937c39-d90c-524b-b95d-4a0d36a070ad",
             "visible": false
           },
           {
-            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "targetLayer": "ccba6808-0da2-5d6b-b440-05e9395c3e59",
             "visible": false
           },
           {
-            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "targetLayer": "1ae54c13-c037-5ad1-9389-79e9f5195627",
             "visible": false
           },
           {
-            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "targetLayer": "ffc5b112-49fb-5db9-b7da-afe3f947551e",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "targetLayer": "dc662fa4-01b7-5437-bc62-e5b5ddfae677",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "targetLayer": "9d5771c5-6b2b-5eef-8f50-69b4badea527",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "targetLayer": "e1fc9d68-86d2-5b14-ab6f-94fb0f27f130",
             "visible": false
           },
           {
-            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "17db14fc-9723-50e2-abee-87f180631cbd",
             "visible": true
           },
           {
-            "targetLayer": "Delhi NCT boundary",
+            "targetLayer": "60b85afc-3e21-5b73-9b5e-3926a11092bf",
             "visible": true
           },
           {
-            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "targetLayer": "fd48ad04-c75c-5117-8266-16c8ae260cad",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "894f14d3-b405-5476-a45e-880c2b3e82db",
+            "visible": true
+          },
+          {
+            "targetLayer": "f0ca72b2-d186-58ce-8e7b-443f61339679",
+            "visible": false
+          },
+          {
+            "targetLayer": "84ec3636-3621-5dee-b051-c2707eec5584",
             "visible": false
           }
         ]
@@ -1789,59 +2007,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "targetLayer": "ee2531a6-23fa-5db3-8289-12a808582c05",
             "visible": false
           },
           {
-            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "targetLayer": "abb68004-d27d-58bb-bca7-8d6bfdf2f9be",
             "visible": true
           },
           {
-            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "targetLayer": "04eaa86c-bc4e-5cf8-99a3-45584f69c77d",
             "visible": false
           },
           {
-            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "targetLayer": "25937c39-d90c-524b-b95d-4a0d36a070ad",
             "visible": false
           },
           {
-            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "targetLayer": "ccba6808-0da2-5d6b-b440-05e9395c3e59",
             "visible": false
           },
           {
-            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "targetLayer": "1ae54c13-c037-5ad1-9389-79e9f5195627",
             "visible": false
           },
           {
-            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "targetLayer": "ffc5b112-49fb-5db9-b7da-afe3f947551e",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "targetLayer": "dc662fa4-01b7-5437-bc62-e5b5ddfae677",
             "visible": true
           },
           {
-            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "targetLayer": "9d5771c5-6b2b-5eef-8f50-69b4badea527",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "targetLayer": "e1fc9d68-86d2-5b14-ab6f-94fb0f27f130",
             "visible": false
           },
           {
-            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "17db14fc-9723-50e2-abee-87f180631cbd",
             "visible": true
           },
           {
-            "targetLayer": "Delhi NCT boundary",
+            "targetLayer": "60b85afc-3e21-5b73-9b5e-3926a11092bf",
             "visible": true
           },
           {
-            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "targetLayer": "fd48ad04-c75c-5117-8266-16c8ae260cad",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "894f14d3-b405-5476-a45e-880c2b3e82db",
+            "visible": false
+          },
+          {
+            "targetLayer": "f0ca72b2-d186-58ce-8e7b-443f61339679",
+            "visible": false
+          },
+          {
+            "targetLayer": "84ec3636-3621-5dee-b051-c2707eec5584",
             "visible": false
           }
         ]
@@ -1874,59 +2100,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "targetLayer": "ee2531a6-23fa-5db3-8289-12a808582c05",
             "visible": false
           },
           {
-            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "targetLayer": "abb68004-d27d-58bb-bca7-8d6bfdf2f9be",
             "visible": false
           },
           {
-            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "targetLayer": "04eaa86c-bc4e-5cf8-99a3-45584f69c77d",
             "visible": true
           },
           {
-            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "targetLayer": "25937c39-d90c-524b-b95d-4a0d36a070ad",
             "visible": false
           },
           {
-            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "targetLayer": "ccba6808-0da2-5d6b-b440-05e9395c3e59",
             "visible": false
           },
           {
-            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "targetLayer": "1ae54c13-c037-5ad1-9389-79e9f5195627",
             "visible": false
           },
           {
-            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "targetLayer": "ffc5b112-49fb-5db9-b7da-afe3f947551e",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "targetLayer": "dc662fa4-01b7-5437-bc62-e5b5ddfae677",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "targetLayer": "9d5771c5-6b2b-5eef-8f50-69b4badea527",
             "visible": true
           },
           {
-            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "targetLayer": "e1fc9d68-86d2-5b14-ab6f-94fb0f27f130",
             "visible": false
           },
           {
-            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "17db14fc-9723-50e2-abee-87f180631cbd",
             "visible": true
           },
           {
-            "targetLayer": "Delhi NCT boundary",
+            "targetLayer": "60b85afc-3e21-5b73-9b5e-3926a11092bf",
             "visible": true
           },
           {
-            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "targetLayer": "fd48ad04-c75c-5117-8266-16c8ae260cad",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "894f14d3-b405-5476-a45e-880c2b3e82db",
+            "visible": false
+          },
+          {
+            "targetLayer": "f0ca72b2-d186-58ce-8e7b-443f61339679",
+            "visible": true
+          },
+          {
+            "targetLayer": "84ec3636-3621-5dee-b051-c2707eec5584",
             "visible": true
           }
         ]
@@ -1959,59 +2193,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "targetLayer": "ee2531a6-23fa-5db3-8289-12a808582c05",
             "visible": false
           },
           {
-            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "targetLayer": "abb68004-d27d-58bb-bca7-8d6bfdf2f9be",
             "visible": false
           },
           {
-            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "targetLayer": "04eaa86c-bc4e-5cf8-99a3-45584f69c77d",
             "visible": false
           },
           {
-            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "targetLayer": "25937c39-d90c-524b-b95d-4a0d36a070ad",
             "visible": false
           },
           {
-            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "targetLayer": "ccba6808-0da2-5d6b-b440-05e9395c3e59",
             "visible": true
           },
           {
-            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "targetLayer": "1ae54c13-c037-5ad1-9389-79e9f5195627",
             "visible": false
           },
           {
-            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "targetLayer": "ffc5b112-49fb-5db9-b7da-afe3f947551e",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "targetLayer": "dc662fa4-01b7-5437-bc62-e5b5ddfae677",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "targetLayer": "9d5771c5-6b2b-5eef-8f50-69b4badea527",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "targetLayer": "e1fc9d68-86d2-5b14-ab6f-94fb0f27f130",
             "visible": false
           },
           {
-            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "17db14fc-9723-50e2-abee-87f180631cbd",
             "visible": true
           },
           {
-            "targetLayer": "Delhi NCT boundary",
+            "targetLayer": "60b85afc-3e21-5b73-9b5e-3926a11092bf",
             "visible": true
           },
           {
-            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "targetLayer": "fd48ad04-c75c-5117-8266-16c8ae260cad",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "894f14d3-b405-5476-a45e-880c2b3e82db",
+            "visible": false
+          },
+          {
+            "targetLayer": "f0ca72b2-d186-58ce-8e7b-443f61339679",
+            "visible": false
+          },
+          {
+            "targetLayer": "84ec3636-3621-5dee-b051-c2707eec5584",
             "visible": false
           }
         ]
@@ -2044,59 +2286,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "targetLayer": "ee2531a6-23fa-5db3-8289-12a808582c05",
             "visible": false
           },
           {
-            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "targetLayer": "abb68004-d27d-58bb-bca7-8d6bfdf2f9be",
             "visible": false
           },
           {
-            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "targetLayer": "04eaa86c-bc4e-5cf8-99a3-45584f69c77d",
             "visible": true
           },
           {
-            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "targetLayer": "25937c39-d90c-524b-b95d-4a0d36a070ad",
             "visible": false
           },
           {
-            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "targetLayer": "ccba6808-0da2-5d6b-b440-05e9395c3e59",
             "visible": false
           },
           {
-            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "targetLayer": "1ae54c13-c037-5ad1-9389-79e9f5195627",
             "visible": false
           },
           {
-            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "targetLayer": "ffc5b112-49fb-5db9-b7da-afe3f947551e",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "targetLayer": "dc662fa4-01b7-5437-bc62-e5b5ddfae677",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "targetLayer": "9d5771c5-6b2b-5eef-8f50-69b4badea527",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "targetLayer": "e1fc9d68-86d2-5b14-ab6f-94fb0f27f130",
             "visible": false
           },
           {
-            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "17db14fc-9723-50e2-abee-87f180631cbd",
             "visible": true
           },
           {
-            "targetLayer": "Delhi NCT boundary",
+            "targetLayer": "60b85afc-3e21-5b73-9b5e-3926a11092bf",
             "visible": true
           },
           {
-            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "targetLayer": "fd48ad04-c75c-5117-8266-16c8ae260cad",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "894f14d3-b405-5476-a45e-880c2b3e82db",
+            "visible": false
+          },
+          {
+            "targetLayer": "f0ca72b2-d186-58ce-8e7b-443f61339679",
+            "visible": true
+          },
+          {
+            "targetLayer": "84ec3636-3621-5dee-b051-c2707eec5584",
             "visible": true
           }
         ]
@@ -2129,59 +2379,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "targetLayer": "ee2531a6-23fa-5db3-8289-12a808582c05",
             "visible": false
           },
           {
-            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "targetLayer": "abb68004-d27d-58bb-bca7-8d6bfdf2f9be",
             "visible": false
           },
           {
-            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "targetLayer": "04eaa86c-bc4e-5cf8-99a3-45584f69c77d",
             "visible": true
           },
           {
-            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "targetLayer": "25937c39-d90c-524b-b95d-4a0d36a070ad",
             "visible": false
           },
           {
-            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "targetLayer": "ccba6808-0da2-5d6b-b440-05e9395c3e59",
             "visible": false
           },
           {
-            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "targetLayer": "1ae54c13-c037-5ad1-9389-79e9f5195627",
             "visible": false
           },
           {
-            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "targetLayer": "ffc5b112-49fb-5db9-b7da-afe3f947551e",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "targetLayer": "dc662fa4-01b7-5437-bc62-e5b5ddfae677",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "targetLayer": "9d5771c5-6b2b-5eef-8f50-69b4badea527",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "targetLayer": "e1fc9d68-86d2-5b14-ab6f-94fb0f27f130",
             "visible": false
           },
           {
-            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "17db14fc-9723-50e2-abee-87f180631cbd",
             "visible": true
           },
           {
-            "targetLayer": "Delhi NCT boundary",
+            "targetLayer": "60b85afc-3e21-5b73-9b5e-3926a11092bf",
             "visible": true
           },
           {
-            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "targetLayer": "fd48ad04-c75c-5117-8266-16c8ae260cad",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "894f14d3-b405-5476-a45e-880c2b3e82db",
+            "visible": false
+          },
+          {
+            "targetLayer": "f0ca72b2-d186-58ce-8e7b-443f61339679",
+            "visible": false
+          },
+          {
+            "targetLayer": "84ec3636-3621-5dee-b051-c2707eec5584",
             "visible": false
           }
         ]
@@ -2214,59 +2472,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "targetLayer": "ee2531a6-23fa-5db3-8289-12a808582c05",
             "visible": false
           },
           {
-            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "targetLayer": "abb68004-d27d-58bb-bca7-8d6bfdf2f9be",
             "visible": false
           },
           {
-            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "targetLayer": "04eaa86c-bc4e-5cf8-99a3-45584f69c77d",
             "visible": true
           },
           {
-            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "targetLayer": "25937c39-d90c-524b-b95d-4a0d36a070ad",
             "visible": false
           },
           {
-            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "targetLayer": "ccba6808-0da2-5d6b-b440-05e9395c3e59",
             "visible": false
           },
           {
-            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "targetLayer": "1ae54c13-c037-5ad1-9389-79e9f5195627",
             "visible": true
           },
           {
-            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "targetLayer": "ffc5b112-49fb-5db9-b7da-afe3f947551e",
             "visible": true
           },
           {
-            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "targetLayer": "dc662fa4-01b7-5437-bc62-e5b5ddfae677",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "targetLayer": "9d5771c5-6b2b-5eef-8f50-69b4badea527",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "targetLayer": "e1fc9d68-86d2-5b14-ab6f-94fb0f27f130",
             "visible": false
           },
           {
-            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "17db14fc-9723-50e2-abee-87f180631cbd",
             "visible": true
           },
           {
-            "targetLayer": "Delhi NCT boundary",
+            "targetLayer": "60b85afc-3e21-5b73-9b5e-3926a11092bf",
             "visible": true
           },
           {
-            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "targetLayer": "fd48ad04-c75c-5117-8266-16c8ae260cad",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "894f14d3-b405-5476-a45e-880c2b3e82db",
+            "visible": false
+          },
+          {
+            "targetLayer": "f0ca72b2-d186-58ce-8e7b-443f61339679",
+            "visible": false
+          },
+          {
+            "targetLayer": "84ec3636-3621-5dee-b051-c2707eec5584",
             "visible": false
           }
         ]
@@ -2299,59 +2565,67 @@
         },
         "layerOverride": [
           {
-            "targetLayer": "AQI 5 Nov 18:30 IST",
+            "targetLayer": "ee2531a6-23fa-5db3-8289-12a808582c05",
             "visible": false
           },
           {
-            "targetLayer": "AQI 6 Nov 02:30 IST",
+            "targetLayer": "abb68004-d27d-58bb-bca7-8d6bfdf2f9be",
             "visible": false
           },
           {
-            "targetLayer": "AQI 7 Nov 05:30 IST",
+            "targetLayer": "04eaa86c-bc4e-5cf8-99a3-45584f69c77d",
             "visible": true
           },
           {
-            "targetLayer": "AQI 7 Nov 14:30 IST",
+            "targetLayer": "25937c39-d90c-524b-b95d-4a0d36a070ad",
             "visible": false
           },
           {
-            "targetLayer": "P(stagnant) 7 Nov 05:30 IST",
+            "targetLayer": "ccba6808-0da2-5d6b-b440-05e9395c3e59",
             "visible": false
           },
           {
-            "targetLayer": "0.25° grid (Aurora 1.5)",
+            "targetLayer": "1ae54c13-c037-5ad1-9389-79e9f5195627",
             "visible": false
           },
           {
-            "targetLayer": "One 0.4° cell (Aurora Air Pollution)",
+            "targetLayer": "ffc5b112-49fb-5db9-b7da-afe3f947551e",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 6 Nov 02:30 IST",
+            "targetLayer": "dc662fa4-01b7-5437-bc62-e5b5ddfae677",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 05:30 IST",
+            "targetLayer": "9d5771c5-6b2b-5eef-8f50-69b4badea527",
             "visible": false
           },
           {
-            "targetLayer": "10 m wind 7 Nov 14:30 IST",
+            "targetLayer": "e1fc9d68-86d2-5b14-ab6f-94fb0f27f130",
             "visible": false
           },
           {
-            "targetLayer": "Delhi-NCR tile (27.5–31.5°N, 76–80°E)",
+            "targetLayer": "17db14fc-9723-50e2-abee-87f180631cbd",
             "visible": true
           },
           {
-            "targetLayer": "Delhi NCT boundary",
+            "targetLayer": "60b85afc-3e21-5b73-9b5e-3926a11092bf",
             "visible": true
           },
           {
-            "targetLayer": "Ten reporting sites (colour: peak category)",
+            "targetLayer": "fd48ad04-c75c-5117-8266-16c8ae260cad",
             "visible": true
           },
           {
-            "targetLayer": "Anand Vihar",
+            "targetLayer": "894f14d3-b405-5476-a45e-880c2b3e82db",
+            "visible": false
+          },
+          {
+            "targetLayer": "f0ca72b2-d186-58ce-8e7b-443f61339679",
+            "visible": false
+          },
+          {
+            "targetLayer": "84ec3636-3621-5dee-b051-c2707eec5584",
             "visible": false
           }
         ]
@@ -2373,6 +2647,8 @@
     "17db14fc-9723-50e2-abee-87f180631cbd",
     "60b85afc-3e21-5b73-9b5e-3926a11092bf",
     "fd48ad04-c75c-5117-8266-16c8ae260cad",
+    "894f14d3-b405-5476-a45e-880c2b3e82db",
+    "f0ca72b2-d186-58ce-8e7b-443f61339679",
     "84ec3636-3621-5dee-b051-c2707eec5584",
     "8725760f-47d7-51d1-886e-7a9cf079b27c",
     "f8850bb1-4cfb-5bc7-a066-0087aabd2028",
