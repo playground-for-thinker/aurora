@@ -4,7 +4,7 @@
 >
 > 이 한 줄의 메시지가 시민에게 도달하기까지, 무엇이 필요하고 Aurora가 어디서 쓰이는지를 장면별로 정리한 문서입니다.
 
-스토리 맵(지도 위 장면별 내러티브, JupyterGIS 문서를 notebook.link에서 열기): [한국어](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_ko.jGIS) · [English](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_en.jGIS) · 이 스토리보드를 notebook.link에서 보기(Specta 아티클, 그래프는 브라우저에서 계산): [한국어](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_ko.ipynb) · [English](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_en.ipynb) · 영어 마크다운: `STORYBOARD.md`
+스토리 맵(지도 위 장면별 내러티브, JupyterGIS 문서를 notebook.link에서 열기): [한국어](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_ko.jGIS) · [English](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_en.jGIS) · 일반인 대상 발표 슬라이드(notebook.link, 12장, 왼쪽 그림·오른쪽 설명, 장마다 한국어 ⇄ English 전환): [한국어](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_ko.ipynb) · [English](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_en.ipynb) · 영어 마크다운: `STORYBOARD.md`
 
 관련 파일:
 
@@ -13,7 +13,7 @@
 | `delhi_aq.py` | 전체 파이프라인 구현(데이터 → 모델 → AQI → 메시지). CLI로도 실행 가능 |
 | `example_delhi_air_quality.ipynb` | 스토리보드를 따라가며 실행하는 노트북 |
 | `README_kor.md` | 설치·실행 방법, 환경 변수, 바로 열어보기 링크 |
-| `storymap/storyboard_{ko,en}.ipynb` | 이 문서의 notebook.link 버전(섹션별 마크다운 셀 + 그래프·표 코드 셀). `build_storyboard_notebooks.py`로 생성 |
+| `storymap/storyboard_{ko,en}.ipynb` | 발표용 슬라이드 12장(코드 없음, 그림은 `storymap/img/`). `build_storyboard_slides.py`로 생성 |
 | `storyboard.html` | 이 문서의 단일 HTML 파일 버전(언어 전환, demo 그래프) |
 | `storymap/` | 스토리 맵의 JupyterGIS 버전: `delhi_aq_storymap_{ko,en}.jGIS` + GeoJSON 레이어 + notebook.link 환경 파일. `build_storymap_jgis.py`로 생성, `publish_storymap_branch.sh`로 발행 |
 | `storymap.html`, `storymap_data.js` | 스토리 맵의 단일 HTML 파일 버전: 지도 위에서 장면별로 시간이 흐르며 한국어 ⇄ English 전환 |

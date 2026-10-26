@@ -10,8 +10,8 @@ Aurora 0.4° Air Pollution(오염물질 농도)과 Aurora 1.5(시간별 확산 �
 | - | - | - |
 | 스토리 맵 · 한국어 (JupyterGIS 문서, notebook.link) | [https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_ko.jGIS](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_ko.jGIS) | 전체 화면 발표(Specta). 편집기로 열기: [lab/?path=delhi_aq_storymap_ko.jGIS](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/lab/?path=delhi_aq_storymap_ko.jGIS). 파일은 `storymap/delhi_aq_storymap_ko.jGIS` + `storymap/data/`. 19개 장면, AQI 타일(4개 시각)·바람·정체 확률·지점·델리 경계. 배지: 위 "Story Map" |
 | 스토리 맵 · English | [https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_en.jGIS](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=delhi_aq_storymap_en.jGIS) | 같은 레이어, 영어 장면. 단일 HTML 파일 버전(한국어 ⇄ English 전환, 로컬에서 바로 열기)은 `storymap.html` + `storymap_data.js` |
-| 스토리보드 · 한국어 (노트북, notebook.link) | [https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_ko.ipynb](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_ko.ipynb) | Specta 아티클 보기. `STORYBOARD_kor.md`의 장면별 설명 + 브라우저에서 그리는 Anand Vihar 48시간 그래프·지점별 표. JupyterLab으로 열기: [lab/?path=storyboard_ko.ipynb](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/lab/?path=storyboard_ko.ipynb). 파일은 `storymap/storyboard_ko.ipynb` |
-| 스토리보드 · English | [https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_en.ipynb](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_en.ipynb) | 같은 구성, 영어. 단일 HTML 파일 버전(한국어 ⇄ English 전환, 로컬에서 바로 열기)은 `storyboard.html` |
+| 스토리보드 · 한국어 (발표용 슬라이드, notebook.link) | [https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_ko.ipynb](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_ko.ipynb) | 12장. 왼쪽 그림, 오른쪽 설명. 일반인 대상 스토리(코드 없음), "현 시스템이 보여주는 것"과 "정부·시가 할 일" 박스로 구분. 각 장 오른쪽 위 버튼으로 English ⇄ 한국어 전환. 파일은 `storymap/storyboard_ko.ipynb` |
+| 스토리보드 · English (slides) | [https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_en.ipynb](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_en.ipynb) | 같은 12장, 영어. 기술 문서는 `STORYBOARD_kor.md`/`STORYBOARD.md`, 단일 HTML 파일 버전은 `storyboard.html` |
 | 노트북 실행 (Google Colab) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb) | demo 모드는 GPU·데이터 불필요. 첫 셀이 `microsoft-aurora`와 `delhi_aq.py`를 자동으로 받습니다 |
 | 노트북 실행 (Binder, JupyterLab) | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/playground-for-thinker/aurora/main?labpath=examples%2Fdelhi_air_quality%2Fexample_delhi_air_quality.ipynb) | 첫 빌드는 수 분 소요 |
 | 노트북 미리보기 (nbviewer) | [https://nbviewer.org/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb](https://nbviewer.org/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb) | 실행 없이 읽기 |
@@ -84,14 +84,14 @@ export BLOB_URL_WITH_SAS="https://<account>.blob.core.windows.net/<container>/<f
 - `storymap/*.jGIS` — JupyterGIS 문서. notebook.link·JupyterLab·JupyterLite에서 열리는 공개용 버전. 레이어는 `storymap/data/*.geojson`, notebook.link 환경은 `storymap/environment.yml` + `nblink-lock.json`. 자세한 내용은 [`storymap/README.md`](storymap/README.md)
 - `storymap.html` — 단일 HTML 파일. 로컬에서 바로 열어보는 버전(한국어 ⇄ English 전환)
 
-스토리보드도 같은 폴더에 노트북으로 들어 있습니다: `storymap/storyboard_{ko,en}.ipynb`는 `STORYBOARD_kor.md`/`STORYBOARD.md`를 섹션별 마크다운 셀로 나누고, demo 산출물 절 뒤에 그래프·표 코드 셀(Specta에서는 코드 숨김)을 넣은 것입니다. `storyboard.html`은 단일 HTML 파일 버전입니다.
+스토리보드 발표 슬라이드도 같은 폴더에 있습니다: `storymap/storyboard_{ko,en}.ipynb`는 슬라이드 12장(장마다 마크다운 셀 하나, 왼쪽 그림·오른쪽 설명)이며 `build_storyboard_slides.py`가 `storymap_data.js`에서 그림(matplotlib, Nanum 글꼴)과 문안을 만듭니다. 코드 셀이 없어 커널 없이 바로 열립니다. `storyboard.html`은 단일 HTML 파일 버전입니다.
 
 파이프라인 산출물 폴더에서 다시 만들려면:
 
 ```bash
 python build_storymap_data.py outputs --finetune-log path/to/finetune_smoke.log   # storymap_data.js
 python build_storymap_jgis.py                                                   # storymap/*.jGIS + storymap/data/*.geojson
-python build_storyboard_notebooks.py                                            # storymap/storyboard_{ko,en}.ipynb (STORYBOARD*.md에서)
+python build_storyboard_slides.py                                               # storymap/storyboard_{ko,en}.ipynb + storymap/img/ (발표용 슬라이드)
 ./publish_storymap_branch.sh                                                    # storymap 브랜치로 발행 → notebook.link 링크 활성화
 ```
 

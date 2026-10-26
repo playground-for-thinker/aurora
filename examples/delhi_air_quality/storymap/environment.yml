@@ -7,5 +7,4 @@ channels:
 dependencies:
   - xeus-python      # Python kernel compiled to WebAssembly (lets you open the .jGIS from a notebook)
   - jupytergis-lite  # JupyterGIS editor + story map viewer for the .jGIS documents
-  - specta           # notebook.link presentation mode (full-screen story map, storyboard article)
-  - matplotlib       # charts in storyboard_{ko,en}.ipynb
+  - specta           # notebook.link presentation mode (story map full screen, storyboard slides)
