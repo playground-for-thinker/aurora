@@ -1344,17 +1344,19 @@
       "parameters": {
         "zoom": 1.97,
         "extent": [
-          -18924313.43,
-          -7967317.54,
-          21150703.25,
-          14368684.28
+          -1113194.91,
+          -6446275.84,
+          38961821.78,
+          11753184.62
         ],
         "enableIdentify": true,
         "content": {
           "contentMode": "map",
-          "markdown": "*Aurora 1.5 + Aurora Air Pollution · 스토리 맵*\n\nAurora는 Microsoft Research의 지구 시스템 파운데이션 모델입니다. 이 이야기는 그 모델로 인도 뉴델리의 48시간 대기질을 예측하고, 인도 CPCB 기준 AQI와 GRAP 단계로 바꿔 힌디어·영어·한국어 메시지를 만들기까지를 장면별로 따라갑니다. 지도는 세계에서 시작해 인도, 델리 수도권, 델리, 그리고 가장 심각한 지점으로 내려갑니다.\n\n### 표기 구분\n\n- **Aurora 직접 분석** — Aurora 모델이 실제 초기장으로 계산한 결과\n- **추가 분석 (다른 방법)** — Aurora 출력 위에 통계·규칙·소프트웨어로 더한 분석(AQI 환산, 정체 판정, 편향 보정, 발송, 자동화)\n- **합성·시뮬레이션** — 모델을 돌리지 않고 만든 예시 값(데모 모드, 계정이 필요한 자료의 대체)\n\n| 항목 | 출처 |\n| --- | --- |\n| 초기 시각 | 2025-11-05 12:00:00 UTC |\n| 기상 (혼합층·바람·기온) | Aurora 1.5 (ARCO-ERA5 initial condition) — Aurora 직접 분석 |\n| 오염 농도 (PM2.5, PM10, …) | 합성 — CAMS 자료는 Atmosphere Data Store 계정이 필요해 이 실행에서는 대체값 사용 |\n| 앙상블 | Aurora 1.5 Ensemble (3 members) — Aurora 직접 분석 |\n| AQI·GRAP·정체 판정·보정·발송·자동화 | 추가 분석 (CPCB 공식, 규칙, 최소제곱, 소프트웨어) |\n\n▶ 버튼으로 다음 장면으로 넘어가면 지도가 따라 움직입니다. 지도 장면에서는 ⓘ(Identify)로 셀과 지점의 값을 클릭해 볼 수 있습니다.\n",
+          "markdown": "<div style='font-size:18px; line-height:1.55;'><div style='font-size:14px; color:#64748b; letter-spacing:.03em; margin:0 0 8px;'>Aurora 1.5 + Aurora Air Pollution · 스토리 맵</div><p style='margin:0 0 10px;'>Aurora는 Microsoft Research의 지구 시스템 파운데이션 모델입니다. 이 이야기는 그 모델로 인도 뉴델리의 48시간 대기질을 예측하고, 인도 CPCB 기준 AQI와 GRAP 단계로 바꿔 힌디어·영어·한국어 메시지를 만들기까지를 장면별로 따라갑니다. 지도는 세계에서 시작해 인도, 델리 수도권, 델리, 그리고 가장 심각한 지점으로 내려갑니다.</p><h3 style='font-size:20px; margin:12px 0 6px;'>표기 구분</h3><ul style='margin:0 0 10px 22px; padding:0;'><li style='margin:0 0 5px;'><b>Aurora 직접 분석</b> — Aurora 모델이 실제 초기장으로 계산한 결과</li><li style='margin:0 0 5px;'><b>추가 분석 (다른 방법)</b> — Aurora 출력 위에 통계·규칙·소프트웨어로 더한 분석(AQI 환산, 정체 판정, 편향 보정, 발송, 자동화)</li><li style='margin:0 0 5px;'><b>합성·시뮬레이션</b> — 모델을 돌리지 않고 만든 예시 값(데모 모드, 계정이 필요한 자료의 대체)</li></ul><table style='border-collapse:collapse; width:100%; font-size:16px; margin:6px 0 10px;'><thead><tr><th style='text-align:left; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>항목</th><th style='text-align:left; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>출처</th></tr></thead><tbody><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>초기 시각</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>2025-11-05 12:00:00 UTC</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>기상 (혼합층·바람·기온)</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Aurora 1.5 (ARCO-ERA5 initial condition) — Aurora 직접 분석</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>오염 농도 (PM2.5, PM10, …)</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>합성 — CAMS 자료는 Atmosphere Data Store 계정이 필요해 이 실행에서는 대체값 사용</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>앙상블</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Aurora 1.5 Ensemble (3 members) — Aurora 직접 분석</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>AQI·GRAP·정체 판정·보정·발송·자동화</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>추가 분석 (CPCB 공식, 규칙, 최소제곱, 소프트웨어)</td></tr></tbody></table><p style='margin:0 0 10px;'>▶ 버튼으로 다음 장면으로 넘어가면 지도가 따라 움직입니다. 지도 장면에서는 ⓘ(Identify)로 셀과 지점의 값을 클릭해 볼 수 있습니다.</p></div>",
           "image": "",
-          "imageCaption": ""
+          "imageCaption": "",
+          "paneAlignment": "end",
+          "panelWidth": "50%"
         },
         "transition": {
           "type": "smooth",
@@ -1427,17 +1429,19 @@
       "parameters": {
         "zoom": 1.97,
         "extent": [
-          -18924313.43,
-          -7967317.54,
-          21150703.25,
-          14368684.28
+          -1113194.91,
+          -6446275.84,
+          38961821.78,
+          11753184.62
         ],
         "enableIdentify": false,
         "content": {
           "contentMode": "markdown",
-          "markdown": "*용어 풀이*\n\n| 약어 | 영어 전체 이름 | 한국어 명칭 | 설명 |\n| --- | --- | --- | --- |\n| **AQI** | Air Quality Index | 대기질 지수 | 0~500 척도. 인도 CPCB 기준으로 좋음·양호·보통·나쁨·매우 나쁨·위험 6단계 |\n| **CPCB** | Central Pollution Control Board | 인도 중앙오염관리위원회 | 인도 환경부 산하 기관. 국가 AQI 기준과 전국 관측망을 운영 |\n| **GRAP** | Graded Response Action Plan | 단계별 대응 조치 계획 | AQI 구간별로 미리 정한 조치(1~4단계: 건설 제한, 차량 제한, 원격수업, 재택근무 등) |\n| **CAQM** | Commission for Air Quality Management in NCR and Adjoining Areas | 수도권 대기질관리위원회 | 델리 수도권의 대기질 정책 기구. GRAP 단계 발동 권한을 가짐 |\n| **DPCC** | Delhi Pollution Control Committee | 델리 오염관리위원회 | 델리 정부의 오염 관리 기관. 시내 관측소를 운영 |\n| **NCR** | National Capital Region | 델리 수도권 | 델리와 인접한 하리아나·우타르프라데시·라자스탄의 도시(구루그람, 노이다 등)를 묶은 권역 |\n| **NCT** | National Capital Territory of Delhi | 델리 수도직할지 | 델리의 행정 단위. 지도의 굵은 외곽선 |\n| **PM2.5** | particulate matter smaller than 2.5 micrometres | 초미세먼지 | 지름 2.5 µm 이하 입자. 단위 µg/m³ |\n| **PM10** | particulate matter smaller than 10 micrometres | 미세먼지 | 지름 10 µm 이하 입자. 단위 µg/m³ |\n| **CAMS** | Copernicus Atmosphere Monitoring Service | 코페르니쿠스 대기 모니터링 서비스 | EU의 전지구 대기 조성 분석·예보 서비스. Air Pollution 모델의 입력 |\n| **ERA5** | ECMWF Reanalysis, 5th generation | 유럽중기예보센터 5세대 재분석 자료 | 과거 기상을 격자로 재구성한 자료. 이 예제에서 Aurora 1.5의 입력 |\n| **IFS HRES T0** | Integrated Forecasting System, high resolution, analysis at lead time 0 | ECMWF 통합예보시스템 고해상도 초기 분석장 | Aurora 1.5가 파인튜닝된 실시간 입력 자료 |\n| **IST** | Indian Standard Time | 인도 표준시 | UTC+5:30 |\n| **BLH** | boundary-layer height | 대기경계층 높이(혼합층 높이) | 오염이 섞이는 하층 대기의 두께. 낮을수록 지표 농도가 오름 |\n",
+          "markdown": "<div style='font-size:18px; line-height:1.55;'><div style='font-size:14px; color:#64748b; letter-spacing:.03em; margin:0 0 8px;'>용어 풀이</div><table style='border-collapse:collapse; width:100%; font-size:16px; margin:6px 0 10px;'><thead><tr><th style='text-align:left; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>약어</th><th style='text-align:left; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>영어 전체 이름</th><th style='text-align:left; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>한국어 명칭</th><th style='text-align:left; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>설명</th></tr></thead><tbody><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'><b>AQI</b></td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Air Quality Index</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>대기질 지수</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>0–500 척도. 인도 CPCB 기준으로 좋음·양호·보통·나쁨·매우 나쁨·위험 6단계</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'><b>CPCB</b></td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Central Pollution Control Board</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>인도 중앙오염관리위원회</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>인도 환경부 산하 기관. 국가 AQI 기준과 전국 관측망을 운영</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'><b>GRAP</b></td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Graded Response Action Plan</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>단계별 대응 조치 계획</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>AQI 구간별로 미리 정한 조치(1–4단계: 건설 제한, 차량 제한, 원격수업, 재택근무 등)</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'><b>CAQM</b></td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Commission for Air Quality Management in NCR and Adjoining Areas</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>수도권 대기질관리위원회</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>델리 수도권의 대기질 정책 기구. GRAP 단계 발동 권한을 가짐</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'><b>DPCC</b></td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Delhi Pollution Control Committee</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>델리 오염관리위원회</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>델리 정부의 오염 관리 기관. 시내 관측소를 운영</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'><b>NCR</b></td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>National Capital Region</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>델리 수도권</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>델리와 인접한 하리아나·우타르프라데시·라자스탄의 도시(구루그람, 노이다 등)를 묶은 권역</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'><b>NCT</b></td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>National Capital Territory of Delhi</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>델리 수도직할지</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>델리의 행정 단위. 지도의 굵은 외곽선</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'><b>PM2.5</b></td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>particulate matter smaller than 2.5 micrometres</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>초미세먼지</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>지름 2.5 µm 이하 입자. 단위 µg/m³</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'><b>PM10</b></td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>particulate matter smaller than 10 micrometres</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>미세먼지</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>지름 10 µm 이하 입자. 단위 µg/m³</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'><b>CAMS</b></td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Copernicus Atmosphere Monitoring Service</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>코페르니쿠스 대기 모니터링 서비스</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>EU의 전지구 대기 조성 분석·예보 서비스. Air Pollution 모델의 입력</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'><b>ERA5</b></td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>ECMWF Reanalysis, 5th generation</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>유럽중기예보센터 5세대 재분석 자료</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>과거 기상을 격자로 재구성한 자료. 이 예제에서 Aurora 1.5의 입력</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'><b>IFS HRES T0</b></td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Integrated Forecasting System, high resolution, analysis at lead time 0</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>ECMWF 통합예보시스템 고해상도 초기 분석장</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Aurora 1.5가 파인튜닝된 실시간 입력 자료</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'><b>IST</b></td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Indian Standard Time</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>인도 표준시</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>UTC+5:30</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'><b>BLH</b></td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>boundary-layer height</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>대기경계층 높이(혼합층 높이)</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>오염이 섞이는 하층 대기의 두께. 낮을수록 지표 농도가 오름</td></tr></tbody></table></div>",
           "image": "",
-          "imageCaption": ""
+          "imageCaption": "",
+          "paneAlignment": "center",
+          "panelWidth": "50%"
         },
         "transition": {
           "type": "smooth",
@@ -1512,15 +1516,17 @@
         "extent": [
           6679169.45,
           445640.11,
-          11131949.08,
+          15584728.71,
           4579425.81
         ],
         "enableIdentify": true,
         "content": {
           "contentMode": "map",
-          "markdown": "*0 · 배경*\n\n- 델리 NCR(수도권)은 매년 10월 말~1월에 세계 최악 수준의 미세먼지 에피소드를 겪습니다. 인접 주(펀자브, 하리아나)의 볏짚 소각, 디왈리 폭죽, 교통·건설·발전 배출이 겹치고, 겨울철 **낮은 혼합층(100~300 m)과 약한 바람**이 오염을 지표 근처에 가둡니다.\n- 인도 정부는 국가 AQI(CPCB 기준)와 단계별 대응계획 **GRAP**(CAQM 주관)을 운영합니다. AQI 구간별로 건설 중단, 차량 제한, 원격수업, 재택근무가 정해져 있어 **예보 → 단계 → 조치**의 연결이 제도적으로 존재합니다.\n- 핵심 질문은 \"얼마나 나빠질지\"가 아니라 **\"언제, 어느 지역에서, 어떤 기상 조건 때문에 나빠지며, 시민은 무엇을 해야 하는가\"**를 12~48시간 앞서 전달하는 것입니다.\n\n지도의 사각형이 이 예제가 다루는 델리 NCR 타일(27.5~31.5°N, 76~80°E)입니다.\n",
+          "markdown": "<div style='font-size:18px; line-height:1.55;'><div style='font-size:14px; color:#64748b; letter-spacing:.03em; margin:0 0 8px;'>0 · 배경</div><ul style='margin:0 0 10px 22px; padding:0;'><li style='margin:0 0 5px;'>델리 NCR(수도권)은 매년 10월 말–1월에 세계 최악 수준의 미세먼지 에피소드를 겪습니다. 인접 주(펀자브, 하리아나)의 볏짚 소각, 디왈리 폭죽, 교통·건설·발전 배출이 겹치고, 겨울철 <b>낮은 혼합층(100–300 m)과 약한 바람</b>이 오염을 지표 근처에 가둡니다.</li><li style='margin:0 0 5px;'>인도 정부는 국가 AQI(CPCB 기준)와 단계별 대응계획 <b>GRAP</b>(CAQM 주관)을 운영합니다. AQI 구간별로 건설 중단, 차량 제한, 원격수업, 재택근무가 정해져 있어 <b>예보 → 단계 → 조치</b>의 연결이 제도적으로 존재합니다.</li><li style='margin:0 0 5px;'>핵심 질문은 \"얼마나 나빠질지\"가 아니라 <b>\"언제, 어느 지역에서, 어떤 기상 조건 때문에 나빠지며, 시민은 무엇을 해야 하는가\"</b>를 12–48시간 앞서 전달하는 것입니다.</li></ul><p style='margin:0 0 10px;'>지도의 사각형이 이 예제가 다루는 델리 NCR 타일(27.5–31.5°N, 76–80°E)입니다.</p></div>",
           "image": "",
-          "imageCaption": ""
+          "imageCaption": "",
+          "paneAlignment": "end",
+          "panelWidth": "50%"
         },
         "transition": {
           "type": "smooth",
@@ -1595,15 +1601,17 @@
         "extent": [
           8293302.06,
           3061141.04,
-          9072538.5,
+          9851774.94,
           3829123.84
         ],
         "enableIdentify": true,
         "content": {
           "contentMode": "map",
-          "markdown": "*2 · 시스템 구성 · 기상: Aurora 1.5 · 농도: 합성 (CAMS 계정 필요)*\n\n1. **입력** · CAMS 전지구 분석 0.4° (PM, NO2, SO2, O3, CO + 기상) · ERA5 또는 IFS HRES T0 0.25° (26개 표면 변수, 13개 기압면)\n2. **Aurora 0.4° Air Pollution** · 12시간 × 4 = 48 h. 로컬 GPU 또는 Foundry \"Aurora\" 엔드포인트\n3. **Aurora 1.5** · 6시간 × 8 + 시간별 서브스텝 = 48개 시간별 기상장 (경계층 높이, 10 m 풍속, 기온, 이슬점, 강수, 돌풍)\n4. **델리 후처리** · 10개 지점 보간 → CPCB AQI → GRAP 단계 → 정체 진단(풍속 < 10 km/h, 혼합층 < 500 m) → hi/en/ko 메시지 → 푸시·SMS·WhatsApp·앱\n\n**왜 두 모델인가.** Aurora 1.5는 기상 전용이라 오염물질을 예측하지 않습니다. 대신 **시간 단위**로 확산 조건을 줍니다. Air Pollution 모델은 농도를 직접 예측하지만 12시간 간격·0.4°입니다. 둘을 합치면 \"농도는 어느 수준인가\"와 \"밤 몇 시부터 정체가 시작되는가\"를 함께 말할 수 있습니다.\n\n**\"고해상도\"의 의미.** (1) 시간: 1.5의 `fine_lead_times=[1,…,6]`으로 1시간 간격. (2) 공간: 지도의 가는 격자가 1.5의 0.25° 셀이고, 이를 10개 지점으로 양선형 보간합니다. 격자 자체는 도시 내부 차이를 해소하지 못합니다(§6).\n\n**연계.** 저장소의 `msresearch-aurora/`(microsoft/vibe-kit의 Aurora 스킬)에서 React 지도 프런트엔드, 검증 유틸리티, 파인튠 스타터를 가져옵니다. 체크포인트는 HuggingFace `microsoft/aurora`에서 받고, GPU가 없으면 `--mode foundry`로 Azure AI Foundry의 \"Aurora\"/\"Aurora-1.5\" 엔드포인트에 작업을 보냅니다.\n",
+          "markdown": "<div style='font-size:18px; line-height:1.55;'><div style='font-size:14px; color:#64748b; letter-spacing:.03em; margin:0 0 8px;'>2 · 시스템 구성 · 기상: Aurora 1.5 · 농도: 합성 (CAMS 계정 필요)</div><ol style='margin:0 0 10px 22px; padding:0;'><li style='margin:0 0 5px;'><b>입력</b> · CAMS 전지구 분석 0.4° (PM, NO2, SO2, O3, CO + 기상) · ERA5 또는 IFS HRES T0 0.25° (26개 표면 변수, 13개 기압면)</li><li style='margin:0 0 5px;'><b>Aurora 0.4° Air Pollution</b> · 12시간 × 4 = 48 h. 로컬 GPU 또는 Foundry \"Aurora\" 엔드포인트</li><li style='margin:0 0 5px;'><b>Aurora 1.5</b> · 6시간 × 8 + 시간별 서브스텝 = 48개 시간별 기상장 (경계층 높이, 10 m 풍속, 기온, 이슬점, 강수, 돌풍)</li><li style='margin:0 0 5px;'><b>델리 후처리</b> · 10개 지점 보간 → CPCB AQI → GRAP 단계 → 정체 진단(풍속 &lt; 10 km/h, 혼합층 &lt; 500 m) → hi/en/ko 메시지 → 푸시·SMS·WhatsApp·앱</li></ol><p style='margin:0 0 10px;'><b>왜 두 모델인가.</b> Aurora 1.5는 기상 전용이라 오염물질을 예측하지 않습니다. 대신 <b>시간 단위</b>로 확산 조건을 줍니다. Air Pollution 모델은 농도를 직접 예측하지만 12시간 간격·0.4°입니다. 둘을 합치면 \"농도는 어느 수준인가\"와 \"밤 몇 시부터 정체가 시작되는가\"를 함께 말할 수 있습니다.</p><p style='margin:0 0 10px;'><b>\"고해상도\"의 의미.</b> (1) 시간: 1.5의 <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>fine_lead_times=[1,…,6]</code>으로 1시간 간격. (2) 공간: 지도의 가는 격자가 1.5의 0.25° 셀이고, 이를 10개 지점으로 양선형 보간합니다. 격자 자체는 도시 내부 차이를 해소하지 못합니다(§6).</p><p style='margin:0 0 10px;'><b>연계.</b> 저장소의 <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>msresearch-aurora/</code>(microsoft/vibe-kit의 Aurora 스킬)에서 React 지도 프런트엔드, 검증 유틸리티, 파인튠 스타터를 가져옵니다. 체크포인트는 HuggingFace <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>microsoft/aurora</code>에서 받고, GPU가 없으면 <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>--mode foundry</code>로 Azure AI Foundry의 \"Aurora\"/\"Aurora-1.5\" 엔드포인트에 작업을 보냅니다.</p></div>",
           "image": "",
-          "imageCaption": ""
+          "imageCaption": "",
+          "paneAlignment": "end",
+          "panelWidth": "50%"
         },
         "transition": {
           "type": "smooth",
@@ -1678,15 +1686,17 @@
         "extent": [
           8293302.06,
           3061141.04,
-          9072538.5,
+          9851774.94,
           3829123.84
         ],
         "enableIdentify": true,
         "content": {
           "contentMode": "map",
-          "markdown": "*1 · 등장인물 · 농도: 합성 (CAMS 계정 필요)*\n\n| 역할 | 원하는 것 | 산출물 |\n| --- | --- | --- |\n| 일반 시민 | 오늘 밤/내일 아침 주의사항 한 줄 | `short` |\n| 민감군과 보호자 | 구체적 행동과 시간대 | `long` |\n| 운영자 (DPCC/CAQM) | 정점 시각, GRAP 근거, 추세 | `summary_by_site.csv`, `bulletin_*.md` |\n| 데이터/ML 엔지니어 | 재현 가능한 파이프라인 | `--mode local|foundry` |\n\n지도: 첫 예측 시각(11월 5일 18:30 IST)의 AQI 타일. 색이 CPCB 범주입니다.\n",
+          "markdown": "<div style='font-size:18px; line-height:1.55;'><div style='font-size:14px; color:#64748b; letter-spacing:.03em; margin:0 0 8px;'>1 · 등장인물 · 농도: 합성 (CAMS 계정 필요)</div><table style='border-collapse:collapse; width:100%; font-size:16px; margin:6px 0 10px;'><thead><tr><th style='text-align:left; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>역할</th><th style='text-align:left; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>원하는 것</th><th style='text-align:left; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>산출물</th></tr></thead><tbody><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>일반 시민</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>오늘 밤/내일 아침 주의사항 한 줄</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'><code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>short</code></td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>민감군과 보호자</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>구체적 행동과 시간대</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'><code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>long</code></td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>운영자 (DPCC/CAQM)</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>정점 시각, GRAP 근거, 추세</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'><code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>summary_by_site.csv</code>, <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>bulletin_*.md</code></td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>데이터/ML 엔지니어</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>재현 가능한 파이프라인</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'><code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>--mode local|foundry</code></td></tr></tbody></table><p style='margin:0 0 10px;'>지도: 첫 예측 시각(11월 5일 18:30 IST)의 AQI 타일. 색이 CPCB 범주입니다.</p></div>",
           "image": "",
-          "imageCaption": ""
+          "imageCaption": "",
+          "paneAlignment": "end",
+          "panelWidth": "50%"
         },
         "transition": {
           "type": "smooth",
@@ -1761,15 +1771,17 @@
         "extent": [
           8293302.06,
           3061141.04,
-          9072538.5,
+          9851774.94,
           3829123.84
         ],
         "enableIdentify": true,
         "content": {
           "contentMode": "map",
-          "markdown": "*3 · S1 · S2 · 기상: Aurora 1.5 · 농도: 합성 (CAMS 계정 필요)*\n\n12 UTC(= 17:30 IST)의 CAMS 00/12 UTC 분석과 ERA5 06/12 UTC로 `Batch` 두 개를 만들고 정적 변수 pickle을 읽습니다. Air Pollution 4스텝(+12/24/36/48 h), Aurora 1.5 8스텝 × 6 서브스텝(+1…+48 h)을 GPU 한 장 또는 Foundry에서 돌립니다. 10분 뒤 10개 지점으로 보간하고 12시간 농도를 시간별로 선형 보간한 뒤, 1.5의 시간별 혼합층·풍속으로 정체 시간대를 표시합니다.\n",
+          "markdown": "<div style='font-size:18px; line-height:1.55;'><div style='font-size:14px; color:#64748b; letter-spacing:.03em; margin:0 0 8px;'>3 · S1 · S2 · 기상: Aurora 1.5 · 농도: 합성 (CAMS 계정 필요)</div><p style='margin:0 0 10px;'>12 UTC(= 17:30 IST)의 CAMS 00/12 UTC 분석과 ERA5 06/12 UTC로 <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>Batch</code> 두 개를 만들고 정적 변수 pickle을 읽습니다. Air Pollution 4스텝(+12/24/36/48 h), Aurora 1.5 8스텝 × 6 서브스텝(+1…+48 h)을 GPU 한 장 또는 Foundry에서 돌립니다. 10분 뒤 10개 지점으로 보간하고 12시간 농도를 시간별로 선형 보간한 뒤, 1.5의 시간별 혼합층·풍속으로 정체 시간대를 표시합니다.</p></div>",
           "image": "",
-          "imageCaption": ""
+          "imageCaption": "",
+          "paneAlignment": "end",
+          "panelWidth": "50%"
         },
         "transition": {
           "type": "smooth",
@@ -1844,15 +1856,17 @@
         "extent": [
           8532638.97,
           3274212.69,
-          8643958.46,
+          8755277.95,
           3382011.46
         ],
         "enableIdentify": true,
         "content": {
           "contentMode": "map",
-          "markdown": "*3 · S3 · S4 · 농도: 합성 (CAMS 계정 필요) · 추가 분석 (다른 방법)*\n\n첫 예측 시각. 델리 전체가 이미 \"매우 나쁨\" 이상이고, 교통 지점(Anand Vihar, ITO, Gurugram)이 가장 높습니다. 지점별 AQI와 GRAP 단계를 계산해 푸시/SMS용 한 줄 메시지를 내보냅니다. 운영자에게는 도시 헤드라인과 지점별 상세가 담긴 브리핑이 갑니다.\n\n**시민용 short · 힌디어**\n\n```text\n[वायु गुणवत्ता चेतावनी] Anand Vihar: अधिकतम AQI 500 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 321 µg/m³। स्वस्थ लोग भी प्रभावित।\n```\n\n**도시 헤드라인**\n\n```text\n델리 NCR 대기질 전망: 지역 중간값 최고 AQI 433 (위험), 최악 지점 Anand Vihar AQI 500 (위험), 11월 7일 05시 전후. GRAP 4단계 수준에 해당합니다.\n```\n",
+          "markdown": "<div style='font-size:18px; line-height:1.55;'><div style='font-size:14px; color:#64748b; letter-spacing:.03em; margin:0 0 8px;'>3 · S3 · S4 · 농도: 합성 (CAMS 계정 필요) · 추가 분석 (다른 방법)</div><p style='margin:0 0 10px;'>첫 예측 시각. 델리 전체가 이미 \"매우 나쁨\" 이상이고, 교통 지점(Anand Vihar, ITO, Gurugram)이 가장 높습니다. 지점별 AQI와 GRAP 단계를 계산해 푸시/SMS용 한 줄 메시지를 내보냅니다. 운영자에게는 도시 헤드라인과 지점별 상세가 담긴 브리핑이 갑니다.</p><p style='margin:0 0 10px;'><b>시민용 short · 힌디어</b></p><pre style='font-size:15px; line-height:1.45; white-space:pre-wrap; background:rgba(100,116,139,.12); padding:8px 11px; border-radius:8px; margin:6px 0 10px;'>[वायु गुणवत्ता चेतावनी] Anand Vihar: अधिकतम AQI 500 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 321 µg/m³। स्वस्थ लोग भी प्रभावित।</pre><p style='margin:0 0 10px;'><b>도시 헤드라인</b></p><pre style='font-size:15px; line-height:1.45; white-space:pre-wrap; background:rgba(100,116,139,.12); padding:8px 11px; border-radius:8px; margin:6px 0 10px;'>델리 NCR 대기질 전망: 지역 중간값 최고 AQI 433 (위험), 최악 지점 Anand Vihar AQI 500 (위험), 11월 7일 05시 전후. GRAP 4단계 수준에 해당합니다.</pre></div>",
           "image": "",
-          "imageCaption": ""
+          "imageCaption": "",
+          "paneAlignment": "end",
+          "panelWidth": "50%"
         },
         "transition": {
           "type": "smooth",
@@ -1927,15 +1941,17 @@
         "extent": [
           8532638.97,
           3274212.69,
-          8643958.46,
+          8755277.95,
           3382011.46
         ],
         "enableIdentify": true,
         "content": {
           "contentMode": "map",
-          "markdown": "*3 · S6 · 기상: Aurora 1.5 · 추가 분석 (다른 방법)*\n\nAurora 1.5가 예측한 첫째 밤(11월 5일 22시~6일 08시) Anand Vihar의 혼합층은 최저 137 m, 풍속 중앙값은 11.1 km/h입니다. 지도의 짧은 선이 그 바람(셀 중심에서 바람이 불어가는 방향, 길이는 풍속)입니다. 배출이 같아도 섞일 공기가 얇아지면 지표 농도가 오릅니다. 메시지에는 \"밤~아침에 오염이 지표 근처에 쌓이기 쉽습니다\"로 들어가고, 민감군에게는 창문 닫기·새벽 운동 자제 리마인더를 보낼 수 있습니다.\n",
+          "markdown": "<div style='font-size:18px; line-height:1.55;'><div style='font-size:14px; color:#64748b; letter-spacing:.03em; margin:0 0 8px;'>3 · S6 · 기상: Aurora 1.5 · 추가 분석 (다른 방법)</div><p style='margin:0 0 10px;'>Aurora 1.5가 예측한 첫째 밤(11월 5일 22시–6일 08시) Anand Vihar의 혼합층은 최저 137 m, 풍속 중앙값은 11.1 km/h입니다. 지도의 짧은 선이 그 바람(셀 중심에서 바람이 불어가는 방향, 길이는 풍속)입니다. 배출이 같아도 섞일 공기가 얇아지면 지표 농도가 오릅니다. 메시지에는 \"밤–아침에 오염이 지표 근처에 쌓이기 쉽습니다\"로 들어가고, 민감군에게는 창문 닫기·새벽 운동 자제 리마인더를 보낼 수 있습니다.</p></div>",
           "image": "",
-          "imageCaption": ""
+          "imageCaption": "",
+          "paneAlignment": "end",
+          "panelWidth": "50%"
         },
         "transition": {
           "type": "smooth",
@@ -2010,15 +2026,17 @@
         "extent": [
           8588298.71,
           3312159.86,
-          8623920.95,
+          8659543.19,
           3345134.73
         ],
         "enableIdentify": true,
         "content": {
           "contentMode": "map",
-          "markdown": "*3 · S7 · 기상: Aurora 1.5 · 농도: 합성 (CAMS 계정 필요) · 추가 분석 (다른 방법)*\n\n두 번째 새벽. 동부 델리의 Anand Vihar(주간 버스터미널과 간선도로가 모인 교통 지점)가 AQI 500(위험)에 닿고, 인접한 ITO·Noida·Okhla도 450을 넘습니다. 이 시각이 지점별 요약표의 \"정점 시각\"이 되고, 06:00 IST 아침 업데이트는 등교·출근 전에 \"오전 7~9시 최고치, 마스크 착용\"을 보냅니다.\n\n**운영자용 long · Anand Vihar**\n\n```text\n- 현재 AQI 385 → 최고 AQI 500 (위험), 정점 11월 7일 05시 전후. 추세: 비슷한 수준 유지.\n- 주 오염물질: PM10. PM2.5 최대 321㎍/㎥, PM10 최대 514㎍/㎥.\n- 확산 조건: 향후 예측기간 중 12시간(야간·새벽 2시간) 동안 풍속 10 km/h 미만, 혼합층 500 m 미만의 정체 조건이 예상됩니다(최저 혼합층 약 67 m). 밤~아침에 오염이 지표 근처에 쌓이기 쉽습니다.\n- 건강 권고: 건강한 사람도 영향을 받습니다. 가능한 한 실내에 머무르고, 어린이·노인·호흡기·심장 질환자는 외출을 피하세요. 공기청정기를 사용하고 증상이 있으면 의료기관을 찾으세요.\n- 행정 조치 안내: GRAP 4단계(위험+) 수준: 트럭 진입 제한, 재택근무 확대, 학교 원격수업 전환 등 강력한 조치가 시행될 수 있습니다. 당국 공지를 확인하세요.\n- 이 예보는 AI 모델(Aurora) 기반 참고 정보이며, 공식 경보는 CPCB/CAQM 발표를 따르세요.\n```\n",
+          "markdown": "<div style='font-size:18px; line-height:1.55;'><div style='font-size:14px; color:#64748b; letter-spacing:.03em; margin:0 0 8px;'>3 · S7 · 기상: Aurora 1.5 · 농도: 합성 (CAMS 계정 필요) · 추가 분석 (다른 방법)</div><p style='margin:0 0 10px;'>두 번째 새벽. 동부 델리의 Anand Vihar(주간 버스터미널과 간선도로가 모인 교통 지점)가 AQI 500(위험)에 닿고, 인접한 ITO·Noida·Okhla도 450을 넘습니다. 이 시각이 지점별 요약표의 \"정점 시각\"이 되고, 06:00 IST 아침 업데이트는 등교·출근 전에 \"오전 7–9시 최고치, 마스크 착용\"을 보냅니다.</p><p style='margin:0 0 10px;'><b>운영자용 long · Anand Vihar</b></p><pre style='font-size:15px; line-height:1.45; white-space:pre-wrap; background:rgba(100,116,139,.12); padding:8px 11px; border-radius:8px; margin:6px 0 10px;'>- 현재 AQI 385 → 최고 AQI 500 (위험), 정점 11월 7일 05시 전후. 추세: 비슷한 수준 유지.\n- 주 오염물질: PM10. PM2.5 최대 321㎍/㎥, PM10 최대 514㎍/㎥.\n- 확산 조건: 향후 예측기간 중 12시간(야간·새벽 2시간) 동안 풍속 10 km/h 미만, 혼합층 500 m 미만의 정체 조건이 예상됩니다(최저 혼합층 약 67 m). 밤–아침에 오염이 지표 근처에 쌓이기 쉽습니다.\n- 건강 권고: 건강한 사람도 영향을 받습니다. 가능한 한 실내에 머무르고, 어린이·노인·호흡기·심장 질환자는 외출을 피하세요. 공기청정기를 사용하고 증상이 있으면 의료기관을 찾으세요.\n- 행정 조치 안내: GRAP 4단계(위험+) 수준: 트럭 진입 제한, 재택근무 확대, 학교 원격수업 전환 등 강력한 조치가 시행될 수 있습니다. 당국 공지를 확인하세요.\n- 이 예보는 AI 모델(Aurora) 기반 참고 정보이며, 공식 경보는 CPCB/CAQM 발표를 따르세요.</pre></div>",
           "image": "",
-          "imageCaption": ""
+          "imageCaption": "",
+          "paneAlignment": "end",
+          "panelWidth": "50%"
         },
         "transition": {
           "type": "smooth",
@@ -2093,15 +2111,17 @@
         "extent": [
           8293302.06,
           3061141.04,
-          9072538.5,
+          9851774.94,
           3829123.84
         ],
         "enableIdentify": true,
         "content": {
           "contentMode": "map",
-          "markdown": "*3 · S6 · 오후 · 기상: Aurora 1.5 · 농도: 합성 (CAMS 계정 필요)*\n\n혼합층이 1,000 m 가까이 올라가고 바람이 10 km/h를 넘는 몇 시간 동안 AQI가 400 아래로 내려갑니다. 그래도 \"매우 나쁨\"입니다. 이 구간이 민감군이 환기나 외출을 할 수 있는 창이고, 메시지는 그 시간대를 명시합니다. 사후(S8)에는 CPCB/DPCC 관측과 비교해 지점별 편향 보정 계수를 구합니다.\n",
+          "markdown": "<div style='font-size:18px; line-height:1.55;'><div style='font-size:14px; color:#64748b; letter-spacing:.03em; margin:0 0 8px;'>3 · S6 · 오후 · 기상: Aurora 1.5 · 농도: 합성 (CAMS 계정 필요)</div><p style='margin:0 0 10px;'>혼합층이 1,000 m 가까이 올라가고 바람이 10 km/h를 넘는 몇 시간 동안 AQI가 400 아래로 내려갑니다. 그래도 \"매우 나쁨\"입니다. 이 구간이 민감군이 환기나 외출을 할 수 있는 창이고, 메시지는 그 시간대를 명시합니다. 사후(S8)에는 CPCB/DPCC 관측과 비교해 지점별 편향 보정 계수를 구합니다.</p></div>",
           "image": "",
-          "imageCaption": ""
+          "imageCaption": "",
+          "paneAlignment": "end",
+          "panelWidth": "50%"
         },
         "transition": {
           "type": "smooth",
@@ -2176,15 +2196,17 @@
         "extent": [
           8532638.97,
           3274212.69,
-          8643958.46,
+          8755277.95,
           3382011.46
         ],
         "enableIdentify": false,
         "content": {
           "contentMode": "markdown",
-          "markdown": "*4 · 메시지 설계 원칙 · 추가 분석 (다른 방법)*\n\n1. **무엇(수치+범주)·언제(IST 정점 시각)·어디(지점)·어떻게(행동 1~2개)**. `short`는 SMS/푸시, `long`은 앱 상세·브리핑용.\n2. **범주는 CPCB 용어 그대로**(좋음/양호/보통/나쁨/매우 나쁨/위험). 뉴스·공식 앱과 일치해야 혼란이 없다.\n3. **민감군을 먼저** 호명한다(어린이·노인·임산부·호흡기 질환자).\n4. **GRAP 단계는 \"해당 수준\"으로만**. 발효는 CAQM 권한이므로 \"시행될 수 있습니다\"로 쓰고 공식 공지를 안내한다.\n5. **기상 근거 한 문장**. 시민이 \"왜 밤에 더 나쁜가\"를 이해하면 행동 순응도가 올라간다.\n6. **면책 문구 고정**: \"AI 모델(Aurora) 기반 참고 정보이며 공식 경보는 CPCB/CAQM을 따르세요.\"\n7. 힌디어(1차), 영어(2차), 운영팀용 한국어. 템플릿은 `HEALTH_ADVICE`, `GRAP_ADVICE`, `CATEGORY_NAMES`에 모여 있어 보건 전문가가 코드 없이 검수한다.\n",
+          "markdown": "<div style='font-size:18px; line-height:1.55;'><div style='font-size:14px; color:#64748b; letter-spacing:.03em; margin:0 0 8px;'>4 · 메시지 설계 원칙 · 추가 분석 (다른 방법)</div><ol style='margin:0 0 10px 22px; padding:0;'><li style='margin:0 0 5px;'><b>무엇(수치+범주)·언제(IST 정점 시각)·어디(지점)·어떻게(행동 1–2개)</b>. <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>short</code>는 SMS/푸시, <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>long</code>은 앱 상세·브리핑용.</li><li style='margin:0 0 5px;'><b>범주는 CPCB 용어 그대로</b>(좋음/양호/보통/나쁨/매우 나쁨/위험). 뉴스·공식 앱과 일치해야 혼란이 없다.</li><li style='margin:0 0 5px;'><b>민감군을 먼저</b> 호명한다(어린이·노인·임산부·호흡기 질환자).</li><li style='margin:0 0 5px;'><b>GRAP 단계는 \"해당 수준\"으로만</b>. 발효는 CAQM 권한이므로 \"시행될 수 있습니다\"로 쓰고 공식 공지를 안내한다.</li><li style='margin:0 0 5px;'><b>기상 근거 한 문장</b>. 시민이 \"왜 밤에 더 나쁜가\"를 이해하면 행동 순응도가 올라간다.</li><li style='margin:0 0 5px;'><b>면책 문구 고정</b>: \"AI 모델(Aurora) 기반 참고 정보이며 공식 경보는 CPCB/CAQM을 따르세요.\"</li><li style='margin:0 0 5px;'>힌디어(1차), 영어(2차), 운영팀용 한국어. 템플릿은 <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>HEALTH_ADVICE</code>, <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>GRAP_ADVICE</code>, <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>CATEGORY_NAMES</code>에 모여 있어 보건 전문가가 코드 없이 검수한다.</li></ol></div>",
           "image": "",
-          "imageCaption": ""
+          "imageCaption": "",
+          "paneAlignment": "center",
+          "panelWidth": "50%"
         },
         "transition": {
           "type": "smooth",
@@ -2259,15 +2281,17 @@
         "extent": [
           8532638.97,
           3274212.69,
-          8643958.46,
+          8755277.95,
           3382011.46
         ],
         "enableIdentify": true,
         "content": {
           "contentMode": "map",
-          "markdown": "*5 · 산출물 · 농도: 합성 (CAMS 계정 필요) · 기상: Aurora 1.5 · 추가 분석 (다른 방법)*\n\n이 실행에서 혼합층·바람·기온은 Aurora 1.5가 ARCO-ERA5 초기장으로 계산한 값이고, 오염 농도는 합성 예시입니다(CAMS 계정 필요). 따라서 AQI 값 자체는 예시이지만 정체 시간대는 실제 모델 결과입니다.\n\n| 지점 | 현재 | 최고 | 범주 | 주 오염물질 | GRAP | 정체 h |\n| --- | ---: | ---: | --- | --- | ---: | ---: |\n| Anand Vihar | 385 | 500 | 위험 | PM10 | 4 | 12 |\n| Dwarka Sector 8 | 336 | 406 | 위험 | PM2.5 | 3 | 16 |\n| Gurugram Vikas Sadan | 376 | 479 | 위험 | PM10 | 4 | 15 |\n| ITO | 383 | 498 | 위험 | PM10 | 4 | 13 |\n| Jahangirpuri | 365 | 452 | 위험 | PM10 | 4 | 14 |\n| Noida Sector 62 | 340 | 409 | 위험 | PM2.5 | 3 | 10 |\n| Okhla Phase 2 | 366 | 453 | 위험 | PM10 | 4 | 11 |\n| Punjabi Bagh | 346 | 415 | 위험 | PM2.5 | 3 | 14 |\n| R K Puram | 335 | 405 | 위험 | PM2.5 | 3 | 13 |\n| Rohini | 337 | 406 | 위험 | PM2.5 | 3 | 16 |\n\n정점은 모든 지점에서 11월 7일 05:30 IST 전후(최저 혼합층 64–75 m). 지도의 지점 색은 정점 범주이고, ⓘ로 지점·셀을 클릭하면 값이 뜹니다. 산출 파일: `pollutants_12h.csv`, `meteorology_hourly.csv`, `fused_hourly.csv`, `summary_by_site.csv`, `messages_{ko,en,hi}.json`, `bulletin_*.md`, `frontend/*.json`.\n",
+          "markdown": "<div style='font-size:18px; line-height:1.55;'><div style='font-size:14px; color:#64748b; letter-spacing:.03em; margin:0 0 8px;'>5 · 산출물 · 농도: 합성 (CAMS 계정 필요) · 기상: Aurora 1.5 · 추가 분석 (다른 방법)</div><p style='margin:0 0 10px;'>이 실행에서 혼합층·바람·기온은 Aurora 1.5가 ARCO-ERA5 초기장으로 계산한 값이고, 오염 농도는 합성 예시입니다(CAMS 계정 필요). 따라서 AQI 값 자체는 예시이지만 정체 시간대는 실제 모델 결과입니다.</p><table style='border-collapse:collapse; width:100%; font-size:16px; margin:6px 0 10px;'><thead><tr><th style='text-align:left; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>지점</th><th style='text-align:right; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>현재</th><th style='text-align:right; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>최고</th><th style='text-align:left; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>범주</th><th style='text-align:left; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>주 오염물질</th><th style='text-align:right; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>GRAP</th><th style='text-align:right; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>정체 h</th></tr></thead><tbody><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Anand Vihar</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>385</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>500</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>위험</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>PM10</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>4</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>12</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Dwarka Sector 8</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>336</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>406</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>위험</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>PM2.5</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>3</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>16</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Gurugram Vikas Sadan</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>376</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>479</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>위험</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>PM10</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>4</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>15</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>ITO</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>383</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>498</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>위험</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>PM10</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>4</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>13</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Jahangirpuri</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>365</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>452</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>위험</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>PM10</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>4</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>14</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Noida Sector 62</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>340</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>409</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>위험</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>PM2.5</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>3</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>10</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Okhla Phase 2</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>366</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>453</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>위험</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>PM10</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>4</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>11</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Punjabi Bagh</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>346</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>415</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>위험</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>PM2.5</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>3</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>14</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>R K Puram</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>335</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>405</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>위험</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>PM2.5</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>3</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>13</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Rohini</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>337</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>406</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>위험</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>PM2.5</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>3</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>16</td></tr></tbody></table><p style='margin:0 0 10px;'>정점은 모든 지점에서 11월 7일 05:30 IST 전후(최저 혼합층 64–75 m). 지도의 지점 색은 정점 범주이고, ⓘ로 지점·셀을 클릭하면 값이 뜹니다. 산출 파일: <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>pollutants_12h.csv</code>, <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>meteorology_hourly.csv</code>, <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>fused_hourly.csv</code>, <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>summary_by_site.csv</code>, <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>messages_{ko,en,hi}.json</code>, <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>bulletin_*.md</code>, <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>frontend/*.json</code>.</p></div>",
           "image": "",
-          "imageCaption": ""
+          "imageCaption": "",
+          "paneAlignment": "end",
+          "panelWidth": "50%"
         },
         "transition": {
           "type": "smooth",
@@ -2342,15 +2366,17 @@
         "extent": [
           8532638.97,
           3274212.69,
-          8643958.46,
+          8755277.95,
           3382011.46
         ],
         "enableIdentify": true,
         "content": {
           "contentMode": "map",
-          "markdown": "*6 · 한계와 책임 있는 사용 · 농도: 합성 (CAMS 계정 필요)*\n\n지도에 겹친 큰 사각형이 Air Pollution 모델의 0.4° 셀 하나입니다. 델리 NCT 전체가 두세 개 셀에 들어갑니다.\n\n- **공간 해상도**: 지점 간 차이는 보간 결과이며 도로변 농도가 아니다. 실제 서비스에는 관측소별 편향 보정이나 CPCB 데이터로의 파인튜닝이 필요하다.\n- **시간 해상도**: 시간별 농도 곡선은 12시간 예측의 선형 보간이다. 시간별 구조의 근거는 1.5의 기상 변수이며 메시지에도 그렇게 표기한다.\n- **입력 데이터**: 1.5는 IFS HRES T0로 파인튜닝되었고 이 예제는 ERA5를 쓴다. Air Pollution 모델은 CAMS 분석 전용이다.\n- **1000 hPa 가스**: NO2/SO2/O3/CO는 1000 hPa 혼합비를 밀도로 환산한 근사치. AQI는 사실상 PM2.5/PM10이 주도한다.\n- **운영 결정**: Aurora는 연구용 모델이며 전문가 검토 없는 운영 의사결정에 쓰여서는 안 된다.\n",
+          "markdown": "<div style='font-size:18px; line-height:1.55;'><div style='font-size:14px; color:#64748b; letter-spacing:.03em; margin:0 0 8px;'>6 · 한계와 책임 있는 사용 · 농도: 합성 (CAMS 계정 필요)</div><p style='margin:0 0 10px;'>지도에 겹친 큰 사각형이 Air Pollution 모델의 0.4° 셀 하나입니다. 델리 NCT 전체가 두세 개 셀에 들어갑니다.</p><ul style='margin:0 0 10px 22px; padding:0;'><li style='margin:0 0 5px;'><b>공간 해상도</b>: 지점 간 차이는 보간 결과이며 도로변 농도가 아니다. 실제 서비스에는 관측소별 편향 보정이나 CPCB 데이터로의 파인튜닝이 필요하다.</li><li style='margin:0 0 5px;'><b>시간 해상도</b>: 시간별 농도 곡선은 12시간 예측의 선형 보간이다. 시간별 구조의 근거는 1.5의 기상 변수이며 메시지에도 그렇게 표기한다.</li><li style='margin:0 0 5px;'><b>입력 데이터</b>: 1.5는 IFS HRES T0로 파인튜닝되었고 이 예제는 ERA5를 쓴다. Air Pollution 모델은 CAMS 분석 전용이다.</li><li style='margin:0 0 5px;'><b>1000 hPa 가스</b>: NO2/SO2/O3/CO는 1000 hPa 혼합비를 밀도로 환산한 근사치. AQI는 사실상 PM2.5/PM10이 주도한다.</li><li style='margin:0 0 5px;'><b>운영 결정</b>: Aurora는 연구용 모델이며 전문가 검토 없는 운영 의사결정에 쓰여서는 안 된다.</li></ul></div>",
           "image": "",
-          "imageCaption": ""
+          "imageCaption": "",
+          "paneAlignment": "end",
+          "panelWidth": "50%"
         },
         "transition": {
           "type": "smooth",
@@ -2425,15 +2451,17 @@
         "extent": [
           8532638.97,
           3274212.69,
-          8643958.46,
+          8755277.95,
           3382011.46
         ],
         "enableIdentify": true,
         "content": {
           "contentMode": "map",
-          "markdown": "*로드맵 실행 1 · 불확실성 · 앙상블: Aurora 1.5 Ensemble · 추가 분석 (다른 방법)*\n\nAurora 1.5 Ensemble을 서로 다른 시드로 3번 실행해(멤버당 48시간, 시간별) 각 멤버의 혼합층과 바람으로 정체 여부를 판정하고, 정체인 멤버의 비율을 확률로 썼습니다. 모델이 실제로 계산한 불확실성입니다.\n\n지도의 파란 농담이 11월 7일 05:30 IST 셀별 정체 확률(멤버 중 풍속 10 km/h 미만·혼합층 500 m 미만인 비율)입니다. 표는 지점별로 첫째 밤(11월 5일 22시~6일 08시), 낮(6일 08~22시), 둘째 밤(6일 22시~7일 08시)의 평균 확률과 정점 시각의 혼합층 10~90퍼센타일입니다.\n\n| 지점 | 밤 1 | 낮 | 밤 2 | 정점 BLH p10–p90 (m) |\n| --- | ---: | ---: | ---: | ---: |\n| Anand Vihar | 3% | 21% | 43% | 79–107 |\n| ITO | 3% | 21% | 43% | 80–105 |\n| Punjabi Bagh | 12% | 24% | 50% | 86–101 |\n| Rohini | 12% | 28% | 50% | 87–100 |\n| Jahangirpuri | 12% | 28% | 50% | 85–102 |\n| R K Puram | 6% | 21% | 43% | 82–103 |\n| Dwarka Sector 8 | 18% | 26% | 50% | 88–99 |\n| Okhla Phase 2 | 0% | 19% | 40% | 78–107 |\n| Noida Sector 62 | 3% | 21% | 43% | 78–109 |\n| Gurugram Vikas Sadan | 18% | 26% | 57% | 86–95 |\n",
+          "markdown": "<div style='font-size:18px; line-height:1.55;'><div style='font-size:14px; color:#64748b; letter-spacing:.03em; margin:0 0 8px;'>로드맵 실행 1 · 불확실성 · 앙상블: Aurora 1.5 Ensemble · 추가 분석 (다른 방법)</div><p style='margin:0 0 10px;'>Aurora 1.5 Ensemble을 서로 다른 시드로 3번 실행해(멤버당 48시간, 시간별) 각 멤버의 혼합층과 바람으로 정체 여부를 판정하고, 정체인 멤버의 비율을 확률로 썼습니다. 모델이 실제로 계산한 불확실성입니다.</p><p style='margin:0 0 10px;'>지도의 파란 농담이 11월 7일 05:30 IST 셀별 정체 확률(멤버 중 풍속 10 km/h 미만·혼합층 500 m 미만인 비율)입니다. 표는 지점별로 첫째 밤(11월 5일 22시–6일 08시), 낮(6일 08–22시), 둘째 밤(6일 22시–7일 08시)의 평균 확률과 정점 시각의 혼합층 10–90퍼센타일입니다.</p><table style='border-collapse:collapse; width:100%; font-size:16px; margin:6px 0 10px;'><thead><tr><th style='text-align:left; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>지점</th><th style='text-align:right; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>밤 1</th><th style='text-align:right; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>낮</th><th style='text-align:right; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>밤 2</th><th style='text-align:right; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>정점 BLH p10–p90 (m)</th></tr></thead><tbody><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Anand Vihar</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>3%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>21%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>43%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>79–107</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>ITO</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>3%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>21%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>43%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>80–105</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Punjabi Bagh</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>12%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>24%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>50%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>86–101</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Rohini</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>12%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>28%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>50%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>87–100</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Jahangirpuri</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>12%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>28%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>50%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>85–102</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>R K Puram</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>6%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>21%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>43%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>82–103</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Dwarka Sector 8</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>18%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>26%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>50%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>88–99</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Okhla Phase 2</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>0%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>19%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>40%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>78–107</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Noida Sector 62</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>3%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>21%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>43%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>78–109</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Gurugram Vikas Sadan</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>18%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>26%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>57%</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>86–95</td></tr></tbody></table></div>",
           "image": "",
-          "imageCaption": ""
+          "imageCaption": "",
+          "paneAlignment": "end",
+          "panelWidth": "50%"
         },
         "transition": {
           "type": "smooth",
@@ -2508,15 +2536,17 @@
         "extent": [
           8532638.97,
           3274212.69,
-          8643958.46,
+          8755277.95,
           3382011.46
         ],
         "enableIdentify": true,
         "content": {
           "contentMode": "map",
-          "markdown": "*로드맵 실행 2 · 관측 보정 · 추가 분석 (다른 방법) · 합성 관측*\n\n관측 = a + b × 예측 형태의 직선을 지점별로 최소제곱으로 맞추고, 보정 전후의 RMSE(평균 제곱근 오차)를 비교합니다. 실제 CPCB 관측은 공개 API가 없어 포털에서 긁어와야 하므로, 여기서는 **합성 관측**(교통 지점은 모델이 15% 낮게, 주거 지점은 8% 높게 읽는다고 가정하고 잡음을 더한 값)으로 절차만 실행했습니다. 표본이 12시간 간격 5개뿐이라 계수는 예시 수준입니다.\n\n| 지점 | a | b | n | RMSE 전 | RMSE 후 |\n| --- | ---: | ---: | ---: | ---: | ---: |\n| Anand Vihar | 201.9 | 0.36 | 5 | 44.2 | 22.5 |\n| ITO | 41.8 | 1.01 | 5 | 47.5 | 13.3 |\n| Punjabi Bagh | 52.8 | 0.67 | 5 | 22.8 | 4.0 |\n| Rohini | -30.6 | 1.06 | 5 | 19.5 | 5.8 |\n| Jahangirpuri | -11.2 | 1.11 | 5 | 19.5 | 11.2 |\n| R K Puram | -4.7 | 0.91 | 5 | 34.0 | 25.3 |\n| Dwarka Sector 8 | 7.8 | 0.92 | 5 | 9.8 | 5.4 |\n| Okhla Phase 2 | 63.8 | 0.77 | 5 | 16.1 | 10.9 |\n| Noida Sector 62 | -8.6 | 0.96 | 5 | 25.5 | 18.3 |\n| Gurugram Vikas Sadan | 189.4 | 0.42 | 5 | 48.7 | 15.2 |\n",
+          "markdown": "<div style='font-size:18px; line-height:1.55;'><div style='font-size:14px; color:#64748b; letter-spacing:.03em; margin:0 0 8px;'>로드맵 실행 2 · 관측 보정 · 추가 분석 (다른 방법) · 합성 관측</div><p style='margin:0 0 10px;'>관측 = a + b × 예측 형태의 직선을 지점별로 최소제곱으로 맞추고, 보정 전후의 RMSE(평균 제곱근 오차)를 비교합니다. 실제 CPCB 관측은 공개 API가 없어 포털에서 긁어와야 하므로, 여기서는 <b>합성 관측</b>(교통 지점은 모델이 15% 낮게, 주거 지점은 8% 높게 읽는다고 가정하고 잡음을 더한 값)으로 절차만 실행했습니다. 표본이 12시간 간격 5개뿐이라 계수는 예시 수준입니다.</p><table style='border-collapse:collapse; width:100%; font-size:16px; margin:6px 0 10px;'><thead><tr><th style='text-align:left; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>지점</th><th style='text-align:right; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>a</th><th style='text-align:right; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>b</th><th style='text-align:right; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>n</th><th style='text-align:right; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>RMSE 전</th><th style='text-align:right; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>RMSE 후</th></tr></thead><tbody><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Anand Vihar</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>201.9</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>0.36</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>5</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>44.2</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>22.5</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>ITO</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>41.8</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>1.01</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>5</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>47.5</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>13.3</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Punjabi Bagh</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>52.8</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>0.67</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>5</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>22.8</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>4.0</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Rohini</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>-30.6</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>1.06</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>5</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>19.5</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>5.8</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Jahangirpuri</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>-11.2</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>1.11</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>5</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>19.5</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>11.2</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>R K Puram</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>-4.7</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>0.91</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>5</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>34.0</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>25.3</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Dwarka Sector 8</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>7.8</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>0.92</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>5</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>9.8</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>5.4</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Okhla Phase 2</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>63.8</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>0.77</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>5</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>16.1</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>10.9</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Noida Sector 62</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>-8.6</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>0.96</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>5</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>25.5</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>18.3</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>Gurugram Vikas Sadan</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>189.4</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>0.42</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>5</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>48.7</td><td style='text-align:right; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:nowrap;'>15.2</td></tr></tbody></table></div>",
           "image": "",
-          "imageCaption": ""
+          "imageCaption": "",
+          "paneAlignment": "end",
+          "panelWidth": "50%"
         },
         "transition": {
           "type": "smooth",
@@ -2591,15 +2621,17 @@
         "extent": [
           8293302.06,
           3061141.04,
-          9072538.5,
+          9851774.94,
           3829123.84
         ],
         "enableIdentify": false,
         "content": {
           "contentMode": "markdown",
-          "markdown": "*로드맵 실행 3 · 파인튜닝 · 추가 분석 (다른 방법)*\n\n인도 지역 학습 자료(격자화한 CPCB 관측이나 지역 CAMS 재분석)는 아직 없으므로 본 파인튜닝은 실행하지 않았습니다. 대신 스타터 코드의 스모크 테스트(`test_finetuning_2t_var_pretrained`: 번들된 미국 서부 ERA5 7일 자료로 사전학습 Aurora의 2 m 기온을 1 에포크 학습)를 돌려 학습 루프·체크포인트·옵티마이저가 이 환경에서 동작하는지 확인했습니다.\n\n**결과**\n\n```text\n스모크 테스트 통과 — 1 test(s) passed in 66 s\n```\n",
+          "markdown": "<div style='font-size:18px; line-height:1.55;'><div style='font-size:14px; color:#64748b; letter-spacing:.03em; margin:0 0 8px;'>로드맵 실행 3 · 파인튜닝 · 추가 분석 (다른 방법)</div><p style='margin:0 0 10px;'>인도 지역 학습 자료(격자화한 CPCB 관측이나 지역 CAMS 재분석)는 아직 없으므로 본 파인튜닝은 실행하지 않았습니다. 대신 스타터 코드의 스모크 테스트(<code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>test_finetuning_2t_var_pretrained</code>: 번들된 미국 서부 ERA5 7일 자료로 사전학습 Aurora의 2 m 기온을 1 에포크 학습)를 돌려 학습 루프·체크포인트·옵티마이저가 이 환경에서 동작하는지 확인했습니다.</p><p style='margin:0 0 10px;'><b>결과</b></p><pre style='font-size:15px; line-height:1.45; white-space:pre-wrap; background:rgba(100,116,139,.12); padding:8px 11px; border-radius:8px; margin:6px 0 10px;'>스모크 테스트 통과 — 1 test(s) passed in 66 s</pre></div>",
           "image": "",
-          "imageCaption": ""
+          "imageCaption": "",
+          "paneAlignment": "center",
+          "panelWidth": "50%"
         },
         "transition": {
           "type": "smooth",
@@ -2674,15 +2706,17 @@
         "extent": [
           8532638.97,
           3274212.69,
-          8643958.46,
+          8755277.95,
           3382011.46
         ],
         "enableIdentify": true,
         "content": {
           "contentMode": "map",
-          "markdown": "*로드맵 실행 4 · 발송 어댑터 · 추가 분석 (다른 방법)*\n\n구독자의 우편번호(PIN)를 가장 가까운 지점에 매핑하고 언어별 `short` 메시지를 payload로 만들어 발송 로그를 남깁니다. 이번 실행은 dry run이라 실제 전송 대신 \"queued\" 상태로 기록되며, 실제 어댑터는 이 자리에서 WhatsApp Business API나 SMS 게이트웨이에 POST합니다.\n\n| 항목 | 값 |\n| --- | --- |\n| 건수 | 20 |\n| 채널 | dryrun |\n| 언어 | en, hi |\n\n**로그 예시**\n\n```text\nsub-000 · PIN 110092 · Anand Vihar · hi · queued (dry run) · 155 chars\n  [वायु गुणवत्ता चेतावनी] Anand Vihar: अधिकतम AQI 500 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 321 µg/m³। स्वस्थ लोग भी प्रभावित।\nsub-001 · PIN 110092 · Anand Vihar · en · queued (dry run) · 166 chars\n  [Air quality alert] Anand Vihar: peak AQI 500 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM10, PM2.5 up to 321 ug/m3. Even healthy people are affected.\nsub-002 · PIN 110002 · ITO · hi · queued (dry run) · 147 chars\n  [वायु गुणवत्ता चेतावनी] ITO: अधिकतम AQI 498 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 318 µg/m³। स्वस्थ लोग भी प्रभावित।\n```\n",
+          "markdown": "<div style='font-size:18px; line-height:1.55;'><div style='font-size:14px; color:#64748b; letter-spacing:.03em; margin:0 0 8px;'>로드맵 실행 4 · 발송 어댑터 · 추가 분석 (다른 방법)</div><p style='margin:0 0 10px;'>구독자의 우편번호(PIN)를 가장 가까운 지점에 매핑하고 언어별 <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>short</code> 메시지를 payload로 만들어 발송 로그를 남깁니다. 이번 실행은 dry run이라 실제 전송 대신 \"queued\" 상태로 기록되며, 실제 어댑터는 이 자리에서 WhatsApp Business API나 SMS 게이트웨이에 POST합니다.</p><table style='border-collapse:collapse; width:100%; font-size:16px; margin:6px 0 10px;'><thead><tr><th style='text-align:left; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>항목</th><th style='text-align:left; padding:4px 7px; border-bottom:2px solid rgba(100,116,139,.5); color:#64748b; font-size:14px; white-space:nowrap;'>값</th></tr></thead><tbody><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>건수</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>20</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>채널</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>dryrun</td></tr><tr><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>언어</td><td style='text-align:left; padding:4px 7px; border-bottom:1px solid rgba(100,116,139,.25); white-space:normal;'>en, hi</td></tr></tbody></table><p style='margin:0 0 10px;'><b>로그 예시</b></p><pre style='font-size:15px; line-height:1.45; white-space:pre-wrap; background:rgba(100,116,139,.12); padding:8px 11px; border-radius:8px; margin:6px 0 10px;'>sub-000 · PIN 110092 · Anand Vihar · hi · queued (dry run) · 155 chars\n  [वायु गुणवत्ता चेतावनी] Anand Vihar: अधिकतम AQI 500 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 321 µg/m³। स्वस्थ लोग भी प्रभावित।\nsub-001 · PIN 110092 · Anand Vihar · en · queued (dry run) · 166 chars\n  [Air quality alert] Anand Vihar: peak AQI 500 (Severe) expected around 07 Nov 05:30 IST. Main pollutant PM10, PM2.5 up to 321 ug/m3. Even healthy people are affected.\nsub-002 · PIN 110002 · ITO · hi · queued (dry run) · 147 chars\n  [वायु गुणवत्ता चेतावनी] ITO: अधिकतम AQI 498 (गंभीर), 07 Nov 05:30 IST के आसपास। मुख्य प्रदूषक PM10, PM2.5 अधिकतम 318 µg/m³। स्वस्थ लोग भी प्रभावित।</pre></div>",
           "image": "",
-          "imageCaption": ""
+          "imageCaption": "",
+          "paneAlignment": "end",
+          "panelWidth": "50%"
         },
         "transition": {
           "type": "smooth",
@@ -2757,15 +2791,17 @@
         "extent": [
           8293302.06,
           3061141.04,
-          9072538.5,
+          9851774.94,
           3829123.84
         ],
         "enableIdentify": false,
         "content": {
           "contentMode": "markdown",
-          "markdown": "*로드맵 실행 5 · 자동화 · 추가 분석 (다른 방법)*\n\n파이프라인이 자동으로 생성한 크론 스크립트입니다. 분석장이 도착한 뒤인 02:30/14:30 UTC(08:00/20:00 IST)에 실행되어 날짜별 폴더에 산출물을 남깁니다. 이 스토리 맵의 데이터 자체가 그 스크립트와 같은 명령(`delhi_aq.py`)의 실행 결과입니다.\n\n```bash\n#!/usr/bin/env bash\n# Re-issue the Delhi air-quality bulletin after each 00/12 UTC analysis becomes available.\n# crontab -e  ->  30 2,14 * * *  /path/to/run_delhi_aq_cron.sh >> /var/log/delhi_aq.log 2>&1\nset -euo pipefail\ncd \"$(dirname \"$0\")\"\npython delhi_aq.py --mode foundry --hours 48 --plot --out \"outputs/$(date -u +%Y-%m-%dT%H)\" -v\n```\n",
+          "markdown": "<div style='font-size:18px; line-height:1.55;'><div style='font-size:14px; color:#64748b; letter-spacing:.03em; margin:0 0 8px;'>로드맵 실행 5 · 자동화 · 추가 분석 (다른 방법)</div><p style='margin:0 0 10px;'>파이프라인이 자동으로 생성한 크론 스크립트입니다. 분석장이 도착한 뒤인 02:30/14:30 UTC(08:00/20:00 IST)에 실행되어 날짜별 폴더에 산출물을 남깁니다. 이 스토리 맵의 데이터 자체가 그 스크립트와 같은 명령(<code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>delhi_aq.py</code>)의 실행 결과입니다.</p><pre style='font-size:15px; line-height:1.45; white-space:pre-wrap; background:rgba(100,116,139,.12); padding:8px 11px; border-radius:8px; margin:6px 0 10px;'>#!/usr/bin/env bash\n# Re-issue the Delhi air-quality bulletin after each 00/12 UTC analysis becomes available.\n# crontab -e  -&gt;  30 2,14 * * *  /path/to/run_delhi_aq_cron.sh &gt;&gt; /var/log/delhi_aq.log 2&gt;&amp;1\nset -euo pipefail\ncd \"$(dirname \"$0\")\"\npython delhi_aq.py --mode foundry --hours 48 --plot --out \"outputs/$(date -u +%Y-%m-%dT%H)\" -v</pre></div>",
           "image": "",
-          "imageCaption": ""
+          "imageCaption": "",
+          "paneAlignment": "center",
+          "panelWidth": "50%"
         },
         "transition": {
           "type": "smooth",
@@ -2840,15 +2876,17 @@
         "extent": [
           8293302.06,
           3061141.04,
-          9072538.5,
+          9851774.94,
           3829123.84
         ],
         "enableIdentify": false,
         "content": {
           "contentMode": "markdown",
-          "markdown": "*7 · 남은 과제 · 직접 실행*\n\n로드맵 다섯 항목은 위 장면에서 실행했습니다. 남은 것은 실제 CPCB 관측 연결, 인도 지역 자료로의 본 파인튜닝, 그리고 CAMS 계정을 붙여 오염 농도까지 Aurora로 계산하는 일입니다.\n\n1. **불확실성**: `AuroraV1p5Ensemble` + `rollout_ensemble`로 \"정체 확률 80%\" 식의 표현.\n2. **CPCB 관측 보정**: 지점별 관측-예측 잔차 학습(선형/분위 매핑부터).\n3. **파인튜닝**: `msresearch-aurora/starter-code/`의 학습 루프로 Air Pollution 모델을 인도 지역 자료에 적응. 모델 측 요구사항은 `docs/finetuning.md`.\n4. **채널 연계**: `messages_hi.json`을 WhatsApp Business API, SMS, 델리 정부 앱으로. 거주 지역(핀코드)을 가장 가까운 지점에 매핑.\n5. **자동화**: 00/12 UTC마다 `delhi_aq.py --mode foundry --plot`을 크론으로.\n\n### 직접 실행하기\n\ndemo 모드는 GPU와 데이터 없이 돌아갑니다.\n\n```bash\ngit clone https://github.com/playground-for-thinker/aurora.git && cd aurora\npip install -e . && pip install matplotlib\npython examples/delhi_air_quality/delhi_aq.py --mode demo --date 2025-11-05 --plot --out outputs\n```\n\n- 노트북: [Colab](https://colab.research.google.com/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb) · [Binder](https://mybinder.org/v2/gh/playground-for-thinker/aurora/main?labpath=examples%2Fdelhi_air_quality%2Fexample_delhi_air_quality.ipynb)\n- 스토리보드(장면별 설명 + 그래프, notebook.link 노트북): [한국어](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_ko.ipynb) · [English](https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_en.ipynb)\n- 코드: [GitHub](https://github.com/playground-for-thinker/aurora/tree/main/examples/delhi_air_quality)\n\n이 스토리 맵은 JupyterGIS 문서(`.jGIS`)입니다. notebook.link의 JupyterLab 보기에서 레이어와 장면을 직접 편집할 수 있고, `build_storymap_jgis.py`로 파이프라인 산출물에서 다시 생성할 수 있습니다.\n",
+          "markdown": "<div style='font-size:18px; line-height:1.55;'><div style='font-size:14px; color:#64748b; letter-spacing:.03em; margin:0 0 8px;'>7 · 남은 과제 · 직접 실행</div><p style='margin:0 0 10px;'>로드맵 다섯 항목은 위 장면에서 실행했습니다. 남은 것은 실제 CPCB 관측 연결, 인도 지역 자료로의 본 파인튜닝, 그리고 CAMS 계정을 붙여 오염 농도까지 Aurora로 계산하는 일입니다.</p><ol style='margin:0 0 10px 22px; padding:0;'><li style='margin:0 0 5px;'><b>불확실성</b>: <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>AuroraV1p5Ensemble</code> + <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>rollout_ensemble</code>로 \"정체 확률 80%\" 식의 표현.</li><li style='margin:0 0 5px;'><b>CPCB 관측 보정</b>: 지점별 관측-예측 잔차 학습(선형/분위 매핑부터).</li><li style='margin:0 0 5px;'><b>파인튜닝</b>: <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>msresearch-aurora/starter-code/</code>의 학습 루프로 Air Pollution 모델을 인도 지역 자료에 적응. 모델 측 요구사항은 <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>docs/finetuning.md</code>.</li><li style='margin:0 0 5px;'><b>채널 연계</b>: <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>messages_hi.json</code>을 WhatsApp Business API, SMS, 델리 정부 앱으로. 거주 지역(핀코드)을 가장 가까운 지점에 매핑.</li><li style='margin:0 0 5px;'><b>자동화</b>: 00/12 UTC마다 <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>delhi_aq.py --mode foundry --plot</code>을 크론으로.</li></ol><h3 style='font-size:20px; margin:12px 0 6px;'>직접 실행하기</h3><p style='margin:0 0 10px;'>demo 모드는 GPU와 데이터 없이 돌아갑니다.</p><pre style='font-size:15px; line-height:1.45; white-space:pre-wrap; background:rgba(100,116,139,.12); padding:8px 11px; border-radius:8px; margin:6px 0 10px;'>git clone https://github.com/playground-for-thinker/aurora.git &amp;&amp; cd aurora\npip install -e . &amp;&amp; pip install matplotlib\npython examples/delhi_air_quality/delhi_aq.py --mode demo --date 2025-11-05 --plot --out outputs</pre><ul style='margin:0 0 10px 22px; padding:0;'><li style='margin:0 0 5px;'>노트북: <a href='https://colab.research.google.com/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb'>Colab</a> · <a href='https://mybinder.org/v2/gh/playground-for-thinker/aurora/main?labpath=examples%2Fdelhi_air_quality%2Fexample_delhi_air_quality.ipynb'>Binder</a></li><li style='margin:0 0 5px;'>스토리보드(장면별 설명 + 그래프, notebook.link 노트북): <a href='https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_ko.ipynb'>한국어</a> · <a href='https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path=storyboard_en.ipynb'>English</a></li><li style='margin:0 0 5px;'>코드: <a href='https://github.com/playground-for-thinker/aurora/tree/main/examples/delhi_air_quality'>GitHub</a></li></ul><p style='margin:0 0 10px;'>이 스토리 맵은 JupyterGIS 문서(<code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>.jGIS</code>)입니다. notebook.link의 JupyterLab 보기에서 레이어와 장면을 직접 편집할 수 있고, <code style='background:rgba(100,116,139,.18); padding:0 4px; border-radius:4px; font-size:.92em;'>build_storymap_jgis.py</code>로 파이프라인 산출물에서 다시 생성할 수 있습니다.</p></div>",
           "image": "",
-          "imageCaption": ""
+          "imageCaption": "",
+          "paneAlignment": "center",
+          "panelWidth": "50%"
         },
         "transition": {
           "type": "smooth",
@@ -2961,7 +2999,7 @@
     "extent": [
       8532638.97,
       3274212.69,
-      8643958.46,
+      8755277.95,
       3382011.46
     ],
     "useExtent": false
@@ -2969,7 +3007,7 @@
   "stories": {
     "d69ab627-a58a-580c-a48a-3a730c07a991": {
       "title": "델리 스모그 스토리 맵",
-      "storyType": "guided",
+      "storyType": "Vertical Scroll",
       "storySegments": [
         "512627bc-5787-57fd-947f-178e61668da1",
         "d39341ea-3d13-520e-bb6d-40e33539fd87",
@@ -2991,7 +3029,10 @@
         "9930de0b-c055-5aa0-8618-4a1598afd6d6",
         "eae7a854-2055-5fce-b774-1af9f692d459"
       ],
-      "showGradient": true
+      "showGradient": true,
+      "storyPanelOpacity": 1.0,
+      "markdownSegmentOpacity": 0.95,
+      "overlayContentWidth": "78%"
     }
   },
   "viewState": {},
