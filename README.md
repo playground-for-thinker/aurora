@@ -13,6 +13,7 @@ hosted service: open it in JupyterLab/JupyterLite with [JupyterGIS](https://gith
 | `delhi_aq_storymap_en.jGIS` | English story map (12 scenes) |
 | `storyboard_ko.ipynb`, `storyboard_en.ipynb` | 발표용 스토리보드 슬라이드 12장 (Specta slides): 왼쪽 그림, 오른쪽 설명, 코드 없음 · 12-slide storyboard for a general audience: figure left, narration right, no code |
 | `storyboard_scenes.py` (상위 폴더) | 두 산출물이 공유하는 장면 텍스트 · scene narration shared by the story map and the slides |
+| `labels/{ko,en}/*.png` | 지명·지점 이름과 Aurora 예측값 라벨 (지도 위 오버레이) · place-name and value label overlays |
 | `img/{ko,en}/*.png` | 슬라이드 그림 (노트북에도 내장됨) · slide figures (also embedded in the notebooks) |
 | `data/*.geojson` | 두 문서가 공유하는 레이어 · layers shared by both documents: AQI tile at 4 forecast hours, 10 m wind, stagnation probability, sites, Delhi NCT, NCR tile, 0.4° cell |
 | `environment.yml`, `nblink-lock.json` | notebook.link 환경 (`xeus-python`, `jupytergis-lite`, `specta`, `matplotlib`) · environment and lock file read by notebook.link |
@@ -58,7 +59,10 @@ JupyterGIS project schema 0.6.0. Every scene is a `StorySegmentLayer` with an ex
 file can also be edited in the JupyterGIS UI and saved back. The story type is "Vertical Scroll" in a split-screen layout: the map fills the left two thirds and each
 scene is a slightly translucent card in the right third that scrolls over it; scene extents are extended eastwards so the region of
 interest sits in the visible left two thirds. The scene text is shared with the slides (`storyboard_scenes.py`), written for a general
-audience, and emitted as HTML with a 16 px base size so tables fit the card. Scenes whose slide figure is not a map (schematics, charts, diagrams) show that figure at the top of
+audience, and emitted as HTML with a 16 px base size so tables fit the card. Place names and Aurora values (AQI or stagnation probability per site) are drawn on transparent
+PNG overlays in `labels/` (JupyterGIS vector layers have no text labels) and switched per scene
+together with the data layers; each card ends with an "On the map" legend. The text card is `40vw`
+wide (a percentage resolves against a narrower story container). Scenes whose slide figure is not a map (schematics, charts, diagrams) show that figure at the top of
 the card, so the story map and the slides stay in step. The split is fixed in the Specta view; in the JupyterLab
 view (`lab/?path=...`) the Story panel is a normal side panel whose divider can be dragged. The scene text is HTML
 with an 18 px base size so it stays readable and tables fit on one screen.
