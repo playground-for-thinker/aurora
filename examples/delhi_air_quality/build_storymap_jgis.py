@@ -13,8 +13,8 @@ and start the story from the Story panel; the Specta view of notebook.link plays
 
 The `.jGIS` files are plain JSON following the JupyterGIS project schema (schemaVersion 0.6.0, the
 version shipped by `jupytergis-lite` 0.16.x on emscripten-forge). The default story type is "Vertical
-Scroll" in a split-screen layout: the map occupies the left half and each scene's text is an opaque
-card filling the right half that scrolls over it (`--overlay` gives a translucent 48% card instead);
+Scroll" in a split-screen layout: each scene's text is a slightly translucent card filling the left
+half and the map shows in the right half (`--overlay` gives a 48% card on the right instead);
 the text is emitted as HTML so its type size is readable. Story stops are
 `StorySegmentLayer` entries: each one carries an extent, markdown and a list of layer-visibility
 overrides, which is how the AQI tile, wind, probability and marker layers are switched per scene.
@@ -89,14 +89,14 @@ SPLIT = True  # split screen: map in the left half, text card in the right half
 def extent(view: str) -> list[float]:
     """Web-mercator extent of a scene.
 
-    In split-screen layout the right half of the map is covered by the text card, so the extent is
-    doubled eastwards: OpenLayers fits the doubled extent to the full width and the region of
-    interest ends up in the visible left half. The world view is instead shifted so that India sits a
-    quarter of the way across.
+    In split-screen layout the left half of the map is covered by the text card, so the extent is
+    doubled westwards: OpenLayers fits the doubled extent to the full width and the region of
+    interest ends up in the visible right half. The world view is instead shifted so that India sits
+    three quarters of the way across.
     """
     x0, y0, x1, y1 = VIEWS[view]
     if SPLIT:
-        x0, x1 = (-10.0, 350.0) if view == "world" else (x0, x0 + 2 * (x1 - x0))
+        x0, x1 = (-190.0, 170.0) if view == "world" else (x1 - 2 * (x1 - x0), x1)
     a, b = merc(x0, y0), merc(x1, y1)
     return [a[0], a[1], b[0], b[1]]
 
@@ -1103,7 +1103,7 @@ def chapters(D: dict, lang: str) -> list[dict]:
 # scene text is therefore emitted as HTML so the type size, line height and table layout are under
 # our control (the stock panel type is small and tables wrap). Tildes are replaced because the
 # markdown renderer turns "22시~08시 ... 1~2" into strikethrough.
-BODY_STYLE = "font-size:18px; line-height:1.55;"
+BODY_STYLE = "font-size:18px; line-height:1.55; min-height:84vh;"
 MUTED = "#64748b"
 
 
@@ -1355,13 +1355,13 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
             on -= {"sites", "delhi"}
         params = {
             "zoom": zoom(ch["view"]), "extent": extent(ch["view"]),
-            "enableIdentify": ch["mode"] == "map",
+            "enableIdentify": True,
             "content": {
-                "contentMode": ch["mode"],
+                "contentMode": "map",
                 "markdown": md_to_html(ch["md"]),
                 "image": "",
                 "imageCaption": "",
-                "paneAlignment": "end" if ch["mode"] == "map" else "center",
+                "paneAlignment": "start" if SPLIT else "end",
                 "panelWidth": "50%" if SPLIT else "48%",
             },
             "transition": {"type": "smooth", "time": 2.0},
@@ -1399,7 +1399,7 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
                 "storyType": story_type,
                 "storySegments": segments,
                 "showGradient": True,
-                "storyPanelOpacity": 1.0 if SPLIT else 0.92,
+                "storyPanelOpacity": 0.86,
                 "markdownSegmentOpacity": 0.95,
                 "overlayContentWidth": "78%",
             }

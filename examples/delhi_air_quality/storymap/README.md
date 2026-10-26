@@ -54,9 +54,10 @@ python build_storyboard_slides.py                  # storymap/storyboard_{ko,en}
 
 `build_storymap_jgis.py` reads `storymap_data.js` (the same data file as `storymap.html`) and writes plain JSON following the
 JupyterGIS project schema 0.6.0. Every scene is a `StorySegmentLayer` with an extent, markdown and layer-visibility overrides, so the
-file can also be edited in the JupyterGIS UI and saved back. The story type is "Vertical Scroll" in a split-screen layout: the map
-occupies the left half and each scene is an opaque card filling the right half that scrolls over it (`--overlay` builds a translucent
-48% card instead); scene extents are doubled eastwards so the region of interest sits in the visible left half. The scene text is HTML
+file can also be edited in the JupyterGIS UI and saved back. The story type is "Vertical Scroll" in a split-screen layout: each scene
+is a slightly translucent card filling the left half and the map shows in the right half (`--overlay` builds a 48% card on the right
+instead); scene extents are doubled westwards so the region of interest sits in the visible right half. The split is fixed in the
+Specta view; in the JupyterLab view (`lab/?path=...`) the Story panel is a normal side panel whose divider can be dragged. The scene text is HTML
 with an 18 px base size so it stays readable and tables fit on one screen.
 
 The storyboard notebooks contain markdown cells only (one per slide, figures embedded as data URIs), so Specta shows them without starting a kernel; in the JupyterLab view they open as a normal notebook.
