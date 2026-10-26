@@ -29,4 +29,6 @@ if [ "${1:-}" != "--no-push" ]; then
   echo "story map (ko): https://notebook.link/github/$url/tree/$BRANCH/specta/?path=delhi_aq_storymap_ko.jGIS"
   echo "story map (en): https://notebook.link/github/$url/tree/$BRANCH/specta/?path=delhi_aq_storymap_en.jGIS"
   echo "editor:         https://notebook.link/github/$url/tree/$BRANCH/lab/?path=delhi_aq_storymap_ko.jGIS"
+  echo "storyboard (ko): https://notebook.link/github/$url/tree/$BRANCH/specta/?path=storyboard_ko.ipynb"
+  echo "storyboard (en): https://notebook.link/github/$url/tree/$BRANCH/specta/?path=storyboard_en.ipynb"
 fi

@@ -1036,6 +1036,9 @@ def chapters(D: dict, lang: str) -> list[dict]:
     )
 
     repo = "https://github.com/playground-for-thinker/aurora"
+    nblink = (
+        "https://notebook.link/github/playground-for-thinker/aurora/tree/storymap/specta/?path="
+    )
     add(
         "done",
         t("실행한 것과 남은 것", "Done and still to do"),
@@ -1064,11 +1067,11 @@ def chapters(D: dict, lang: str) -> list[dict]:
         "python examples/delhi_air_quality/delhi_aq.py --mode demo --date 2025-11-05 --plot --out outputs\n```\n\n"
         + t(
             f"- 노트북: [Colab](https://colab.research.google.com/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb) · [Binder](https://mybinder.org/v2/gh/playground-for-thinker/aurora/main?labpath=examples%2Fdelhi_air_quality%2Fexample_delhi_air_quality.ipynb)\n"
-            f"- 스토리보드(장면별 설명 문서): [STORYBOARD_kor.md]({repo}/blob/main/examples/delhi_air_quality/STORYBOARD_kor.md) · [STORYBOARD.md]({repo}/blob/main/examples/delhi_air_quality/STORYBOARD.md)\n"
+            f"- 스토리보드(장면별 설명 + 그래프, notebook.link 노트북): [한국어]({nblink}storyboard_ko.ipynb) · [English]({nblink}storyboard_en.ipynb)\n"
             f"- 코드: [GitHub]({repo}/tree/main/examples/delhi_air_quality)\n\n"
             "이 스토리 맵은 JupyterGIS 문서(`.jGIS`)입니다. notebook.link의 JupyterLab 보기에서 레이어와 장면을 직접 편집할 수 있고, `build_storymap_jgis.py`로 파이프라인 산출물에서 다시 생성할 수 있습니다.",
             f"- Notebook: [Colab](https://colab.research.google.com/github/playground-for-thinker/aurora/blob/main/examples/delhi_air_quality/example_delhi_air_quality.ipynb) · [Binder](https://mybinder.org/v2/gh/playground-for-thinker/aurora/main?labpath=examples%2Fdelhi_air_quality%2Fexample_delhi_air_quality.ipynb)\n"
-            f"- Storyboard (scene-by-scene document): [STORYBOARD.md]({repo}/blob/main/examples/delhi_air_quality/STORYBOARD.md) · [STORYBOARD_kor.md]({repo}/blob/main/examples/delhi_air_quality/STORYBOARD_kor.md)\n"
+            f"- Storyboard (scene-by-scene document with charts, notebook.link): [English]({nblink}storyboard_en.ipynb) · [Korean]({nblink}storyboard_ko.ipynb)\n"
             f"- Code: [GitHub]({repo}/tree/main/examples/delhi_air_quality)\n\n"
             "This story map is a JupyterGIS document (`.jGIS`). Open it in notebook.link's JupyterLab view to edit layers and scenes, or rebuild it from pipeline outputs with `build_storymap_jgis.py`.",
         ),
