@@ -2388,9 +2388,9 @@
     "f9dac00e-b6f7-51b8-abcb-89f682728b83"
   ],
   "options": {
-    "latitude": 28.64,
-    "longitude": 77.12,
-    "zoom": 10.46,
+    "longitude": 77.517,
+    "latitude": 28.625,
+    "zoom": 9.32,
     "bearing": 0.0,
     "pitch": 0.0,
     "projection": "EPSG:3857",
@@ -2400,7 +2400,7 @@
       8751604.41,
       3382011.46
     ],
-    "useExtent": true
+    "useExtent": false
   },
   "stories": {
     "d69ab627-a58a-580c-a48a-3a730c07a991": {
