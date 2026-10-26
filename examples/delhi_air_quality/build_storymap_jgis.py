@@ -551,7 +551,7 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
                 "paneAlignment": "end",
                 "panelWidth": "34%",
             },
-            "transition": {"type": "smooth", "time": 2.0},
+            "transition": {"type": "linear", "time": 1.5},
             "layerOverride": [{"targetLayer": names[k], "visible": k in on} for k in toggles],
         }  # fmt: skip
         segments.append(

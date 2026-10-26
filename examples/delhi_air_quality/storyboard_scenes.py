@@ -169,7 +169,7 @@ def scenes(D: dict, lang: str) -> list[dict]:
                 ),
             },
         ),
-        "delhi",
+        "world",
         aqi="h35",
     )
 
@@ -575,7 +575,7 @@ def scenes(D: dict, lang: str) -> list[dict]:
             ]
         ),
         ("roles", {}),
-        "tile",
+        "delhi",
         aqi="h35",
     )
 
@@ -659,7 +659,7 @@ def scenes(D: dict, lang: str) -> list[dict]:
             )
         ),
         ("roadmap", {}),
-        "tile",
+        "delhi",
         aqi="h35",
     )
     return S

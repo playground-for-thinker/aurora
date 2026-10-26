@@ -1342,12 +1342,12 @@
       "name": "1. One line of air-quality warning that reaches a citizen",
       "visible": true,
       "parameters": {
-        "zoom": 10.46,
+        "zoom": 1.97,
         "extent": [
-          8506701.53,
-          3274212.69,
-          8751604.41,
-          3382011.46
+          -4452779.63,
+          -6446275.84,
+          35622237.05,
+          11753184.62
         ],
         "enableIdentify": true,
         "content": {
@@ -1359,8 +1359,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -1409,11 +1409,11 @@
           },
           {
             "targetLayer": "Delhi NCT boundary",
-            "visible": true
+            "visible": false
           },
           {
             "targetLayer": "Ten reporting sites (colour: peak category)",
-            "visible": true
+            "visible": false
           },
           {
             "targetLayer": "Anand Vihar",
@@ -1444,8 +1444,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -1529,8 +1529,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -1614,8 +1614,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -1699,8 +1699,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -1784,8 +1784,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -1869,8 +1869,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -1954,8 +1954,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -2039,8 +2039,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -2107,12 +2107,12 @@
       "name": "10. What the system shows and what government and city must own",
       "visible": true,
       "parameters": {
-        "zoom": 7.65,
+        "zoom": 10.46,
         "extent": [
-          8111739.97,
-          3061141.04,
-          9826060.13,
-          3829123.84
+          8506701.53,
+          3274212.69,
+          8751604.41,
+          3382011.46
         ],
         "enableIdentify": true,
         "content": {
@@ -2124,8 +2124,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -2209,8 +2209,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -2277,12 +2277,12 @@
       "name": "12. Done, and still to do",
       "visible": true,
       "parameters": {
-        "zoom": 7.65,
+        "zoom": 10.46,
         "extent": [
-          8111739.97,
-          3061141.04,
-          9826060.13,
-          3829123.84
+          8506701.53,
+          3274212.69,
+          8751604.41,
+          3382011.46
         ],
         "enableIdentify": true,
         "content": {
@@ -2294,8 +2294,8 @@
           "panelWidth": "34%"
         },
         "transition": {
-          "type": "smooth",
-          "time": 2.0
+          "type": "linear",
+          "time": 1.5
         },
         "layerOverride": [
           {
@@ -2388,17 +2388,17 @@
     "05204f19-ec33-5ea0-b00f-449b7bcb095a"
   ],
   "options": {
-    "longitude": 77.517,
-    "latitude": 28.625,
-    "zoom": 9.32,
+    "longitude": 140.0,
+    "latitude": 11.0,
+    "zoom": 1.97,
     "bearing": 0.0,
     "pitch": 0.0,
     "projection": "EPSG:3857",
     "extent": [
-      8506701.53,
-      3274212.69,
-      8751604.41,
-      3382011.46
+      -4452779.63,
+      -6446275.84,
+      35622237.05,
+      11753184.62
     ],
     "useExtent": false
   },
