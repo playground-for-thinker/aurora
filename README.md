@@ -59,7 +59,10 @@ JupyterGIS project schema 0.6.0. Every scene is a `StorySegmentLayer` with an ex
 file can also be edited in the JupyterGIS UI and saved back. The story type is "Vertical Scroll" in a split-screen layout: the map fills the left two thirds and each
 scene is a slightly translucent card in the right third that scrolls over it; scene extents are extended eastwards so the region of
 interest sits in the visible left two thirds. The scene text is shared with the slides (`storyboard_scenes.py`), written for a general
-audience, and emitted as HTML with a 16 px base size so tables fit the card. Place names and Aurora values (AQI or stagnation probability per site) are drawn on transparent
+audience, and emitted as HTML with a 16 px base size so tables fit the card. Layers are grouped by kind (Aurora results, grids, boundaries, sites and alerts, labels) so the
+JupyterLab view's Layers panel offers an on/off switch per variable; the Specta view has no layer panel,
+so every card links to it. Card colours inherit the theme (light or dark via the top-bar menu).
+Place names and Aurora values (AQI or stagnation probability per site) are drawn on transparent
 PNG overlays in `labels/` (JupyterGIS vector layers have no text labels) and switched per scene
 together with the data layers; each card ends with an "On the map" legend. The text card is `40vw`
 wide (a percentage resolves against a narrower story container). Scenes whose slide figure is not a map (schematics, charts, diagrams) show that figure at the top of
