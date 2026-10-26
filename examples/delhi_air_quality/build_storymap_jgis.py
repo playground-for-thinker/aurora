@@ -511,8 +511,10 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
     )
 
     toggles = [k for k in names if k != "basemap"]
+    chs = chapters(D, lang)
+    first_view = chs[0]["view"]
     segments: list[str] = []
-    for i, ch in enumerate(chapters(D, lang)):
+    for i, ch in enumerate(chs):
         on = {"tile", "delhi", "sites"}
         if ch["aqi"]:
             on.add(f"aqi_{ch['aqi']}")
@@ -565,8 +567,8 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
             "bearing": 0.0,
             "pitch": 0.0,
             "projection": "EPSG:3857",
-            "extent": extent("delhi"),
-            "useExtent": False,
+            "extent": extent(first_view),
+            "useExtent": True,
         },  # fmt: skip
         "stories": {
             story_id: {
@@ -575,8 +577,7 @@ def build_document(D: dict, lang: str, geo: dict[str, dict], story_type: str) ->
                 "storySegments": segments,
                 "showGradient": True,
                 "storyPanelOpacity": 0.86,
-                "markdownSegmentOpacity": 0.95,
-                "overlayContentWidth": "78%",
+                "overlayContentWidth": "100%",
             }
         },
         "viewState": {},
